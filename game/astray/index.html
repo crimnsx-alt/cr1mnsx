@@ -1,0 +1,74 @@
+<html>
+
+    <head>
+    
+        <script src='Box2dWeb.min.js'></script>
+        <script src="Three.js"></script>
+        <script src="keyboard.js"></script>
+        <script src="jquery.js"></script>
+        <script src="maze.js"></script>
+
+        <script src="astray.js"></script>
+    
+        <style>
+        
+            body {
+                background: black;
+                margin: 0;
+                padding: 0;
+                font-family: 'Helvetica';
+            }
+            
+            #instructions {
+                background-color: rgba(0,0,0,0.75);
+                color: white;
+                text-align: center;
+                padding: 32px;
+                margin: 0px;
+                display: inline;
+                border: 2px solid white;
+            }
+
+            #help {
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                padding: 4px;
+                color: white;   
+            }
+
+            #level {
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                padding: 4px;
+                color: yellow;   
+                font-weight: bold;
+            }
+
+        </style>
+        
+    </head>
+    
+    <body>
+    
+    <div id='instructions'>
+        How to play Astray:
+        <br><br>
+        Use the arrow keys to move the ball and find the exit to the maze.
+        <br><br>
+        Vim trainees: h, j, k, l
+    </div>
+    
+    <div id='help'>
+        Hold down the 'I' key for instructions.
+    </div>
+
+    <div id='level'>
+        Level 1
+    </div>
+    
+    </body>
+
+</html>
+

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>cr1mnsx — PS5, Souls-like & Twitch</title>
+  <meta name="description" content="cr1mnsx — PlayStation 5, Dark Souls 1, стримы Мафани и лор с Владом Клёвые Тачки">
+  <meta name="theme-color" content="#0b2a5a">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.png">
+
+  <!-- M PLUS 1p — шрифт M+, как в XMB-теме RetroArch; по духу близок к системному Rodin у PS3 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/boot.js"></script>
+</head>
+<body>
+
+  <!-- Фон: аквариум с рыбками. Источник видео выбирает js/main.js -->
+  <div class="bg" aria-hidden="true">
+    <video id="bgVideo" muted loop playsinline preload="none" poster="assets/video/bg-poster.jpg"></video>
+  </div>
+
+  <div class="status" aria-hidden="true">
+    <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки PS3" title="Звуки PS3 XMB (Вкл / Выкл)">🔊</button>
+    <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
+  </div>
+
+  <main class="xmb" id="xmb">
+
+    <!-- cr1mnsx (Профиль) -->
+    <section class="cat" id="cr1mnsx" data-icon="assets/icons/aero/profile-msn.png">
+      <h2 class="cat__label">cr1mnsx</h2>
+      <ul class="cat__items">
+        <li class="item">
+          <div class="item__row">
+            <a class="item__icon item__icon--photo item__zoom" href="assets/video/avatar.mp4" target="_blank">
+              <span class="avatar">
+                <video src="assets/video/avatar.mp4" poster="assets/photos/avatar.jpg" autoplay loop muted playsinline></video>
+              </span>
+            </a>
+            <span class="item__text">
+              <span class="item__title">cr1mnsx</span>
+              <span class="item__sub">Консольщик на PS5, преданный фанат Souls-like игр (Dark Souls 1) и зритель стримов Мафани (лор с Владом).</span>
+            </span>
+          </div>
+          <div class="item__panel">
+            <p class="panel__note">«Don't you dare go Hollow» — костры горят, боссы падают.</p>
+            <dl class="panel__facts">
+              <div><dt>Платформа</dt><dd>PlayStation 5 & PC</dd></div>
+              <div><dt>Жанр</dt><dd>Soulslike (Souls-игры)</dd></div>
+              <div><dt>Фаворит</dt><dd>Dark Souls 1 (Top-1 Souls)</dd></div>
+              <div><dt>Любимый стример</dt><dd><a href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">mafanyaking</a></dd></div>
+              <div><dt>Twitch</dt><dd><a href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
+              <div><dt>Steam</dt><dd><a href="https://steamcommunity.com/id/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
+              <div><dt>ВКонтакте</dt><dd><a href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener">vk.ru/cr1mnsx</a></dd></div>
+            </dl>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Souls-like (Любимые игры) -->
+    <section class="cat" id="souls" data-icon="assets/icons/aero/game-pad.png">
+      <h2 class="cat__label">Souls-like</h2>
+      <ul class="cat__items">
+        <li class="item item--photo">
+          <a class="item__row" href="assets/photos/souls/ds1-bonfire.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/ds1-bonfire.jpg" alt="Dark Souls 1"></span>
+            <span class="item__text">
+              <span class="item__title">Dark Souls 1 — Топ-1 любимая часть</span>
+              <span class="item__sub">Лордран, Храм Огня, Арториас, Гвин и незабываемый первый опыт в жанре.</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/game-pad.png" alt="PS5"></span>
+            <span class="item__text">
+              <span class="item__title">PlayStation 5 & DualSense</span>
+              <span class="item__sub">Тактильный отклик ударов и парирований, Demon's Souls Remake и Bloodborne на консоли.</span>
+            </span>
+          </div>
+        </li>
+        <li class="item item--photo">
+          <a class="item__row" href="assets/photos/souls/elden-ring.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/elden-ring.jpg" alt="Elden Ring"></span>
+            <span class="item__text">
+              <span class="item__title">Elden Ring & Shadow of the Erdtree</span>
+              <span class="item__sub">Безупречный открытый мир, величие Междуземья и сложнейшие боссы.</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Bloodborne"></span>
+            <span class="item__text">
+              <span class="item__title">Bloodborne (Мечта о 60 FPS)</span>
+              <span class="item__sub">Охота в Ярнаме, лавкрафтовская атмосфера и лучший сеттинг FromSoftware.</span>
+            </span>
+          </div>
+        </li>
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Dark Souls 3"></span>
+            <span class="item__text">
+              <span class="item__title">Dark Souls III: The Ringed City</span>
+              <span class="item__sub">Эпичное завершение трилогии, Безымянный Король и рыцарь-раб Гаэль.</span>
+            </span>
+          </div>
+        </li>
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Sekiro"></span>
+            <span class="item__text">
+              <span class="item__title">Sekiro: Shadows Die Twice</span>
+              <span class="item__sub">Звон клинков, идеальные дефлекты и победа над Иссином.</span>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Twitch (Телевизор) -->
+    <section class="cat" id="twitch" data-icon="assets/icons/aero/videos-youtube.png">
+      <h2 class="cat__label">Twitch</h2>
+      <ul class="cat__items">
+        <li class="item">
+          <a class="item__row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">
+            <span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/cr1mnsx.png" alt="cr1mnsx"></span></span>
+            <span class="item__text">
+              <span class="item__title">cr1mnsx на Twitch</span>
+              <span class="item__sub">twitch.tv/cr1mnsx · Мой профиль на твиче</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <a class="item__row" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">
+            <span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/mafanya.png" alt="mafanyaking"></span></span>
+            <span class="item__text">
+              <span class="item__title">mafanyaking (Илья Мафаня)</span>
+              <span class="item__sub">twitch.tv/mafanyaking · Любимый стример</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <a class="item__row" href="https://t.me/toxiclegion" target="_blank" rel="noopener">
+            <span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Toxic Legion"></span></span>
+            <span class="item__text">
+              <span class="item__title">ТГК Мафани (Toxic Legion)</span>
+              <span class="item__sub">t.me/toxiclegion · Официальный телеграм-канал Мафани</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <a class="item__row" href="https://mafanya.ru/" target="_blank" rel="noopener">
+            <span class="item__icon"><img src="assets/icons/aero/movie.png" alt="Пранки"></span>
+            <span class="item__text">
+              <span class="item__title">Сайт Мафани (Архив Пранков)</span>
+              <span class="item__sub">mafanya.ru · Все легендарные пранки и проекты</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <a class="item__row" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener">
+            <span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Влад Диор Армани"></span></span>
+            <span class="item__text">
+              <span class="item__title">Влад Клёвые Тачки (Диор Армани)</span>
+              <span class="item__sub">t.me/VLADAPRMANI · Телеграм Влада, легендарного персонажа лора</span>
+            </span>
+          </a>
+        </li>
+        <li class="item">
+          <a class="item__row" href="https://t.me/bombastertg" target="_blank" rel="noopener">
+            <span class="item__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></span>
+            <span class="item__text">
+              <span class="item__title">Новости по Мафане (Бомбастер)</span>
+              <span class="item__sub">t.me/bombastertg · Нарезки, анонсы и свежие новости</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Игра: только на ПК, на узком экране раздел убирает js/main.js -->
+    <section class="cat" id="game" data-desktop data-icon="assets/icons/aero/hexgl.png">
+      <h2 class="cat__label">Игры</h2>
+      <ul class="cat__items">
+        <li class="item"><a class="item__row" href="game/astray/index.html"><span class="item__icon"><img src="assets/icons/aero/astray.png" alt=""></span><span class="item__text"><span class="item__title">Astray 3D</span><span class="item__sub">Лабиринт на WebGL · управление стрелками</span></span></a></li>
+      </ul>
+    </section>
+
+    <!-- Линки -->
+    <section class="cat" id="links" data-icon="assets/icons/aero/links.png">
+      <h2 class="cat__label">Линки</h2>
+      <ul class="cat__items">
+        <li class="item"><a class="item__row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/vk.png" alt="VK"></span></span><span class="item__text"><span class="item__title">ВКонтакте</span><span class="item__sub">vk.ru/cr1mnsx</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://steamcommunity.com/id/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/steam.png" alt="Steam"></span></span><span class="item__text"><span class="item__title">Steam Профиль</span><span class="item__sub">cr1mnsx</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/icons/social/twitch.png" alt="Twitch"></span></span><span class="item__text"><span class="item__title">Twitch Профиль</span><span class="item__sub">twitch.tv/cr1mnsx</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/mafanya.png" alt="Mafanya"></span></span><span class="item__text"><span class="item__title">Канал Мафани на Twitch</span><span class="item__sub">twitch.tv/mafanyaking</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://t.me/toxiclegion" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Toxic Legion"></span></span><span class="item__text"><span class="item__title">ТГК Мафани (Toxic Legion)</span><span class="item__sub">t.me/toxiclegion</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://mafanya.ru/" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt="Сайт Мафани"></span><span class="item__text"><span class="item__title">Сайт Мафани (Архив Пранков)</span><span class="item__sub">mafanya.ru</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Влад Диор Армани"></span></span><span class="item__text"><span class="item__title">ТГ Влада Клёвые Тачки</span><span class="item__sub">t.me/VLADAPRMANI (@VLADAPRMANI)</span></span></a></li>
+        <li class="item"><a class="item__row" href="https://t.me/bombastertg" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></span><span class="item__text"><span class="item__title">Новости по Мафане (Бомбастер)</span><span class="item__sub">t.me/bombastertg</span></span></a></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/aero/game-pad.png" alt="PSN"></span></span><span class="item__text"><span class="item__title">PlayStation Network</span><span class="item__sub">PSN: cr1mnsx · PlayStation 5</span></span></div></li>
+        <li class="item"><a class="item__row" href="https://t.me/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Telegram"></span></span><span class="item__text"><span class="item__title">Telegram</span><span class="item__sub">t.me/cr1mnsx</span></span></a></li>
+      </ul>
+    </section>
+
+    <!-- Об этом сайте -->
+    <section class="cat" id="info" data-icon="assets/icons/aero/info.png">
+      <h2 class="cat__label">Об этом сайте</h2>
+      <ul class="cat__items">
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/info.png" alt=""></span>
+            <span class="item__text"><span class="item__title">Сайт cr1mnsx · Frutiger Aero x PS5/PS3 XMB</span></span>
+          </div>
+        </li>
+        <li class="item">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/aero/visits-steps.png" alt=""></span>
+            <span class="item__text"><span class="item__title">Визиты сайта: <span id="visits">…</span></span></span>
+          </div>
+        </li>
+        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt=""></span><span class="item__text"><span class="item__title">Видео-аватар</span><span class="item__sub">Du du du du Max Verstappen</span></span></div></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Живой аквариум на фоне</span><span class="item__sub">Skeuomorphic live video background</span></span></div></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/game-pad.png" alt=""></span><span class="item__text"><span class="item__title">Звуки меню PS3</span><span class="item__sub">Синтезированы через Web Audio API</span></span></div></li>
+        <li class="item"><a class="item__row" href="https://fonts.google.com/specimen/M+PLUS+1p" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Шрифт M PLUS 1p</span><span class="item__sub">M+ Fonts Project · SIL OFL</span></span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Просмотр фото" hidden>
+    <img class="viewer__img" id="viewerImg" alt="">
+    <video class="viewer__video" id="viewerVideo" controls playsinline preload="metadata" hidden></video>
+    <div class="viewer__bar">
+      <button class="viewer__btn" type="button" data-prev aria-label="Предыдущее фото">‹</button>
+      <span id="viewerCount"></span>
+      <button class="viewer__btn" type="button" data-next aria-label="Следующее фото">›</button>
+    </div>
+    <button class="viewer__btn viewer__close" type="button" data-close aria-label="Закрыть">✕</button>
+  </div>
+
+  <!-- игра открывается поверх сайта; крестик справа сверху закрывает -->
+  <div class="play" id="play" hidden>
+    <iframe class="play__frame" id="playFrame" title="Игра" allow="fullscreen; autoplay"></iframe>
+    <button class="play__close" id="playClose" type="button" aria-label="Закрыть игру">✕</button>
+  </div>
+
+  <script src="js/ps3wave.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
