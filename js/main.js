@@ -494,7 +494,8 @@
 
   function openGame(url) {
     if (!play || !url) return;
-    playFrame.src = `${url}${url.includes('?') ? '&' : '?'}v=${GAME_BUILD}`;
+    const finalUrl = url.startsWith('http') ? url : `${url}${url.includes('?') ? '&' : '?'}v=${GAME_BUILD}`;
+    playFrame.src = finalUrl;
     play.hidden = false;
     // аквариум на фоне на паузу: игра и так грузит видеокарту
     playWasPlaying = Boolean(bgVideo && !bgVideo.paused);
