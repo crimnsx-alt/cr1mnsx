@@ -477,7 +477,7 @@
   <!-- Верхняя панель XMB -->
   <header class="topbar">
     <div class="topbar__left">
-      <a class="btn-back" href="../../index.html" title="Вернуться в главное меню PS3">
+      <a class="btn-back" href="../../index.html" onclick="if(window.parent &amp;&amp; window.parent !== window &amp;&amp; window.parent.document.getElementById('playClose')) { window.parent.document.getElementById('playClose').click(); return false; }" target="_top" title="Вернуться в главное меню PS3">
         <span>←</span> <span>Назад в XMB</span>
       </a>
       <div class="brand">
@@ -671,6 +671,16 @@
     helpModal.addEventListener('click', (e) => {
       if (e.target === helpModal) helpModal.classList.remove('is-active');
     });
+
+    // Автозапуск ROM из URL параметров (если передан ?rom=...)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const romParam = urlParams.get('rom');
+      const nameParam = urlParams.get('name');
+      if (romParam) {
+        startEmulator(romParam, nameParam || 'PlayStation 1');
+      }
+    } catch(e) {}
   </script>
 </body>
 </html>

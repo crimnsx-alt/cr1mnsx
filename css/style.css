@@ -155,6 +155,8 @@ a { color: inherit; }
 .item__icon .icon-tile img { width: 100%; height: 100%; object-fit: cover; filter: none; }
 .icon-tile--twitch { background: linear-gradient(#8b6bd0, #6441a5 55%, #4b2f80); }
 .item__icon .icon-tile--twitch img { width: 56%; height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+.icon-tile--psn { background: linear-gradient(180deg, #0070d1 0%, #00439c 55%, #00266e 100%); }
+.item__icon .icon-tile--psn img { width: 62%; height: auto; object-fit: contain; filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
 
 /* панель «О себе» справа */
 .item__panel { margin: 14px 0 0 calc(var(--col) + 18px); max-width: 400px; text-shadow: var(--shadow); }
@@ -207,6 +209,7 @@ a { color: inherit; }
 .xmb-cat img {
   display: block;
   width: var(--cat-icon); height: var(--cat-icon);
+  object-fit: contain;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .35));
   transition: transform .32s var(--ease), filter .32s ease;
 }
@@ -268,6 +271,170 @@ a { color: inherit; }
   margin: 0;
 }
 
+/* ---------- Карточка PSN Terminal (psn.gg) в разделе Souls-like ---------- */
+.xmb-on #souls .item.is-selected .item__panel {
+  display: block;
+  position: absolute; top: -14px;
+  left: calc(var(--col) + 18px + 440px + 36px);
+  width: min(540px, calc(100vw - var(--ix, 20vw) - var(--col) - 510px));
+  margin: 0;
+  z-index: 5;
+  animation: psnPanelFadeIn .25s var(--ease);
+}
+
+@keyframes psnPanelFadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.psn-terminal-widget {
+  position: relative;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0, 168, 255, .35), rgba(10, 20, 42, .85) 50%, rgba(0, 90, 180, .28));
+  padding: 3px;
+  box-shadow: 0 10px 32px rgba(0, 6, 24, .75), 0 0 18px rgba(0, 168, 255, .28);
+  border: 1px solid rgba(255, 255, 255, .25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.psn-terminal-widget:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 14px 40px rgba(0, 6, 24, .85), 0 0 24px rgba(0, 168, 255, .45);
+  border-color: rgba(120, 210, 255, .6);
+}
+
+.psn-card-link {
+  display: block;
+  border-radius: 11px;
+  overflow: hidden;
+  line-height: 0;
+  position: relative;
+  text-decoration: none;
+  background: #0b111e;
+}
+
+.psn-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 800 / 180;
+  object-fit: cover;
+  border-radius: 11px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .4));
+}
+
+.psn-meta {
+  margin-top: 12px;
+  background: rgba(6, 16, 36, .72);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 12px;
+  padding: 12px 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+}
+
+.psn-meta__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.psn-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0, 168, 255, .25);
+  border: 1px solid rgba(0, 168, 255, .5);
+  color: #70d4ff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+}
+
+.psn-badge--souls {
+  background: rgba(220, 100, 30, .25);
+  border-color: rgba(255, 140, 60, .5);
+  color: #ffaa66;
+}
+
+.psn-badge--top {
+  background: rgba(240, 190, 20, .25);
+  border-color: rgba(255, 215, 0, .6);
+  color: #ffd700;
+}
+
+.psn-meta__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+}
+
+.psn-stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 12px;
+}
+
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: rgba(255, 255, 255, .92);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .8);
+}
+
+.stat-pill b { color: #fff; font-weight: 700; }
+.stat-pill--plat { border-color: rgba(140, 190, 255, .4); background: rgba(100, 160, 255, .15); }
+.stat-pill--gold { border-color: rgba(255, 215, 0, .4); background: rgba(255, 215, 0, .12); }
+.stat-pill--silver { border-color: rgba(200, 210, 220, .4); background: rgba(200, 210, 220, .12); }
+.stat-pill--bronze { border-color: rgba(210, 140, 90, .4); background: rgba(210, 140, 90, .12); }
+.stat-pill--lvl { border-color: rgba(255, 230, 80, .5); background: rgba(255, 230, 80, .15); color: #fff280; }
+
+.psn-btn-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: linear-gradient(180deg, rgba(0, 168, 255, .35) 0%, rgba(0, 90, 190, .55) 100%);
+  border: 1px solid rgba(120, 210, 255, .6);
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+  transition: all .2s ease;
+}
+
+.psn-btn-profile:hover {
+  background: linear-gradient(180deg, rgba(0, 190, 255, .5) 0%, rgba(0, 120, 220, .7) 100%);
+  border-color: rgba(170, 235, 255, .8);
+  box-shadow: 0 4px 16px rgba(0, 168, 255, .45), inset 0 1px 2px rgba(255, 255, 255, .6);
+  transform: translateY(-1px);
+}
+
+.psn-btn-arrow {
+  font-size: 14px;
+  transition: transform .2s ease;
+}
+.psn-btn-profile:hover .psn-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
 /* «О себе»: текст ближе к аватарке, она уже остальных иконок */
 @media (min-width: 641px) {
   .xmb-on #cr1mnsx .item__text,
@@ -280,6 +447,9 @@ a { color: inherit; }
     width: auto;
     max-width: 420px;
     margin: 16px 0 0 calc(var(--col) + 18px);
+  }
+  .xmb-on #souls .item.is-selected .item__panel {
+    max-width: 520px;
   }
 }
 

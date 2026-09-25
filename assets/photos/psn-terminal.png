@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex,nofollow">
+    <title>PSN.GG — Security Check</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; height: 100%; }
+        body {
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(ellipse at 20% 30%, rgba(232, 51, 77, 0.14) 0%, transparent 50%),
+                linear-gradient(135deg, #020617 0%, #0d1a2e 55%, #1a0a1f 100%);
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #E8334D 30%, #3b9eff 70%, transparent);
+            opacity: 0.8;
+        }
+        body::after {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(232, 51, 77, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232, 51, 77, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container { position: relative; z-index: 1; text-align: center; max-width: 560px; }
+        .brand { display: inline-flex; align-items: center; gap: 0.9rem; margin-bottom: 2.5rem; text-decoration: none; }
+        .brand-icon { width: 56px; height: 56px; filter: drop-shadow(0 0 12px rgba(59, 158, 255, 0.5)); }
+        .brand-text {
+            font-family: 'Impact', 'Arial Black', 'Helvetica Neue', sans-serif;
+            font-size: 2rem; font-weight: 900; letter-spacing: 0.18em; color: #fff; line-height: 1;
+        }
+        .brand-text .gg { color: #3b9eff; }
+        .alert-tag {
+            display: inline-block;
+            padding: 0.3rem 0.75rem;
+            background: rgba(232, 51, 77, 0.15);
+            border: 1px solid rgba(232, 51, 77, 0.5);
+            border-radius: 999px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: #E8334D;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .stripe {
+            display: block; height: 2px; width: 120px; margin: 0 auto 1.5rem;
+            background: linear-gradient(90deg, transparent, #E8334D 30%, #3b9eff 70%, transparent);
+        }
+        h1 {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700; color: #fff; text-transform: uppercase;
+            letter-spacing: 0.12em; margin: 0 0 1rem;
+        }
+        .message { color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin: 0 auto 2rem; max-width: 480px; }
+        .cf-box {
+            margin: 0 auto 2.5rem;
+            padding: 1.5rem;
+            background: rgba(2, 6, 23, 0.6);
+            border: 1px solid rgba(59, 158, 255, 0.3);
+            border-radius: 10px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pulse {
+            display: inline-block;
+            width: 12px; height: 12px;
+            margin-right: 0.5rem;
+            border-radius: 50%;
+            background: #E8334D;
+            box-shadow: 0 0 12px rgba(232, 51, 77, 0.8);
+            animation: pulse 1.5s ease-in-out infinite;
+            vertical-align: middle;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+        .hint {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+        .footer {
+            font-family: 'Courier New', monospace; font-size: 0.7rem;
+            color: #475569; letter-spacing: 0.25em; text-transform: uppercase;
+        }
+        .footer .x { color: #5A4DD9; }
+        .footer .o { color: #E8334D; }
+        .footer .t { color: #0AB5A3; }
+        .footer .s { color: #E5479C; }
+    </style>
+<meta http-equiv="refresh" content="360"></head>
+<body>
+    <div class="container">
+        <a href="https://psn.gg/" class="brand">
+            <svg class="brand-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M 0 96 L 96 0 L 512 0 L 512 416 L 416 512 L 0 512 Z" fill="#02040A" stroke="#3B9EFF" stroke-width="22"/>
+                <g stroke="#5A4DD9" stroke-width="30" stroke-linecap="round" fill="none">
+                    <line x1="100" y1="120" x2="220" y2="240"/>
+                    <line x1="220" y1="120" x2="100" y2="240"/>
+                </g>
+                <circle cx="372" cy="180" r="62" stroke="#E8334D" stroke-width="30" fill="none"/>
+                <polygon points="160,288 230,412 90,412" stroke="#0AB5A3" stroke-width="30" fill="none" stroke-linejoin="round"/>
+                <rect x="306" y="290" width="124" height="124" stroke="#E5479C" stroke-width="30" fill="none"/>
+            </svg>
+            <span class="brand-text">PSN<span class="gg">.GG</span></span>
+        </a>
+
+        <div class="alert-tag">Heightened Security</div>
+
+        <span class="stripe"></span>
+
+        <div class="hint">
+            <span class="pulse"></span> Running browser integrity checks&hellip;
+        </div>
+
+        <div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'yI_yXH1PAWxbrBbOSCO7BPD4YnljhBipaMEHz.HIXZ0-1790313615-1.2.1.1-R3KQXhvfi5.3gEGbXmWO6rZz0VaPCWL9KqoHNVIlDBJgKHXRH_09OXPiozmWrKGu',cITimeS: '1790313615',cRay: 'a40794222fc14884',cTplB: '0',cTplC:1,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:"/profile/Cr1mnsx/card/terminal.png?__cf_chl_tk=.rnvQwkUlh7UOUMg8WAlRy8b9L.6h9Tx4Sd__6yBV1M-1790313615-1.0.1.1-cQD9dZUpPnmukJ8.UdOwbcw4xSrYODkWT3o0bnRMfzE",cvId: '3',cZone: 'psn.gg',fa:"/profile/Cr1mnsx/card/terminal.png?__cf_chl_f_tk=.rnvQwkUlh7UOUMg8WAlRy8b9L.6h9Tx4Sd__6yBV1M-1790313615-1.0.1.1-cQD9dZUpPnmukJ8.UdOwbcw4xSrYODkWT3o0bnRMfzE",md: 'LyIx9cnnrH90_.nbNxJAC_vuHG0IPOJ0i9CcN02EvzI-1790313615-1.2.1.1-onFnftTi8.FL7wWHzLsAaikpTrhzBDS9G4jS.CF1ZRdz741eQULBCo2pn.Fsqpa3ak7GCYCU28PyPhJL2ZYJKT8aFVgdc2BaKNT1Cx1WprXsDZC5APEYdkVxhBW8mF53rnsr8byNGw4XmEfoGCroypcAqJCXeyH1zhsZ8P54afN5QWjwVmMYv0lqOqu2RHuWa9CBpNLTdrkRrYci.znPXPkctnUXHJrVPdhgsKoi_3qyc0SRELP_LJGDNYTmCGEkPyRy3Fv5R0RA3fZ5yQB0eY_Vc5PPW4IGwexcMFoXYGsk.ICcYY6v38eEYF_qD9EFGSa1JC27_oRjc4euZ5DLdM.vNE0ET3Vp7VG8SHdG5EbhFMBentq5TmWmOs_vRQFUqEYtC_Kv7ulSl2HbV_sUGn29tiDDqbk9hkXFFimaXHA0RYd3eA5xHCdf0DQd7u8AdCx3wBjwi_ykFL8S5KkP9w65LpBi.Ygg8kMmxG9RsYHoAmEYfrvaRb5UQm7I7tMhXtLp_BL_TNTteiZB2mf7u66_Zl92QpI6gSjYm04bqzWa9qrPgrwhOudxVWFDNlBGg5ieRISkajkcxy.UjZtC3Rbfy0CitNuWJ1SKrV3knqG3l0N65LWMXN0XOW7antdP5UNndIMn2ut_PEL5edJt5e8KJrGj5gERvpsQyVVUiXhCs6EFh7ZUtizbtirpeN_X06nARZKM8oSKYVAtZsoIDj2f9CAFAQ3NHID9VbiPZmT8vYEYtXbdsg6hOuRLzWND185Wa6lfSu4SqasnD1_skeDLqj4EFM3_nkbikOUA5mgCqykt4BqcQtQUoA0DqXhdIGPIyO7svRkS09LmUc01qiQIhIEsjRzzdp0HA6JRF0NHx7.4rwJGwXMU8weEjsmPKrL3Q6LuPs3sq4Wp.49S7PhW7s.FCbRM7RNaHf_WmFFBar9izJ.S7.fFiZ7JV9YVx_BQRhVmlXv4eVpvIG1pdkkodGJNp3wGD8MYPkbIRkxPQ1Tq3Jzy73tW8h88vUlCCLdJLaNGts8Zw7.Zg76ceJuXOt7TUSkMCffQh4.KVe3sTFnXi_i8EHzt9X0wi2328NX5_gtNixQ68wH86pUWNIJhMP7xTqf263wfWKu3zfHsdBrT4sz7MJu4zxVltREBBEFNsSFamShrJuwyiBL5QUQNZ6qqlabxzn5TPE4BzTPrSd8xSZC1vGPJXkmYtm2ugb8O2RZlOEXjeZ3voRgvWTAnABWulODZuvYzG_iYlqI',mdrd: 'nBbhOfj_u6TfDJdaal5O.XpN2pxE6AuaNSC0r8IMtck-1790313615-1.2.1.1-S34feaTeQMgkpljLqHeZ756fffqHGMfrtHRnEHtkgruQ4lMP45ACaNkRIdXdR3fKxusj7hdBdEIqekCXWU6hgOuIIkPDYf1g6KethUSUgp6xHUvSZ86obFgYhq6cx0RLXdI2V_HLeZFhTR3wa8ovnJXRqR9F.Sg38QmVp8hArxaOWaQKesaJYkFhWid7lX2BcbG8og43JgQg0K0x_jATFTZjwdN7P1iVANVdEZdaS7jxuy78Pv8GrnrPLtzYkigwZE.geCSmvZstI.ABz5PBfTrWQSVW2iMVy9S0P3eFrKbAQUseZQxN.AbHvfVsGpuh7.FS39emal4hqAQXP.YXeYLZh60.9ls5PvQ8yNjg5OnuDAzyKWPo.bfN52L0UDZp',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/b/orchestrate/chl_page/v1?ray=a40794222fc14884';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"/profile/Cr1mnsx/card/terminal.png?__cf_chl_rt_tk=.rnvQwkUlh7UOUMg8WAlRy8b9L.6h9Tx4Sd__6yBV1M-1790313615-1.0.1.1-cQD9dZUpPnmukJ8.UdOwbcw4xSrYODkWT3o0bnRMfzE"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script>
+
+        <div class="footer">
+            // PSN.GG &middot;
+            <span class="x">X</span>
+            <span class="o">O</span>
+            <span class="t">^</span>
+            <span class="s">[]</span>
+            &middot; Playstation Nation
+        </div>
+    </div>
+</body>
+</html>
