@@ -897,5 +897,129 @@
   });
   if (document.fonts) document.fonts.ready.then(render);
 
+  /* ---------- Brawl Stars: Синхронизация статистики с Brawlify (#2RGUQJQ0R) ---------- */
+  const initBrawlStarsSync = () => {
+    const TAG = '2RGUQJQ0R';
+    const CACHE_KEY = 'bs_profile_2rguqjq0r';
+    const CACHE_TTL = 20 * 60 * 1000; // 20 минут
+
+    const elTrophies = $('#bs-trophies');
+    const elHighest = $('#bs-highest');
+    const el3v3 = $('#bs-3v3');
+    const elShowdown = $('#bs-showdown');
+    const elBrawlers = $('#bs-brawlers');
+    const elClub = $('#bs-club');
+    const elSyncStatus = $('#bs-sync-status');
+    const elSubPreview = $('#bs-sub-preview');
+
+    const updateDOM = (data, isLive = false) => {
+      if (!data) return;
+      if (elTrophies && data.trophies) elTrophies.textContent = Number(data.trophies).toLocaleString('ru-RU');
+      if (elHighest && data.highest) elHighest.textContent = Number(data.highest).toLocaleString('ru-RU');
+      if (el3v3 && data.victories3v3) el3v3.textContent = Number(data.victories3v3).toLocaleString('ru-RU');
+      if (elShowdown && data.showdown) elShowdown.textContent = typeof data.showdown === 'number' ? Number(data.showdown).toLocaleString('ru-RU') : data.showdown;
+      if (elBrawlers && data.brawlers) elBrawlers.textContent = data.brawlers;
+      if (elClub && data.club) elClub.textContent = data.club;
+      if (elSubPreview && data.trophies) {
+        elSubPreview.textContent = `🏆 ${Number(data.trophies).toLocaleString('ru-RU')} кубков · 3v3 победы · Ежедневный актив · brawlify.com`;
+      }
+      if (elSyncStatus) {
+        elSyncStatus.textContent = isLive ? '🟢 Live с Brawlify' : '🟢 Кэш готов';
+      }
+    };
+
+    // 1. Проверяем кэш в localStorage
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        updateDOM(parsed.data, false);
+        if (Date.now() - parsed.timestamp < CACHE_TTL) {
+          return; // Кэш еще свежий
+        }
+      }
+    } catch { /* ignore cache read error */ }
+
+    // 2. Парсер HTML страницы Brawlify
+    const parseBrawlifyHTML = (html) => {
+      if (!html || html.includes('Just a moment...') || html.includes('challenges.cloudflare.com')) {
+        return null;
+      }
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        // Ищем элементы со статистикой
+        const textContent = doc.body.textContent || '';
+        if (!textContent.includes('2RGUQJQ0R')) return null;
+
+        const res = {};
+        
+        // Регулярные выражения по структуре Brawlify
+        const trophiesMatch = textContent.match(/Trophies[:\s]+([\d,]+)/i) || textContent.match(/([\d,]{4,6})\s*Trophies/i);
+        if (trophiesMatch) res.trophies = parseInt(trophiesMatch[1].replace(/,/g, ''), 10);
+
+        const highestMatch = textContent.match(/Highest[:\s]+([\d,]+)/i) || textContent.match(/Highest Trophies[:\s]+([\d,]+)/i);
+        if (highestMatch) res.highest = parseInt(highestMatch[1].replace(/,/g, ''), 10);
+
+        const v3Match = textContent.match(/3v3 Victories[:\s]+([\d,]+)/i) || textContent.match(/Victories[:\s]+([\d,]+)/i);
+        if (v3Match) res.victories3v3 = parseInt(v3Match[1].replace(/,/g, ''), 10);
+
+        const soloMatch = textContent.match(/Solo Victories[:\s]+([\d,]+)/i);
+        const duoMatch = textContent.match(/Duo Victories[:\s]+([\d,]+)/i);
+        if (soloMatch || duoMatch) {
+          const s = soloMatch ? parseInt(soloMatch[1].replace(/,/g, ''), 10) : 0;
+          const d = duoMatch ? parseInt(duoMatch[1].replace(/,/g, ''), 10) : 0;
+          res.showdown = (s + d) || `${s} / ${d}`;
+        }
+
+        const brawlerMatch = textContent.match(/Brawlers[:\s]+(\d+)\s*\/\s*(\d+)/i) || textContent.match(/(\d+)\s*\/\s*(\d+)\s*Brawlers/i);
+        if (brawlerMatch) res.brawlers = `${brawlerMatch[1]} / ${brawlerMatch[2]}`;
+
+        const clubMatch = doc.querySelector('.club-name, [class*="club"]') || textContent.match(/Club[:\s]+([^\n\r]+)/i);
+        if (clubMatch) {
+          res.club = (clubMatch.textContent || clubMatch[1] || '').trim().replace(/Club:?/i, '').trim();
+        }
+
+        return Object.keys(res).length >= 2 ? res : null;
+      } catch {
+        return null;
+      }
+    };
+
+    // 3. Каскад запросов через CORS-прокси
+    const targetUrl = `https://brawlify.com/player/${TAG}`;
+    const proxyList = [
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+      `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+    ];
+
+    const fetchViaProxies = async () => {
+      for (const pUrl of proxyList) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const resp = await fetch(pUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (resp.ok) {
+            const html = await resp.text();
+            const data = parseBrawlifyHTML(html);
+            if (data) {
+              updateDOM(data, true);
+              localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+              return;
+            }
+          }
+        } catch {
+          // тихо пропускаем таймауты и Cloudflare ошибки, не мусоря в консоль
+        }
+      }
+    };
+
+    fetchViaProxies();
+  };
+
   startBgmIfAllowed();
+  initBrawlStarsSync();
 })();

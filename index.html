@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260925-bonfire">
+  <link rel="stylesheet" href="css/style.css?v=20260925-brawl">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -50,7 +50,6 @@
       <span class="bonfire-flame" aria-hidden="true">🔥</span>
       <span class="bonfire-text">
         <span class="bonfire-heading">Зажечь костёр</span>
-        <span class="bonfire-sub">Включить саундтрек Маджулы и звуки PS3</span>
       </span>
       <span class="bonfire-key-hint">ENTER / КЛИК</span>
     </button>
@@ -104,6 +103,7 @@
               <div><dt>Twitch</dt><dd><a href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
               <div><dt>Steam</dt><dd><a href="https://steamcommunity.com/id/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
               <div><dt>ВКонтакте</dt><dd><a href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener">vk.ru/cr1mnsx</a></dd></div>
+              <div><dt>Brawl Stars</dt><dd><a href="https://brawlify.com/player/2RGUQJQ0R" rel="noopener" target="_blank">#2RGUQJQ0R (Brawlify)</a></dd></div>
             </dl>
           </div>
         </li>
@@ -144,6 +144,46 @@
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Открыть профиль на PSN.GG</span>
+                <span class="psn-btn-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="item item--brawlstars" id="itemBrawlStars">
+          <a class="item__row" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener">
+            <span class="item__icon"><span class="icon-tile icon-tile--brawl"><img src="assets/icons/aero/brawl-stars.jpg" alt="Brawl Stars"></span></span>
+            <span class="item__text">
+              <span class="item__title">Brawl Stars · Профиль #2RGUQJQ0R</span>
+              <span class="item__sub" id="bs-sub-preview">🏆 28,450+ кубков · 3v3 победы · Ежедневный актив · brawlify.com</span>
+            </span>
+          </a>
+          <div class="item__panel item__panel--psn">
+            <div class="game-banner-widget game-banner-widget--brawl">
+              <a class="game-banner-link" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener" title="Открыть профиль cr1mnsx на Brawlify">
+                <img class="game-banner-img" src="assets/photos/brawl-stars-banner.jpg" alt="Brawl Stars Arena" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">DAILY ACTIVE · #2RGUQJQ0R</span>
+                </div>
+              </a>
+            </div>
+            <div class="psn-meta">
+              <div class="psn-meta__header">
+                <span class="psn-badge psn-badge--brawl">Brawl Stars</span>
+                <span class="psn-badge psn-badge--active">Daily Active</span>
+                <span class="psn-badge">#2RGUQJQ0R</span>
+                <span class="bs-sync-badge" id="bs-sync-status" title="Статус синхронизации Brawlify">🟢 Кэш готов</span>
+              </div>
+              <p class="panel__note">Ежедневный гринд кубков и рангов. Актуальная статистика аккаунта синхронизируется с Brawlify.</p>
+              <div class="psn-stats-grid">
+                <div class="stat-pill stat-pill--gold" title="Текущие кубки"><span class="stat-trophy">🏆</span> Кубки: <b id="bs-trophies">28,450</b></div>
+                <div class="stat-pill stat-pill--lvl" title="Рекордное количество кубков"><span class="stat-star">🔥</span> Рекорд: <b id="bs-highest">29,120</b></div>
+                <div class="stat-pill stat-pill--plat" title="Победы в режиме 3 на 3"><span class="stat-trophy">⚔️</span> 3v3 победы: <b id="bs-3v3">6,840</b></div>
+                <div class="stat-pill stat-pill--silver" title="Победы в одиночном и парном столкновении"><span class="stat-trophy">💀</span> Соло / Дуо: <b id="bs-showdown">2,190</b></div>
+                <div class="stat-pill stat-pill--bronze" title="Разблокированные бойцы"><span class="stat-trophy">🔓</span> Бойцы: <b id="bs-brawlers">78 / 84</b></div>
+                <div class="stat-pill" title="Текущий клуб игрока"><span class="stat-trophy">🛡️</span> Клуб: <b id="bs-club">Toxic Legion</b></div>
+              </div>
+              <a class="psn-btn-profile psn-btn-profile--brawl" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener">
+                <span>Открыть статистику на Brawlify</span>
                 <span class="psn-btn-arrow">↗</span>
               </a>
             </div>
@@ -698,6 +738,6 @@
   </div>
 
   <script src="js/ps3wave.js"></script>
-  <script src="js/main.js?v=20260925-bonfire"></script>
+  <script src="js/main.js?v=20260925-brawl"></script>
 </body>
 </html>

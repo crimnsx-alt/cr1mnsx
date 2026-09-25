@@ -729,6 +729,50 @@ a { color: inherit; }
   color: #ffd299;
 }
 
+.psn-badge--brawl {
+  background: rgba(255, 190, 0, .25);
+  border-color: rgba(255, 215, 0, .65);
+  color: #ffe066;
+}
+
+.psn-badge--active {
+  background: rgba(0, 230, 118, .2);
+  border-color: rgba(0, 230, 118, .5);
+  color: #69f0ae;
+}
+
+.bs-sync-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 12px;
+  background: rgba(0, 230, 118, .12);
+  border: 1px solid rgba(0, 230, 118, .35);
+  color: #b9f6ca;
+  margin-left: auto;
+}
+
+.game-banner-widget--brawl {
+  background: linear-gradient(135deg, rgba(255, 190, 0, .35), rgba(20, 14, 30, .88) 50%, rgba(140, 20, 200, .25));
+  border-color: rgba(255, 200, 60, .45);
+}
+
+.game-banner-widget--brawl:hover {
+  border-color: rgba(255, 220, 100, .85);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, .9), 0 0 28px rgba(255, 200, 0, .5);
+}
+
+.psn-btn-profile--brawl {
+  background: linear-gradient(180deg, rgba(255, 180, 0, .4) 0%, rgba(200, 110, 0, .6) 100%);
+  border-color: rgba(255, 215, 0, .7);
+}
+
+.psn-btn-profile--brawl:hover {
+  background: linear-gradient(180deg, rgba(255, 200, 20, .55) 0%, rgba(220, 130, 0, .75) 100%);
+  border-color: rgba(255, 235, 100, .9);
+  box-shadow: 0 4px 16px rgba(255, 190, 0, .5), inset 0 1px 2px rgba(255, 255, 255, .6);
+}
+
 /* Плеер темы Маджулы в панели DS2 */
 .ds2-player-box {
   margin: 10px 0 12px;
