@@ -1020,6 +1020,146 @@
     fetchViaProxies();
   };
 
+  /* ---------- PlayStation 5: Синхронизация последней запущенной игры ---------- */
+  const initPS5LastPlayedSync = () => {
+    const PSN_USER = 'Cr1mnsx';
+    const CACHE_KEY = 'ps5_last_played_cr1mnsx';
+    const CACHE_TTL = 20 * 60 * 1000; // 20 минут
+
+    const elTitles = $$('.ps5-last-game-title');
+    const elImgs = $$('.ps5-last-game-img');
+    const elPlatforms = $$('.ps5-last-game-platform');
+    const elStatuses = $$('.ps5-last-game-status');
+    const elProgresses = $$('.ps5-last-game-progress');
+    const elBars = $$('.ps5-last-game-bar');
+
+    const updateDOM = (game) => {
+      if (!game) return;
+      if (game.title) {
+        elTitles.forEach(el => { el.textContent = game.title; });
+      }
+      if (game.image) {
+        elImgs.forEach(el => {
+          el.src = game.image;
+          el.alt = game.title || 'PS5 Last Played Game';
+        });
+      }
+      if (game.platform) {
+        elPlatforms.forEach(el => { el.textContent = game.platform; });
+      }
+      if (game.last_played_text) {
+        elStatuses.forEach(el => {
+          el.textContent = `Последний запуск на PlayStation 5 · ${game.last_played_text}`;
+        });
+      }
+      if (game.progress_percent !== undefined) {
+        const pct = Math.min(100, Math.max(0, Number(game.progress_percent)));
+        elBars.forEach(el => { el.style.width = `${pct}%`; });
+        const earned = game.trophies_earned;
+        const total = game.trophies_total;
+        const extraRank = game.rank ? ` · ${game.rank} Rank` : '';
+        const progressStr = (earned !== undefined && total !== undefined && total > 0)
+          ? `🏆 ${earned}/${total} трофеев (${pct}%)${extraRank}`
+          : `🏆 Прогресс: ${pct}%${extraRank}`;
+        elProgresses.forEach(el => { el.textContent = progressStr; });
+      }
+    };
+
+    // 1. Проверяем кэш в localStorage
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (data && (Date.now() - timestamp < CACHE_TTL)) {
+          updateDOM(data);
+          return;
+        }
+      }
+    } catch {}
+
+    // 2. Проверяем локальный data/psn_recent.json (100% надежный источник без Cloudflare)
+    fetch('data/psn_recent.json')
+      .then(r => (r.ok ? r.json() : null))
+      .then(json => {
+        if (json && json.game) {
+          updateDOM(json.game);
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ data: json.game, timestamp: Date.now() }));
+          } catch {}
+        }
+      })
+      .catch(() => {});
+
+    // 3. Парсер HTML страницы PSN.GG / PSNProfiles
+    const parsePSNHTML = (html) => {
+      try {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const gameRow = doc.querySelector('.game-row, .library-item, #gamesTable tr, tr.game');
+        if (!gameRow) return null;
+
+        const titleEl = gameRow.querySelector('.title, .game-title, a[href*="/game/"]');
+        const imgEl = gameRow.querySelector('img.game, img.cover, img');
+        const platEl = gameRow.querySelector('.platform, .badge-platform, span[class*="platform"]');
+        const progressEl = gameRow.querySelector('.progress-bar span, .percentage, .trophy-progress');
+        const dateEl = gameRow.querySelector('.small-info, .last-played, .date');
+
+        if (!titleEl && !imgEl) return null;
+
+        const title = titleEl ? titleEl.textContent.trim() : '';
+        const image = imgEl ? (imgEl.getAttribute('data-src') || imgEl.src) : '';
+        const platform = platEl ? platEl.textContent.trim() : 'PS5';
+        const progressMatch = progressEl ? progressEl.textContent.match(/(\d+)%/) : null;
+        const percent = progressMatch ? parseInt(progressMatch[1], 10) : undefined;
+        const dateText = dateEl ? dateEl.textContent.trim() : '';
+
+        return {
+          title,
+          image,
+          platform,
+          progress_percent: percent,
+          last_played_text: dateText
+        };
+      } catch {
+        return null;
+      }
+    };
+
+    // 4. Запрос через каскад CORS-прокси
+    const targetUrl = `https://psn.gg/profile/${PSN_USER}`;
+    const proxyList = [
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+      `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+    ];
+
+    const fetchViaProxies = async () => {
+      for (const pUrl of proxyList) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 6000);
+          const resp = await fetch(pUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+          if (resp.ok) {
+            const html = await resp.text();
+            const gameData = parsePSNHTML(html);
+            if (gameData && gameData.title) {
+              updateDOM(gameData);
+              try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ data: gameData, timestamp: Date.now() }));
+              } catch {}
+              return;
+            }
+          }
+        } catch {
+          // тихо пропускаем таймауты
+        }
+      }
+    };
+
+    fetchViaProxies();
+  };
+
   startBgmIfAllowed();
   initBrawlStarsSync();
+  initPS5LastPlayedSync();
 })();

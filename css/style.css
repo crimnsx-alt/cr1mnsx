@@ -934,6 +934,187 @@ a { color: inherit; }
   transform: translate(2px, -2px);
 }
 
+/* ---------- Виджет «Последняя запущенная игра на PS5» ---------- */
+.ps5-last-played-widget {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, rgba(12, 22, 42, 0.8) 0%, rgba(6, 12, 24, 0.9) 100%);
+  border: 1px solid rgba(0, 140, 255, 0.38);
+  border-radius: 10px;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0 14px;
+}
+
+.ps5-last-played-widget::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(120, 200, 255, 0.6), transparent);
+  pointer-events: none;
+}
+
+.ps5-last-played-widget:hover {
+  background: linear-gradient(135deg, rgba(16, 32, 62, 0.9) 0%, rgba(8, 18, 36, 0.96) 100%);
+  border-color: rgba(90, 185, 255, 0.75);
+  box-shadow: 0 6px 22px rgba(0, 112, 209, 0.38), 0 0 16px rgba(0, 140, 255, 0.28), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1.5px);
+}
+
+.ps5-last-played-widget--profile {
+  margin: 10px 0 14px;
+}
+
+.ps5-last-played-widget--card {
+  margin: 10px 0 14px;
+}
+
+.ps5-lp__cover-wrap {
+  position: relative;
+  width: 76px;
+  height: 44px;
+  flex: none;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 112, 209, 0.3);
+  background: #050a14;
+}
+
+.ps5-lp__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.ps5-last-played-widget:hover .ps5-lp__cover {
+  transform: scale(1.05);
+}
+
+.ps5-lp__plat-badge {
+  position: absolute;
+  bottom: 2px;
+  left: 3px;
+  background: linear-gradient(135deg, #00439c 0%, #002266 100%);
+  color: #fff;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid rgba(140, 200, 255, 0.5);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  line-height: 1.1;
+}
+
+.ps5-lp__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ps5-lp__status-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ps5-lp__pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00e676;
+  box-shadow: 0 0 8px #00e676;
+  flex: none;
+  animation: ps5Pulse 2s infinite ease-in-out;
+}
+
+@keyframes ps5Pulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 4px #00e676; opacity: 0.8; }
+  50% { transform: scale(1.2); box-shadow: 0 0 12px #00e676, 0 0 20px rgba(0, 230, 118, 0.5); opacity: 1; }
+  100% { transform: scale(0.9); box-shadow: 0 0 4px #00e676; opacity: 0.8; }
+}
+
+.ps5-lp__status-text {
+  font-size: 10px;
+  color: #8be5ff;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ps5-lp__title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.25;
+}
+
+.ps5-lp__progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.ps5-lp__progress-bar {
+  flex: 0 0 70px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.ps5-lp__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0070d1, #00e5ff);
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(0, 190, 255, 0.7);
+  transition: width 0.3s ease;
+}
+
+.ps5-lp__progress-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.78);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ps5-lp__arrow {
+  color: rgba(140, 210, 255, 0.7);
+  font-size: 14px;
+  transition: all 0.2s ease;
+  margin-left: 2px;
+  flex: none;
+}
+
+.ps5-last-played-widget:hover .ps5-lp__arrow {
+  color: #fff;
+  transform: translate(2px, -2px);
+}
+
 /* «О себе»: текст ближе к аватарке, она уже остальных иконок */
 @media (min-width: 641px) {
   .xmb-on #cr1mnsx .item__text,

@@ -1,0 +1,20 @@
+{
+  "updated_at": "2026-09-25T19:18:00+03:00",
+  "username": "Cr1mnsx",
+  "psn_url": "https://psn.gg/profile/Cr1mnsx",
+  "game": {
+    "title": "Dark Souls II: Scholar of the First Sin",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "image": "assets/photos/souls/ds2-last-played-hd.jpg",
+    "progress_percent": 22,
+    "trophies_earned": 12,
+    "trophies_total": 38,
+    "bronze": 8,
+    "silver": 4,
+    "gold": 0,
+    "platinum": 0,
+    "last_played_text": "22 сентября 2026",
+    "last_trophy": "Brightstone Bonfire"
+  }
+}
