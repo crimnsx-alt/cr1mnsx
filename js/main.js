@@ -362,6 +362,94 @@
     });
   }
 
+  /* ---------- Звуковой эффект костра Dark Souls (Синтез шума огня и колокола) ---------- */
+  function playBonfireSound() {
+    initAudio();
+    if (!audioCtx) return;
+    try {
+      const t = audioCtx.currentTime;
+      // 1. Теплый глубокий бас резонанса костра
+      const oscBass = audioCtx.createOscillator();
+      const bassGain = audioCtx.createGain();
+      oscBass.type = 'sine';
+      oscBass.frequency.setValueAtTime(120, t);
+      oscBass.frequency.exponentialRampToValueAtTime(55, t + 1.2);
+      bassGain.gain.setValueAtTime(0.18, t);
+      bassGain.gain.exponentialRampToValueAtTime(0.0001, t + 1.4);
+      oscBass.connect(bassGain);
+      bassGain.connect(audioCtx.destination);
+      oscBass.start(t);
+      oscBass.stop(t + 1.45);
+
+      // 2. Треск и шум пламени (Pink noise / filter buffer)
+      const bufferSize = audioCtx.sampleRate * 1.5;
+      const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const data = buffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        data[i] = (lastOut + (0.02 * white)) / 1.02; // имитация розового шума
+        lastOut = data[i];
+        data[i] *= 3.5;
+      }
+      const noise = audioCtx.createBufferSource();
+      noise.buffer = buffer;
+      const noiseFilter = audioCtx.createBiquadFilter();
+      noiseFilter.type = 'lowpass';
+      noiseFilter.frequency.setValueAtTime(450, t);
+      noiseFilter.frequency.linearRampToValueAtTime(1400, t + 0.3);
+      noiseFilter.frequency.exponentialRampToValueAtTime(300, t + 1.5);
+      const noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.001, t);
+      noiseGain.gain.linearRampToValueAtTime(0.22, t + 0.25);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+      noise.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(audioCtx.destination);
+      noise.start(t);
+      noise.stop(t + 1.55);
+
+      // 3. Мистический колокольный перелив
+      const chime = audioCtx.createOscillator();
+      const chimeGain = audioCtx.createGain();
+      chime.type = 'triangle';
+      chime.frequency.setValueAtTime(440, t + 0.1);
+      chime.frequency.exponentialRampToValueAtTime(880, t + 0.6);
+      chimeGain.gain.setValueAtTime(0.001, t + 0.1);
+      chimeGain.gain.linearRampToValueAtTime(0.08, t + 0.3);
+      chimeGain.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+      chime.connect(chimeGain);
+      chimeGain.connect(audioCtx.destination);
+      chime.start(t + 0.1);
+      chime.stop(t + 1.85);
+    } catch { /* ignore */ }
+  }
+
+  /* ---------- Баннер «Зажечь костёр» и оверлей BONFIRE LIT ---------- */
+  const bonfireBanner = $('#bonfireBanner');
+  const bonfireLitBtn = $('#bonfireLitBtn');
+  const bonfireLitOverlay = $('#bonfireLitOverlay');
+
+  function triggerBonfireLit() {
+    if (bonfireBanner) bonfireBanner.classList.add('is-hidden');
+    playBonfireSound();
+    if (bonfireLitOverlay) {
+      bonfireLitOverlay.classList.add('is-active');
+      setTimeout(() => {
+        bonfireLitOverlay.classList.remove('is-active');
+      }, 3500);
+    }
+    // Плавное включение саундтрека Маджулы
+    playBgm();
+  }
+
+  if (bonfireLitBtn) {
+    bonfireLitBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerBonfireLit();
+    });
+  }
+
   // Автоматический запуск фоновой темы:
   // 1. Сразу вешаем перехват любого первого действия (клик, тап, скролл, клавиша).
   // 2. Пытаемся воспроизвести немедленно при загрузке.
@@ -375,6 +463,7 @@
       bgmAudio.volume = 0.5;
       bgmAudio.play().then(() => {
         updateBgmUI(true);
+        if (bonfireBanner) bonfireBanner.classList.add('is-hidden');
         showPs3Toast('Dark Souls II — Majula', 'Тема Маджулы · Motoi Sakuraba');
         removeAutoStartListeners();
       }).catch(() => {});
@@ -395,7 +484,11 @@
           window.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
           document.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
         });
-        playBgm();
+        playBgm().then((started) => {
+          if (started && bonfireBanner) {
+            bonfireBanner.classList.add('is-hidden');
+          }
+        });
       }
     } catch (e) {
       console.warn('BGM auto-start deferred:', e);

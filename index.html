@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260925-majula">
+  <link rel="stylesheet" href="css/style.css?v=20260925-bonfire">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -44,8 +44,26 @@
     <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
   </div>
 
+  <!-- Стильная интерактивная плашка обхода автоплея «Зажечь костёр» -->
+  <div class="bonfire-banner" id="bonfireBanner" role="region" aria-label="Включение звука и музыки">
+    <button class="bonfire-banner__btn" id="bonfireLitBtn" type="button">
+      <span class="bonfire-flame" aria-hidden="true">🔥</span>
+      <span class="bonfire-text">
+        <span class="bonfire-heading">Зажечь костёр</span>
+        <span class="bonfire-sub">Включить саундтрек Маджулы и звуки PS3</span>
+      </span>
+      <span class="bonfire-key-hint">ENTER / КЛИК</span>
+    </button>
+  </div>
+
+  <!-- Аутентичная плашка Dark Souls «BONFIRE LIT / КОСТЁР ЗАЖЖЁН» -->
+  <div class="bonfire-lit-overlay" id="bonfireLitOverlay" aria-hidden="true">
+    <div class="bonfire-lit-title">BONFIRE LIT</div>
+    <div class="bonfire-lit-sub">КОСТЁР ЗАЖЖЁН · ТЕМА МАДЖУЛЫ ВКЛЮЧЕНА</div>
+  </div>
+
   <!-- Аудио фоновой темы Dark Souls 2 Majula -->
-  <audio id="bgmAudio" src="assets/audio/majula.mp3" autoplay preload="auto" loop></audio>
+  <audio id="bgmAudio" src="assets/audio/majula.mp3" preload="auto" loop></audio>
 
   <!-- Всплывающее PS3-уведомление о треке -->
   <div class="ps3-toast" id="ps3Toast" aria-live="polite">
@@ -140,9 +158,12 @@
             </span>
           </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/ds1-bonfire.jpg" target="_blank" rel="noopener" title="Открыть арт Dark Souls">
+                <img class="game-banner-img" src="assets/photos/souls/ds1-bonfire.jpg" alt="Dark Souls 1 — Bonfire" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">LORD RINGS FIRE</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -154,7 +175,7 @@
               <p class="panel__note">Главная любовь и начало пути в Souls-играх. Лордран, Арториас и костры Храма Огня.</p>
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Платиновый кубок</b></div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill"><span class="stat-trophy">⚔️</span> <b>Рыцарь чести</b></div>
                 <div class="stat-pill"><span class="stat-icon">🎮</span> <b>PlayStation 5</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
@@ -173,9 +194,12 @@
             </span>
           </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/ds2-majula.jpg" target="_blank" rel="noopener" title="Открыть арт Маджулы">
+                <img class="game-banner-img" src="assets/photos/souls/ds2-majula.jpg" alt="Dark Souls 2 — Majula" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">DRANGLEIC SUNSET</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -210,8 +234,8 @@
 
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Платиновый кубок</b></div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
                 <div class="stat-pill stat-pill--majula"><span class="stat-icon">🌅</span> <b>Тема сайта</b></div>
+                <div class="stat-pill"><span class="stat-trophy">👑</span> <b>Scholar of the First Sin</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -229,9 +253,12 @@
             </span>
           </div>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
+                <img class="game-banner-img" src="assets/photos/psn-terminal.png" alt="PS5 DualSense Gaming" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">NEXT GEN GAMING</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -241,8 +268,8 @@
               </div>
               <p class="panel__note">Основная игровая платформа. Тактильный отклик ударов и парирований, мгновенные загрузки.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>647</b> трофеев</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🎮</span> <b>DualSense</b> Haptics</div>
+                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⚡</span> <b>Ultra-High Speed SSD</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -260,9 +287,12 @@
             </span>
           </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/elden-ring.jpg" target="_blank" rel="noopener" title="Открыть арт Elden Ring">
+                <img class="game-banner-img" src="assets/photos/souls/elden-ring.jpg" alt="Elden Ring" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">LANDS BETWEEN &amp; SHADOW</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -274,7 +304,7 @@
               <p class="panel__note">Безупречный открытый мир, исследование Междуземья и Царства Теней, сложнейшие боссы.</p>
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>100%</b> трофеев</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--gold"><span class="stat-star">⚔️</span> <b>Повелитель Элдена</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -283,18 +313,21 @@
             </div>
           </div>
         </li>
-        <li class="item">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Bloodborne"></span>
+        <li class="item item--photo">
+          <a class="item__row" href="assets/photos/souls/bloodborne.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/bloodborne.jpg" alt="Bloodborne"></span>
             <span class="item__text">
               <span class="item__title">Bloodborne (Мечта о 60 FPS)</span>
               <span class="item__sub">Охота в Ярнаме, лавкрафтовская атмосфера и лучший сеттинг FromSoftware.</span>
             </span>
-          </div>
+          </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/bloodborne.jpg" target="_blank" rel="noopener" title="Открыть арт Ярнама Bloodborne">
+                <img class="game-banner-img" src="assets/photos/souls/bloodborne.jpg" alt="Bloodborne — Yharnam Hunter" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">YHARNAM NIGHTMARE</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -305,7 +338,7 @@
               <p class="panel__note">Культовый эксклюзив PlayStation. Охота в Ярнаме, Кошмар Менсиса и Колесо Логариуса.</p>
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Платина</b> Ярнама</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--silver"><span class="stat-trophy">🩸</span> <b>Старый Охотник</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -314,18 +347,21 @@
             </div>
           </div>
         </li>
-        <li class="item">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Dark Souls 3"></span>
+        <li class="item item--photo">
+          <a class="item__row" href="assets/photos/souls/ds3-gael.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/ds3-gael.jpg" alt="Dark Souls 3"></span>
             <span class="item__text">
               <span class="item__title">Dark Souls III: The Ringed City</span>
               <span class="item__sub">Эпичное завершение трилогии, Безымянный Король и рыцарь-раб Гаэль.</span>
             </span>
-          </div>
+          </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/ds3-gael.jpg" target="_blank" rel="noopener" title="Открыть арт Гаэля Ringed City">
+                <img class="game-banner-img" src="assets/photos/souls/ds3-gael.jpg" alt="Dark Souls 3 — Slave Knight Gael" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">THE RINGED CITY · GAEL</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -336,7 +372,7 @@
               <p class="panel__note">Эпичный финал трилогии Souls. Боссы Рыцарь-раб Гаэль, Мидир и Безымянный Король.</p>
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>100%</b> прохождение</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--gold"><span class="stat-trophy">⚔️</span> <b>Рыцарь-раб Гаэль</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -345,18 +381,21 @@
             </div>
           </div>
         </li>
-        <li class="item">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/photos-album-crystal.png" alt="Sekiro"></span>
+        <li class="item item--photo">
+          <a class="item__row" href="assets/photos/souls/sekiro.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/sekiro.jpg" alt="Sekiro"></span>
             <span class="item__text">
               <span class="item__title">Sekiro: Shadows Die Twice</span>
               <span class="item__sub">Звон клинков, идеальные дефлекты и победа над Иссином.</span>
             </span>
-          </div>
+          </a>
           <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="assets/photos/souls/sekiro.jpg" target="_blank" rel="noopener" title="Открыть арт Sekiro">
+                <img class="game-banner-img" src="assets/photos/souls/sekiro.jpg" alt="Sekiro: Shadows Die Twice" width="800" height="180">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag">ONE-ARMED WOLF</span>
+                </div>
               </a>
             </div>
             <div class="psn-meta">
@@ -367,7 +406,7 @@
               <p class="panel__note">Быстрый боевой танец. Идеальные парирования и победа над Мастером меча Иссином.</p>
               <div class="psn-stats-grid">
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Победа над Иссином</b></div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--gold"><span class="stat-trophy">🗡️</span> <b>Мастер клинка</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -659,6 +698,6 @@
   </div>
 
   <script src="js/ps3wave.js"></script>
-  <script src="js/main.js?v=20260925-fix3"></script>
+  <script src="js/main.js?v=20260925-bonfire"></script>
 </body>
 </html>
