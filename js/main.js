@@ -169,36 +169,15 @@
   let audioCtx = null;
   const soundToggleBtn = $('#soundToggle');
 
-  const updateSoundBtn = () => {
-    if (!soundToggleBtn) return;
-    soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
-    soundToggleBtn.classList.toggle('is-muted', !soundEnabled);
-    soundToggleBtn.title = soundEnabled ? 'Звук PS3: Включен (нажмите для выкл)' : 'Звук PS3: Выключен (нажмите для вкл)';
-  };
-  updateSoundBtn();
-
-  if (soundToggleBtn) {
-    soundToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      soundEnabled = !soundEnabled;
-      localStorage.setItem('ps3_sound', soundEnabled ? '1' : '0');
-      updateSoundBtn();
-      if (soundEnabled) {
-        initAudio();
-        playSfx('ok');
-      }
-    });
-  }
-
-  const initAudio = () => {
+  function initAudio() {
     if (!audioCtx) {
       const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
       if (AudioCtxClass) audioCtx = new AudioCtxClass();
     }
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-  };
+  }
 
-  const playSfx = (type) => {
+  function playSfx(type) {
     if (!soundEnabled) return;
     initAudio();
     if (!audioCtx) return;
@@ -243,7 +222,185 @@
         osc.stop(t + 0.07);
       }
     } catch { /* ignore */ }
+  }
+
+  const updateSoundBtn = () => {
+    if (!soundToggleBtn) return;
+    soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
+    soundToggleBtn.classList.toggle('is-muted', !soundEnabled);
+    soundToggleBtn.title = soundEnabled ? 'Звук PS3: Включен (нажмите для выкл)' : 'Звук PS3: Выключен (нажмите для вкл)';
   };
+  updateSoundBtn();
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('ps3_sound', soundEnabled ? '1' : '0');
+      updateSoundBtn();
+      if (soundEnabled) {
+        initAudio();
+        playSfx('ok');
+      }
+    });
+  }
+
+  /* ---------- Фоновая музыка: Dark Souls II — Majula Theme ---------- */
+  const bgmAudio = $('#bgmAudio');
+  const bgmPill = $('#bgmPill');
+  const bgmToggleBtn = $('#bgmToggleBtn');
+  const ps3Toast = $('#ps3Toast');
+  const ps3ToastTitle = $('#ps3ToastTitle');
+  const ps3ToastSub = $('#ps3ToastSub');
+  const ds2PanelPlayBtn = $('#ds2PanelPlayBtn');
+  const ds2SeekFill = $('#ds2SeekFill');
+  const ds2SeekBar = $('#ds2SeekBar');
+  const ds2TimeCurrent = $('#ds2TimeCurrent');
+
+  if (bgmAudio) bgmAudio.volume = 0.5;
+
+  let bgmPlaying = false;
+  let toastTimer = null;
+
+  const showPs3Toast = (title, sub) => {
+    if (!ps3Toast) return;
+    if (ps3ToastTitle && title) ps3ToastTitle.textContent = title;
+    if (ps3ToastSub && sub) ps3ToastSub.textContent = sub;
+    ps3Toast.classList.add('is-show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      ps3Toast.classList.remove('is-show');
+    }, 4500);
+  };
+
+  const updateBgmUI = (isPlaying) => {
+    bgmPlaying = isPlaying;
+    if (bgmPill) {
+      bgmPill.classList.toggle('is-playing', isPlaying);
+    }
+    if (ds2PanelPlayBtn) {
+      const icon = $('.ds2-player-btn-icon', ds2PanelPlayBtn);
+      const text = $('.ds2-player-btn-text', ds2PanelPlayBtn);
+      if (icon) icon.textContent = isPlaying ? '⏸' : '▶';
+      if (text) text.textContent = isPlaying ? 'Пауза' : 'Слушать';
+    }
+  };
+
+  const playBgm = () => {
+    if (!bgmAudio) return Promise.resolve(false);
+    initAudio();
+    bgmAudio.volume = 0.5;
+    localStorage.removeItem('ps3_bgm_disabled');
+    return bgmAudio.play().then(() => {
+      updateBgmUI(true);
+      showPs3Toast('Dark Souls II — Majula', 'Тема Маджулы · Motoi Sakuraba');
+      removeAutoStartListeners();
+      return true;
+    }).catch((err) => {
+      updateBgmUI(false);
+      return false;
+    });
+  };
+
+  const pauseBgm = () => {
+    if (!bgmAudio) return;
+    bgmAudio.pause();
+    localStorage.setItem('ps3_bgm_disabled', '1');
+    updateBgmUI(false);
+  };
+
+  const toggleBgm = () => {
+    if (!bgmAudio) return;
+    if (bgmAudio.paused) {
+      playBgm();
+      playSfx('ok');
+    } else {
+      pauseBgm();
+      playSfx('back');
+    }
+  };
+
+  if (bgmToggleBtn) {
+    bgmToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleBgm();
+    });
+  }
+
+  if (ds2PanelPlayBtn) {
+    ds2PanelPlayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleBgm();
+    });
+  }
+
+  if (bgmAudio) {
+    bgmAudio.addEventListener('timeupdate', () => {
+      if (!bgmAudio.duration) return;
+      const progress = (bgmAudio.currentTime / bgmAudio.duration) * 100;
+      if (ds2SeekFill) ds2SeekFill.style.width = progress + '%';
+      if (ds2TimeCurrent) {
+        const curM = Math.floor(bgmAudio.currentTime / 60);
+        const curS = Math.floor(bgmAudio.currentTime % 60).toString().padStart(2, '0');
+        ds2TimeCurrent.textContent = `${curM}:${curS}`;
+      }
+    });
+
+    bgmAudio.addEventListener('play', () => updateBgmUI(true));
+    bgmAudio.addEventListener('pause', () => updateBgmUI(false));
+    bgmAudio.addEventListener('ended', () => updateBgmUI(false));
+  }
+
+  if (ds2SeekBar) {
+    ds2SeekBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!bgmAudio || !bgmAudio.duration) return;
+      const rect = ds2SeekBar.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      bgmAudio.currentTime = Math.max(0, Math.min(1, pos)) * bgmAudio.duration;
+      if (bgmAudio.paused) playBgm();
+    });
+  }
+
+  // Автоматический запуск фоновой темы:
+  // 1. Сразу вешаем перехват любого первого действия (клик, тап, скролл, клавиша).
+  // 2. Пытаемся воспроизвести немедленно при загрузке.
+  const gestureEvents = ['pointerdown', 'touchstart', 'touchend', 'mousedown', 'keydown', 'wheel', 'scroll', 'click'];
+  const onUserGestureForBgm = () => {
+    if (localStorage.getItem('ps3_bgm_disabled') === '1') {
+      removeAutoStartListeners();
+      return;
+    }
+    if (bgmAudio && bgmAudio.paused) {
+      bgmAudio.volume = 0.5;
+      bgmAudio.play().then(() => {
+        updateBgmUI(true);
+        showPs3Toast('Dark Souls II — Majula', 'Тема Маджулы · Motoi Sakuraba');
+        removeAutoStartListeners();
+      }).catch(() => {});
+    }
+  };
+
+  const removeAutoStartListeners = () => {
+    gestureEvents.forEach(evt => {
+      window.removeEventListener(evt, onUserGestureForBgm, { capture: true });
+      document.removeEventListener(evt, onUserGestureForBgm, { capture: true });
+    });
+  };
+
+  function startBgmIfAllowed() {
+    try {
+      if (localStorage.getItem('ps3_bgm_disabled') !== '1') {
+        gestureEvents.forEach(evt => {
+          window.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
+          document.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
+        });
+        playBgm();
+      }
+    } catch (e) {
+      console.warn('BGM auto-start deferred:', e);
+    }
+  }
 
   function selectCat(k) {
     const next = clamp(k, 0, cats.length - 1);
@@ -281,6 +438,10 @@
       openGame($('.item__row', item).getAttribute('href'));
       return;
     }
+    if (item.classList.contains('item--ds2') || item.id === 'itemDs2') {
+      toggleBgm();
+      return;
+    }
     const row = $('.item__row', item);
     if (row && row.href) row.click();
   };
@@ -315,7 +476,7 @@
       swiped = false;
       return;
     }
-    if (e.target.closest('.item__panel a')) return;
+    if (e.target.closest('.item__panel a') || e.target.closest('.item__panel button') || e.target.closest('.ds2-seek-bar')) return;
     // аватарка в «О себе» открывается в просмотрщике
     const zoom = e.target.closest('.cat.is-current .item.is-selected .item__zoom');
     if (zoom) {
@@ -329,6 +490,11 @@
     if (j !== selected[current]) {
       e.preventDefault();
       selectItem(j);
+      return;
+    }
+    if (item.classList.contains('item--ds2') || item.id === 'itemDs2') {
+      e.preventDefault();
+      toggleBgm();
       return;
     }
     if (isMedia(item)) {
@@ -637,4 +803,6 @@
     render();
   });
   if (document.fonts) document.fonts.ready.then(render);
+
+  startBgmIfAllowed();
 })();

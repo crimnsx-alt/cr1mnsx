@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260925-psn2">
+  <link rel="stylesheet" href="css/style.css?v=20260925-majula">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -25,8 +25,37 @@
   </div>
 
   <div class="status" aria-hidden="true">
+    <div class="bgm-pill" id="bgmPill" title="Тема Маджулы (Dark Souls II OST) — Вкл / Выкл фоновую музыку">
+      <button class="bgm-pill__btn" id="bgmToggleBtn" type="button" aria-label="Включить или приостановить тему Dark Souls 2 (Majula)">
+        <span class="bgm-pill__waves" aria-hidden="true">
+          <span class="bgm-bar b1"></span>
+          <span class="bgm-bar b2"></span>
+          <span class="bgm-bar b3"></span>
+          <span class="bgm-bar b4"></span>
+        </span>
+        <span class="bgm-pill__icon">🎵</span>
+        <span class="bgm-pill__info">
+          <span class="bgm-pill__title">Dark Souls II</span>
+          <span class="bgm-pill__sub">Majula Theme</span>
+        </span>
+      </button>
+    </div>
     <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки PS3" title="Звуки PS3 XMB (Вкл / Выкл)">🔊</button>
     <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
+  </div>
+
+  <!-- Аудио фоновой темы Dark Souls 2 Majula -->
+  <audio id="bgmAudio" src="assets/audio/majula.mp3" autoplay preload="auto" loop></audio>
+
+  <!-- Всплывающее PS3-уведомление о треке -->
+  <div class="ps3-toast" id="ps3Toast" aria-live="polite">
+    <div class="ps3-toast__glass">
+      <div class="ps3-toast__icon">🎵</div>
+      <div class="ps3-toast__content">
+        <div class="ps3-toast__title" id="ps3ToastTitle">Dark Souls II — Majula</div>
+        <div class="ps3-toast__sub" id="ps3ToastSub">Тема Маджулы · Motoi Sakuraba</div>
+      </div>
+    </div>
   </div>
 
   <main class="xmb" id="xmb">
@@ -127,6 +156,62 @@
                 <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Платиновый кубок</b></div>
                 <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
                 <div class="stat-pill"><span class="stat-icon">🎮</span> <b>PlayStation 5</b></div>
+              </div>
+              <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
+                <span>Профиль Cr1mnsx на PSN.GG</span>
+                <span class="psn-btn-arrow">↗</span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="item item--photo item--ds2" id="itemDs2">
+          <a class="item__row" href="assets/photos/souls/ds2-majula.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/ds2-majula.jpg" alt="Dark Souls 2 — Majula"></span>
+            <span class="item__text">
+              <span class="item__title">Dark Souls II — Тема Маджулы (Majula)</span>
+              <span class="item__sub">Мотои Сакураба · Культовый саундтрек заката Дранглика · Нажмите для включения темы</span>
+            </span>
+          </a>
+          <div class="item__panel item__panel--psn">
+            <div class="psn-terminal-widget">
+              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
+                <img class="psn-card-img" src="https://psn.gg/profile/Cr1mnsx/card/terminal.svg" onerror="this.onerror=null; this.src='https://psn.gg/profile/Cr1mnsx/card/terminal.png';" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
+              </a>
+            </div>
+            <div class="psn-meta">
+              <div class="psn-meta__header">
+                <span class="psn-badge">PS5</span>
+                <span class="psn-badge psn-badge--majula">Dark Souls II</span>
+                <span class="psn-meta__title">Scholar of the First Sin · OST</span>
+              </div>
+              <p class="panel__note">«Bearer of the curse... Seek souls. Larger, more powerful souls.» Меланхоличный шедевр Мотои Сакурабы, звучащий на закате Маджулы у самого края океана.</p>
+              
+              <!-- Интерактивный плеер темы Маджулы -->
+              <div class="ds2-player-box">
+                <div class="ds2-player-top">
+                  <div class="ds2-track-art">
+                    <img src="assets/photos/souls/ds2-majula.jpg" alt="Majula Cover">
+                  </div>
+                  <div class="ds2-track-details">
+                    <span class="ds2-track-label">Фоновая музыка сайта</span>
+                    <strong class="ds2-track-name">Dark Souls II OST — Majula</strong>
+                    <span class="ds2-track-author">Motoi Sakuraba · FromSoftware</span>
+                  </div>
+                  <button class="ds2-player-btn" id="ds2PanelPlayBtn" type="button" aria-label="Включить тему Маджулы">
+                    <span class="ds2-player-btn-icon">▶</span>
+                    <span class="ds2-player-btn-text">Слушать</span>
+                  </button>
+                </div>
+                <div class="ds2-player-seek">
+                  <div class="ds2-seek-bar" id="ds2SeekBar"><div class="ds2-seek-fill" id="ds2SeekFill"></div></div>
+                  <div class="ds2-time-display"><span id="ds2TimeCurrent">0:00</span><span>3:19</span></div>
+                </div>
+              </div>
+
+              <div class="psn-stats-grid">
+                <div class="stat-pill stat-pill--plat"><span class="stat-trophy">🏆</span> <b>Платиновый кубок</b></div>
+                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--majula"><span class="stat-icon">🌅</span> <b>Тема сайта</b></div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Профиль Cr1mnsx на PSN.GG</span>
@@ -574,6 +659,6 @@
   </div>
 
   <script src="js/ps3wave.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=20260925-fix3"></script>
 </body>
 </html>

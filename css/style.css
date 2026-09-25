@@ -79,6 +79,151 @@ a { color: inherit; }
   transition: opacity .25s, visibility .25s;
 }
 .baro__gif { display: block; height: 52px; width: auto; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .45)); pointer-events: none; }
+/* ---------- Фоновая музыка Dark Souls 2 Majula (BGM Pill) ---------- */
+.bgm-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.bgm-pill__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .22) 0%, rgba(20, 32, 54, .7) 60%, rgba(10, 18, 32, .85) 100%);
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 20px;
+  padding: 4px 12px 4px 10px;
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .35);
+  transition: transform .2s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  font-family: inherit;
+}
+
+.bgm-pill__btn:hover {
+  transform: translateY(-1px) scale(1.03);
+  border-color: rgba(255, 180, 90, .7);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .5), 0 0 12px rgba(255, 160, 60, .35), inset 0 1px 2px rgba(255, 255, 255, .5);
+}
+
+.bgm-pill.is-playing .bgm-pill__btn {
+  border-color: rgba(255, 190, 100, .8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .55), 0 0 14px rgba(255, 170, 70, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+}
+
+.bgm-pill__waves {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+  width: 14px;
+}
+
+.bgm-bar {
+  display: block;
+  width: 2.5px;
+  height: 3px;
+  background: #ffbe6a;
+  border-radius: 2px;
+  opacity: .5;
+  transition: height .2s ease, opacity .2s ease;
+}
+
+.bgm-pill.is-playing .bgm-bar {
+  opacity: 1;
+  animation: bgmBarWave .8s ease-in-out infinite alternate;
+}
+
+.bgm-pill.is-playing .bgm-bar.b1 { animation-delay: 0s; }
+.bgm-pill.is-playing .bgm-bar.b2 { animation-delay: .2s; }
+.bgm-pill.is-playing .bgm-bar.b3 { animation-delay: .4s; }
+.bgm-pill.is-playing .bgm-bar.b4 { animation-delay: .15s; }
+
+@keyframes bgmBarWave {
+  0% { height: 3px; }
+  100% { height: 14px; background: #ffe2a8; }
+}
+
+.bgm-pill__icon {
+  font-size: 13px;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
+}
+
+.bgm-pill__info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.bgm-pill__title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
+}
+
+.bgm-pill__sub {
+  font-size: 10px;
+  color: rgba(255, 210, 150, .92);
+  text-shadow: 0 1px 2px rgba(0,0,0,.8);
+}
+
+/* ---------- Аутентичное PS3 всплывающее уведомление ---------- */
+.ps3-toast {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform .42s cubic-bezier(.16, 1, .3, 1), opacity .35s ease;
+}
+
+.ps3-toast.is-show {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ps3-toast__glass {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(32, 45, 65, .92) 0%, rgba(12, 20, 34, .96) 60%, rgba(5, 10, 18, .98) 100%);
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 12px;
+  padding: 10px 18px 10px 14px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .8), 0 0 20px rgba(0, 168, 255, .25), inset 0 1px 2px rgba(255, 255, 255, .5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  min-width: 250px;
+}
+
+.ps3-toast__icon {
+  font-size: 22px;
+  flex: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .7));
+}
+
+.ps3-toast__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, .9);
+}
+
+.ps3-toast__sub {
+  font-size: 11px;
+  color: #ffbe6a;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+}
+
 .sound-toggle {
   background: rgba(255, 255, 255, .15);
   border: 1px solid rgba(255, 255, 255, .35);
@@ -402,6 +547,130 @@ a { color: inherit; }
 .stat-pill--silver { border-color: rgba(200, 210, 220, .4); background: rgba(200, 210, 220, .12); }
 .stat-pill--bronze { border-color: rgba(210, 140, 90, .4); background: rgba(210, 140, 90, .12); }
 .stat-pill--lvl { border-color: rgba(255, 230, 80, .5); background: rgba(255, 230, 80, .15); color: #fff280; }
+.stat-pill--majula { border-color: rgba(255, 170, 70, .5); background: rgba(255, 140, 50, .18); color: #ffe0b3; }
+
+.psn-badge--majula {
+  background: rgba(255, 130, 40, .28);
+  border-color: rgba(255, 170, 70, .6);
+  color: #ffd299;
+}
+
+/* Плеер темы Маджулы в панели DS2 */
+.ds2-player-box {
+  margin: 10px 0 12px;
+  background: rgba(0, 8, 20, .6);
+  border: 1px solid rgba(255, 180, 90, .32);
+  border-radius: 10px;
+  padding: 10px 12px;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, .15), 0 4px 12px rgba(0, 0, 0, .4);
+}
+
+.ds2-player-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ds2-track-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex: none;
+  border: 1px solid rgba(255, 255, 255, .3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .5);
+}
+
+.ds2-track-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ds2-track-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ds2-track-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #ffbe6a;
+  font-weight: 700;
+}
+
+.ds2-track-name {
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+}
+
+.ds2-track-author {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .72);
+}
+
+.ds2-player-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(180deg, rgba(255, 160, 50, .45) 0%, rgba(200, 90, 20, .65) 100%);
+  border: 1px solid rgba(255, 200, 120, .6);
+  border-radius: 8px;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+  transition: all .2s ease;
+  font-family: inherit;
+  flex: none;
+}
+
+.ds2-player-btn:hover {
+  background: linear-gradient(180deg, rgba(255, 180, 70, .6) 0%, rgba(220, 110, 30, .8) 100%);
+  border-color: rgba(255, 230, 170, .85);
+  box-shadow: 0 4px 14px rgba(255, 140, 40, .45), inset 0 1px 2px rgba(255, 255, 255, .6);
+  transform: translateY(-1px);
+}
+
+.ds2-player-seek {
+  margin-top: 8px;
+}
+
+.ds2-seek-bar {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, .14);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ds2-seek-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9534, #ffe082);
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(255, 160, 50, .6);
+  transition: width .15s linear;
+}
+
+.ds2-time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(255, 255, 255, .65);
+  margin-top: 3px;
+}
 
 .psn-btn-profile {
   display: flex;
