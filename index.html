@@ -93,40 +93,163 @@
               <span class="item__sub">best player улиц</span>
             </span>
           </div>
-          <div class="item__panel">
-            <p class="panel__note">«Don't you dare go Hollow» — костры горят, боссы падают.</p>
+          <div class="item__panel item__panel--profile-dashboard">
+            <div class="profile-quote">«Don't you dare go Hollow...»</div>
 
-            <!-- 🎮 Виджет: Последняя активность на PS5 -->
-            <a class="ps5-last-played-widget ps5-last-played-widget--profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
-              <div class="ps5-lp__cover-wrap">
-                <img class="ps5-lp__cover ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II: Scholar of the First Sin">
-                <span class="ps5-lp__plat-badge ps5-last-game-platform">PS4</span>
+            <!-- Верхняя карточка: Последняя игра на PS5 -->
+            <a class="pgc-card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
+              <div class="pgc-banner">
+                <img class="pgc-banner-img ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II: Scholar of the First Sin">
               </div>
-              <div class="ps5-lp__content">
-                <div class="ps5-lp__status-row">
-                  <span class="ps5-lp__pulse-dot"></span>
-                  <span class="ps5-lp__status-text ps5-last-game-status">Последний запуск на PlayStation 5 · 22 сент.</span>
+              <div class="pgc-strip">
+                <div class="pgc-thumb-box">
+                  <img class="pgc-thumb ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II">
                 </div>
-                <strong class="ps5-lp__title ps5-last-game-title" id="ps5-last-game-title">Dark Souls II: Scholar of the First Sin</strong>
-                <div class="ps5-lp__progress-wrap">
-                  <div class="ps5-lp__progress-bar">
-                    <div class="ps5-lp__progress-fill ps5-last-game-bar" style="width: 22%;"></div>
+                <div class="pgc-details">
+                  <div class="pgc-top-line">
+                    <span class="pgc-tag ps5-last-game-status">ПОСЛЕДНИЙ ЗАПУСК НА PLAYSTATION 5...</span>
+                    <svg class="pgc-ps-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                      <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
+                    </svg>
                   </div>
-                  <span class="ps5-lp__progress-text ps5-last-game-progress" id="ps5-last-game-progress">🏆 12/38 трофеев (22%) · D Rank</span>
+                  <div class="pgc-title ps5-last-game-title" id="ps5-last-game-title">Dark Souls II: Scholar of the First Sin</div>
+                  <div class="pgc-bottom-row">
+                    <div class="pgc-bar-track">
+                      <div class="pgc-bar-fill ps5-last-game-bar" style="width: 22%;"></div>
+                    </div>
+                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress">🏆 12/38 трофеев (22%)</span>
+                  </div>
                 </div>
               </div>
-              <span class="ps5-lp__arrow">↗</span>
             </a>
 
-            <dl class="panel__facts">
-              <div><dt>Платформа</dt><dd>PlayStation 5 & PC</dd></div>
-              <div><dt>Жанр</dt><dd>Soulslike (Souls-игры)</dd></div>
-              <div><dt>Фаворит</dt><dd>Dark Souls 1 (Top-1 Souls)</dd></div>
-              <div><dt>Любимый стример</dt><dd><a href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">mafanyaking</a></dd></div>
-              <div><dt>Twitch</dt><dd><a href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
-              <div><dt>Steam</dt><dd><a href="https://steamcommunity.com/id/cr1mnsx" target="_blank" rel="noopener">cr1mnsx</a></dd></div>
-              <div><dt>ВКонтакте</dt><dd><a href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener">vk.ru/cr1mnsx</a></dd></div>
-            </dl>
+            <!-- Средний ряд: 2 карточки сеткой (О ИГРОКЕ + СТАТИСТИКА) -->
+            <div class="profile-mid-row">
+              <!-- Карточка: О ИГРОКЕ -->
+              <div class="p-card p-card--player">
+                <div class="p-card-title">О ИГРОКЕ</div>
+                <div class="p-stat-list">
+                  <div class="p-stat-row">
+                    <div class="p-stat-icon">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
+                      </svg>
+                    </div>
+                    <div class="p-stat-info">
+                      <span class="p-sub-label">ПОСЛЕДНИЙ ЗАПУСК</span>
+                      <strong class="p-main-val">PlayStation 5</strong>
+                    </div>
+                  </div>
+
+                  <div class="p-stat-row">
+                    <div class="p-stat-icon">
+                      <span class="p-icon-badge">PC</span>
+                    </div>
+                    <div class="p-stat-info">
+                      <span class="p-sub-label">ПЛАТФОРМА</span>
+                      <strong class="p-main-val">PS5 &amp; PC</strong>
+                    </div>
+                  </div>
+
+                  <div class="p-stat-row">
+                    <div class="p-stat-icon">
+                      <span class="p-icon-emoji">⚔️</span>
+                    </div>
+                    <div class="p-stat-info">
+                      <span class="p-sub-label">ЖАНР</span>
+                      <strong class="p-main-val">Soulslike</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Карточка: СТАТИСТИКА -->
+              <div class="p-card p-card--stats">
+                <div class="p-card-title">СТАТИСТИКА</div>
+                <div class="p-stat-list">
+                  <div class="p-trophy-box">
+                    <div class="p-trophy-header">
+                      <span class="p-sub-label">ТРОФЕИ</span>
+                      <span class="p-trophy-pct">12/38 (22%)</span>
+                    </div>
+                    <div class="p-bar-track">
+                      <div class="p-bar-fill ps5-last-game-bar" style="width: 22%;"></div>
+                    </div>
+                    <div class="p-trophy-row">
+                      <span class="p-tr-item"><span class="p-tr-icon">🏆</span>0</span>
+                      <span class="p-tr-item"><span class="p-tr-icon">🥇</span>0</span>
+                      <span class="p-tr-item"><span class="p-tr-icon">🥈</span>4</span>
+                      <span class="p-tr-item"><span class="p-tr-icon">🥉</span>8</span>
+                    </div>
+                  </div>
+
+                  <div class="p-stat-row">
+                    <div class="p-stat-icon">
+                      <span class="p-icon-emoji">⭐</span>
+                    </div>
+                    <div class="p-stat-info">
+                      <span class="p-sub-label">ФАВОРИТ</span>
+                      <strong class="p-main-val">Dark Souls 1</strong>
+                    </div>
+                  </div>
+
+                  <div class="p-stat-row">
+                    <div class="p-stat-icon">
+                      <span class="p-icon-emoji">📹</span>
+                    </div>
+                    <div class="p-stat-info">
+                      <span class="p-sub-label">ЛЮБИМЫЙ СТРИМЕР</span>
+                      <strong class="p-main-val"><a href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">mafanyaking</a></strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Нижняя карточка: ТРАНСЛЯЦИЯ & ПРОФИЛИ -->
+            <div class="p-card p-card--profiles">
+              <div class="p-card-title">
+                <span class="p-broadcast-wave">((•))</span>
+                <span>ТРАНСЛЯЦИЯ &amp; ПРОФИЛИ</span>
+              </div>
+              <div class="p-links-list">
+                <a class="p-link-row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">
+                  <div class="p-link-left">
+                    <span class="p-link-brand p-link-brand--twitch">
+                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                      </svg>
+                    </span>
+                    <span class="p-link-name">Twitch</span>
+                  </div>
+                  <span class="p-link-handle">cr1mnsx</span>
+                </a>
+
+                <a class="p-link-row" href="https://steamcommunity.com/id/cr1mnsx" target="_blank" rel="noopener">
+                  <div class="p-link-left">
+                    <span class="p-link-brand p-link-brand--steam">
+                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                        <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.005.105.005.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                      </svg>
+                    </span>
+                    <span class="p-link-name">Steam</span>
+                  </div>
+                  <span class="p-link-handle">cr1mnsx</span>
+                </a>
+
+                <a class="p-link-row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener">
+                  <div class="p-link-left">
+                    <span class="p-link-brand p-link-brand--vk">
+                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                        <path d="M15.684 0H8.316C2.992 0 0 2.992 0 8.316v7.368C0 21.008 2.992 24 8.316 24h7.368C21.008 24 24 21.008 24 15.684V8.316C24 2.992 21.008 0 15.684 0zm3.605 17.158h-1.637c-.619 0-.81-.492-1.928-1.61-.976-.952-1.41-1.074-1.652-1.074-.338 0-.435.097-.435.564v1.46c0 .393-.127.66-1.282.66-1.897 0-4.01-1.15-5.495-3.292-2.25-3.17-2.871-5.556-2.871-6.046 0-.27.106-.516.63-.516h1.637c.47 0 .647.214.827.718 1.15 3.328 3.076 6.242 3.87 6.242.298 0 .434-.137.434-.888V11.23c-.092-1.393-.81-1.512-.81-2.008 0-.236.197-.474.52-.474h2.569c.356 0 .484.184.484.603v3.254c0 .354.156.474.258.474.204 0 .373-.12.75-.498 1.173-1.314 2.01-3.34 2.01-3.34.11-.237.322-.493.79-.493h1.637c.493 0 .604.256.496.603-.207.962-2.228 3.824-2.33 3.992-.26.39-.36.568 0 1.047.256.342 1.1 1.077 1.666 1.728.855.98 1.513 1.802 1.687 2.373.18.57-.102.872-.56.872z"/>
+                      </svg>
+                    </span>
+                    <span class="p-link-name">ВКонтакте</span>
+                  </div>
+                  <span class="p-link-handle">cr1mnsx</span>
+                </a>
+              </div>
+            </div>
           </div>
         </li>
       </ul>
