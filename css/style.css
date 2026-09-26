@@ -392,14 +392,35 @@ a { color: inherit; }
 /* аватарка в стеклянной рамке с экрана входа aMSN 2 вместо белого контура;
    рамка режется на 9 частей, поэтому бортик остаётся ровным при любом размере аватарки */
 .avatar { position: relative; display: block; line-height: 0; }
+.avatar__crop {
+  display: block;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: 2px;
+}
 .item__icon--photo .avatar img,
 .item__icon--photo .avatar video,
 .xmb-on .item.is-selected .item__icon--photo .avatar img,
 .xmb-on .item.is-selected .item__icon--photo .avatar video { border: 0; border-radius: 0; box-shadow: none; object-fit: cover; }
-.avatar video { width: 54px; height: 54px; display: block; }
+.avatar video,
+.avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: scale(2.65);
+  transform-origin: 27% 41%;
+}
 /* аватарка с рамкой чуть меньше остальных снимков */
+.xmb-on .item.is-selected .item__icon--photo .avatar__crop { width: 84px; height: 84px; }
 .xmb-on .item.is-selected .item__icon--photo .avatar img,
-.xmb-on .item.is-selected .item__icon--photo .avatar video { width: 84px; height: 84px; }
+.xmb-on .item.is-selected .item__icon--photo .avatar video {
+  width: 100%;
+  height: 100%;
+  transform: scale(2.65);
+  transform-origin: 27% 41%;
+}
 .avatar::after {
   content: "";
   position: absolute; inset: -10px;
@@ -431,6 +452,8 @@ a { color: inherit; }
 .item__icon .icon-tile img { width: 100%; height: 100%; object-fit: cover; filter: none; }
 .icon-tile--twitch { background: linear-gradient(#8b6bd0, #6441a5 55%, #4b2f80); }
 .item__icon .icon-tile--twitch img { width: 56%; height: auto; object-fit: contain; filter: brightness(0) invert(1); }
+.icon-tile--steam { background: radial-gradient(circle at 80% 20%, #2a475e 0%, #1b2838 55%, #171a21 100%); }
+.item__icon .icon-tile--steam img { width: 62%; height: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .5)); }
 .icon-tile--psn { background: linear-gradient(180deg, #0070d1 0%, #00439c 55%, #00266e 100%); }
 .item__icon .icon-tile--psn img { width: 62%; height: auto; object-fit: contain; filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, .4)); }
 
@@ -1650,8 +1673,9 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   .xmb-on .item.is-selected .item__icon { height: auto; }
   .xmb-on .item.is-selected .item__icon > img { width: 64px; height: 64px; }
   .xmb-on .item.is-selected .item__icon--video img { width: 92px; height: 52px; }
+  .xmb-on .item.is-selected .item__icon--photo .avatar__crop { width: 66px; height: 66px; }
   .xmb-on .item.is-selected .item__icon--photo .avatar img,
-  .xmb-on .item.is-selected .item__icon--photo .avatar video { width: 66px; height: 66px; }
+  .xmb-on .item.is-selected .item__icon--photo .avatar video { width: 100%; height: 100%; }
   /* аватарка «О себе» чуть выше текста */
   .xmb-on #cr1mnsx .item__icon--photo,
   .xmb-on #striver .item__icon--photo { transform: translateY(-10px); }
