@@ -900,8 +900,8 @@
   /* ---------- Brawl Stars: Синхронизация статистики с Brawlify (#2RGUQJQ0R) ---------- */
   const initBrawlStarsSync = () => {
     const TAG = '2RGUQJQ0R';
-    const CACHE_KEY = 'bs_profile_2rguqjq0r';
-    const CACHE_TTL = 20 * 60 * 1000; // 20 минут
+    const CACHE_KEY = 'bs_profile_2rguqjq0r_v3';
+    const CACHE_TTL = 30 * 60 * 1000; // 30 минут
 
     const elTrophies = $('#bs-trophies');
     const elHighest = $('#bs-highest');
@@ -915,32 +915,73 @@
     const updateDOM = (data, isLive = false) => {
       if (!data) return;
       if (elTrophies && data.trophies) elTrophies.textContent = Number(data.trophies).toLocaleString('ru-RU');
-      if (elHighest && data.highest) elHighest.textContent = Number(data.highest).toLocaleString('ru-RU');
+      if (elHighest && (data.highest || data.highestTrophies)) {
+        elHighest.textContent = Number(data.highest || data.highestTrophies).toLocaleString('ru-RU');
+      }
       if (el3v3 && data.victories3v3) el3v3.textContent = Number(data.victories3v3).toLocaleString('ru-RU');
-      if (elShowdown && data.showdown) elShowdown.textContent = typeof data.showdown === 'number' ? Number(data.showdown).toLocaleString('ru-RU') : data.showdown;
+      if (elShowdown && data.showdown) {
+        elShowdown.textContent = typeof data.showdown === 'number' ? Number(data.showdown).toLocaleString('ru-RU') : data.showdown;
+      }
       if (elBrawlers && data.brawlers) elBrawlers.textContent = data.brawlers;
       if (elClub && data.club) elClub.textContent = data.club;
       if (elSubPreview && data.trophies) {
         elSubPreview.textContent = `🏆 ${Number(data.trophies).toLocaleString('ru-RU')} кубков · 3v3 победы · Ежедневный актив · brawlify.com`;
       }
       if (elSyncStatus) {
-        elSyncStatus.textContent = isLive ? '🟢 Live с Brawlify' : '🟢 Кэш готов';
+        elSyncStatus.textContent = isLive ? '🟢 Live с Brawlify' : '🟢 Синхронизировано';
       }
     };
 
-    // 1. Проверяем кэш в localStorage
+    // Очистка старых версий кэша с заниженными кубками
+    try {
+      ['bs_profile_2rguqjq0r', 'bs_profile_2rguqjq0r_v2'].forEach(k => localStorage.removeItem(k));
+    } catch { /* ignore */ }
+
+    // 1. Проверяем свежий кэш в localStorage
+    let hasFreshCache = false;
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
-        updateDOM(parsed.data, false);
-        if (Date.now() - parsed.timestamp < CACHE_TTL) {
-          return; // Кэш еще свежий
+        if (parsed?.data?.trophies && parsed.data.trophies >= 35000) {
+          updateDOM(parsed.data, false);
+          if (Date.now() - parsed.timestamp < CACHE_TTL) {
+            hasFreshCache = true;
+          }
         }
       }
     } catch { /* ignore cache read error */ }
 
-    // 2. Парсер HTML страницы Brawlify
+    // 2. Чтение локального JSON файла (assets/data/brawl.json или data/brawl.json)
+    const loadLocalJson = async () => {
+      const jsonPaths = ['assets/data/brawl.json', 'data/brawl.json'];
+      for (const p of jsonPaths) {
+        try {
+          const resp = await fetch(p);
+          if (resp.ok) {
+            const raw = await resp.json();
+            if (raw && raw.trophies && raw.trophies >= 35000) {
+              const normalized = {
+                trophies: raw.trophies,
+                highest: raw.highestTrophies || raw.highest || raw.trophies,
+                victories3v3: raw.victories3v3,
+                showdown: raw.showdown || ((raw.soloVictories || 0) + (raw.duoVictories || 0)),
+                brawlers: raw.brawlers || `${raw.brawlersUnlocked || 106} / ${raw.brawlersTotal || 108}`,
+                club: raw.club || '0.3.7|teams'
+              };
+              updateDOM(normalized, false);
+              try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ data: normalized, timestamp: Date.now() }));
+              } catch { /* ignore */ }
+              return true;
+            }
+          }
+        } catch { /* ignore */ }
+      }
+      return false;
+    };
+
+    // 3. Парсер HTML страницы Brawlify
     const parseBrawlifyHTML = (html) => {
       if (!html || html.includes('Just a moment...') || html.includes('challenges.cloudflare.com')) {
         return null;
@@ -948,14 +989,10 @@
       try {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
-
-        // Ищем элементы со статистикой
         const textContent = doc.body.textContent || '';
-        if (!textContent.includes('2RGUQJQ0R')) return null;
+        if (!textContent.includes(TAG)) return null;
 
         const res = {};
-        
-        // Регулярные выражения по структуре Brawlify
         const trophiesMatch = textContent.match(/Trophies[:\s]+([\d,]+)/i) || textContent.match(/([\d,]{4,6})\s*Trophies/i);
         if (trophiesMatch) res.trophies = parseInt(trophiesMatch[1].replace(/,/g, ''), 10);
 
@@ -981,21 +1018,25 @@
           res.club = (clubMatch.textContent || clubMatch[1] || '').trim().replace(/Club:?/i, '').trim();
         }
 
-        return Object.keys(res).length >= 2 ? res : null;
+        // Защита от старых или битых данных: трофеи должны быть не ниже 35000
+        return (res.trophies && res.trophies >= 35000) ? res : null;
       } catch {
         return null;
       }
     };
 
-    // 3. Каскад запросов через CORS-прокси
-    const targetUrl = `https://brawlify.com/player/${TAG}`;
-    const proxyList = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-      `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
-    ];
+    // 4. Онлайн обновление через CORS-прокси (только если нет свежего кэша)
+    const fetchOnline = async () => {
+      const loaded = await loadLocalJson();
+      if (hasFreshCache && loaded) return;
 
-    const fetchViaProxies = async () => {
+      const targetUrl = `https://brawlify.com/player/${TAG}`;
+      const proxyList = [
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
+        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+      ];
+
       for (const pUrl of proxyList) {
         try {
           const controller = new AbortController();
@@ -1005,19 +1046,21 @@
           if (resp.ok) {
             const html = await resp.text();
             const data = parseBrawlifyHTML(html);
-            if (data) {
+            if (data && data.trophies >= 35000) {
               updateDOM(data, true);
-              localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+              try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+              } catch { /* ignore */ }
               return;
             }
           }
         } catch {
-          // тихо пропускаем таймауты и Cloudflare ошибки, не мусоря в консоль
+          // тихо пропускаем таймауты
         }
       }
     };
 
-    fetchViaProxies();
+    fetchOnline();
   };
 
   /* ---------- PlayStation 5: Синхронизация последней запущенной игры ---------- */

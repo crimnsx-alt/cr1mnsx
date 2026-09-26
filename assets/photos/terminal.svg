@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 180" width="800" height="180">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070c18"/>
+      <stop offset="50%" stop-color="#0d1829"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+    <linearGradient id="borderGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00a8ff" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#3b82f6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="platGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#93c5fd"/>
+    </linearGradient>
+    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+    <linearGradient id="silverGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <linearGradient id="bronzeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <clipPath id="avatarClip">
+      <circle cx="85" cy="90" r="50"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background Card -->
+  <rect x="2" y="2" width="796" height="176" rx="16" fill="url(#bg)" stroke="url(#borderGlow)" stroke-width="2"/>
+
+  <!-- Background PlayStation Shapes Ambient Decor -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="2.5" fill="none">
+    <!-- Triangle -->
+    <polygon points="500,25 520,55 480,55"/>
+    <!-- Circle -->
+    <circle cx="620" cy="40" r="16"/>
+    <!-- Cross -->
+    <line x1="720" y1="26" x2="748" y2="54"/>
+    <line x1="748" y1="26" x2="720" y2="54"/>
+    <!-- Square -->
+    <rect x="560" y="115" width="28" height="28" rx="4"/>
+    <circle cx="450" cy="140" r="18"/>
+    <polygon points="680,120 702,152 658,152"/>
+  </g>
+
+  <!-- Glow orb behind avatar -->
+  <circle cx="85" cy="90" r="54" fill="#0070d1" opacity="0.25" filter="url(#glow)"/>
+
+  <!-- Avatar Circle Border -->
+  <circle cx="85" cy="90" r="51" fill="none" stroke="#00a8ff" stroke-width="2.5"/>
+
+  <!-- Avatar Image (Fallback or Spider-Man avatar styled) -->
+  <g clip-path="url(#avatarClip)">
+    <rect x="35" y="40" width="100" height="100" fill="#b91c1c"/>
+    <!-- Spider-Man Web & Eyes styling -->
+    <circle cx="85" cy="90" r="50" fill="#991b1b"/>
+    <path d="M40 70 Q85 100 130 70 M40 110 Q85 80 130 110 M60 45 Q85 100 110 45 M60 135 Q85 80 110 135" stroke="#1e293b" stroke-width="1.5" fill="none" opacity="0.6"/>
+    <!-- Spider-Man Eyes -->
+    <polygon points="62,82 78,87 75,74" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+    <polygon points="108,82 92,87 95,74" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+  </g>
+
+  <!-- Online/Status Indicator -->
+  <circle cx="125" cy="128" r="8" fill="#10b981" stroke="#070c18" stroke-width="2.5"/>
+
+  <!-- Profile Title Info -->
+  <text x="156" y="58" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">PLAYSTATION NETWORK</text>
+  <text x="156" y="94" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" letter-spacing="0.5">Cr1mnsx</text>
+
+  <!-- Level Badge -->
+  <g transform="translate(305, 70)">
+    <rect x="0" y="0" width="82" height="28" rx="14" fill="#0f213d" stroke="#1d4ed8" stroke-width="1.5"/>
+    <text x="12" y="19" fill="#facc15" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14">⭐</text>
+    <text x="32" y="19" fill="#60a5fa" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="800">186</text>
+  </g>
+
+  <!-- Total Trophies Counter Pill -->
+  <g transform="translate(156, 114)">
+    <rect x="0" y="0" width="138" height="26" rx="8" fill="#1e293b" opacity="0.6"/>
+    <text x="10" y="18" fill="#cbd5e1" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600">Всего кубков:</text>
+    <text x="96" y="18" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="800">647</text>
+  </g>
+
+  <!-- Divider Line -->
+  <line x1="410" y1="25" x2="410" y2="155" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Trophy Breakdown Grid (4 columns) -->
+  <!-- 1. Platinum -->
+  <g transform="translate(430, 35)">
+    <rect x="0" y="0" width="76" height="110" rx="10" fill="#0f172a" fill-opacity="0.6" stroke="#334155" stroke-width="1"/>
+    <circle cx="38" cy="36" r="18" fill="#38bdf8" fill-opacity="0.15"/>
+    <text x="38" y="42" text-anchor="middle" font-size="20">🏆</text>
+    <text x="38" y="74" text-anchor="middle" fill="#93c5fd" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800">2</text>
+    <text x="38" y="94" text-anchor="middle" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">PLATINUM</text>
+  </g>
+
+  <!-- 2. Gold -->
+  <g transform="translate(518, 35)">
+    <rect x="0" y="0" width="76" height="110" rx="10" fill="#0f172a" fill-opacity="0.6" stroke="#334155" stroke-width="1"/>
+    <circle cx="38" cy="36" r="18" fill="#facc15" fill-opacity="0.15"/>
+    <text x="38" y="42" text-anchor="middle" font-size="20">🥇</text>
+    <text x="38" y="74" text-anchor="middle" fill="#fde047" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800">20</text>
+    <text x="38" y="94" text-anchor="middle" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">GOLD</text>
+  </g>
+
+  <!-- 3. Silver -->
+  <g transform="translate(606, 35)">
+    <rect x="0" y="0" width="76" height="110" rx="10" fill="#0f172a" fill-opacity="0.6" stroke="#334155" stroke-width="1"/>
+    <circle cx="38" cy="36" r="18" fill="#94a3b8" fill-opacity="0.15"/>
+    <text x="38" y="42" text-anchor="middle" font-size="20">🥈</text>
+    <text x="38" y="74" text-anchor="middle" fill="#e2e8f0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800">128</text>
+    <text x="38" y="94" text-anchor="middle" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">SILVER</text>
+  </g>
+
+  <!-- 4. Bronze -->
+  <g transform="translate(694, 35)">
+    <rect x="0" y="0" width="76" height="110" rx="10" fill="#0f172a" fill-opacity="0.6" stroke="#334155" stroke-width="1"/>
+    <circle cx="38" cy="36" r="18" fill="#ca8a04" fill-opacity="0.15"/>
+    <text x="38" y="42" text-anchor="middle" font-size="20">🥉</text>
+    <text x="38" y="74" text-anchor="middle" fill="#fdba74" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="800">497</text>
+    <text x="38" y="94" text-anchor="middle" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" letter-spacing="0.5">BRONZE</text>
+  </g>
+</svg>
