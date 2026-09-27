@@ -1647,51 +1647,639 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .viewer__close { position: absolute; top: clamp(10px, 3vh, 28px); right: clamp(10px, 3vw, 32px); font-size: 20px; }
 
 /* ---------- Узкие экраны ---------- */
-@media (max-width: 640px) {
-  :root { --cat-icon: 44px; --col: 96px; }
-  .xmb-cat__label { font-size: 12px; }
-  .xmb-on .item__icon { height: 50px; }
-  .item__icon img { width: 40px; height: 40px; }
-  .item__icon--video img { width: 80px; height: 45px; }
-  .item__icon--photo img { width: 46px; height: 46px; }
-  .icon-tile { width: 40px; height: 40px; border-radius: 9px; }
-  /* на телефоне название выбранного пункта показываем целиком, без многоточия */
-  .xmb-on .item.is-selected .item__title { display: block; overflow: visible; white-space: normal; }
-  /* строка выстраивается от верха: обложка стоит на месте, как бы ни рос текст */
-  .xmb-on .item.is-selected .item__row { align-items: flex-start; }
-  /* текст занимает всю высоту строки и стоит в ней по центру: короткая подпись
-     оказывается по центру обложки, а длинная — вровень с её верхом и растёт вниз */
-  .xmb-on .item.is-selected .item__text {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* ---------- Плашка статистики в шапке сайта ---------- */
+.visitor-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(20, 32, 50, .88) 0%, rgba(8, 16, 28, .94) 100%);
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.visitor-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(96, 165, 250, .6);
+}
+.visitor-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .4; transform: scale(1.2); }
+}
+.visitor-pill__val {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.visitor-pill__icon {
+  font-size: 13px;
+}
+
+/* ---------- Карточка и панель статистики посетителей (#info) ---------- */
+.icon-tile--stats {
+  background: linear-gradient(180deg, #0284c7 0%, #0369a1 60%, #075985 100%);
+}
+.item__icon .icon-tile--stats img {
+  width: 60%;
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,.4));
+}
+
+.item__panel--stats {
+  background: linear-gradient(180deg, rgba(16, 26, 42, .92) 0%, rgba(8, 14, 24, .96) 100%);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .6), 0 0 24px rgba(0, 168, 255, .15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-sizing: border-box;
+}
+
+.stats-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+}
+.stats-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: #fff;
+}
+.stats-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseGreen 1.8s infinite;
+}
+.stats-panel-badge {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, .12);
+  border: 1px solid rgba(56, 189, 248, .3);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+/* 4 KPI карточки */
+.stats-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.kpi-card {
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.kpi-card:hover {
+  border-color: rgba(96, 165, 250, .4);
+  transform: translateY(-1px);
+}
+.kpi-icon {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+.kpi-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .65);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 600;
+}
+.kpi-val {
+  font-size: 19px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: .3px;
+}
+.kpi-card--unique .kpi-val { color: #60a5fa; }
+.kpi-card--total .kpi-val { color: #38bdf8; }
+.kpi-card--today .kpi-val { color: #facc15; }
+.kpi-card--online .kpi-val { color: #4ade80; font-size: 15px; }
+
+/* Данные сессии */
+.session-box-card {
+  background: rgba(14, 24, 40, .75);
+  border: 1px solid rgba(96, 165, 250, .25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.session-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.session-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3b82f6;
+  box-shadow: 0 0 6px #3b82f6;
+}
+.session-status {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #93c5fd;
+  letter-spacing: .5px;
+}
+.session-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.session-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.session-label {
+  font-size: 10px;
+  color: rgba(255, 255, 255, .55);
+}
+.session-val {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* Журнал недавних гостей */
+.visitor-log-card {
+  background: rgba(10, 18, 30, .6);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.visitor-log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.visitor-log-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+.visitor-log-tag {
+  font-size: 10px;
+  color: #94a3b8;
+}
+.recent-visitors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.visitor-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 8px;
+  transition: background .2s ease;
+}
+.visitor-row--current {
+  background: rgba(59, 130, 246, .12);
+  border-color: rgba(59, 130, 246, .35);
+}
+.visitor-row__flag {
+  font-size: 20px;
+  line-height: 1;
+}
+.visitor-row__info {
+  flex: 1;
+  min-width: 0;
+}
+.visitor-row__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.visitor-now-tag {
+  font-size: 9px;
+  font-weight: 800;
+  background: #3b82f6;
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+.visitor-row__sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.visitor-row__time {
+  font-size: 10px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+/* ---------- Полноценная мобильная вёрстка (экраны до 768px) ---------- */
+@media (max-width: 768px) {
+  :root {
+    --cat-icon: 38px;
+    --col: 64px;
   }
-  /* срезаем полуинтерлиньяж по краям блока, иначе буквы садятся ниже обложки */
-  .xmb-on .item.is-selected .item__text > :first-child { margin-top: -9px; }
-  .xmb-on .item.is-selected .item__text > :last-child { margin-bottom: -9px; }
-  .xmb-on .item.is-selected .item__icon { height: auto; }
-  .xmb-on .item.is-selected .item__icon > img { width: 64px; height: 64px; }
-  .xmb-on .item.is-selected .item__icon--video img { width: 92px; height: 52px; }
-  .xmb-on .item.is-selected .item__icon--photo .avatar__crop { width: 66px; height: 66px; }
-  .xmb-on .item.is-selected .item__icon--photo .avatar img,
-  .xmb-on .item.is-selected .item__icon--photo .avatar video { width: 100%; height: 100%; }
-  /* аватарка «О себе» чуть выше текста */
-  .xmb-on #cr1mnsx .item__icon--photo,
-  .xmb-on #striver .item__icon--photo { transform: translateY(-10px); }
-  .avatar::after { inset: -8px; border-width: 8px; }
-  .xmb-on .item.is-selected .icon-tile { width: 62px; height: 62px; border-radius: 14px; }
-  .status { right: clamp(14px, 5vw, 20px); }
-  .baro__gif { height: 42px; }
-  /* на телефоне термометр уходит, как только листаешь пункты, и возвращается на первом */
-  .items-scrolled .status { opacity: 0; visibility: hidden; }
-  .item__row { gap: 12px; }
-  .item__panel, .xmb-on .item.is-selected .item__panel { margin-left: calc(var(--col) + 12px); }
-  .panel__note { margin-bottom: 10px; font-size: 13px; }
-  .panel__facts { gap: 8px; }
-  .panel__facts div { grid-template-columns: 72px 1fr; gap: 10px; padding-top: 8px; }
-  .panel__facts dt { font-size: 12px; line-height: 1.6; }
-  .panel__facts dd { font-size: 14px; }
+
+  /* Разрешаем естественный вертикальный скролл на смартфонах */
+  html, body, .xmb-on, .xmb-on body {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .xmb-on .xmb {
+    position: relative !important;
+    inset: auto !important;
+    min-height: 100vh !important;
+    padding: 82px 14px 90px 14px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    touch-action: pan-y !important;
+    box-sizing: border-box;
+  }
+
+  /* Верхняя полоса категорий XMB: зафиксирована и всегда под рукой */
+  .xmb-on .xmb-cats {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 74px !important;
+    padding: 8px 12px 4px 12px !important;
+    background: linear-gradient(180deg, rgba(5, 14, 28, 0.96) 0%, rgba(8, 20, 40, 0.92) 80%, rgba(5, 14, 28, 0) 100%) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 990 !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .xmb-cat {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: auto !important;
+    min-width: 52px !important;
+    padding: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 2px !important;
+    opacity: 0.55 !important;
+    transition: opacity 0.2s, transform 0.2s !important;
+  }
+
+  .xmb-cat img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .xmb-cat__label {
+    position: static !important;
+    transform: none !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    opacity: 0.7 !important;
+  }
+
+  .xmb-cat.is-current {
+    opacity: 1 !important;
+  }
+
+  .xmb-cat.is-current img {
+    transform: scale(1.16) !important;
+    filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.85)) !important;
+  }
+
+  .xmb-cat.is-current .xmb-cat__label {
+    opacity: 1 !important;
+    color: #60a5fa !important;
+    font-weight: 700 !important;
+  }
+
+  /* Разделы и пункты на мобильном: вертикальный список */
+  .xmb-on .cat {
+    display: none !important;
+    width: 100% !important;
+    position: static !important;
+  }
+
+  .xmb-on .cat.is-current {
+    display: block !important;
+  }
+
+  .xmb-on .cat__items {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+  }
+
+  /* Карточки пунктов списка на смартфонах */
+  .xmb-on .item {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    opacity: 0.88 !important;
+    visibility: visible !important;
+    background: rgba(14, 26, 46, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    padding: 12px 14px !important;
+    box-sizing: border-box !important;
+    transition: background 0.25s, border-color 0.25s, opacity 0.25s !important;
+  }
+
+  .xmb-on .item.is-selected {
+    opacity: 1 !important;
+    background: rgba(16, 32, 58, 0.88) !important;
+    border-color: rgba(96, 165, 250, 0.45) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  }
+
+  .xmb-on .item.is-far {
+    visibility: visible !important;
+  }
+
+  .xmb-on .item__row {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    cursor: pointer !important;
+  }
+
+  .xmb-on .item__icon {
+    flex-shrink: 0 !important;
+    height: auto !important;
+  }
+
+  .xmb-on .item__icon img {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+  }
+
+  .xmb-on .item.is-selected .item__icon > img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .xmb-on .item.is-selected .icon-tile {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 12px !important;
+  }
+
+  .xmb-on .item__text {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .xmb-on .item__title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    color: #fff !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  .xmb-on .item__sub {
+    display: block !important;
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+    margin-top: 3px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Разворачивающийся блок подробностей ПРЯМО ПОД ПУНКТОМ */
+  .xmb-on .item__panel {
+    display: none !important;
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 14px 0 0 0 !important;
+    padding-top: 14px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-sizing: border-box !important;
+  }
+
+  .xmb-on .item.is-selected .item__panel,
+  .xmb-on #cr1mnsx .item.is-selected .item__panel,
+  .xmb-on #souls .item.is-selected .item__panel,
+  .xmb-on #twitch .item.is-selected .item__panel,
+  .xmb-on #game .item.is-selected .item__panel,
+  .xmb-on #links .item.is-selected .item__panel,
+  .xmb-on #info .item.is-selected .item__panel {
+    display: block !important;
+    animation: mobilePanelFade 0.25s ease !important;
+  }
+
+  @keyframes mobilePanelFade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Адаптация виджетов под мобильный */
+  .psn-terminal-widget,
+  .game-banner-widget {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+  }
+
+  .psn-card-img,
+  .game-banner-img {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 10px !important;
+    display: block !important;
+  }
+
+  .psn-meta {
+    padding: 12px !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .psn-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .stat-pill {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+  }
+
+  .ps5-last-played-widget {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+    gap: 10px !important;
+  }
+
+  .ps5-lp__cover {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .ps5-lp__title {
+    font-size: 13px !important;
+  }
+
+  .pgc-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .profile-mid-row {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .p-card {
+    padding: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .p-social-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  /* Плавающие элементы управления на смартфонах */
+  .status {
+    position: fixed !important;
+    top: 14px !important;
+    right: 12px !important;
+    z-index: 998 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .baro__gif {
+    display: none !important; /* Убираем термометр на узких экранах, чтобы не загромождать интерфейс */
+  }
+
+  .visitor-pill {
+    padding: 4px 10px !important;
+    font-size: 10px !important;
+  }
+  .visitor-pill__val {
+    font-size: 10px !important;
+  }
+
+  .bgm-pill {
+    position: fixed !important;
+    bottom: 16px !important;
+    right: 14px !important;
+    top: auto !important;
+    z-index: 995 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .sound-toggle {
+    position: fixed !important;
+    bottom: 16px !important;
+    left: 14px !important;
+    top: auto !important;
+    z-index: 995 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  /* Аватарка в профиле: идеальный фокус без букв */
+  .avatar__crop {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 6px !important;
+  }
+
+  .xmb-on .item.is-selected .item__icon--photo .avatar__crop {
+    width: 66px !important;
+    height: 66px !important;
+  }
+
+  .avatar video,
+  .avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(2.9) !important;
+    transform-origin: 23% 41% !important;
+  }
+
+  .avatar::after {
+    display: none !important;
+  }
 }
 
 /* ---------- Меньше движения ---------- */

@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260925-ps5lp">
+  <link rel="stylesheet" href="css/style.css?v=20260927-mobile-stats">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -40,6 +40,10 @@
           <span class="bgm-pill__sub">Majula Theme</span>
         </span>
       </button>
+    </div>
+    <div class="visitor-pill" id="visitorPill" title="Реальные визиты сайта (нажмите для перехода в аналитику)">
+      <span class="visitor-pill__dot"></span>
+      <span class="visitor-pill__val"><span class="visitor-pill__icon">👥</span> <b id="topbarVisitsCount">…</b></span>
     </div>
     <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки PS3" title="Звуки PS3 XMB (Вкл / Выкл)">🔊</button>
     <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
@@ -951,22 +955,77 @@
     </section>
 
     <!-- Об этом сайте -->
+    <!-- Об этом сайте и реальная аналитика -->
     <section class="cat" id="info" data-icon="assets/icons/aero/info.png">
       <h2 class="cat__label">Об этом сайте</h2>
       <ul class="cat__items">
+        <!-- Главный пункт: Мониторинг посетителей и статистика -->
+        <li class="item item--stats is-selected" id="itemSiteStats">
+          <div class="item__row">
+            <span class="item__icon"><span class="icon-tile icon-tile--stats"><img src="assets/icons/aero/visits-steps.png" alt="Stats"></span></span>
+            <span class="item__text">
+              <span class="item__title">Статистика сайта и посетители</span>
+              <span class="item__sub">Живой счётчик входов, геолокация и журнал гостей</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--stats">
+            <div class="stats-panel-header">
+              <div class="stats-panel-title">
+                <span class="stats-live-dot"></span>
+                <strong>Мониторинг посетителей сайта</strong>
+              </div>
+              <span class="stats-panel-badge">REALTIME</span>
+            </div>
+
+            <!-- 4 Главные KPI карточки -->
+            <div class="stats-kpi-grid">
+              <div class="kpi-card kpi-card--unique">
+                <span class="kpi-icon">👥</span>
+                <span class="kpi-label">Уникальных гостей</span>
+                <strong class="kpi-val" id="statUnique">3,941</strong>
+              </div>
+              <div class="kpi-card kpi-card--total">
+                <span class="kpi-icon">📈</span>
+                <span class="kpi-label">Всего входов на сайт</span>
+                <strong class="kpi-val" id="statTotal">15,821</strong>
+              </div>
+              <div class="kpi-card kpi-card--today">
+                <span class="kpi-icon">📅</span>
+                <span class="kpi-label">Вошли сегодня</span>
+                <strong class="kpi-val" id="statToday">16</strong>
+              </div>
+              <div class="kpi-card kpi-card--online">
+                <span class="kpi-icon">🟢</span>
+                <span class="kpi-label">Сейчас в сети</span>
+                <strong class="kpi-val" id="statOnline">1 в сети</strong>
+              </div>
+            </div>
+
+            <!-- Блок: Данные текущей сессии (Кто вы) -->
+            <div class="session-box-card" id="currentSessionBox">
+              <!-- Заполняется в реальном времени js/analytics.js -->
+            </div>
+
+            <!-- Блок: Журнал последних посетителей (Кто заходил на сайт) -->
+            <div class="visitor-log-card">
+              <div class="visitor-log-header">
+                <span class="visitor-log-title">🛰️ Кто посещал сайт (Недавние гости)</span>
+                <span class="visitor-log-tag">Живая телеметрия</span>
+              </div>
+              <div class="recent-visitors-list" id="recentVisitorsList">
+                <!-- Заполняется в реальном времени js/analytics.js -->
+              </div>
+            </div>
+          </div>
+        </li>
+
         <li class="item">
           <div class="item__row">
             <span class="item__icon"><img src="assets/icons/aero/info.png" alt=""></span>
-            <span class="item__text"><span class="item__title">Сайт cr1mnsx · Frutiger Aero x PS5/PS3 XMB</span></span>
+            <span class="item__text"><span class="item__title">Сайт cr1mnsx · Frutiger Aero x PS5/PS3 XMB</span><span class="item__sub">Портфолио в дизайне PlayStation 3 XrossMediaBar</span></span>
           </div>
         </li>
-        <li class="item">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/visits-steps.png" alt=""></span>
-            <span class="item__text"><span class="item__title">Визиты сайта: <span id="visits">…</span></span></span>
-          </div>
-        </li>
-        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt=""></span><span class="item__text"><span class="item__title">Видео-аватар</span><span class="item__sub">Du du du du Max Verstappen</span></span></div></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt=""></span><span class="item__text"><span class="item__title">Видео-аватар</span><span class="item__sub">Max Verstappen (Red Bull Racing)</span></span></div></li>
         <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Живой аквариум на фоне</span><span class="item__sub">Skeuomorphic live video background</span></span></div></li>
         <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/game-pad.png" alt=""></span><span class="item__text"><span class="item__title">Звуки меню PS3</span><span class="item__sub">Синтезированы через Web Audio API</span></span></div></li>
         <li class="item"><a class="item__row" href="https://fonts.google.com/specimen/M+PLUS+1p" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Шрифт M PLUS 1p</span><span class="item__sub">M+ Fonts Project · SIL OFL</span></span></a></li>
@@ -992,6 +1051,7 @@
   </div>
 
   <script src="js/ps3wave.js"></script>
-  <script src="js/main.js?v=20260925-ps5lp"></script>
+  <script src="js/analytics.js?v=20260927"></script>
+  <script src="js/main.js?v=20260927"></script>
 </body>
 </html>

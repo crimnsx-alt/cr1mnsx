@@ -156,7 +156,7 @@
         item.style.transform = `translate3d(0, ${y}px, 0)`;
         const far = y < -geo.step * 2 || y > innerHeight + geo.step;
         item.classList.toggle('is-far', far);
-        if (on && !far) loadThumb(item);
+        if (on && (!far || window.innerWidth <= 768)) loadThumb(item);
       });
     });
 
@@ -407,6 +407,10 @@
     playSfx('cat');
     if (window.ps3WaveImpulse) window.ps3WaveImpulse();
     render();
+    if (window.innerWidth <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      catButtons[current]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
   }
 
   function selectItem(j) {
@@ -418,6 +422,15 @@
     if (window.ps3WaveImpulse) window.ps3WaveImpulse();
     render();
   }
+
+  window.xmbGoto = (catIdx, itemIdx = 0) => {
+    selectCat(catIdx);
+    selectItem(itemIdx);
+    if (window.innerWidth <= 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      catButtons[catIdx]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
 
   const activate = () => {
     const item = itemsOf(current)[selected[current]];
@@ -512,6 +525,7 @@
   let wheelLast = 0;
   let wheelLockUntil = 0;
   addEventListener('wheel', (e) => {
+    if (window.innerWidth <= 768) return; // Разрешаем нативный скролл на мобильных устройствах
     if (!viewer.hidden || (play && !play.hidden)) return;
     e.preventDefault();
     const now = performance.now();
@@ -546,6 +560,15 @@
     const dx = e.clientX - touchStart.x;
     const dy = e.clientY - touchStart.y;
     touchStart = null;
+    if (window.innerWidth <= 768) {
+      // На мобильных экранах не перехватываем вертикальный скролл контента!
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        swiped = true;
+        setTimeout(() => { swiped = false; }, 300);
+        selectCat(current - Math.sign(dx));
+      }
+      return;
+    }
     if (Math.max(Math.abs(dx), Math.abs(dy)) < 30) return;
     swiped = true;
     setTimeout(() => { swiped = false; }, 400);
@@ -801,6 +824,19 @@
     render();
   });
   if (document.fonts) document.fonts.ready.then(render);
+
+  /* Клик по плашке посетителей в шапке ведёт сразу в категорию «Об этом сайте» к статистике */
+  const visitorPill = $('#visitorPill');
+  if (visitorPill) {
+    visitorPill.style.cursor = 'pointer';
+    visitorPill.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const infoIdx = cats.findIndex(c => c.id === 'info');
+      if (infoIdx !== -1) {
+        window.xmbGoto(infoIdx, 0);
+      }
+    });
+  }
 
   /* ---------- Brawl Stars: Синхронизация статистики с Brawlify (#2RGUQJQ0R) ---------- */
   const initBrawlStarsSync = () => {
