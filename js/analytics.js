@@ -105,42 +105,10 @@
     if (visitsEl) visitsEl.textContent = fmt(counters.total);
   }
 
-  // Рендер анонимного журнала недавней активности
-  function renderAnonymousLog() {
-    const container = document.getElementById('recentVisitorsList');
-    if (!container) return;
-
-    const mockActivity = [
-      { flag: '🇷🇺', region: 'Россия', platform: '📱 Мобильное устройство', timeText: '5 мин назад' },
-      { flag: '🇷🇺', region: 'Россия', platform: '🖥️ Компьютер (ПК)', timeText: '18 мин назад' },
-      { flag: '🇧🇾', region: 'Беларусь', platform: '📱 Мобильное устройство', timeText: '42 мин назад' },
-      { flag: '🇰🇿', region: 'Казахстан', platform: '📱 Мобильное устройство', timeText: '1 час назад' },
-      { flag: '🇪🇺', region: 'Европа', platform: '🖥️ Компьютер (ПК)', timeText: '2 часа назад' }
-    ];
-
-    container.innerHTML = mockActivity.map(item => `
-      <div class="visitor-row">
-        <div class="visitor-row__flag">${item.flag}</div>
-        <div class="visitor-row__info">
-          <div class="visitor-row__title">
-            <strong>${item.region}</strong>
-          </div>
-          <div class="visitor-row__sub">
-            ${item.platform}
-          </div>
-        </div>
-        <div class="visitor-row__time">
-          ${item.timeText}
-        </div>
-      </div>
-    `).join('');
-  }
-
   // Запуск
   function initAnalytics() {
     const counters = updateCounters();
     renderKPIs(counters);
-    renderAnonymousLog();
   }
 
   if (document.readyState === 'loading') {
