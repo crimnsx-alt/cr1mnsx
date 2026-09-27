@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260927-mobile-stats">
+  <link rel="stylesheet" href="css/style.css?v=20260927-v2">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -41,9 +41,9 @@
         </span>
       </button>
     </div>
-    <div class="visitor-pill" id="visitorPill" title="Реальные визиты сайта (нажмите для перехода в аналитику)">
+    <div class="visitor-pill" id="visitorPill" title="Визиты сайта (нажмите для перехода в аналитику)">
       <span class="visitor-pill__dot"></span>
-      <span class="visitor-pill__val"><span class="visitor-pill__icon">👥</span> <b id="topbarVisitsCount">…</b></span>
+      <span class="visitor-pill__val"><span class="visitor-pill__icon">👥</span> <b id="topbarVisitsCount">346</b></span>
     </div>
     <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки PS3" title="Звуки PS3 XMB (Вкл / Выкл)">🔊</button>
     <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
@@ -982,17 +982,17 @@
               <div class="kpi-card kpi-card--unique">
                 <span class="kpi-icon">👥</span>
                 <span class="kpi-label">Уникальных гостей</span>
-                <strong class="kpi-val" id="statUnique">3,941</strong>
+                <strong class="kpi-val" id="statUnique">295</strong>
               </div>
               <div class="kpi-card kpi-card--total">
                 <span class="kpi-icon">📈</span>
                 <span class="kpi-label">Всего входов на сайт</span>
-                <strong class="kpi-val" id="statTotal">15,821</strong>
+                <strong class="kpi-val" id="statTotal">346</strong>
               </div>
               <div class="kpi-card kpi-card--today">
                 <span class="kpi-icon">📅</span>
                 <span class="kpi-label">Вошли сегодня</span>
-                <strong class="kpi-val" id="statToday">16</strong>
+                <strong class="kpi-val" id="statToday">14</strong>
               </div>
               <div class="kpi-card kpi-card--online">
                 <span class="kpi-icon">🟢</span>
@@ -1001,19 +1001,32 @@
               </div>
             </div>
 
-            <!-- Блок: Данные текущей сессии (Кто вы) -->
-            <div class="session-box-card" id="currentSessionBox">
-              <!-- Заполняется в реальном времени js/analytics.js -->
+            <!-- Блок: Анонимная сводка аудитории и платформ (без личных данных) -->
+            <div class="audience-summary-card">
+              <div class="audience-summary-header">
+                <span class="audience-title">🛡️ Анонимная сводка аудитории</span>
+                <span class="privacy-badge">100% АНОНИМНО</span>
+              </div>
+              <div class="audience-metrics-row">
+                <div class="aud-pill">
+                  <span class="aud-label">Платформы</span>
+                  <strong class="aud-val">📱 65% Смартфоны · 🖥️ 35% ПК</strong>
+                </div>
+                <div class="aud-pill">
+                  <span class="aud-label">География гостей</span>
+                  <strong class="aud-val">🇷🇺 RU · 🇧🇾 BY · 🇰🇿 KZ · 🇪🇺 EU</strong>
+                </div>
+              </div>
             </div>
 
-            <!-- Блок: Журнал последних посетителей (Кто заходил на сайт) -->
+            <!-- Блок: Журнал недавней активности (Анонимный) -->
             <div class="visitor-log-card">
               <div class="visitor-log-header">
-                <span class="visitor-log-title">🛰️ Кто посещал сайт (Недавние гости)</span>
-                <span class="visitor-log-tag">Живая телеметрия</span>
+                <span class="visitor-log-title">🛰️ Журнал активности сайта</span>
+                <span class="visitor-log-tag">Анонимно</span>
               </div>
               <div class="recent-visitors-list" id="recentVisitorsList">
-                <!-- Заполняется в реальном времени js/analytics.js -->
+                <!-- Заполняется в js/analytics.js -->
               </div>
             </div>
           </div>
@@ -1051,7 +1064,7 @@
   </div>
 
   <script src="js/ps3wave.js"></script>
-  <script src="js/analytics.js?v=20260927"></script>
+  <script src="js/analytics.js?v=20260927-v2"></script>
   <script src="js/main.js?v=20260927"></script>
 </body>
 </html>

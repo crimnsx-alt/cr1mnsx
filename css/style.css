@@ -1789,53 +1789,59 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .kpi-card--today .kpi-val { color: #facc15; }
 .kpi-card--online .kpi-val { color: #4ade80; font-size: 15px; }
 
-/* Данные сессии */
-.session-box-card {
+/* Анонимная сводка аудитории */
+.audience-summary-card {
   background: rgba(14, 24, 40, .75);
   border: 1px solid rgba(96, 165, 250, .25);
   border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 14px;
 }
-.session-badge {
+.audience-summary-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-.session-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #3b82f6;
-  box-shadow: 0 0 6px #3b82f6;
-}
-.session-status {
-  font-size: 11px;
+.audience-title {
+  font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
   color: #93c5fd;
-  letter-spacing: .5px;
+  letter-spacing: .3px;
 }
-.session-grid {
+.privacy-badge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #34d399;
+  background: rgba(52, 211, 153, .12);
+  border: 1px solid rgba(52, 211, 153, .3);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+.audience-metrics-row {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
-.session-item {
+.aud-pill {
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 8px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
-.session-label {
+.aud-label {
   font-size: 10px;
   color: rgba(255, 255, 255, .55);
 }
-.session-val {
-  font-size: 12px;
+.aud-val {
+  font-size: 11px;
   color: #fff;
   font-weight: 600;
-  word-break: break-word;
+  line-height: 1.3;
 }
 
 /* Журнал недавних гостей */
