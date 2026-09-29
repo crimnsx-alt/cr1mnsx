@@ -169,10 +169,10 @@
     const isMafanyaSelected = currentCatId === 'twitch' && mafanyaItem && mafanyaItem.classList.contains('is-selected');
     if (isMafanyaSelected) {
       if (typeof loadTwitchXmbIframe === 'function') loadTwitchXmbIframe(true);
-      if (typeof initAeroTilt === 'function') initAeroTilt();
     } else {
       if (typeof unloadTwitchXmbIframe === 'function') unloadTwitchXmbIframe();
     }
+    if (typeof initAeroTilt === 'function') initAeroTilt();
   };
 
   /* ---------- Аудио-эффекты PS3 XrossMediaBar (Web Audio API) ---------- */
@@ -1290,7 +1290,23 @@
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (!canHover) return;
 
-    const selector = '.aero-tilt, .pgc-card, .game-banner-widget, .kpi-card, .bs-profile-card, .twitch-quicklink, .twitch-drawer__player-wrap';
+    const selector = [
+      '.aero-tilt',
+      '.pgc-card',
+      '.game-banner-widget',
+      '.kpi-card',
+      '.bs-profile-card',
+      '.twitch-quicklink',
+      '.twitch-xmb-card',
+      '.twitch-xmb-player-box',
+      '.twitch-chip',
+      '.psn-terminal-widget',
+      '.psn-meta',
+      '.ps5-last-played-widget',
+      '.ds2-player-box',
+      '.p-card',
+      '.item__panel--stats'
+    ].join(', ');
     const cards = $$(selector);
 
     cards.forEach(card => {
@@ -1319,6 +1335,9 @@
       });
 
       card.addEventListener('mousemove', (e) => {
+        // Предотвращаем конфликт при вложенных 3D-карточках
+        e.stopPropagation();
+
         const rect = card.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) return;
 
@@ -1329,9 +1348,10 @@
         const nx = (x / rect.width) * 2 - 1;
         const ny = (y / rect.height) * 2 - 1;
 
-        // Физический наклон от -8° до +8°
-        targetRotX = (-ny * 8).toFixed(2);
-        targetRotY = (nx * 8).toFixed(2);
+        // Для крупных информационных панелей угол умереннее (5.5°), для средних и компактных — 8°
+        const maxTilt = (rect.height > 220 || rect.width > 420) ? 5.5 : 8;
+        targetRotX = (-ny * maxTilt).toFixed(2);
+        targetRotY = (nx * maxTilt).toFixed(2);
 
         // Положение динамического блика в процентах
         targetGlareX = ((x / rect.width) * 100).toFixed(1);

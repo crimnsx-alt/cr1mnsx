@@ -801,11 +801,14 @@ a { color: inherit; }
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .p-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(0, 168, 255, 0.4);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 140, 255, 0.25);
 }
 
 .p-card-title {
@@ -1156,6 +1159,14 @@ a { color: inherit; }
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .45);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.psn-meta:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 10px 32px rgba(0, 6, 24, 0.65), 0 0 18px rgba(0, 168, 255, 0.25);
 }
 
 .psn-meta__header {
@@ -2450,7 +2461,14 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   .bs-profile-card,
   .twitch-quicklink,
   .twitch-xmb-card,
-  .twitch-xmb-player-box {
+  .twitch-xmb-player-box,
+  .twitch-chip,
+  .psn-terminal-widget,
+  .psn-meta,
+  .ps5-last-played-widget,
+  .ds2-player-box,
+  .p-card,
+  .item__panel--stats {
     --rotate-x: 0deg;
     --rotate-y: 0deg;
     --glare-x: 50%;
@@ -2469,7 +2487,14 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   .bs-profile-card.is-tilting,
   .twitch-quicklink.is-tilting,
   .twitch-xmb-card.is-tilting,
-  .twitch-xmb-player-box.is-tilting {
+  .twitch-xmb-player-box.is-tilting,
+  .twitch-chip.is-tilting,
+  .psn-terminal-widget.is-tilting,
+  .psn-meta.is-tilting,
+  .ps5-last-played-widget.is-tilting,
+  .ds2-player-box.is-tilting,
+  .p-card.is-tilting,
+  .item__panel--stats.is-tilting {
     transition: transform 0.05s linear;
     transform: perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg)) scale3d(1.025, 1.025, 1.025) !important;
     z-index: 8;
@@ -2483,7 +2508,14 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   .bs-profile-card::after,
   .twitch-quicklink::after,
   .twitch-xmb-card::after,
-  .twitch-xmb-player-box::after {
+  .twitch-xmb-player-box::after,
+  .twitch-chip::after,
+  .psn-terminal-widget::after,
+  .psn-meta::after,
+  .ps5-last-played-widget::after,
+  .ds2-player-box::after,
+  .p-card::after,
+  .item__panel--stats::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -2502,7 +2534,14 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   .bs-profile-card.is-tilting::after,
   .twitch-quicklink.is-tilting::after,
   .twitch-xmb-card.is-tilting::after,
-  .twitch-xmb-player-box.is-tilting::after {
+  .twitch-xmb-player-box.is-tilting::after,
+  .twitch-chip.is-tilting::after,
+  .psn-terminal-widget.is-tilting::after,
+  .psn-meta.is-tilting::after,
+  .ps5-last-played-widget.is-tilting::after,
+  .ds2-player-box.is-tilting::after,
+  .p-card.is-tilting::after,
+  .item__panel--stats.is-tilting::after {
     opacity: 1;
   }
 }
