@@ -1031,7 +1031,11 @@
       if (game.platform) {
         elPlatforms.forEach(el => { el.textContent = game.platform; });
       }
-      if (game.last_played_text) {
+      if (game.is_playing_now) {
+        elStatuses.forEach(el => {
+          el.innerHTML = '<span style="color:#4ade80; font-weight:700;">🟢 В ИГРЕ СЕЙЧАС НА PLAYSTATION 5</span>';
+        });
+      } else if (game.last_played_text) {
         elStatuses.forEach(el => {
           el.textContent = `Последний запуск на PlayStation 5 · ${game.last_played_text}`;
         });
@@ -1063,7 +1067,7 @@
 
     // 2. Проверяем локальные JSON с данными PSN игр
     const loadLocalPSN = async () => {
-      const endpoints = ['assets/data/psn_games.json', 'data/psn_games.json', 'data/psn_recent.json'];
+      const endpoints = ['data/psn_recent.json', 'data/psn_games.json', 'assets/data/psn_games.json'];
       for (const ep of endpoints) {
         try {
           const res = await fetch(ep);
@@ -1071,6 +1075,9 @@
             const json = await res.json();
             const game = json.last_played || (Array.isArray(json.games) ? json.games[0] : null) || json.game;
             if (game) {
+              if (json.is_playing_now !== undefined) {
+                game.is_playing_now = json.is_playing_now;
+              }
               updateDOM(game);
               try {
                 localStorage.setItem(CACHE_KEY, JSON.stringify({ data: game, timestamp: Date.now() }));
