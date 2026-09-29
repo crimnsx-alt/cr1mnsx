@@ -1,0 +1,9 @@
+# Sensitive tokens & config
+psn_config.json
+.env
+.env.*
+*.token
+
+# System files
+.DS_Store
+Thumbs.db
