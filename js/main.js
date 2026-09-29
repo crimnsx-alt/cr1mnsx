@@ -162,6 +162,17 @@
 
     // листаем пункты — на телефоне прячем термометр, чтобы не мешался
     root.classList.toggle('items-scrolled', selected[current] > 0);
+
+    // Управление воспроизведением стрима в правой панели XMB
+    const currentCatId = cats[current] ? cats[current].id : '';
+    const mafanyaItem = $('#itemMafanyaTwitch');
+    const isMafanyaSelected = currentCatId === 'twitch' && mafanyaItem && mafanyaItem.classList.contains('is-selected');
+    if (isMafanyaSelected) {
+      if (typeof loadTwitchXmbIframe === 'function') loadTwitchXmbIframe(true);
+      if (typeof initAeroTilt === 'function') initAeroTilt();
+    } else {
+      if (typeof unloadTwitchXmbIframe === 'function') unloadTwitchXmbIframe();
+    }
   };
 
   /* ---------- Аудио-эффекты PS3 XrossMediaBar (Web Audio API) ---------- */
@@ -436,8 +447,8 @@
     const item = itemsOf(current)[selected[current]];
     if (!item) return;
     playSfx('ok');
-    if (item.id === 'itemMafanyaTwitch' || item.classList.contains('item--mafanya') || item.querySelector('#mafanyaTwitchRow')) {
-      openTwitchDrawer();
+    if (item.id === 'itemMafanyaTwitch' || item.classList.contains('item--mafanya')) {
+      window.open('https://www.twitch.tv/mafanyaking', '_blank', 'noopener');
       return;
     }
     if (isMedia(item)) {
@@ -463,13 +474,6 @@
 
   /* клавиатура */
   addEventListener('keydown', (e) => {
-    if (isTwitchDrawerOpen()) {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeTwitchDrawer();
-      }
-      return;
-    }
     // пока открыта игра или просмотрщик, клавиши сайту не нужны
     if (!viewer.hidden || (play && !play.hidden) || e.altKey || e.ctrlKey || e.metaKey) return;
     const inPanel = e.target instanceof Element && e.target.closest('.item__panel');
@@ -493,7 +497,6 @@
   /* мышь: клик выбирает пункт, повторный клик открывает */
   let swiped = false;
   xmb.addEventListener('click', (e) => {
-    if (isTwitchDrawerOpen()) return;
     if (swiped) {
       e.preventDefault();
       swiped = false;
@@ -520,9 +523,7 @@
       toggleBgm();
       return;
     }
-    if (item.id === 'itemMafanyaTwitch' || item.classList.contains('item--mafanya') || item.querySelector('#mafanyaTwitchRow')) {
-      e.preventDefault();
-      openTwitchDrawer();
+    if (item.id === 'itemMafanyaTwitch' || item.classList.contains('item--mafanya')) {
       return;
     }
     if (isMedia(item)) {
@@ -1357,17 +1358,10 @@
   }
 
   /* ==================================================
-     2. ВЫДВИЖНОЕ ОКНО СО СТРИМОМ МАФАНИ (TWITCH DRAWER)
+     2. ПРАВАЯ ПАНЕЛЬ СТРИМА МАФАНИ (XMB WIDGET)
      ================================================== */
-  let wasBgmPlayingBeforeDrawer = false;
-
-  function isTwitchDrawerOpen() {
-    const drawer = $('#twitchDrawer');
-    return drawer && drawer.classList.contains('is-open');
-  }
-
-  function loadTwitchIframe(autoplay = true) {
-    const iframe = $('#twitchIframe');
+  function loadTwitchXmbIframe(autoplay = true) {
+    const iframe = $('#twitchXmbIframe');
     if (!iframe) return;
     const currentHost = window.location.hostname || 'crimnsx-alt.github.io';
     const hosts = ['crimnsx-alt.github.io', 'localhost', '127.0.0.1'];
@@ -1379,40 +1373,36 @@
     }
   }
 
-  function unloadTwitchIframe() {
-    const iframe = $('#twitchIframe');
+  function unloadTwitchXmbIframe() {
+    const iframe = $('#twitchXmbIframe');
     if (iframe && iframe.src) {
       iframe.src = '';
     }
   }
 
   function updateTwitchUI(info) {
-    const statusPill = $('#twitchStatusPill');
-    const statusLabel = $('#twitchStatusLabel');
+    const statusPill = $('#twitchXmbStatusPill');
+    const statusLabel = $('#twitchXmbStatusLabel');
     const topPill = $('#twitchTopPill');
     const topPillDot = $('#twitchTopPillDot');
     const topPillText = $('#twitchTopPillText');
     const menuBadge = $('#mafanyaMenuBadge');
-    const liveDetails = $('#twitchLiveDetails');
-    const offlineDetails = $('#twitchOfflineDetails');
-    const streamTitle = $('#twitchStreamTitle');
-    const streamCategory = $('#twitchStreamCategory');
-    const streamViewers = $('#twitchStreamViewers');
-    const streamUptime = $('#twitchStreamUptime');
-    const followersEl = $('#twitchFollowersCount');
-    const avatarEl = $('#twitchDrawerAvatar');
-    const lastBroadcastText = $('#twitchLastBroadcastText');
+    const avatarEl = $('#twitchXmbAvatar');
+    const subEl = $('#twitchXmbSub');
+    const titleEl = $('#twitchXmbStreamTitle');
+    const catEl = $('#twitchXmbCategory');
+    const viewersEl = $('#twitchXmbViewers');
+    const uptimeEl = $('#twitchXmbUptime');
 
-    if (info.followers && followersEl) {
+    if (info.followers && subEl) {
       const k = Math.round(info.followers / 1000);
-      followersEl.textContent = `· ${k}k фолловеров`;
+      subEl.textContent = `mafanyaking · ${k}k фолловеров`;
     }
     if (info.avatar && avatarEl && !avatarEl.src.includes(info.avatar)) {
       avatarEl.src = info.avatar;
     }
 
     if (info.isLive) {
-      // Состояние «В ЭФИРЕ»
       if (statusPill) {
         statusPill.classList.remove('is-offline');
         statusPill.classList.add('is-live');
@@ -1422,15 +1412,14 @@
       if (topPillText) topPillText.textContent = 'Мафаня 🔴 LIVE';
       if (menuBadge) menuBadge.style.display = 'inline-flex';
 
-      if (liveDetails) liveDetails.style.display = 'block';
-      if (offlineDetails) offlineDetails.style.display = 'none';
-
-      if (streamTitle && info.title) streamTitle.textContent = info.title;
-      if (streamCategory && info.game) streamCategory.textContent = `🎮 ${info.game}`;
-      if (streamViewers && info.viewers) streamViewers.textContent = `👥 ${Number(info.viewers).toLocaleString('ru-RU')} зрителей`;
-      if (streamUptime && info.uptime) streamUptime.textContent = `⏱ ${info.uptime}`;
+      if (titleEl && info.title) titleEl.textContent = info.title;
+      if (catEl && info.game) catEl.textContent = `🎮 ${info.game}`;
+      if (viewersEl && info.viewers) viewersEl.textContent = `👥 ${Number(info.viewers).toLocaleString('ru-RU')} зрителей`;
+      if (uptimeEl && info.uptime) {
+        uptimeEl.style.display = 'inline-flex';
+        uptimeEl.textContent = `⏱ ${info.uptime}`;
+      }
     } else {
-      // Состояние «ОФФЛАЙН»
       if (statusPill) {
         statusPill.classList.remove('is-live');
         statusPill.classList.add('is-offline');
@@ -1440,12 +1429,14 @@
       if (topPillText) topPillText.textContent = 'Мафаня';
       if (menuBadge) menuBadge.style.display = 'none';
 
-      if (liveDetails) liveDetails.style.display = 'none';
-      if (offlineDetails) offlineDetails.style.display = 'block';
-
-      if (info.lastBroadcastTitle && lastBroadcastText) {
-        lastBroadcastText.textContent = `Последний стрим: «${info.lastBroadcastTitle}». Смотрите клипы и хайлайты ниже!`;
+      if (titleEl) {
+        titleEl.textContent = info.lastBroadcastTitle 
+          ? `Последний стрим: «${info.lastBroadcastTitle}»` 
+          : 'Канал Влада Мафани на Twitch';
       }
+      if (catEl) catEl.textContent = '🎮 Общение';
+      if (viewersEl) viewersEl.textContent = '👥 Оффлайн';
+      if (uptimeEl) uptimeEl.style.display = 'none';
     }
   }
 
@@ -1488,97 +1479,21 @@
     updateTwitchUI({ isLive: false });
   }
 
-  function openTwitchDrawer() {
-    initAudio();
-    playSfx('ok');
-    const drawer = $('#twitchDrawer');
-    const backdrop = $('#twitchBackdrop');
-    if (!drawer || !backdrop) return;
-
-    drawer.classList.add('is-open');
-    drawer.setAttribute('aria-hidden', 'false');
-    backdrop.classList.add('is-open');
-    backdrop.setAttribute('aria-hidden', 'false');
-
-    // Если играет фоновая музыка Dark Souls 2 (Majula), аккуратно ставим на паузу
-    if (bgmPlaying && bgmAudio && !bgmAudio.paused) {
-      wasBgmPlayingBeforeDrawer = true;
-      bgmAudio.pause();
-      updateBgmUI(false);
-    }
-
-    loadTwitchIframe();
-    checkTwitchLiveStatus();
-    initAeroTilt();
-  }
-
-  function closeTwitchDrawer() {
-    playSfx('back');
-    const drawer = $('#twitchDrawer');
-    const backdrop = $('#twitchBackdrop');
-    if (drawer) {
-      drawer.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden', 'true');
-    }
-    if (backdrop) {
-      backdrop.classList.remove('is-open');
-      backdrop.setAttribute('aria-hidden', 'true');
-    }
-
-    unloadTwitchIframe();
-
-    // Восстанавливаем фоновую тему Маджулы, если она играла до открытия:
-    if (wasBgmPlayingBeforeDrawer && bgmAudio && bgmAudio.paused && localStorage.getItem('ps3_bgm_disabled') !== '1') {
-      bgmAudio.play().then(() => {
-        updateBgmUI(true);
-      }).catch(() => {});
-      wasBgmPlayingBeforeDrawer = false;
-    }
-  }
-
-  function initTwitchDrawer() {
-    const backdrop = $('#twitchBackdrop');
-    const closeBtn = $('#twitchDrawerClose');
+  function initTwitchXmbWidget() {
     const topPill = $('#twitchTopPill');
-
-    if (backdrop) {
-      backdrop.addEventListener('click', (e) => {
-        e.preventDefault();
-        closeTwitchDrawer();
-      });
-    }
-
-    if (closeBtn) {
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        closeTwitchDrawer();
-      });
-    }
-
     if (topPill) {
       topPill.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (isTwitchDrawerOpen()) {
-          closeTwitchDrawer();
-        } else {
-          openTwitchDrawer();
+        const twitchCatIdx = cats.findIndex(c => c.id === 'twitch');
+        if (twitchCatIdx !== -1) {
+          window.xmbGoto(twitchCatIdx, 1);
+          playSfx('ok');
         }
       });
     }
 
-    // Перехват кликов по пунктам Mafanya в меню и на сайте:
-    document.addEventListener('click', (e) => {
-      const mafanyaRow = e.target.closest('#mafanyaTwitchRow, #itemMafanyaTwitch > .item__row');
-      if (mafanyaRow) {
-        e.preventDefault();
-        e.stopPropagation();
-        openTwitchDrawer();
-        return;
-      }
-    });
-
-    // Начальная проверка статуса стрима и периодический опрос раз в 60 сек
+    // Первичная проверка статуса стрима и периодический опрос раз в 60 сек
     checkTwitchLiveStatus();
     setInterval(checkTwitchLiveStatus, 60000);
   }
@@ -1587,5 +1502,5 @@
   initBrawlStarsSync();
   initPS5LastPlayedSync();
   initAeroTilt();
-  initTwitchDrawer();
+  initTwitchXmbWidget();
 })();

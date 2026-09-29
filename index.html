@@ -788,13 +788,89 @@
           </a>
         </li>
         <li class="item item--mafanya" id="itemMafanyaTwitch">
-          <a class="item__row" href="https://www.twitch.tv/mafanyaking" id="mafanyaTwitchRow" target="_blank" rel="noopener">
+          <div class="item__row" id="mafanyaTwitchRow">
             <span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/mafanya.png" alt="mafanyaking"></span></span>
             <span class="item__text">
               <span class="item__title">mafanyaking (Влад Мафаня) <span class="twitch-live-pill" id="mafanyaMenuBadge" style="display:none;">LIVE</span></span>
-              <span class="item__sub">twitch.tv/mafanyaking · Любимый стример · Нажмите для стрима</span>
+              <span class="item__sub">twitch.tv/mafanyaking · Любимый стример</span>
             </span>
-          </a>
+          </div>
+
+          <!-- Встроенная правая панель XMB со стримом Мафани -->
+          <div class="item__panel item__panel--twitch">
+            <div class="twitch-xmb-card aero-tilt">
+              <!-- Шапка виджета -->
+              <div class="twitch-xmb-header">
+                <div class="twitch-xmb-user">
+                  <div class="twitch-xmb-avatar-box">
+                    <img class="twitch-xmb-avatar" id="twitchXmbAvatar" src="assets/photos/twitch/mafanya.png" alt="Влад Мафаня">
+                    <span class="twitch-xmb-avatar-ring"></span>
+                  </div>
+                  <div class="twitch-xmb-meta">
+                    <div class="twitch-xmb-name-row">
+                      <strong class="twitch-xmb-name">Влад Мафаня</strong>
+                      <span class="twitch-verified" title="Подтвержденный стример">✓</span>
+                    </div>
+                    <div class="twitch-xmb-sub" id="twitchXmbSub">mafanyaking · 548k фолловеров</div>
+                  </div>
+                </div>
+                <div class="twitch-status-pill is-offline" id="twitchXmbStatusPill">
+                  <span class="twitch-status-dot"></span>
+                  <span class="twitch-status-label" id="twitchXmbStatusLabel">ОФФЛАЙН</span>
+                </div>
+              </div>
+
+              <!-- Плеер Twitch 16:9 прямо внутри панели справа -->
+              <div class="twitch-xmb-player-box">
+                <iframe 
+                  id="twitchXmbIframe"
+                  class="twitch-xmb-iframe"
+                  title="Стрим mafanyaking"
+                  src=""
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+              </div>
+
+              <!-- Информация о стриме -->
+              <div class="twitch-xmb-info">
+                <div class="twitch-xmb-stream-title" id="twitchXmbStreamTitle">Стрим Влада Мафани на Twitch</div>
+                <div class="twitch-xmb-stream-tags">
+                  <span class="twitch-meta-item" id="twitchXmbCategory">🎮 Общение</span>
+                  <span class="twitch-meta-item" id="twitchXmbViewers">👥 Оффлайн</span>
+                  <span class="twitch-meta-item" id="twitchXmbUptime" style="display:none;">⏱ 0:00</span>
+                </div>
+              </div>
+
+              <!-- Кнопки перехода и быстрые ссылки -->
+              <div class="twitch-xmb-actions">
+                <a class="twitch-xmb-cta" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+                  </svg>
+                  <span>Перейти на Twitch-канал Влада ↗</span>
+                </a>
+                <div class="twitch-xmb-chips">
+                  <a class="twitch-chip" href="https://t.me/toxiclegion" target="_blank" rel="noopener" title="Официальный ТГК">
+                    <img src="assets/icons/social/telegram.png" alt="">
+                    <span>Toxic Legion</span>
+                  </a>
+                  <a class="twitch-chip" href="https://mafanya.ru/" target="_blank" rel="noopener" title="Архив Пранков">
+                    <img src="assets/icons/aero/movie.png" alt="">
+                    <span>Архив Пранков</span>
+                  </a>
+                  <a class="twitch-chip" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener" title="Диор Армани">
+                    <img src="assets/icons/social/telegram.png" alt="">
+                    <span>Диор Армани</span>
+                  </a>
+                  <a class="twitch-chip" href="https://t.me/bombastertg" target="_blank" rel="noopener" title="Новости Бомбастер">
+                    <img src="assets/icons/aero/clock.png" alt="">
+                    <span>Бомбастер</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
         <li class="item">
           <a class="item__row" href="https://t.me/toxiclegion" target="_blank" rel="noopener">
@@ -1074,122 +1150,6 @@
       </ul>
     </section>
   </main>
-
-  <!-- Twitch Drawer: Стрим и медиа Влада Мафани (mafanyaking) -->
-  <div class="twitch-backdrop" id="twitchBackdrop" aria-hidden="true"></div>
-  <aside class="twitch-drawer" id="twitchDrawer" aria-hidden="true" role="dialog" aria-label="Стрим Влада Мафани">
-    <div class="twitch-drawer__header">
-      <div class="twitch-drawer__user">
-        <div class="twitch-drawer__avatar-wrap">
-          <img class="twitch-drawer__avatar" id="twitchDrawerAvatar" src="assets/photos/twitch/mafanya.png" alt="Влад Мафаня">
-          <span class="twitch-drawer__avatar-pulse"></span>
-        </div>
-        <div class="twitch-drawer__user-meta">
-          <div class="twitch-drawer__name">
-            <strong>Влад Мафаня</strong>
-            <span class="twitch-verified" title="Подтвержденный стример">✓</span>
-          </div>
-          <div class="twitch-drawer__handle">
-            <span>mafanyaking</span>
-            <span class="twitch-drawer__followers" id="twitchFollowersCount">· 548k фолловеров</span>
-          </div>
-        </div>
-      </div>
-      <div class="twitch-drawer__actions">
-        <span class="twitch-status-pill is-offline" id="twitchStatusPill">
-          <span class="twitch-status-dot"></span>
-          <span class="twitch-status-label" id="twitchStatusLabel">ОФФЛАЙН</span>
-        </span>
-        <button class="twitch-drawer__close" id="twitchDrawerClose" type="button" aria-label="Закрыть стрим">✕</button>
-      </div>
-    </div>
-
-    <div class="twitch-drawer__body">
-      <!-- Контейнер плеера 16:9 с 3D-наклоном и неоновым свечением -->
-      <div class="twitch-drawer__player-wrap aero-tilt" id="twitchPlayerWrap">
-        <iframe 
-          id="twitchIframe"
-          class="twitch-drawer__iframe"
-          title="Стрим mafanyaking"
-          src=""
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <!-- Блок информации о стриме / Оффлайн-уведомление -->
-      <div class="twitch-drawer__info-card" id="twitchInfoCard">
-        <div class="twitch-drawer__live-details" id="twitchLiveDetails" style="display: none;">
-          <div class="twitch-drawer__stream-title" id="twitchStreamTitle">Прямой эфир Влада Мафани</div>
-          <div class="twitch-drawer__stream-meta">
-            <span class="twitch-meta-item" id="twitchStreamCategory">🎮 Общение</span>
-            <span class="twitch-meta-item" id="twitchStreamViewers">👥 0 зрителей</span>
-            <span class="twitch-meta-item" id="twitchStreamUptime">⏱ 0:00</span>
-          </div>
-        </div>
-
-        <div class="twitch-drawer__offline-details" id="twitchOfflineDetails">
-          <div class="twitch-offline-badge-row">
-            <span class="twitch-offline-icon">📡</span>
-            <div class="twitch-offline-text">
-              <strong class="twitch-offline-heading">Стрим сейчас не идет</strong>
-              <p class="twitch-offline-desc" id="twitchLastBroadcastText">Влад сейчас оффлайн. Вы можете посмотреть записи прошлых стримов, клипы или подписаться на уведомления в Telegram.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Главная кнопка перехода на канал -->
-      <a class="twitch-drawer__cta-btn" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">
-        <span class="twitch-cta-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
-          </svg>
-        </span>
-        <span>Перейти на Twitch-канал Влада ↗</span>
-      </a>
-
-      <!-- Секция быстрых ссылок (как в XMB) -->
-      <div class="twitch-drawer__section-title">Медиа-ресурсы Влада</div>
-      <div class="twitch-drawer__links-grid">
-        <a class="twitch-quicklink aero-tilt" href="https://t.me/toxiclegion" target="_blank" rel="noopener">
-          <div class="twitch-quicklink__icon"><img src="assets/icons/social/telegram.png" alt="Telegram"></div>
-          <div class="twitch-quicklink__text">
-            <span class="twitch-quicklink__title">ТГК Мафани (Toxic Legion)</span>
-            <span class="twitch-quicklink__sub">t.me/toxiclegion · Официальный телеграм</span>
-          </div>
-          <span class="twitch-quicklink__arrow">↗</span>
-        </a>
-
-        <a class="twitch-quicklink aero-tilt" href="https://mafanya.ru/" target="_blank" rel="noopener">
-          <div class="twitch-quicklink__icon"><img src="assets/icons/aero/movie.png" alt="Архив"></div>
-          <div class="twitch-quicklink__text">
-            <span class="twitch-quicklink__title">Сайт Мафани (Архив Пранков)</span>
-            <span class="twitch-quicklink__sub">mafanya.ru · Все легендарные проекты</span>
-          </div>
-          <span class="twitch-quicklink__arrow">↗</span>
-        </a>
-
-        <a class="twitch-quicklink aero-tilt" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener">
-          <div class="twitch-quicklink__icon"><img src="assets/icons/social/telegram.png" alt="Диор Армани"></div>
-          <div class="twitch-quicklink__text">
-            <span class="twitch-quicklink__title">Влад Клёвые Тачки (Диор Армани)</span>
-            <span class="twitch-quicklink__sub">t.me/VLADAPRMANI · Канал Влада</span>
-          </div>
-          <span class="twitch-quicklink__arrow">↗</span>
-        </a>
-
-        <a class="twitch-quicklink aero-tilt" href="https://t.me/bombastertg" target="_blank" rel="noopener">
-          <div class="twitch-quicklink__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></div>
-          <div class="twitch-quicklink__text">
-            <span class="twitch-quicklink__title">Новости по Мафане (Бомбастер)</span>
-            <span class="twitch-quicklink__sub">t.me/bombastertg · Нарезки и анонсы</span>
-          </div>
-          <span class="twitch-quicklink__arrow">↗</span>
-        </a>
-      </div>
-    </div>
-  </aside>
 
   <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Просмотр фото" hidden>
     <img class="viewer__img" id="viewerImg" alt="">
