@@ -1,20 +1,23 @@
 {
-  "updated_at": "2026-09-25T19:18:00+03:00",
+  "updated_at": "2026-09-29T10:58:27.165Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
+  "is_online": false,
+  "is_playing_now": false,
   "game": {
-    "title": "Dark Souls II: Scholar of the First Sin",
+    "title": "Grand Theft Auto V",
     "platform": "PS4",
     "played_on": "PS5",
-    "image": "assets/photos/souls/ds2-last-played-hd.jpg",
-    "progress_percent": 22,
+    "image": "https://psnobj.prod.dl.playstation.net/psnobj/NPWR21647_00/26efdb55-9e6d-4de9-943f-6b95768ae607.png",
+    "progress_percent": 17,
     "trophies_earned": 12,
-    "trophies_total": 38,
-    "bronze": 8,
-    "silver": 4,
-    "gold": 0,
+    "trophies_total": 78,
+    "rank": "D",
+    "bronze": 9,
+    "silver": 2,
+    "gold": 1,
     "platinum": 0,
-    "last_played_text": "22 сентября 2026",
-    "last_trophy": "Brightstone Bonfire"
+    "last_played_text": "29 сентября 2026",
+    "play_duration": ""
   }
 }
