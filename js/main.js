@@ -1072,6 +1072,11 @@
           banner.alt = title;
         }
 
+        const bannerBg = $('.game-banner-bg', latestItem);
+        if (bannerBg && imgUrl) {
+          bannerBg.src = imgUrl;
+        }
+
         const overlayTag = $('.ps5-latest-overlay-tag', latestItem);
         if (overlayTag) {
           overlayTag.textContent = isPlaying ? '🟢 СЕЙЧАС В ИГРЕ · PLAYSTATION 5' : 'PLAYSTATION 5 · ПОСЛЕДНИЙ ЗАПУСК';
@@ -1139,6 +1144,22 @@
         if (window.xmbGoto) window.xmbGoto(1, 1);
       });
     }
+
+    // Автоматическое создание красивого эмбиент-фона для всех баннеров игр
+    const initAmbientGameBanners = () => {
+      $$('.game-banner-link').forEach(link => {
+        const img = $('img.game-banner-img', link);
+        if (img && !$('.game-banner-bg', link) && !img.src.includes('brawl-stars-banner') && !img.src.includes('ds2-majula') && !img.src.includes('terminal')) {
+          const bg = document.createElement('img');
+          bg.className = 'game-banner-bg';
+          bg.src = img.src;
+          bg.alt = '';
+          bg.setAttribute('aria-hidden', 'true');
+          link.prepend(bg);
+        }
+      });
+    };
+    initAmbientGameBanners();
 
     // 1. Быстро отображаем сохраненный кэш, если он есть
     try {

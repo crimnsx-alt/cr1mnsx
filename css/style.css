@@ -599,73 +599,105 @@ a { color: inherit; }
 }
 
 /* 1. Верхняя карточка: Hero Game Card */
+/* 1. Верхняя карточка: Hero Game Card (PlayStation 5 Activity Card) */
 .pgc-card {
+  position: relative;
   display: block;
-  background: rgba(13, 20, 35, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(135deg, rgba(16, 26, 46, 0.88) 0%, rgba(8, 14, 28, 0.94) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 14px;
   overflow: hidden;
   text-decoration: none;
   color: #fff;
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   margin-bottom: 8px;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .pgc-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(0, 168, 255, 0.45);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(0, 140, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: rgba(0, 168, 255, 0.55);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(0, 140, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.pgc-banner {
-  position: relative;
-  width: 100%;
-  height: 114px;
+.pgc-backdrop {
+  position: absolute;
+  inset: -15px;
   overflow: hidden;
-  background: #050a14;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.pgc-banner-img {
+.pgc-backdrop-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  filter: blur(24px) saturate(220%) brightness(0.28);
+  transform: scale(1.2);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.pgc-card:hover .pgc-backdrop-img {
+  filter: blur(20px) saturate(240%) brightness(0.35);
+  transform: scale(1.25);
+}
+
+.pgc-backdrop-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(0, 112, 209, 0.2), transparent 70%),
+              linear-gradient(180deg, rgba(10, 16, 30, 0.6) 0%, rgba(5, 10, 20, 0.85) 100%);
+}
+
+.pgc-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.pgc-cover-box {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 12px rgba(0, 140, 255, 0.25);
+  background: #000;
+}
+
+.pgc-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
   transition: transform 0.35s ease;
 }
 
-.pgc-card:hover .pgc-banner-img {
-  transform: scale(1.04);
+.pgc-card:hover .pgc-cover {
+  transform: scale(1.06);
 }
 
-.pgc-strip {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  background: linear-gradient(180deg, rgba(10, 16, 28, 0.75) 0%, rgba(6, 10, 18, 0.9) 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.pgc-thumb-box {
-  width: 40px;
-  height: 40px;
-  border-radius: 7px;
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  background: #000;
-}
-
-.pgc-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.pgc-cover-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: linear-gradient(135deg, #00439c 0%, #002266 100%);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid rgba(140, 200, 255, 0.5);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.1;
 }
 
 .pgc-details {
@@ -673,7 +705,7 @@ a { color: inherit; }
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .pgc-top-line {
@@ -683,14 +715,27 @@ a { color: inherit; }
 }
 
 .pgc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 8.5px;
   font-weight: 700;
-  color: #8da2c0;
+  color: #93c5fd;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pgc-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+  flex-shrink: 0;
 }
 
 .pgc-ps-icon {
@@ -701,40 +746,41 @@ a { color: inherit; }
 }
 
 .pgc-title {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
   color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  letter-spacing: 0.2px;
 }
 
 .pgc-bottom-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 .pgc-bar-track {
   flex: 1;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .pgc-bar-fill {
   height: 100%;
   background: linear-gradient(90deg, #00d2ff, #0070d1);
-  border-radius: 2px;
-  box-shadow: 0 0 6px rgba(0, 210, 255, 0.6);
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(0, 210, 255, 0.7);
 }
 
 .pgc-progress-text {
-  font-size: 9px;
-  font-weight: 600;
+  font-size: 9.5px;
+  font-weight: 700;
   color: #cbd5e1;
   white-space: nowrap;
 }
@@ -1018,30 +1064,65 @@ a { color: inherit; }
 
 .psn-card-link,
 .game-banner-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 11px;
   overflow: hidden;
   line-height: 0;
   position: relative;
   text-decoration: none;
-  background: #0b111e;
+  background: #080e1a;
+  aspect-ratio: 800 / 185;
+}
+
+.game-banner-bg {
+  position: absolute;
+  inset: -15px;
+  width: calc(100% + 30px);
+  height: calc(100% + 30px);
+  object-fit: cover;
+  filter: blur(28px) saturate(220%) brightness(0.28);
+  transform: scale(1.2);
+  pointer-events: none;
+  z-index: 1;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.game-banner-widget:hover .game-banner-bg {
+  filter: blur(22px) saturate(240%) brightness(0.35);
+  transform: scale(1.25);
 }
 
 .psn-card-img,
 .game-banner-img {
+  position: relative;
+  z-index: 2;
   display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 800 / 180;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
   border-radius: 11px;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .4));
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, .8));
   transition: transform .35s ease, filter .35s ease;
 }
 
 .game-banner-widget:hover .game-banner-img {
   transform: scale(1.03);
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .6)) brightness(1.08);
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .9)) brightness(1.06);
+}
+
+/* Wide banners naturally cover whole area */
+.game-banner-widget--brawl .game-banner-img,
+.psn-card-img,
+.game-banner-img[src*="brawl-stars-banner"],
+.game-banner-img[src*="ds2-majula"],
+.game-banner-img[src*="terminal"] {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: cover !important;
 }
 
 .game-banner-overlay {
@@ -1413,13 +1494,13 @@ a { color: inherit; }
 
 .ps5-lp__cover-wrap {
   position: relative;
-  width: 76px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   flex: none;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 112, 209, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(0, 112, 209, 0.3);
   background: #050a14;
 }
 
