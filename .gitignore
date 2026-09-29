@@ -4,6 +4,7 @@ psn_config.json
 .env.*
 *.token
 
-# System files
+# System & dependencies
 .DS_Store
 Thumbs.db
+node_modules/

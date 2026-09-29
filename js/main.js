@@ -1007,8 +1007,7 @@
   /* ---------- PlayStation 5: Синхронизация последней запущенной игры ---------- */
   const initPS5LastPlayedSync = () => {
     const PSN_USER = 'Cr1mnsx';
-    const CACHE_KEY = 'ps5_last_played_cr1mnsx';
-    const CACHE_TTL = 20 * 60 * 1000; // 20 минут
+    const CACHE_KEY = 'ps5_last_played_cr1mnsx_v2';
 
     const elTitles = $$('.ps5-last-game-title');
     const elImgs = $$('.ps5-last-game-img');
@@ -1018,66 +1017,172 @@
     const elBars = $$('.ps5-last-game-bar');
 
     const updateDOM = (game) => {
-      if (!game) return;
-      if (game.title) {
-        elTitles.forEach(el => { el.textContent = game.title; });
+      if (!game || !game.title) return;
+
+      const title = game.title;
+      const imgUrl = game.image || game.thumb || game.banner;
+      const platform = game.platform || 'PS5';
+      const pct = game.progress_percent !== undefined ? Math.min(100, Math.max(0, Number(game.progress_percent))) : 0;
+      const earned = game.trophies_earned !== undefined ? Number(game.trophies_earned) : 0;
+      const total = game.trophies_total !== undefined ? Number(game.trophies_total) : 0;
+      const rank = game.rank || 'D';
+      const lastPlayedText = game.last_played_text || game.last_played || '29 сентября 2026';
+      const isPlaying = !!game.is_playing_now;
+
+      // 1. Шапка: кнопка-плашка PS5
+      const topPillText = $('#ps5TopPillText');
+      const topPillDot = $('#ps5TopPillDot');
+      if (topPillText) {
+        topPillText.textContent = isPlaying ? `🟢 В игре: ${title}` : `PS5: ${title}`;
       }
-      if (game.image) {
+      if (topPillDot) {
+        topPillDot.classList.toggle('is-playing', isPlaying);
+      }
+
+      // 2. Подзаголовок элемента PlayStation Network в меню игр
+      const psnSub = $('#psnHeaderSub');
+      if (psnSub) {
+        psnSub.textContent = isPlaying
+          ? `🟢 В игре прямо сейчас на PS5: ${title}`
+          : `🎮 Последний запуск: ${title} (${lastPlayedText}) · 647 трофеев`;
+      }
+
+      // 3. Отдельный пункт в списке игр: #itemPs5Latest
+      const latestItem = $('#itemPs5Latest');
+      if (latestItem) {
+        const t = $('.ps5-latest-title', latestItem);
+        if (t) t.textContent = title;
+
+        const sub = $('.ps5-latest-sub', latestItem);
+        if (sub) {
+          sub.textContent = isPlaying
+            ? `🟢 В игре прямо сейчас на PS5 · ${pct}% трофеев`
+            : `🎮 Последний запуск на PS5 · ${lastPlayedText} · ${pct}% трофеев`;
+        }
+
+        const thumb = $('.ps5-latest-thumb', latestItem);
+        if (thumb && imgUrl) {
+          thumb.src = imgUrl;
+          thumb.alt = title;
+        }
+
+        const banner = $('.ps5-latest-banner', latestItem);
+        if (banner && imgUrl) {
+          banner.src = imgUrl;
+          banner.alt = title;
+        }
+
+        const overlayTag = $('.ps5-latest-overlay-tag', latestItem);
+        if (overlayTag) {
+          overlayTag.textContent = isPlaying ? '🟢 СЕЙЧАС В ИГРЕ · PLAYSTATION 5' : 'PLAYSTATION 5 · ПОСЛЕДНИЙ ЗАПУСК';
+        }
+
+        const badge = $('.ps5-latest-badge', latestItem);
+        if (badge) {
+          badge.textContent = isPlaying ? '🟢 В игре' : 'Последний запуск';
+        }
+
+        const plat = $('.ps5-latest-platform', latestItem);
+        if (plat) plat.textContent = platform;
+
+        const note = $('.ps5-latest-note', latestItem);
+        if (note) {
+          note.textContent = isPlaying
+            ? `Прямо сейчас запущено на консоли PlayStation 5. Прогресс трофеев: ${pct}% (${earned}/${total}).`
+            : `Запущено на консоли PlayStation 5. Дата запуска: ${lastPlayedText}. Прогресс трофеев: ${pct}% (${earned}/${total}).`;
+        }
+
+        const progPill = $('.ps5-latest-progress-pill', latestItem);
+        if (progPill) {
+          progPill.innerHTML = `<span class="stat-trophy">🏆</span> <b>${pct}%</b> трофеев (${earned}/${total})`;
+        }
+
+        const rankPill = $('.ps5-latest-rank-pill', latestItem);
+        if (rankPill) {
+          rankPill.innerHTML = `<span class="stat-star">⭐</span> <b>${rank}</b> Rank`;
+        }
+
+        const datePill = $('.ps5-latest-date-pill', latestItem);
+        if (datePill) {
+          datePill.innerHTML = `<span class="stat-star">⏱️</span> <b>${lastPlayedText}</b>`;
+        }
+      }
+
+      // 4. Обновление всех общих виджетов (карточка в профиле #cr1mnsx и виджет в панели PSN)
+      elTitles.forEach(el => { el.textContent = title; });
+      if (imgUrl) {
         elImgs.forEach(el => {
-          el.src = game.image;
-          el.alt = game.title || 'PS5 Last Played Game';
+          el.src = imgUrl;
+          el.alt = title;
         });
       }
-      if (game.platform) {
-        elPlatforms.forEach(el => { el.textContent = game.platform; });
-      }
-      if (game.is_playing_now) {
-        elStatuses.forEach(el => {
+      elPlatforms.forEach(el => { el.textContent = platform; });
+      elStatuses.forEach(el => {
+        if (isPlaying) {
           el.innerHTML = '<span style="color:#4ade80; font-weight:700;">🟢 В ИГРЕ СЕЙЧАС НА PLAYSTATION 5</span>';
-        });
-      } else if (game.last_played_text) {
-        elStatuses.forEach(el => {
-          el.textContent = `Последний запуск на PlayStation 5 · ${game.last_played_text}`;
-        });
-      }
-      if (game.progress_percent !== undefined) {
-        const pct = Math.min(100, Math.max(0, Number(game.progress_percent)));
-        elBars.forEach(el => { el.style.width = `${pct}%`; });
-        const earned = game.trophies_earned;
-        const total = game.trophies_total;
-        const extraRank = game.rank ? ` · ${game.rank} Rank` : '';
-        const progressStr = (earned !== undefined && total !== undefined && total > 0)
-          ? `🏆 ${earned}/${total} трофеев (${pct}%)${extraRank}`
-          : `🏆 Прогресс: ${pct}%${extraRank}`;
-        elProgresses.forEach(el => { el.textContent = progressStr; });
-      }
+        } else {
+          el.textContent = `Последний запуск на PlayStation 5 · ${lastPlayedText}`;
+        }
+      });
+      elBars.forEach(el => { el.style.width = `${pct}%`; });
+      const extraRank = rank ? ` · ${rank} Rank` : '';
+      const progressStr = (earned > 0 && total > 0)
+        ? `🏆 ${earned}/${total} трофеев (${pct}%)${extraRank}`
+        : `🏆 Прогресс: ${pct}%${extraRank}`;
+      elProgresses.forEach(el => { el.textContent = progressStr; });
     };
 
-    // 1. Проверяем кэш в localStorage
+    // Клик по плашке в шапке переносит в категорию Games к последней игре
+    const topPill = $('#ps5TopPill');
+    if (topPill) {
+      topPill.addEventListener('click', () => {
+        if (window.xmbGoto) window.xmbGoto(1, 1);
+      });
+    }
+
+    // 1. Быстро отображаем сохраненный кэш, если он есть
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
-        const { data, timestamp } = JSON.parse(cached);
-        if (data && (Date.now() - timestamp < CACHE_TTL)) {
-          updateDOM(data);
-          return;
-        }
+        const { data } = JSON.parse(cached);
+        if (data) updateDOM(data);
       }
     } catch {}
 
-    // 2. Проверяем локальные JSON с данными PSN игр
+    // 2. Проверяем локальные JSON с данными PSN игр (с обходом HTTP-кэша)
     const loadLocalPSN = async () => {
       const endpoints = ['data/psn_recent.json', 'data/psn_games.json', 'assets/data/psn_games.json'];
       for (const ep of endpoints) {
         try {
-          const res = await fetch(ep);
+          const res = await fetch(`${ep}?_=${Date.now()}`, { cache: 'no-store' });
           if (res.ok) {
             const json = await res.json();
-            const game = json.last_played || (Array.isArray(json.games) ? json.games[0] : null) || json.game;
-            if (game) {
-              if (json.is_playing_now !== undefined) {
-                game.is_playing_now = json.is_playing_now;
+            let rawGame = null;
+            let isPlayingNow = false;
+
+            if (json && typeof json === 'object') {
+              if (Array.isArray(json)) {
+                rawGame = json[0];
+                isPlayingNow = rawGame?.status?.includes('Играет прямо сейчас') || false;
+              } else {
+                rawGame = json.game || json.last_played || (Array.isArray(json.games) ? json.games[0] : null);
+                isPlayingNow = json.is_playing_now !== undefined ? !!json.is_playing_now : (rawGame?.status?.includes('Играет прямо сейчас') || false);
               }
+            }
+
+            if (rawGame && rawGame.title) {
+              const game = {
+                title: rawGame.title,
+                image: rawGame.image || rawGame.thumb || rawGame.banner,
+                platform: rawGame.platform || 'PS5',
+                progress_percent: rawGame.progress_percent !== undefined ? rawGame.progress_percent : (rawGame.progress_pct !== undefined ? rawGame.progress_pct : 0),
+                trophies_earned: rawGame.trophies_earned !== undefined ? rawGame.trophies_earned : (rawGame.trophy_breakdown ? (rawGame.trophy_breakdown.bronze + rawGame.trophy_breakdown.silver + rawGame.trophy_breakdown.gold + rawGame.trophy_breakdown.platinum) : 0),
+                trophies_total: rawGame.trophies_total !== undefined ? rawGame.trophies_total : 0,
+                rank: rawGame.rank || 'D',
+                last_played_text: rawGame.last_played_text || rawGame.last_played || '29 сентября 2026',
+                is_playing_now: isPlayingNow
+              };
+
               updateDOM(game);
               try {
                 localStorage.setItem(CACHE_KEY, JSON.stringify({ data: game, timestamp: Date.now() }));
@@ -1089,51 +1194,23 @@
       }
       return false;
     };
+
+    // Запускаем немедленно и ставим периодический опрос каждые 30 секунд
     loadLocalPSN();
+    setInterval(loadLocalPSN, 30000);
 
-    // 3. Парсер HTML страницы PSN.GG / PSNProfiles
-    const parsePSNHTML = (html) => {
-      try {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const gameRow = doc.querySelector('.game-row, .library-item, #gamesTable tr, tr.game');
-        if (!gameRow) return null;
-
-        const titleEl = gameRow.querySelector('.title, .game-title, a[href*="/game/"]');
-        const imgEl = gameRow.querySelector('img.game, img.cover, img');
-        const platEl = gameRow.querySelector('.platform, .badge-platform, span[class*="platform"]');
-        const progressEl = gameRow.querySelector('.progress-bar span, .percentage, .trophy-progress');
-        const dateEl = gameRow.querySelector('.small-info, .last-played, .date');
-
-        if (!titleEl && !imgEl) return null;
-
-        const title = titleEl ? titleEl.textContent.trim() : '';
-        const image = imgEl ? (imgEl.getAttribute('data-src') || imgEl.src) : '';
-        const platform = platEl ? platEl.textContent.trim() : 'PS5';
-        const progressMatch = progressEl ? progressEl.textContent.match(/(\d+)%/) : null;
-        const percent = progressMatch ? parseInt(progressMatch[1], 10) : undefined;
-        const dateText = dateEl ? dateEl.textContent.trim() : '';
-
-        return {
-          title,
-          image,
-          platform,
-          progress_percent: percent,
-          last_played_text: dateText
-        };
-      } catch {
-        return null;
-      }
-    };
-
-    // 4. Запрос через каскад CORS-прокси
+    // 3. Fallback: парсинг профиля через CORS-прокси (только если локальные файлы недоступны)
     const targetUrl = `https://psn.gg/profile/${PSN_USER}`;
     const proxyList = [
       `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-      `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
     ];
 
     const fetchViaProxies = async () => {
+      // Запускаем только если loadLocalPSN не дал результата
+      const loaded = await loadLocalPSN();
+      if (loaded) return;
+
       for (const pUrl of proxyList) {
         try {
           const controller = new AbortController();
@@ -1142,18 +1219,24 @@
           clearTimeout(timeoutId);
           if (resp.ok) {
             const html = await resp.text();
-            const gameData = parsePSNHTML(html);
-            if (gameData && gameData.title) {
+            const doc = new DOMParser().parseFromString(html, 'text/html');
+            const gameRow = doc.querySelector('.game-row, .library-item, #gamesTable tr, tr.game');
+            if (!gameRow) continue;
+
+            const titleEl = gameRow.querySelector('.title, .game-title, a[href*="/game/"]');
+            const imgEl = gameRow.querySelector('img.game, img.cover, img');
+            if (titleEl) {
+              const gameData = {
+                title: titleEl.textContent.trim(),
+                image: imgEl ? (imgEl.getAttribute('data-src') || imgEl.src) : '',
+                platform: 'PS5',
+                last_played_text: 'Недавно'
+              };
               updateDOM(gameData);
-              try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ data: gameData, timestamp: Date.now() }));
-              } catch {}
               return;
             }
           }
-        } catch {
-          // тихо пропускаем таймауты
-        }
+        } catch {}
       }
     };
 

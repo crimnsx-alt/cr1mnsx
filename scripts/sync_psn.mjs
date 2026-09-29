@@ -171,7 +171,10 @@ async function main() {
 
     // Get best high-res cover art
     let coverUrl = "";
-    if (g.media?.images) {
+    if (g.image?.url) {
+      coverUrl = g.image.url;
+    }
+    if (!coverUrl && g.media?.images) {
       const coverTypes = ["GAMEHUB_COVER_ART", "MASTER", "FOUR_BY_THREE_BANNER", "PORTRAIT_BANNER"];
       for (const ct of coverTypes) {
         const found = g.media.images.find(img => img.type === ct);

@@ -45,6 +45,10 @@
       <span class="visitor-pill__dot"></span>
       <span class="visitor-pill__val"><span class="visitor-pill__icon">👥</span> <b id="topbarVisitsCount">346</b></span>
     </div>
+    <div class="ps5-top-pill" id="ps5TopPill" title="Текущий статус PlayStation 5 Cr1mnsx (нажмите для перехода к игре)">
+      <span class="ps5-top-pill__dot" id="ps5TopPillDot"></span>
+      <span class="ps5-top-pill__text" id="ps5TopPillText">🎮 PS5: GTA V</span>
+    </div>
     <button class="sound-toggle" id="soundToggle" type="button" aria-label="Звуки PS3" title="Звуки PS3 XMB (Вкл / Выкл)">🔊</button>
     <img class="baro__gif" src="assets/gif/thermometer.gif" alt="">
   </div>
@@ -91,25 +95,25 @@
             <!-- Верхняя карточка: Последняя игра на PS5 -->
             <a class="pgc-card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
               <div class="pgc-banner">
-                <img class="pgc-banner-img ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II: Scholar of the First Sin">
+                <img class="pgc-banner-img ps5-last-game-img" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V">
               </div>
               <div class="pgc-strip">
                 <div class="pgc-thumb-box">
-                  <img class="pgc-thumb ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II">
+                  <img class="pgc-thumb ps5-last-game-img" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V">
                 </div>
                 <div class="pgc-details">
                   <div class="pgc-top-line">
-                    <span class="pgc-tag ps5-last-game-status">ПОСЛЕДНИЙ ЗАПУСК НА PLAYSTATION 5...</span>
+                    <span class="pgc-tag ps5-last-game-status">ПОСЛЕДНИЙ ЗАПУСК НА PLAYSTATION 5 · 29 СЕНТЯБРЯ 2026</span>
                     <svg class="pgc-ps-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
                       <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
                     </svg>
                   </div>
-                  <div class="pgc-title ps5-last-game-title" id="ps5-last-game-title">Dark Souls II: Scholar of the First Sin</div>
+                  <div class="pgc-title ps5-last-game-title" id="ps5-last-game-title">Grand Theft Auto V</div>
                   <div class="pgc-bottom-row">
                     <div class="pgc-bar-track">
-                      <div class="pgc-bar-fill ps5-last-game-bar" style="width: 22%;"></div>
+                      <div class="pgc-bar-fill ps5-last-game-bar" style="width: 17%;"></div>
                     </div>
-                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress">🏆 12/38 трофеев (22%)</span>
+                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress">🏆 12/78 трофеев (17%) · D Rank</span>
                   </div>
                 </div>
               </div>
@@ -251,12 +255,12 @@
     <section class="cat" id="souls" data-icon="assets/icons/aero/game-pad.png">
       <h2 class="cat__label">Games</h2>
       <ul class="cat__items">
-        <li class="item item--psn">
+        <li class="item item--psn" id="itemPsnProfile">
           <a class="item__row" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
             <span class="item__icon item__icon--photo"><img src="assets/icons/ps-gothic.jpg" alt="PlayStation Network" style="border-radius: 6px;"></span>
             <span class="item__text">
               <span class="item__title">PlayStation Network · Профиль Cr1mnsx</span>
-              <span class="item__sub">Карточка игрока «Терминал» · 647 трофеев, 2 платины, LVL 186 · psn.gg</span>
+              <span class="item__sub" id="psnHeaderSub">🎮 Последний запуск: Grand Theft Auto V (29 сентября 2026) · 647 трофеев</span>
             </span>
           </a>
           <div class="item__panel item__panel--psn">
@@ -276,20 +280,20 @@
               <!-- 🎮 Виджет: Последняя активность на PS5 -->
               <a class="ps5-last-played-widget ps5-last-played-widget--card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
                 <div class="ps5-lp__cover-wrap">
-                  <img class="ps5-lp__cover ps5-last-game-img" src="assets/photos/souls/ds2-last-played-hd.jpg" alt="Dark Souls II: Scholar of the First Sin">
-                  <span class="ps5-lp__plat-badge ps5-last-game-platform">PS4</span>
+                  <img class="ps5-lp__cover ps5-last-game-img" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V">
+                  <span class="ps5-lp__plat-badge ps5-last-game-platform">PS5</span>
                 </div>
                 <div class="ps5-lp__content">
                   <div class="ps5-lp__status-row">
                     <span class="ps5-lp__pulse-dot"></span>
-                    <span class="ps5-lp__status-text ps5-last-game-status">Последний запуск на PlayStation 5 · 22 сент.</span>
+                    <span class="ps5-lp__status-text ps5-last-game-status">Последний запуск на PlayStation 5 · 29 сентября 2026</span>
                   </div>
-                  <strong class="ps5-lp__title ps5-last-game-title">Dark Souls II: Scholar of the First Sin</strong>
+                  <strong class="ps5-lp__title ps5-last-game-title">Grand Theft Auto V</strong>
                   <div class="ps5-lp__progress-wrap">
                     <div class="ps5-lp__progress-bar">
-                      <div class="ps5-lp__progress-fill ps5-last-game-bar" style="width: 22%;"></div>
+                      <div class="ps5-lp__progress-fill ps5-last-game-bar" style="width: 17%;"></div>
                     </div>
-                    <span class="ps5-lp__progress-text ps5-last-game-progress">🏆 12/38 трофеев (22%) · D Rank</span>
+                    <span class="ps5-lp__progress-text ps5-last-game-progress">🏆 12/78 трофеев (17%) · D Rank</span>
                   </div>
                 </div>
                 <span class="ps5-lp__arrow">↗</span>
@@ -306,6 +310,52 @@
                 <span>Открыть профиль на PSN.GG</span>
                 <span class="psn-btn-arrow">↗</span>
               </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- 🎮 1. Последняя запущенная игра на PS5: Grand Theft Auto V -->
+        <li class="item item--photo item--ps5-latest" id="itemPs5Latest">
+          <a class="item__row" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener">
+            <span class="item__icon item__icon--photo">
+              <img class="ps5-latest-thumb" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V" style="border-radius: 6px;">
+            </span>
+            <span class="item__text">
+              <span class="item__title ps5-latest-title">Grand Theft Auto V</span>
+              <span class="item__sub ps5-latest-sub">🎮 Последний запуск на PS5 · 29 сентября 2026 · 17% трофеев</span>
+            </span>
+          </a>
+          <div class="item__panel item__panel--psn">
+            <div class="game-banner-widget">
+              <a class="game-banner-link" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи GTA V">
+                <img class="game-banner-img ps5-latest-banner" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V" width="800" height="180" style="object-fit: cover;">
+                <div class="game-banner-overlay">
+                  <span class="game-banner-tag ps5-latest-overlay-tag">LOS SANTOS · PLAYSTATION 5</span>
+                </div>
+              </a>
+            </div>
+            <div class="psn-meta">
+              <div class="psn-meta__header">
+                <span class="psn-badge ps5-latest-platform">PS5</span>
+                <span class="psn-badge psn-badge--active ps5-latest-badge">Последний запуск</span>
+                <span class="psn-meta__title ps5-latest-title">Grand Theft Auto V</span>
+              </div>
+              <p class="panel__note ps5-latest-note">Легендарный криминальный блокбастер Rockstar Games. Запущено на консоли PlayStation 5. Прогресс трофеев: 17% (12/78).</p>
+              <div class="psn-stats-grid">
+                <div class="stat-pill stat-pill--gold ps5-latest-progress-pill"><span class="stat-trophy">🏆</span> <b>17%</b> трофеев (12/78)</div>
+                <div class="stat-pill stat-pill--silver ps5-latest-rank-pill"><span class="stat-star">⭐</span> <b>D</b> Rank</div>
+                <div class="stat-pill stat-pill--bronze ps5-latest-date-pill"><span class="stat-star">⏱️</span> <b>29 сент. 2026</b></div>
+              </div>
+              <div class="bs-action-links" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <a class="psn-btn-profile" style="flex: 1; min-width: 170px;" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener">
+                  <span>Трофеи на PSNProfiles</span>
+                  <span class="psn-btn-arrow">↗</span>
+                </a>
+                <a class="psn-btn-profile psn-btn-profile--psn" style="flex: 1; min-width: 170px;" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
+                  <span>Профиль на PSN.GG</span>
+                  <span class="psn-btn-arrow">↗</span>
+                </a>
+              </div>
             </div>
           </div>
         </li>

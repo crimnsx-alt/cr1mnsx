@@ -1691,6 +1691,54 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   font-size: 13px;
 }
 
+/* ---------- Плашка статуса PS5 в шапке сайта ---------- */
+.ps5-top-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, rgba(14, 43, 82, .9) 0%, rgba(5, 18, 40, .95) 100%);
+  border: 1px solid rgba(96, 165, 250, .4);
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.ps5-top-pill:hover {
+  transform: translateY(-1px);
+  border-color: rgba(96, 165, 250, .8);
+  box-shadow: 0 6px 18px rgba(0, 112, 209, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+}
+.ps5-top-pill__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  transition: background .3s, box-shadow .3s;
+  flex-shrink: 0;
+}
+.ps5-top-pill__dot.is-playing {
+  background: #22c55e !important;
+  box-shadow: 0 0 10px #22c55e !important;
+  animation: pulseGreen 1.6s infinite ease-in-out;
+}
+.ps5-top-pill__text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ---------- Карточка и панель статистики посетителей (#info) ---------- */
 .icon-tile--stats {
   background: linear-gradient(180deg, #0284c7 0%, #0369a1 60%, #075985 100%);
@@ -2243,6 +2291,14 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   }
   .visitor-pill__val {
     font-size: 10px !important;
+  }
+  .ps5-top-pill {
+    padding: 4px 10px !important;
+    font-size: 10px !important;
+  }
+  .ps5-top-pill__text {
+    font-size: 10px !important;
+    max-width: 105px !important;
   }
 
   .bgm-pill {
