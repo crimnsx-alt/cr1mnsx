@@ -33,18 +33,12 @@
       });
   }
 
-  /* ---------- Фон: видео аквариума ---------- */
+  /* ---------- Фон: видео аквариума (отключено в пользу лёгкого Canvas 60fps) ---------- */
   const bgVideo = $('#bgVideo');
-  if (bgVideo && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const small = matchMedia('(max-width: 900px)').matches || Boolean(navigator.connection && navigator.connection.saveData);
-    // H.264 MP4 играет везде; на телефонах и при экономии трафика — лёгкая версия
-    bgVideo.src = `assets/video/bg-${small ? '540p' : '720p'}.mp4`;
-    bgVideo.muted = true;
-    bgVideo.play().catch(() => {}); // если автозапуск запрещён, останется кадр-постер
-    // браузер ставит фоновое видео на паузу, пока вкладка скрыта, — при возвращении продолжаем
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden && bgVideo.paused) bgVideo.play().catch(() => {});
-    });
+  if (bgVideo) {
+    bgVideo.pause();
+    bgVideo.removeAttribute('src');
+    bgVideo.style.display = 'none';
   }
 
   /* ---------- XMB: ряд разделов и столбец пунктов ---------- */
@@ -1056,7 +1050,7 @@
       const topPillText = $('#ps5TopPillText');
       const topPillDot = $('#ps5TopPillDot');
       if (topPillText) {
-        topPillText.textContent = isPlaying ? `🟢 В игре: ${title}` : `PS5: ${title}`;
+        topPillText.textContent = isPlaying ? `В игре: ${title}` : `PS5: ${title}`;
       }
       if (topPillDot) {
         topPillDot.classList.toggle('is-playing', isPlaying);

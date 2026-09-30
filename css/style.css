@@ -535,19 +535,21 @@ a { color: inherit; }
 
 @keyframes ps3CatAura {
   0%, 100% {
-    filter: drop-shadow(0 0 6px rgba(120, 195, 255, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 8px rgba(120, 195, 255, 0.45));
   }
   50% {
-    filter: drop-shadow(0 0 16px rgba(175, 225, 255, 0.8)) drop-shadow(0 0 28px rgba(70, 160, 255, 0.45));
+    transform: scale(1.16);
+    filter: drop-shadow(0 0 16px rgba(175, 225, 255, 0.8));
   }
 }
 
 @keyframes ps3ItemAura {
   0%, 100% {
-    filter: drop-shadow(0 0 8px rgba(120, 195, 255, 0.35)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 0 8px rgba(120, 195, 255, 0.4));
   }
   50% {
-    filter: drop-shadow(0 0 18px rgba(175, 225, 255, 0.75)) drop-shadow(0 0 32px rgba(80, 160, 255, 0.4));
+    filter: drop-shadow(0 0 18px rgba(175, 225, 255, 0.75));
   }
 }
 

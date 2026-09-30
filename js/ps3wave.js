@@ -18,16 +18,16 @@
   const ctx = canvas.getContext('2d');
   let width = 0;
   let height = 0;
-  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
 
   const resize = () => {
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-    ctx.scale(dpr, dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
 
   resize();
@@ -135,18 +135,20 @@
       ctx.fillStyle = waveGrad;
       ctx.fill();
 
-      // Отрисовка светящегося гребня (Crest Line)
+      // Отрисовка светящегося гребня (Crest Line) без дорогого shadowBlur
       ctx.beginPath();
       points.forEach((p, i) => {
         if (i === 0) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       });
-      ctx.lineWidth = 1.6;
-      ctx.strokeStyle = w.strokeColor;
-      ctx.shadowColor = '#80c0ff';
-      ctx.shadowBlur = 8;
+      // Мягкий рассеянный ореол
+      ctx.lineWidth = 3.6;
+      ctx.strokeStyle = 'rgba(128, 195, 255, 0.28)';
       ctx.stroke();
-      ctx.shadowBlur = 0;
+      // Четкий гребень
+      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = w.strokeColor;
+      ctx.stroke();
     });
 
     ctx.restore();
