@@ -20,22 +20,6 @@
   let height = 0;
   let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-  // Частицы пыли / светящиеся искры PS3
-  const PARTICLE_COUNT = 45;
-  const particles = [];
-
-  const createParticle = () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    radius: Math.random() * 1.8 + 0.6,
-    speedY: Math.random() * 0.4 + 0.15,
-    swaySpeed: Math.random() * 0.02 + 0.01,
-    swayAmp: Math.random() * 20 + 8,
-    swaySeed: Math.random() * Math.PI * 2,
-    alpha: Math.random() * 0.6 + 0.2,
-    pulseSpeed: Math.random() * 0.02 + 0.01,
-  });
-
   const resize = () => {
     width = window.innerWidth;
     height = window.innerHeight;
@@ -44,10 +28,6 @@
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
     ctx.scale(dpr, dpr);
-
-    if (particles.length === 0) {
-      for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(createParticle());
-    }
   };
 
   resize();
@@ -169,29 +149,6 @@
       ctx.shadowBlur = 0;
     });
 
-    ctx.restore();
-
-    // 3. Плавающие частицы пыли PS3
-    ctx.save();
-    particles.forEach((p) => {
-      p.y -= p.speedY;
-      p.swaySeed += p.swaySpeed;
-      const curX = p.x + Math.sin(p.swaySeed) * p.swayAmp;
-      
-      // перенос снизу вверх
-      if (p.y < -10) {
-        p.y = height + 10;
-        p.x = Math.random() * width;
-      }
-
-      const pulse = 0.6 + Math.sin(time * p.pulseSpeed + p.swaySeed) * 0.4;
-      ctx.beginPath();
-      ctx.arc(curX, p.y, p.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * pulse})`;
-      ctx.shadowColor = 'rgba(160, 220, 255, 0.8)';
-      ctx.shadowBlur = 6;
-      ctx.fill();
-    });
     ctx.restore();
 
     requestAnimationFrame(animate);

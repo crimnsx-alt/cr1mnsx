@@ -447,6 +447,10 @@
     const item = itemsOf(current)[selected[current]];
     if (!item) return;
     playSfx('ok');
+    if (typeof window.ps3ParticleBurst === 'function') {
+      const rect = item.getBoundingClientRect();
+      window.ps3ParticleBurst(rect.left + Math.min(rect.width / 2, 80), rect.top + rect.height / 2, 22);
+    }
     if (item.id === 'itemMafanyaTwitch' || item.classList.contains('item--mafanya')) {
       window.open('https://www.twitch.tv/mafanyaking', '_blank', 'noopener');
       return;

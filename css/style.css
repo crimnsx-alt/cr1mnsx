@@ -16,8 +16,8 @@
   --cat-icon: 68px;
   --col: 140px;
   --shadow: 0 1px 2px rgba(0, 0, 0, .45);
-  --glow: 0 0 10px rgba(255, 255, 255, .5), 0 1px 2px rgba(0, 0, 0, .45);
-  --ease: cubic-bezier(.25, .8, .25, 1);
+  --glow: 0 0 12px rgba(255, 255, 255, .65), 0 0 24px rgba(120, 190, 255, .35), 0 1px 2px rgba(0, 0, 0, .45);
+  --ease: cubic-bezier(.16, 1, .3, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -67,18 +67,17 @@ a { color: inherit; }
   pointer-events: none;
 }
 
-/* ---------- Термометр в правом верхнем углу: анимация Animation Factory ---------- */
+/* ---------- Верхняя статус-панель PS3 / XMB (Aero Glass Status Bar) ---------- */
 .status {
-  position: fixed; z-index: 2;
-  /* отступ справа тот же, что сверху: термометр стоит ровно в углу */
-  top: clamp(18px, 4.5vh, 44px);
-  right: clamp(18px, 4.5vh, 44px);
+  position: fixed; z-index: 100;
+  top: clamp(16px, 3.5vh, 32px);
+  right: clamp(16px, 3.5vw, 36px);
   display: flex;
   align-items: center;
-  gap: 12px;
-  transition: opacity .25s, visibility .25s;
+  gap: 10px;
+  transition: opacity .3s ease, visibility .3s ease;
 }
-.baro__gif { display: block; height: 52px; width: auto; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .45)); pointer-events: none; }
+.baro__gif { display: none !important; }
 /* ---------- Фоновая музыка Dark Souls 2 Majula (BGM Pill) ---------- */
 .bgm-pill {
   position: relative;
@@ -89,29 +88,30 @@ a { color: inherit; }
 .bgm-pill__btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .22) 0%, rgba(20, 32, 54, .7) 60%, rgba(10, 18, 32, .85) 100%);
-  border: 1px solid rgba(255, 255, 255, .32);
-  border-radius: 20px;
-  padding: 4px 12px 4px 10px;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 11px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .18) 0%, rgba(20, 32, 54, .75) 55%, rgba(10, 18, 32, .9) 100%);
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 18px;
   color: #fff;
   cursor: pointer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .4), inset 0 1px 1px rgba(255, 255, 255, .35);
-  transition: transform .2s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .35);
+  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease, background .25s ease;
   font-family: inherit;
 }
 
 .bgm-pill__btn:hover {
-  transform: translateY(-1px) scale(1.03);
-  border-color: rgba(255, 180, 90, .7);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .5), 0 0 12px rgba(255, 160, 60, .35), inset 0 1px 2px rgba(255, 255, 255, .5);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(255, 180, 90, .8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .55), 0 0 16px rgba(255, 160, 60, .4), inset 0 1px 2px rgba(255, 255, 255, .6);
 }
 
 .bgm-pill.is-playing .bgm-pill__btn {
-  border-color: rgba(255, 190, 100, .8);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .55), 0 0 14px rgba(255, 170, 70, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+  border-color: rgba(255, 190, 100, .85);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .6), 0 0 16px rgba(255, 170, 70, .45), inset 0 1px 1px rgba(255, 255, 255, .45);
 }
 
 .bgm-pill__waves {
@@ -522,7 +522,10 @@ a { color: inherit; }
   transition: opacity .25s;
 }
 .xmb-cat.is-current { opacity: 1; }
-.xmb-cat.is-current img { transform: scale(1.12); }
+.xmb-cat.is-current img {
+  transform: scale(1.14);
+  animation: ps3CatAura 2.8s ease-in-out infinite;
+}
 .xmb-cat.is-current .xmb-cat__label { opacity: 1; }
 .xmb-cat:hover { opacity: .85; }
 .xmb-cat.is-current:hover { opacity: 1; }
@@ -530,13 +533,31 @@ a { color: inherit; }
 .xmb-cat:focus, .xmb-cat:focus-visible { outline: none; }
 .xmb-cat, .item__row { -webkit-tap-highlight-color: transparent; }
 
+@keyframes ps3CatAura {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(120, 195, 255, 0.4)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(175, 225, 255, 0.8)) drop-shadow(0 0 28px rgba(70, 160, 255, 0.45));
+  }
+}
+
+@keyframes ps3ItemAura {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(120, 195, 255, 0.35)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.55));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(175, 225, 255, 0.75)) drop-shadow(0 0 32px rgba(80, 160, 255, 0.4));
+  }
+}
+
 /* столбец пунктов */
 .xmb-on .item {
   position: absolute; top: 0; left: var(--ix, 20vw);
   width: min(760px, calc(100vw - var(--ix, 20vw) - 20px));
   margin: 0;
   opacity: .6;
-  transition: transform .32s var(--ease), opacity .25s;
+  transition: transform .36s var(--ease), opacity .28s;
   will-change: transform;
 }
 .xmb-on .cat:not(.is-current) .item { opacity: 0; pointer-events: none; }
@@ -550,10 +571,19 @@ a { color: inherit; }
 
 .xmb-on .item.is-selected { opacity: 1; }
 .xmb-on .item.is-selected .item__icon { height: 100px; }
-.xmb-on .item.is-selected .item__icon > img { width: 88px; height: 88px; }
+.xmb-on .item.is-selected .item__icon > img {
+  width: 88px; height: 88px;
+  animation: ps3ItemAura 2.6s ease-in-out infinite;
+}
 .xmb-on .item.is-selected .item__icon--video img { width: 136px; height: 76px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .75), 0 0 16px rgba(255, 255, 255, .3); }
 .xmb-on .item.is-selected .item__icon--photo img { width: 96px; height: 96px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .75), 0 0 16px rgba(255, 255, 255, .3); }
-.xmb-on .item.is-selected .icon-tile { width: 80px; height: 80px; border-radius: 18px; }
+.xmb-on .item.is-selected .item__icon--photo .avatar {
+  animation: ps3ItemAura 2.6s ease-in-out infinite;
+}
+.xmb-on .item.is-selected .icon-tile {
+  width: 80px; height: 80px; border-radius: 18px;
+  animation: ps3ItemAura 2.6s ease-in-out infinite;
+}
 .xmb-on .item.is-selected .item__title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1026,12 +1056,18 @@ a { color: inherit; }
   width: min(540px, calc(100vw - var(--ix, 20vw) - var(--col) - 510px));
   margin: 0;
   z-index: 5;
-  animation: psnPanelFadeIn .25s var(--ease);
+  animation: psnPanelFadeIn .35s var(--ease);
 }
 
 @keyframes psnPanelFadeIn {
-  from { opacity: 0; transform: translateX(10px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 .psn-terminal-widget,
@@ -1744,27 +1780,41 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(180deg, rgba(20, 32, 50, .88) 0%, rgba(8, 16, 28, .94) 100%);
+  height: 36px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .16) 0%, rgba(18, 30, 48, .75) 55%, rgba(8, 16, 28, .92) 100%);
   border: 1px solid rgba(255, 255, 255, .25);
-  border-radius: 20px;
-  padding: 6px 14px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   cursor: pointer;
-  transition: transform .2s ease, border-color .2s ease;
+  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease;
 }
 .visitor-pill:hover {
-  transform: translateY(-1px);
-  border-color: rgba(96, 165, 250, .6);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(96, 165, 250, .8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .55), 0 0 14px rgba(96, 165, 250, .35), inset 0 1px 2px rgba(255, 255, 255, .5);
 }
 .visitor-pill__dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: #10b981;
   box-shadow: 0 0 8px #10b981;
-  animation: pulseGreen 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+.visitor-pill__dot::after {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(16, 185, 129, 0.8);
+  animation: radarRing 2.2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes radarRing {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 @keyframes pulseGreen {
   0%, 100% { opacity: 1; transform: scale(1); }
@@ -1777,7 +1827,7 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   letter-spacing: .3px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 .visitor-pill__icon {
   font-size: 13px;
@@ -1788,22 +1838,24 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(180deg, rgba(14, 43, 82, .9) 0%, rgba(5, 18, 40, .95) 100%);
+  height: 36px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .16) 0%, rgba(12, 38, 74, .75) 55%, rgba(5, 18, 40, .92) 100%);
   border: 1px solid rgba(96, 165, 250, .4);
-  border-radius: 20px;
-  padding: 6px 14px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   cursor: pointer;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease;
 }
 .ps5-top-pill:hover {
-  transform: translateY(-1px);
-  border-color: rgba(96, 165, 250, .8);
-  box-shadow: 0 6px 18px rgba(0, 112, 209, .4), inset 0 1px 1px rgba(255, 255, 255, .4);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(96, 165, 250, .85);
+  box-shadow: 0 8px 24px rgba(0, 112, 209, .45), 0 0 16px rgba(56, 189, 248, .4), inset 0 1px 2px rgba(255, 255, 255, .5);
 }
 .ps5-top-pill__dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -1812,10 +1864,19 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   transition: background .3s, box-shadow .3s;
   flex-shrink: 0;
 }
+.ps5-top-pill__dot::after {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.8);
+  animation: radarRing 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
 .ps5-top-pill__dot.is-playing {
   background: #22c55e !important;
   box-shadow: 0 0 10px #22c55e !important;
-  animation: pulseGreen 1.6s infinite ease-in-out;
+}
+.ps5-top-pill__dot.is-playing::after {
+  border-color: rgba(34, 197, 94, 0.85);
 }
 .ps5-top-pill__text {
   font-size: 11px;
@@ -1826,7 +1887,7 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   align-items: center;
   gap: 5px;
   white-space: nowrap;
-  max-width: 190px;
+  max-width: 195px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -2552,28 +2613,30 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .twitch-top-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: linear-gradient(180deg, rgba(34, 18, 54, 0.9) 0%, rgba(18, 9, 32, 0.95) 100%);
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .16) 0%, rgba(32, 16, 50, .75) 55%, rgba(18, 9, 32, .92) 100%);
   border: 1px solid rgba(168, 85, 247, 0.4);
-  border-radius: 20px;
-  padding: 6px 13px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, .3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   cursor: pointer;
   color: #fff;
   font-family: inherit;
   font-size: 11px;
   font-weight: 700;
   text-decoration: none;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease;
 }
 .twitch-top-pill:hover {
-  transform: translateY(-1px);
-  border-color: rgba(168, 85, 247, 0.8);
-  box-shadow: 0 6px 18px rgba(147, 51, 234, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  border-color: rgba(168, 85, 247, .85);
+  box-shadow: 0 8px 24px rgba(147, 51, 234, .45), 0 0 16px rgba(168, 85, 247, .4), inset 0 1px 2px rgba(255, 255, 255, .5);
 }
 .twitch-top-pill__dot {
+  position: relative;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -2582,10 +2645,20 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   transition: background .3s, box-shadow .3s;
   flex-shrink: 0;
 }
+.twitch-top-pill__dot::after {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(168, 85, 247, 0.6);
+  animation: radarRing 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
 .twitch-top-pill__dot.is-live {
   background: #ef4444 !important;
   box-shadow: 0 0 10px #ef4444 !important;
-  animation: pulseRed 1.4s infinite ease-in-out;
+}
+.twitch-top-pill__dot.is-live::after {
+  border-color: rgba(239, 68, 68, 0.85);
+  animation: radarRing 1.8s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 .twitch-top-pill__icon img {
   width: 16px;
