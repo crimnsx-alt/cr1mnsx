@@ -1,7 +1,7 @@
 [
   {
-    "id": "the-witcher-3-wild-hunt-remastered",
-    "title": "The Witcher 3: Wild Hunt — Remastered",
+    "id": "the-witcher-3-wild-hunt",
+    "title": "The Witcher 3: Wild Hunt",
     "subtitle": "PlayStation 5",
     "platform": "PS4",
     "played_on": "PS5",
@@ -19,8 +19,8 @@
     "last_played_iso": "2026-09-30T09:54:40.900000Z",
     "play_duration": "",
     "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202211/1412/5YlA3POEEpaAJsUq3eg6U8d6.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202211/1412/5YlA3POEEpaAJsUq3eg6U8d6.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
