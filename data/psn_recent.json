@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-01T18:06:07.249Z",
+  "updated_at": "2026-10-01T19:06:13.179Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
-  "is_playing_now": true,
+  "is_playing_now": false,
   "game": {
     "title": "The Witcher 3: Wild Hunt — Remastered",
     "platform": "PS4",
@@ -17,7 +17,7 @@
     "silver": 1,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
+    "last_played_text": "1 октября 2026",
     "play_duration": ""
   }
 }
