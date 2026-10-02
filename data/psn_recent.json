@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-02T09:36:06.335Z",
+  "updated_at": "2026-10-02T15:31:58.765Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
+  "is_online": false,
+  "is_playing_now": false,
   "game": {
     "title": "Grand Theft Auto V",
     "platform": "PS4",
@@ -17,7 +17,7 @@
     "silver": 2,
     "gold": 1,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
+    "last_played_text": "2 октября 2026",
     "play_duration": ""
   }
 }
