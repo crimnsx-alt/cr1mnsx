@@ -1,5 +1,30 @@
 [
   {
+    "id": "far-cry-3-classic-edition",
+    "title": "Far Cry® 3 Classic Edition",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 32,
+    "trophies_earned": 18,
+    "trophies_total": 44,
+    "trophy_breakdown": {
+      "bronze": 15,
+      "silver": 3,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "C",
+    "last_played": "3 октября 2026",
+    "last_played_iso": "2026-10-03T16:55:04.960000Z",
+    "play_duration": "",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 32%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "grand-theft-auto-v",
     "title": "Grand Theft Auto V",
     "subtitle": "PlayStation 5",
@@ -16,9 +41,9 @@
     },
     "rank": "D",
     "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T15:25:39.900000Z",
+    "last_played_iso": "2026-10-03T16:43:54.350000Z",
     "play_duration": "",
-    "status": "🟢 Играет прямо сейчас",
+    "status": "В процессе прохождения",
     "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
     "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
@@ -272,31 +297,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "dark-souls-remastered",
-    "title": "DARK SOULS™: REMASTERED",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 42,
-    "trophies_earned": 17,
-    "trophies_total": 41,
-    "trophy_breakdown": {
-      "bronze": 8,
-      "silver": 8,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "C",
-    "last_played": "13 сентября 2026",
-    "last_played_iso": "2026-09-13T18:42:04.520000Z",
-    "play_duration": "",
-    "status": "Сюжет пройден",
-    "banner": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08495_00/4/i_e1d39aec96b1583322c0c83a100142424b2dadd351510fcf0f2c3eed02830576/i/icon0.png",
-    "thumb": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08495_00/4/i_e1d39aec96b1583322c0c83a100142424b2dadd351510fcf0f2c3eed02830576/i/icon0.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 42%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   }
 ]
