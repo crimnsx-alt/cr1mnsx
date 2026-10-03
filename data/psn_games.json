@@ -1,5 +1,30 @@
 [
   {
+    "id": "grand-theft-auto-v",
+    "title": "Grand Theft Auto V",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 2,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "3 октября 2026",
+    "last_played_iso": "2026-10-03T06:50:41.270000Z",
+    "play_duration": "",
+    "status": "В процессе прохождения",
+    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "the-witcher-3-wild-hunt-remastered",
     "title": "The Witcher 3: Wild Hunt — Remastered",
     "subtitle": "PlayStation 5",
@@ -16,7 +41,7 @@
     },
     "rank": "D",
     "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T04:51:14.890000Z",
+    "last_played_iso": "2026-10-03T06:00:37.030000Z",
     "play_duration": "",
     "status": "В процессе прохождения",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
@@ -97,31 +122,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v",
-    "title": "Grand Theft Auto V",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "2 октября 2026",
-    "last_played_iso": "2026-10-02T15:34:55.200000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
