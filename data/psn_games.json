@@ -1,30 +1,5 @@
 [
   {
-    "id": "the-witcher-3-wild-hunt-remastered",
-    "title": "The Witcher 3: Wild Hunt — Remastered",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 18,
-    "trophies_earned": 17,
-    "trophies_total": 79,
-    "trophy_breakdown": {
-      "bronze": 16,
-      "silver": 1,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T11:57:15.700000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 18%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
     "id": "grand-theft-auto-v",
     "title": "Grand Theft Auto V",
     "subtitle": "PlayStation 5",
@@ -41,12 +16,37 @@
     },
     "rank": "D",
     "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T11:57:10.800000Z",
+    "last_played_iso": "2026-10-03T15:25:39.900000Z",
     "play_duration": "",
-    "status": "В процессе прохождения",
+    "status": "🟢 Играет прямо сейчас",
     "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
     "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "the-witcher-3-wild-hunt-remastered",
+    "title": "The Witcher 3: Wild Hunt — Remastered",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 18,
+    "trophies_earned": 17,
+    "trophies_total": 79,
+    "trophy_breakdown": {
+      "bronze": 16,
+      "silver": 1,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "3 октября 2026",
+    "last_played_iso": "2026-10-03T15:25:33.130000Z",
+    "play_duration": "",
+    "status": "В процессе прохождения",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 18%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
