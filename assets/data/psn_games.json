@@ -1,5 +1,55 @@
 [
   {
+    "id": "grand-theft-auto-v",
+    "title": "Grand Theft Auto V",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 2,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "4 октября 2026",
+    "last_played_iso": "2026-10-04T12:14:36.320000Z",
+    "play_duration": "",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "assassin-s-creed-unity",
+    "title": "Assassin's Creed® Unity",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 40,
+    "trophies_earned": 27,
+    "trophies_total": 58,
+    "trophy_breakdown": {
+      "bronze": 21,
+      "silver": 6,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "C",
+    "last_played": "4 октября 2026",
+    "last_played_iso": "2026-10-04T12:14:29.250000Z",
+    "play_duration": "",
+    "status": "Сюжет пройден",
+    "banner": "https://image.api.playstation.com/cdn/UP0001/CUSA00663_00/o1pTr4XjsCODz0vZadpH4zyxgMj7I7ga.png",
+    "thumb": "https://image.api.playstation.com/cdn/UP0001/CUSA00663_00/o1pTr4XjsCODz0vZadpH4zyxgMj7I7ga.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 40%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "far-cry-3-classic-edition",
     "title": "Far Cry® 3 Classic Edition",
     "subtitle": "PlayStation 5",
@@ -16,37 +66,12 @@
     },
     "rank": "C",
     "last_played": "4 октября 2026",
-    "last_played_iso": "2026-10-04T10:57:52.880000Z",
+    "last_played_iso": "2026-10-04T11:54:39.690000Z",
     "play_duration": "",
-    "status": "🟢 Играет прямо сейчас",
+    "status": "Сюжет пройден",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 45%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v",
-    "title": "Grand Theft Auto V",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T16:43:54.350000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -272,31 +297,6 @@
     "banner": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08519_00/12/i_3da1cf7c41dc7652f9b639e1680d96436773658668c7dc3930c441291095713b/i/icon0.png",
     "thumb": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08519_00/12/i_3da1cf7c41dc7652f9b639e1680d96436773658668c7dc3930c441291095713b/i/icon0.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 15%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v-playstation-5",
-    "title": "Grand Theft Auto V (PlayStation®5)",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "13 сентября 2026",
-    "last_played_iso": "2026-09-13T19:49:36.030000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   }
 ]
