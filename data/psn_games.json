@@ -1,5 +1,80 @@
 [
   {
+    "id": "dark-souls-ii-scholar-of-the-first-sin",
+    "title": "DARK SOULS™ II: Scholar of the First Sin",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 24,
+    "trophies_earned": 13,
+    "trophies_total": 38,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 4,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "4 октября 2026",
+    "last_played_iso": "2026-10-04T17:46:34.750000Z",
+    "play_duration": "",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
+    "thumb": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 24%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "the-witcher-3-wild-hunt-remastered",
+    "title": "The Witcher 3: Wild Hunt — Remastered",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 18,
+    "trophies_earned": 17,
+    "trophies_total": 79,
+    "trophy_breakdown": {
+      "bronze": 16,
+      "silver": 1,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "4 октября 2026",
+    "last_played_iso": "2026-10-04T17:46:01.970000Z",
+    "play_duration": "",
+    "status": "В процессе прохождения",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 18%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "grand-theft-auto-v",
+    "title": "Grand Theft Auto V",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 2,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "4 октября 2026",
+    "last_played_iso": "2026-10-04T17:40:50.100000Z",
+    "play_duration": "",
+    "status": "В процессе прохождения",
+    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "minecraft",
     "title": "Minecraft",
     "subtitle": "PlayStation 5",
@@ -22,31 +97,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v",
-    "title": "Grand Theft Auto V",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "4 октября 2026",
-    "last_played_iso": "2026-10-04T13:09:10.360000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "thumb": "https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 17%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -100,31 +150,6 @@
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
-    "id": "the-witcher-3-wild-hunt-remastered",
-    "title": "The Witcher 3: Wild Hunt — Remastered",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 18,
-    "trophies_earned": 17,
-    "trophies_total": 79,
-    "trophy_breakdown": {
-      "bronze": 16,
-      "silver": 1,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "3 октября 2026",
-    "last_played_iso": "2026-10-03T15:25:33.130000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 18%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
     "id": "marvel-s-spider-man-2",
     "title": "Marvel's Spider-Man 2",
     "subtitle": "PlayStation 5",
@@ -172,31 +197,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202604/2122/41d5a3beff5a2b0b9ac56b9b23869dad7821df71a60f4b02.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202604/2122/41d5a3beff5a2b0b9ac56b9b23869dad7821df71a60f4b02.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "dark-souls-ii-scholar-of-the-first-sin",
-    "title": "DARK SOULS™ II: Scholar of the First Sin",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 24,
-    "trophies_earned": 13,
-    "trophies_total": 38,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 4,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "27 сентября 2026",
-    "last_played_iso": "2026-09-27T15:48:41.950000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
-    "thumb": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 24%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
