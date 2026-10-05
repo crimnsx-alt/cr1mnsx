@@ -15,13 +15,38 @@
       "platinum": 0
     },
     "rank": "D",
-    "last_played": "4 октября 2026",
-    "last_played_iso": "2026-10-04T19:42:12.790000Z",
+    "last_played": "5 октября 2026",
+    "last_played_iso": "2026-10-05T09:57:45.720000Z",
     "play_duration": "",
     "status": "В процессе прохождения",
     "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
     "thumb": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 24%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "marvel-s-spider-man-2",
+    "title": "Marvel's Spider-Man 2",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 0,
+    "trophies_earned": 0,
+    "trophies_total": 0,
+    "trophy_breakdown": {
+      "bronze": 0,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "E",
+    "last_played": "5 октября 2026",
+    "last_played_iso": "2026-10-05T09:28:56.790000Z",
+    "play_duration": "",
+    "status": "В процессе прохождения",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -147,31 +172,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 45%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "marvel-s-spider-man-2",
-    "title": "Marvel’s Spider-Man 2",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 0,
-    "trophies_earned": 0,
-    "trophies_total": 0,
-    "trophy_breakdown": {
-      "bronze": 0,
-      "silver": 0,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "E",
-    "last_played": "2 октября 2026",
-    "last_played_iso": "2026-10-02T17:53:39.170000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
