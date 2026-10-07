@@ -1,5 +1,30 @@
 [
   {
+    "id": "dark-souls-ii-scholar-of-the-first-sin",
+    "title": "DARK SOULS™ II: Scholar of the First Sin",
+    "subtitle": "PlayStation 5",
+    "platform": "PS4",
+    "played_on": "PS5",
+    "progress_pct": 27,
+    "trophies_earned": 14,
+    "trophies_total": 38,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 5,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "C",
+    "last_played": "7 октября 2026",
+    "last_played_iso": "2026-10-07T15:13:40.620000Z",
+    "play_duration": "",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
+    "thumb": "https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png",
+    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 27%.",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "minecraft",
     "title": "Minecraft",
     "subtitle": "PlayStation 5",
@@ -22,31 +47,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 0%.",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "dark-souls-ii-scholar-of-the-first-sin",
-    "title": "DARK SOULS™ II: Scholar of the First Sin",
-    "subtitle": "PlayStation 5",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "progress_pct": 27,
-    "trophies_earned": 14,
-    "trophies_total": 38,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 5,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "C",
-    "last_played": "7 октября 2026",
-    "last_played_iso": "2026-10-07T11:53:50.750000Z",
-    "play_duration": "",
-    "status": "В процессе прохождения",
-    "banner": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA01589_00/4/i_4775fa4753de7530e6c4fa3e985e1869552054a23931b74414eac03cba388ed8/i/icon0.png",
-    "thumb": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA01589_00/4/i_4775fa4753de7530e6c4fa3e985e1869552054a23931b74414eac03cba388ed8/i/icon0.png",
-    "note": "Запущено на консоли PlayStation 5. Общее время в игре: несколько часов. Прогресс трофеев: 27%.",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
