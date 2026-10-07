@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-07T15:31:10.008Z",
+  "updated_at": "2026-10-07T17:39:46.835Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
+  "is_online": false,
+  "is_playing_now": false,
   "game": {
     "title": "DARK SOULS™ II: Scholar of the First Sin",
     "platform": "PS4",
@@ -17,7 +17,7 @@
     "silver": 5,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
+    "last_played_text": "7 октября 2026",
     "play_duration": ""
   }
 }
