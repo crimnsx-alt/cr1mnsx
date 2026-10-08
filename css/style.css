@@ -78,6 +78,92 @@ a { color: inherit; }
   transition: opacity .3s ease, visibility .3s ease;
 }
 .baro__gif { display: none !important; }
+
+/* ---------- Менюшка PSN (Скриншот 1: 6:10 PM PSN 📶 4 🌊) ---------- */
+.psn-clock-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 36px;
+  padding: 0 14px;
+  background: rgba(8, 16, 32, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .25);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  user-select: none;
+  cursor: default;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.psn-clock-widget:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 112, 209, .45), inset 0 1px 1px rgba(255, 255, 255, .35);
+}
+
+.psn-clock-time {
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.psn-clock-label {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+}
+
+.psn-clock-signal {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+}
+
+.psn-sig-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  padding-bottom: 1px;
+}
+
+.psn-sig-bar {
+  width: 2.5px;
+  background: #ffffff;
+  border-radius: 1px;
+}
+
+.psn-sig-bar.b1 { height: 3px; }
+.psn-sig-bar.b2 { height: 6px; }
+.psn-sig-bar.b3 { height: 9px; }
+.psn-sig-bar.b4 { height: 12px; }
+
+.psn-sig-num {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.psn-clock-wave {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
 /* ---------- Фоновая музыка Dark Souls 2 Majula (BGM Pill) ---------- */
 .bgm-pill {
   position: relative;
@@ -422,6 +508,25 @@ a { color: inherit; }
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .4));
   pointer-events: none;
 }
+
+/* ---------- Увеличение иконки с автором при наведении (hover scale) ---------- */
+.item__icon--photo {
+  transition: transform .32s var(--ease), filter .32s ease;
+}
+
+.item__icon--photo:hover,
+.item__icon--photo:hover .avatar,
+.item__row:hover .item__icon--photo {
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 20px rgba(120, 190, 255, 0.95));
+  z-index: 50;
+}
+
+.xmb-cat:hover img {
+  transform: scale(1.2) !important;
+  filter: drop-shadow(0 0 16px rgba(175, 225, 255, 0.9)) !important;
+}
+
 
 /* глянец iOS 6 для логотипов без собственного блика */
 .icon-tile {

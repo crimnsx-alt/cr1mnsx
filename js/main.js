@@ -1516,9 +1516,28 @@
     setInterval(checkTwitchLiveStatus, 60000);
   }
 
+  /* ---------- Виджет часов PSN (Скриншот 1) ---------- */
+  function initPsnClockWidget() {
+    function updateClock() {
+      const el = $('#psnClockTime');
+      if (!el) return;
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      const mStr = minutes < 10 ? '0' + minutes : minutes;
+      el.textContent = `${hours}:${mStr} ${ampm}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
   startBgmIfAllowed();
   initBrawlStarsSync();
   initPS5LastPlayedSync();
   initAeroTilt();
   initTwitchXmbWidget();
+  initPsnClockWidget();
 })();
