@@ -1516,22 +1516,39 @@
     setInterval(checkTwitchLiveStatus, 60000);
   }
 
-  /* ---------- Виджет часов PSN (Скриншот 1) ---------- */
-  function initPsnClockWidget() {
+  /* ---------- Аутентичные часы PS3 (Скриншот 3: M/D HH:MM 🕒) ---------- */
+  function initPs3ClockWidget() {
     function updateClock() {
-      const el = $('#psnClockTime');
-      if (!el) return;
       const now = new Date();
-      let hours = now.getHours();
-      const minutes = now.getMinutes();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      const mStr = minutes < 10 ? '0' + minutes : minutes;
-      el.textContent = `${hours}:${mStr} ${ampm}`;
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+
+      const dateEl = $('#ps3ClockDate');
+      const timeEl = $('#ps3ClockTime');
+      if (dateEl) dateEl.textContent = `${month}/${day}`;
+      if (timeEl) timeEl.textContent = `${hours}:${minutes}`;
     }
     updateClock();
     setInterval(updateClock, 1000);
+  }
+
+  /* ---------- Гарантированное увеличение иконки автора при наведении ---------- */
+  function initAvatarHoverZoom() {
+    const avatarLinks = $$('.item__icon--photo, .item__icon--photo .avatar');
+    avatarLinks.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        el.style.setProperty('transform', 'scale(1.3)', 'important');
+        el.style.setProperty('filter', 'drop-shadow(0 0 24px rgba(0, 190, 255, 0.95))', 'important');
+        el.style.setProperty('z-index', '9999', 'important');
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.removeProperty('transform');
+        el.style.removeProperty('filter');
+        el.style.removeProperty('z-index');
+      });
+    });
   }
 
   startBgmIfAllowed();
@@ -1539,5 +1556,6 @@
   initPS5LastPlayedSync();
   initAeroTilt();
   initTwitchXmbWidget();
-  initPsnClockWidget();
+  initPs3ClockWidget();
+  initAvatarHoverZoom();
 })();
