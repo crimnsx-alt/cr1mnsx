@@ -26,15 +26,40 @@
   </div>
 
   <div class="status" aria-hidden="true">
-    <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation 3 System Time">
-      <span class="ps3-clock-date" id="ps3ClockDate">10/8</span>
-      <span class="ps3-clock-time" id="ps3ClockTime">20:49</span>
-      <span class="ps3-clock-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="9.5" />
-          <polyline points="12 6.5 12 12 15.5 13.5" />
+    <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation Network & System Time">
+      <div class="ps3-status-cluster">
+        <span class="ps3-status-psn">PSN</span>
+        <svg class="ps3-status-signal" viewBox="0 0 16 12" width="13" height="10" fill="currentColor">
+          <rect x="0.5" y="8.5" width="2" height="3.5" rx="0.5"/>
+          <rect x="4" y="6" width="2" height="6" rx="0.5"/>
+          <rect x="7.5" y="3.5" width="2" height="8.5" rx="0.5"/>
+          <rect x="11" y="0.5" width="2" height="11.5" rx="0.5"/>
         </svg>
-      </span>
+      </div>
+
+      <div class="ps3-status-cluster ps3-status-cluster--pad">
+        <span class="ps3-status-pad-badge">1</span>
+        <svg class="ps3-status-battery" viewBox="0 0 22 12" width="16" height="9" fill="none" stroke="currentColor">
+          <rect x="1" y="1" width="16" height="10" rx="2" stroke-width="1.3"/>
+          <path d="M19 4.2 L19 7.8" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="3" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
+          <rect x="7.5" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
+          <rect x="12" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
+        </svg>
+      </div>
+
+      <div class="ps3-status-divider"></div>
+
+      <div class="ps3-status-cluster ps3-status-cluster--time">
+        <span class="ps3-clock-date" id="ps3ClockDate">10/8</span>
+        <span class="ps3-clock-time" id="ps3ClockTime">20:49</span>
+        <span class="ps3-clock-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9.5" />
+            <polyline points="12 6.5 12 12 15.5 13.5" />
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
 
@@ -57,7 +82,7 @@
   <main class="xmb" id="xmb">
 
     <!-- cr1mnsx (Профиль) -->
-    <section class="cat" id="cr1mnsx" data-icon="assets/icons/aero/profile-msn.png">
+    <section class="cat" id="cr1mnsx" data-icon="assets/icons/xmb/users.svg">
       <h2 class="cat__label">cr1mnsx</h2>
       <ul class="cat__items">
         <li class="item">
@@ -80,7 +105,7 @@
             <!-- Верхняя карточка: Последняя игра на PS5 -->
             <a class="pgc-card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
               <div class="pgc-backdrop">
-                <img class="pgc-backdrop-img ps5-last-game-img" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V" aria-hidden="true">
+                <img class="pgc-backdrop-img ps5-last-game-img" src="assets/photos/games/gta5.jpg" alt="Grand Theft Auto V" aria-hidden="true">
                 <div class="pgc-backdrop-overlay"></div>
               </div>
               <div class="pgc-inner">
@@ -100,7 +125,7 @@
                     <div class="pgc-bar-track">
                       <div class="pgc-bar-fill ps5-last-game-bar" style="width: 17%;"></div>
                     </div>
-                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress">🏆 12/78 трофеев (17%) · D Rank</span>
+                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="14" height="14"> 12/78 трофеев (17%) · D Rank</span>
                   </div>
                 </div>
               </div>
@@ -159,10 +184,10 @@
                       <div class="p-bar-fill ps5-last-game-bar" style="width: 22%;"></div>
                     </div>
                     <div class="p-trophy-row">
-                      <span class="p-tr-item"><span class="p-tr-icon">🏆</span>0</span>
-                      <span class="p-tr-item"><span class="p-tr-icon">🥇</span>0</span>
-                      <span class="p-tr-item"><span class="p-tr-icon">🥈</span>4</span>
-                      <span class="p-tr-item"><span class="p-tr-icon">🥉</span>8</span>
+                      <span class="p-tr-item"><img class="ps-tr-icon" src="assets/icons/trophies/plat.svg" alt="Platinum">0</span>
+                      <span class="p-tr-item"><img class="ps-tr-icon" src="assets/icons/trophies/gold.svg" alt="Gold">0</span>
+                      <span class="p-tr-item"><img class="ps-tr-icon" src="assets/icons/trophies/silver.svg" alt="Silver">4</span>
+                      <span class="p-tr-item"><img class="ps-tr-icon" src="assets/icons/trophies/bronze.svg" alt="Bronze">8</span>
                     </div>
                   </div>
 
@@ -239,7 +264,7 @@
     </section>
 
     <!-- Games (Последние запущенные игры на PS5) -->
-    <section class="cat" id="souls" data-icon="assets/icons/aero/game-pad.png">
+    <section class="cat" id="souls" data-icon="assets/icons/xmb/dualshock3.svg">
       <h2 class="cat__label">Games</h2>
       <ul class="cat__items">
         <li class="item item--psn" id="itemPsnProfile">
@@ -280,17 +305,17 @@
                     <div class="ps5-lp__progress-bar">
                       <div class="ps5-lp__progress-fill ps5-last-game-bar" style="width: 17%;"></div>
                     </div>
-                    <span class="ps5-lp__progress-text ps5-last-game-progress">🏆 12/78 трофеев (17%) · D Rank</span>
+                    <span class="ps5-lp__progress-text ps5-last-game-progress"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="14" height="14"> 12/78 трофеев (17%) · D Rank</span>
                   </div>
                 </div>
                 <span class="ps5-lp__arrow">↗</span>
               </a>
 
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--plat" title="Платиновые трофеи на PSN (Spider-Man Remastered & Miles Morales)"><span class="stat-trophy">🏆</span> <b>2</b> платины (Spider-Man)</div>
-                <div class="stat-pill stat-pill--gold"><span class="stat-trophy">🥇</span> <b>20</b> золотых</div>
-                <div class="stat-pill stat-pill--silver"><span class="stat-trophy">🥈</span> <b>128</b> серебра</div>
-                <div class="stat-pill stat-pill--bronze"><span class="stat-trophy">🥉</span> <b>497</b> бронзы</div>
+                <div class="stat-pill stat-pill--plat" title="Платиновые трофеи на PSN (Spider-Man Remastered & Miles Morales)"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt="Platinum"> <b>2</b> платины (Spider-Man)</div>
+                <div class="stat-pill stat-pill--gold"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="Gold"> <b>20</b> золотых</div>
+                <div class="stat-pill stat-pill--silver"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt="Silver"> <b>128</b> серебра</div>
+                <div class="stat-pill stat-pill--bronze"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt="Bronze"> <b>497</b> бронзы</div>
                 <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
               </div>
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
@@ -315,8 +340,8 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи GTA V">
-                <img class="game-banner-bg ps5-last-game-img" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="" aria-hidden="true">
-                <img class="game-banner-img ps5-latest-banner" src="https://image.api.playstation.com/sgst/prod/00/PPSA01721_00/app/info/48/fi_4ab7e06757bbcd7539537ab46776ce11cf2fe1343a9d967a2432d68377819160/icon0.png" alt="Grand Theft Auto V">
+                <img class="game-banner-bg ps5-last-game-img" src="assets/photos/games/gta5.jpg" alt="" aria-hidden="true">
+                <img class="game-banner-img ps5-latest-banner" src="assets/photos/games/gta5.jpg" alt="Grand Theft Auto V">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag ps5-latest-overlay-tag">LOS SANTOS · PLAYSTATION 5</span>
                 </div>
@@ -330,7 +355,7 @@
               </div>
               <p class="panel__note ps5-latest-note">Легендарный криминальный блокбастер Rockstar Games. Запущено на консоли PlayStation 5. Прогресс трофеев: 17% (12/78).</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--gold ps5-latest-progress-pill"><span class="stat-trophy">🏆</span> <b>17%</b> трофеев (12/78)</div>
+                <div class="stat-pill stat-pill--gold ps5-latest-progress-pill"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt=""> <b>17%</b> трофеев (12/78)</div>
                 <div class="stat-pill stat-pill--silver ps5-latest-rank-pill"><span class="stat-star">⭐</span> <b>D</b> Rank</div>
                 <div class="stat-pill stat-pill--bronze ps5-latest-date-pill"><span class="stat-star">⏱️</span> <b>29 сент. 2026</b></div>
               </div>
@@ -373,11 +398,11 @@
               </div>
               <p class="panel__note">Активный игрок с 2019 года. Ежедневный гринд кубков и рангов. Статистика аккаунта синхронизируется с Brawlify и Brawl Time Ninja.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--gold" title="Текущие кубки"><span class="stat-trophy">🏆</span> Кубки: <b id="bs-trophies">38,216</b></div>
+                <div class="stat-pill stat-pill--gold" title="Текущие кубки"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt=""> Кубки: <b id="bs-trophies">38,216</b></div>
                 <div class="stat-pill stat-pill--lvl" title="Рекордное количество кубков"><span class="stat-star">🔥</span> Рекорд: <b id="bs-highest">38,216</b></div>
                 <div class="stat-pill stat-pill--bronze" title="Разблокированные бойцы"><span class="stat-trophy">🔓</span> Бойцы: <b id="bs-brawlers">106 / 108</b></div>
-                <div class="stat-pill stat-pill--plat" title="Победы в режиме 3 на 3"><span class="stat-trophy">⚔️</span> 3v3 победы: <b id="bs-3v3">2,601</b></div>
-                <div class="stat-pill stat-pill--silver" title="Победы в одиночном и парном столкновении (ШД)"><span class="stat-trophy">💀</span> Соло / Дуо: <b id="bs-showdown">1,445</b></div>
+                <div class="stat-pill stat-pill--plat" title="Победы в режиме 3 на 3"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt=""> 3v3 победы: <b id="bs-3v3">2,601</b></div>
+                <div class="stat-pill stat-pill--silver" title="Победы в одиночном и парном столкновении (ШД)"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> Соло / Дуо: <b id="bs-showdown">1,445</b></div>
                 <div class="stat-pill" title="Текущий клуб игрока"><span class="stat-trophy">🛡️</span> Клуб: <b id="bs-club">0.3.7|teams</b></div>
               </div>
               <div class="bs-action-links" style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -395,7 +420,7 @@
         </li>
         <li class="item item--photo item--ds2" id="itemDs2">
           <a class="item__row" href="assets/photos/souls/ds2-majula.jpg" target="_blank">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/ds2-majula.jpg" alt="Dark Souls 2 — Majula"></span>
+            <span class="item__icon item__icon--photo"><img src="assets/photos/games/ds2-scholar.jpg" alt="Dark Souls 2 — Majula"></span>
             <span class="item__text">
               <span class="item__title">Dark Souls II — Тема Маджулы (Majula)</span>
               <span class="item__sub">Мотои Сакураба · Культовый саундтрек заката Дранглика · Нажмите для включения темы</span>
@@ -403,10 +428,10 @@
           </a>
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
-              <a class="game-banner-link" href="assets/photos/souls/ds2-majula.jpg" target="_blank" rel="noopener" title="Открыть арт Маджулы">
-                <img class="game-banner-img" src="assets/photos/souls/ds2-majula.jpg" alt="Dark Souls 2 — Majula" width="800" height="180">
+              <a class="game-banner-link" href="assets/photos/games/ds2-scholar.jpg" target="_blank" rel="noopener" title="Открыть арт Scholar of the First Sin">
+                <img class="game-banner-img" src="assets/photos/games/ds2-scholar.jpg" alt="Dark Souls 2: Scholar of the First Sin" width="800" height="180">
                 <div class="game-banner-overlay">
-                  <span class="game-banner-tag">DRANGLEIC SUNSET</span>
+                  <span class="game-banner-tag">DRANGLEIC SUNSET · SCHOLAR OF THE FIRST SIN</span>
                 </div>
               </a>
             </div>
@@ -442,7 +467,7 @@
               </div>
 
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>22%</b> трофеев (12/38)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>22%</b> трофеев (12/38)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-trophy">⚔️</span> <b>Сюжет пройден</b></div>
                 <div class="stat-pill stat-pill--majula"><span class="stat-icon">🌅</span> <b>Тема сайта</b></div>
               </div>
@@ -465,7 +490,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/29755-until-dawn/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи Until Dawn">
-                <img class="game-banner-img" src="assets/photos/games/until-dawn.png" alt="Until Dawn" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/until-dawn.jpg" alt="Until Dawn" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">BLACKWOOD PINES · UE5 REMAKE</span>
                 </div>
@@ -479,7 +504,7 @@
               </div>
               <p class="panel__note">Культовый интерактивный хоррор от Supermassive Games. Ремейк на Unreal Engine 5 с эффектом бабочки, выживанием до рассвета и нелинейным сюжетом.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>4%</b> трофеев (3/29)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>4%</b> трофеев (3/29)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">🌲</span> <b>Гора Блэквуд</b></div>
                 <div class="stat-pill stat-pill--silver"><span class="stat-star">⏱️</span> <b>20 сент. 2026</b></div>
               </div>
@@ -493,8 +518,8 @@
 
         <!-- 3. Dark Souls Remastered -->
         <li class="item item--photo">
-          <a class="item__row" href="assets/photos/souls/ds1-bonfire.jpg" target="_blank">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/souls/ds1-bonfire.jpg" alt="Dark Souls Remastered"></span>
+          <a class="item__row" href="assets/photos/games/ds1-remastered.jpg" target="_blank">
+            <span class="item__icon item__icon--photo"><img src="assets/photos/games/ds1-remastered.png" alt="Dark Souls Remastered"></span>
             <span class="item__text">
               <span class="item__title">Dark Souls Remastered (Top-1 Souls)</span>
               <span class="item__sub">Лордран, костры и незабываемое путешествие сквозь пепел и тьму.</span>
@@ -502,8 +527,8 @@
           </a>
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
-              <a class="game-banner-link" href="assets/photos/souls/ds1-bonfire.jpg" target="_blank" rel="noopener" title="Открыть арт Dark Souls Remastered">
-                <img class="game-banner-img" src="assets/photos/souls/ds1-bonfire.jpg" alt="Dark Souls Remastered — Firelink Shrine" width="800" height="180">
+              <a class="game-banner-link" href="assets/photos/games/ds1-remastered.jpg" target="_blank" rel="noopener" title="Открыть арт Dark Souls Remastered">
+                <img class="game-banner-img" src="assets/photos/games/ds1-remastered.jpg" alt="Dark Souls Remastered — Firelink Shrine" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">LORDRAIL · FIRELINK SHRINE</span>
                 </div>
@@ -517,7 +542,7 @@
               </div>
               <p class="panel__note">Величайшая классика Хидэтаки Миядзаки. Непревзойденный левел-дизайн Лордрана, костер Храма Огня, Анор Лондо и битва с Гвином.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥈</span> <b>42%</b> трофеев (17/41)</div>
+                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> <b>42%</b> трофеев (17/41)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">⚔️</span> <b>Сюжет пройден</b></div>
                 <div class="stat-pill stat-pill--bronze"><span class="stat-trophy">🔥</span> <b>Храм Огня</b></div>
               </div>
@@ -541,7 +566,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/8370-red-dead-redemption-2/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи RDR2">
-                <img class="game-banner-img" src="assets/photos/games/rdr2.png" alt="Red Dead Redemption 2" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/rdr2.jpg" alt="Red Dead Redemption 2" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">VAN DER LINDE GANG · 1899</span>
                 </div>
@@ -550,11 +575,12 @@
             <div class="psn-meta">
               <div class="psn-meta__header">
                 <span class="psn-badge">PS4 / PS5</span>
+                <span class="psn-badge psn-badge--souls">Western Epic</span>
                 <span class="psn-meta__title">Red Dead Redemption 2</span>
               </div>
               <p class="panel__note">Грандиозный открытый мир фронтира, глубокая драматическая история Артура Моргана и банды Ван дер Линде на закате беззакония.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>15%</b> трофеев (11/52)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>15%</b> трофеев (11/52)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">⚔️</span> <b>Сюжет пройден</b></div>
                 <div class="stat-pill stat-pill--silver"><span class="stat-star">🐎</span> <b>Артур Морган</b></div>
               </div>
@@ -578,7 +604,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/3303-dying-light/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи Dying Light">
-                <img class="game-banner-img" src="assets/photos/games/dying-light.png" alt="Dying Light" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/dying-light.jpg" alt="Dying Light" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">HARRAN QUARANTINE ZONE</span>
                 </div>
@@ -591,7 +617,7 @@
               </div>
               <p class="panel__note">Паркур от первого лица в зараженном Харране, крафт смертоносного снаряжения и опаснейшие ночные вылазки от свирепых Прыгунов.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>3%</b> трофеев (3/69)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>3%</b> трофеев (3/69)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">🏃</span> <b>Харранский трейсер</b></div>
                 <div class="stat-pill stat-pill--silver"><span class="stat-trophy">🌙</span> <b>Ночная охота</b></div>
               </div>
@@ -615,7 +641,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/25779-helldivers-2/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи Helldivers 2">
-                <img class="game-banner-img" src="assets/photos/games/helldivers2.png" alt="Helldivers 2" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/helldivers2.jpg" alt="Helldivers 2" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">FOR SUPER EARTH · DEMOCRACY</span>
                 </div>
@@ -629,7 +655,7 @@
               </div>
               <p class="panel__note">Ураганный экшен, стратагемы, орбитальные бомбардировки и ожесточенные битвы против бесконечных орд терминидов и автоматонов.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>7%</b> трофеев (5/39)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>7%</b> трофеев (5/39)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">🚀</span> <b>Адский десантник</b></div>
                 <div class="stat-pill stat-pill--silver"><span class="stat-trophy">🛡️</span> <b>Супер-Земля</b></div>
               </div>
@@ -653,7 +679,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/7735-far-cry-3-classic-edition/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи Far Cry 3">
-                <img class="game-banner-img" src="assets/photos/games/farcry3.png" alt="Far Cry 3 Classic Edition" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/farcry3.jpg" alt="Far Cry 3 Classic Edition" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">ROOK ISLANDS · VAAS MONTENEGRO</span>
                 </div>
@@ -666,7 +692,7 @@
               </div>
               <p class="panel__note">«Я уже говорил тебе, что такое безумие?» Культовое приключение Джейсона Броди на тропических островах Рук, захват аванпостов и татау.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥈</span> <b>32%</b> трофеев (18/44)</div>
+                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> <b>32%</b> трофеев (18/44)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">🏝️</span> <b>Рук Айленд</b></div>
                 <div class="stat-pill stat-pill--bronze"><span class="stat-trophy">🔫</span> <b>Воин Ракьят</b></div>
               </div>
@@ -690,7 +716,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/20111-the-witcher-3-wild-hunt/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи The Witcher 3">
-                <img class="game-banner-img" src="assets/photos/games/witcher3.png" alt="The Witcher 3: Wild Hunt" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/witcher3.jpg" alt="The Witcher 3: Wild Hunt" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">WHITE WOLF · NEXT-GEN PS5</span>
                 </div>
@@ -703,7 +729,7 @@
               </div>
               <p class="panel__note">Улучшенная версия для PlayStation 5. Белый Сад, Велен, Новиград и острова Скеллиге. Серебряные мечи, знаки и ведьмачьи заказы.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥉</span> <b>17%</b> трофеев (16/79)</div>
+                <div class="stat-pill stat-pill--bronze" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt=""> <b>17%</b> трофеев (16/79)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">🐺</span> <b>Белый Волк</b></div>
                 <div class="stat-pill stat-pill--silver"><span class="stat-trophy">⚔️</span> <b>Путь Ведьмака</b></div>
               </div>
@@ -727,7 +753,7 @@
           <div class="item__panel item__panel--psn">
             <div class="game-banner-widget">
               <a class="game-banner-link" href="https://psnprofiles.com/trophies/3072-assassins-creed-unity/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи Assassin's Creed Unity">
-                <img class="game-banner-img" src="assets/photos/games/ac-unity.png" alt="Assassin's Creed Unity" width="800" height="180">
+                <img class="game-banner-img" src="assets/photos/games/ac-unity.jpg" alt="Assassin's Creed Unity" width="800" height="180">
                 <div class="game-banner-overlay">
                   <span class="game-banner-tag">PARIS 1789 · FRENCH REVOLUTION</span>
                 </div>
@@ -740,7 +766,7 @@
               </div>
               <p class="panel__note">Лучшая система паркура в серии, великолепный Париж в масштабе 1:1, собор Нотр-Дам и история ассасина Арно Дориана.</p>
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><span class="stat-trophy">🥈</span> <b>40%</b> трофеев (27/58)</div>
+                <div class="stat-pill stat-pill--silver" title="Прогресс трофеев на PSN"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> <b>40%</b> трофеев (27/58)</div>
                 <div class="stat-pill stat-pill--gold"><span class="stat-star">⚔️</span> <b>Сюжет пройден</b></div>
                 <div class="stat-pill stat-pill--bronze"><span class="stat-trophy">🗡️</span> <b>Мастер-Ассасин</b></div>
               </div>
@@ -755,7 +781,7 @@
     </section>
 
     <!-- Twitch (Телевизор) -->
-    <section class="cat" id="twitch" data-icon="assets/icons/aero/videos-youtube.png">
+    <section class="cat" id="twitch" data-icon="assets/icons/xmb/tv.svg">
       <h2 class="cat__label">Twitch</h2>
       <ul class="cat__items">
         <li class="item">
@@ -892,7 +918,7 @@
     </section>
 
     <!-- Игры: Онлайн-эмулятор Sony PlayStation 1 (PSX) -->
-    <section class="cat" id="game" data-icon="assets/icons/aero/ps1.svg">
+    <section class="cat" id="game" data-icon="assets/icons/xmb/disc.svg">
       <h2 class="cat__label">Игры</h2>
       <ul class="cat__items">
         <li class="item">
@@ -1052,7 +1078,7 @@
     </section>
 
     <!-- Линки -->
-    <section class="cat" id="links" data-icon="assets/icons/aero/links.png">
+    <section class="cat" id="links" data-icon="assets/icons/xmb/network.svg">
       <h2 class="cat__label">Линки</h2>
       <ul class="cat__items">
         <li class="item"><a class="item__row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/vk.png" alt="VK"></span></span><span class="item__text"><span class="item__title">ВКонтакте</span><span class="item__sub">vk.ru/cr1mnsx</span></span></a></li>
@@ -1063,14 +1089,14 @@
         <li class="item"><a class="item__row" href="https://mafanya.ru/" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt="Сайт Мафани"></span><span class="item__text"><span class="item__title">Сайт Мафани (Архив Пранков)</span><span class="item__sub">mafanya.ru</span></span></a></li>
         <li class="item"><a class="item__row" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Влад Диор Армани"></span></span><span class="item__text"><span class="item__title">ТГ Влада Клёвые Тачки</span><span class="item__sub">t.me/VLADAPRMANI (@VLADAPRMANI)</span></span></a></li>
         <li class="item"><a class="item__row" href="https://t.me/bombastertg" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></span><span class="item__text"><span class="item__title">Новости по Мафане (Бомбастер)</span><span class="item__sub">t.me/bombastertg</span></span></a></li>
-        <li class="item"><div class="item__row"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/aero/game-pad.png" alt="PSN"></span></span><span class="item__text"><span class="item__title">PlayStation Network</span><span class="item__sub">PSN: cr1mnsx · PlayStation 5</span></span></div></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/xmb/dualshock3.svg" alt="PSN"></span></span><span class="item__text"><span class="item__title">PlayStation Network</span><span class="item__sub">PSN: cr1mnsx · PlayStation 5</span></span></div></li>
         <li class="item"><a class="item__row" href="https://t.me/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Telegram"></span></span><span class="item__text"><span class="item__title">Telegram</span><span class="item__sub">t.me/cr1mnsx</span></span></a></li>
       </ul>
     </section>
 
     <!-- Об этом сайте -->
     <!-- Об этом сайте и реальная аналитика -->
-    <section class="cat" id="info" data-icon="assets/icons/aero/info.png">
+    <section class="cat" id="info" data-icon="assets/icons/xmb/info.svg">
       <h2 class="cat__label">Об этом сайте</h2>
       <ul class="cat__items">
         <!-- Главный пункт: Мониторинг посетителей и статистика -->
@@ -1125,7 +1151,7 @@
         </li>
         <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt=""></span><span class="item__text"><span class="item__title">Видео-аватар</span><span class="item__sub">Max Verstappen (Red Bull Racing)</span></span></div></li>
         <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Живой аквариум на фоне</span><span class="item__sub">Skeuomorphic live video background</span></span></div></li>
-        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/game-pad.png" alt=""></span><span class="item__text"><span class="item__title">Звуки меню PS3</span><span class="item__sub">Синтезированы через Web Audio API</span></span></div></li>
+        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/xmb/dualshock3.svg" alt=""></span><span class="item__text"><span class="item__title">Звуки меню PS3</span><span class="item__sub">Синтезированы через Web Audio API</span></span></div></li>
         <li class="item"><a class="item__row" href="https://fonts.google.com/specimen/M+PLUS+1p" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Шрифт M PLUS 1p</span><span class="item__sub">M+ Fonts Project · SIL OFL</span></span></a></li>
       </ul>
     </section>

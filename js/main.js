@@ -1116,7 +1116,7 @@
 
         const progPill = $('.ps5-latest-progress-pill', latestItem);
         if (progPill) {
-          progPill.innerHTML = `<span class="stat-trophy">🏆</span> <b>${pct}%</b> трофеев (${earned}/${total})`;
+          progPill.innerHTML = `<img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="15" height="15"> <b>${pct}%</b> трофеев (${earned}/${total})`;
         }
 
         const rankPill = $('.ps5-latest-rank-pill', latestItem);

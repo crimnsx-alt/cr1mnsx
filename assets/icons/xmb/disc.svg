@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="discGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#cde2fe" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="discShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#discShadow)">
+    <!-- Outer Disc -->
+    <circle cx="32" cy="32" r="22" fill="url(#discGrad)"/>
+    <!-- Outer Rim Line -->
+    <circle cx="32" cy="32" r="20" stroke="#0b172a" stroke-opacity="0.3" stroke-width="0.8"/>
+    <!-- Data Track Arc Reflection -->
+    <path d="M18 20 A19 19 0 0 1 44 18 L39 23 A13 13 0 0 0 22 24 Z" fill="#ffffff" fill-opacity="0.45"/>
+    <path d="M46 44 A19 19 0 0 1 20 46 L25 41 A13 13 0 0 0 42 40 Z" fill="#ffffff" fill-opacity="0.45"/>
+    <!-- Inner Transparent Hub Ring -->
+    <circle cx="32" cy="32" r="9" fill="#0b172a" fill-opacity="0.75"/>
+    <circle cx="32" cy="32" r="7.5" fill="url(#discGrad)" fill-opacity="0.5"/>
+    <!-- Center Hole Spindle -->
+    <circle cx="32" cy="32" r="4.2" fill="#0b172a" fill-opacity="0.9"/>
+  </g>
+</svg>

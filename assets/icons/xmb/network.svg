@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="netGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4e4f7" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="netShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#netShadow)">
+    <!-- Globe Body -->
+    <circle cx="32" cy="32" r="17" fill="url(#netGrad)"/>
+    <!-- Globe Inner Latitude & Longitude grid lines -->
+    <!-- Equator -->
+    <ellipse cx="32" cy="32" rx="17" ry="5.5" stroke="#0b172a" stroke-opacity="0.7" stroke-width="1.8" fill="none"/>
+    <!-- Prime Meridian -->
+    <ellipse cx="32" cy="32" rx="7.5" ry="17" stroke="#0b172a" stroke-opacity="0.7" stroke-width="1.8" fill="none"/>
+    <!-- Center Vertical Line -->
+    <line x1="32" y1="15" x2="32" y2="49" stroke="#0b172a" stroke-opacity="0.7" stroke-width="1.8"/>
+
+    <!-- Orbital Ring (PlayStation Network Orbit Ring) -->
+    <ellipse cx="32" cy="32" rx="24" ry="7.5" transform="rotate(-28 32 32)" stroke="url(#netGrad)" stroke-width="2.6" fill="none"/>
+    <!-- Satellite node on ring -->
+    <circle cx="48" cy="23" r="2.8" fill="#ffffff"/>
+  </g>
+</svg>

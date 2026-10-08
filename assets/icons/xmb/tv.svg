@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="tvGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4e4f7" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="tvShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#tvShadow)">
+    <!-- Bravia / PS3 Display Screen Outer Frame -->
+    <rect x="10" y="15" width="44" height="28" rx="3.5" fill="url(#tvGrad)"/>
+    <!-- Screen Cutout (dark glass) -->
+    <rect x="13.5" y="18.5" width="37" height="21" rx="1.5" fill="#0b172a" fill-opacity="0.8"/>
+    <!-- Subtle screen glass reflection -->
+    <path d="M14 19 L32 19 L20 38 L14 38 Z" fill="#ffffff" fill-opacity="0.15"/>
+    <!-- Stand Neck -->
+    <path d="M29 43 L35 43 L36 47 L28 47 Z" fill="url(#tvGrad)"/>
+    <!-- Stand Base (Pedestal) -->
+    <rect x="23" y="47" width="18" height="2.5" rx="1.25" fill="url(#tvGrad)"/>
+  </g>
+</svg>

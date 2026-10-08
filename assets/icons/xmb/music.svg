@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="musicGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4e4f7" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="musicShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#musicShadow)">
+    <path d="M22 47 C22 43 25 41 29 41 C32 41 34 42.5 35 44 L35 22 L47 18 L47 40 C47 37 50 35 53 35 C57 35 60 38 60 41 C60 44.5 57 47 53 47 C49 47 47 44.5 47 41 L47 25 L35 28.5 L35 47 C35 50.5 32 53 29 53 C25 53 22 50.5 22 47 Z" fill="url(#musicGrad)" transform="translate(-8, 0)"/>
+  </g>
+</svg>

@@ -79,29 +79,76 @@ a { color: inherit; }
 }
 .baro__gif { display: none !important; }
 
-/* ---------- Аутентичные часы PS3 (Скриншот 3: 4/4 20:49 🕒) ---------- */
+/* ---------- Аутентичный статус-бар PS3/PS5 (Сеть PSN, Контроллер, Батарея, Время) ---------- */
 .ps3-clock-bar {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  height: 28px;
-  padding: 0 10px;
-  background: rgba(0, 0, 0, 0.85);
+  gap: 12px;
+  height: 30px;
+  padding: 0 12px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-family: var(--font), system-ui, -apple-system, sans-serif;
-  font-size: 14.5px;
+  font-family: -apple-system, BlinkMacSystemFont, "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  font-size: 13.5px;
   font-weight: 500;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   user-select: none;
   cursor: default;
-  transition: border-color .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
 }
 
 .ps3-clock-bar:hover {
-  border-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.ps3-status-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.ps3-status-psn {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #60a5fa;
+  text-shadow: 0 0 6px rgba(96, 165, 250, 0.5);
+}
+
+.ps3-status-signal {
+  color: #60a5fa;
+}
+
+.ps3-status-pad-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.ps3-status-battery {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ps3-status-divider {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .ps3-clock-date {
@@ -566,8 +613,9 @@ a { color: inherit; }
   display: block;
   width: var(--cat-icon); height: var(--cat-icon);
   object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .35));
-  transition: transform .32s var(--ease), filter .32s ease;
+  opacity: .6;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .45));
+  transition: transform .32s var(--ease), opacity .32s, filter .32s ease;
 }
 .xmb-cat__label {
   position: absolute; top: calc(100% + 8px); left: 50%;
@@ -580,11 +628,17 @@ a { color: inherit; }
 }
 .xmb-cat.is-current { opacity: 1; }
 .xmb-cat.is-current img {
-  transform: scale(1.14);
+  opacity: 1;
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 14px rgba(120, 195, 255, 0.45));
   animation: ps3CatAura 2.8s ease-in-out infinite;
 }
 .xmb-cat.is-current .xmb-cat__label { opacity: 1; }
-.xmb-cat:hover { opacity: .85; }
+.xmb-cat:hover { opacity: .9; }
+.xmb-cat:hover img {
+  opacity: .92;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
 .xmb-cat.is-current:hover { opacity: 1; }
 /* без рамки фокуса и серого квадрата при нажатии: выбранный раздел и так виден */
 .xmb-cat:focus, .xmb-cat:focus-visible { outline: none; }
@@ -592,12 +646,12 @@ a { color: inherit; }
 
 @keyframes ps3CatAura {
   0%, 100% {
-    transform: scale(1.12);
-    filter: drop-shadow(0 0 8px rgba(120, 195, 255, 0.45));
+    transform: scale(1.16);
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 12px rgba(120, 195, 255, 0.4));
   }
   50% {
-    transform: scale(1.16);
-    filter: drop-shadow(0 0 16px rgba(175, 225, 255, 0.8));
+    transform: scale(1.22);
+    filter: drop-shadow(0 0 9px rgba(255, 255, 255, 0.85)) drop-shadow(0 0 18px rgba(175, 225, 255, 0.7));
   }
 }
 
@@ -1262,30 +1316,60 @@ a { color: inherit; }
   margin-bottom: 8px;
 }
 
-.psn-badge {
-  display: inline-block;
+/* PlayStation Platform Badges */
+.psn-badge,
+.pgc-cover-badge,
+.ps5-lp__plat-badge,
+.p-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .5px;
-  padding: 2px 8px;
-  border-radius: 4px;
-  background: rgba(0, 168, 255, .25);
-  border: 1px solid rgba(0, 168, 255, .5);
-  color: #70d4ff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .8);
+  letter-spacing: .6px;
+  padding: 2.5px 8px;
+  border-radius: 5px;
+  background: rgba(0, 112, 209, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(120, 195, 255, 0.45);
+  color: #e0f2fe;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .85);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  line-height: 1.2;
 }
 
 .psn-badge--souls {
-  background: rgba(220, 100, 30, .25);
-  border-color: rgba(255, 140, 60, .5);
-  color: #ffaa66;
+  background: rgba(220, 100, 30, .28);
+  border-color: rgba(255, 140, 60, .55);
+  color: #fed7aa;
 }
 
 .psn-badge--top {
-  background: rgba(240, 190, 20, .25);
+  background: rgba(240, 190, 20, .28);
   border-color: rgba(255, 215, 0, .6);
-  color: #ffd700;
+  color: #fef08a;
+}
+
+/* PlayStation Network Trophy Icons */
+.ps-trophy-img {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: -2.5px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+.ps-tr-icon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  vertical-align: -1px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
 }
 
 .psn-meta__title {
@@ -1310,6 +1394,8 @@ a { color: inherit; }
   padding: 3px 9px;
   border-radius: 16px;
   background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, .16);
   color: rgba(255, 255, 255, .92);
   text-shadow: 0 1px 2px rgba(0, 0, 0, .8);

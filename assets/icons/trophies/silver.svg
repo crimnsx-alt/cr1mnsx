@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <defs>
+    <linearGradient id="silvGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#e2e8f0"/>
+      <stop offset="70%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <filter id="silvGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="#475569" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <g filter="url(#silvGlow)">
+    <!-- Handles -->
+    <path d="M7 8 C5 8 3.5 10 3.5 12.5 C3.5 15.5 5.5 18 9 18.5 L9 16 C6.8 15.5 5.5 14 5.5 12.5 C5.5 11 6.5 10 8 10 L9 10 L9 8 Z" fill="url(#silvGrad)"/>
+    <path d="M25 8 C27 8 28.5 10 28.5 12.5 C28.5 15.5 26.5 18 23 18.5 L23 16 C25.2 15.5 26.5 14 26.5 12.5 C26.5 11 25.5 10 24 10 L23 10 L23 8 Z" fill="url(#silvGrad)"/>
+    <!-- Cup Rim & Body -->
+    <path d="M8 7 L24 7 C24 7 23.5 16 20 19 C18 20.8 17 21.5 17 23 L15 23 C15 21.5 14 20.8 12 19 C8.5 16 8 7 8 7 Z" fill="url(#silvGrad)"/>
+    <!-- Rim Highlight -->
+    <rect x="8" y="6" width="16" height="2" rx="1" fill="#ffffff"/>
+    <!-- Center Star -->
+    <path d="M16 10 L17.2 13 L20 13.3 L17.8 15.2 L18.5 18 L16 16.5 L13.5 18 L14.2 15.2 L12 13.3 L14.8 13 Z" fill="#ffffff" fill-opacity="0.9"/>
+    <!-- Stem & Base -->
+    <path d="M14 23 L18 23 L18 25 L14 25 Z" fill="url(#silvGrad)"/>
+    <path d="M10 25 L22 25 L23 27 L9 27 Z" fill="url(#silvGrad)"/>
+    <rect x="8" y="27" width="16" height="2.5" rx="1" fill="#334155"/>
+  </g>
+</svg>

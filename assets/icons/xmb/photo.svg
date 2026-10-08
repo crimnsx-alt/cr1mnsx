@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="photoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4e4f7" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="photoShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#photoShadow)">
+    <rect x="12" y="15" width="40" height="34" rx="4" fill="url(#photoGrad)"/>
+    <rect x="16" y="19" width="32" height="26" rx="2" fill="#0b172a" fill-opacity="0.8"/>
+    <!-- Mountain landscape & sun inside photo -->
+    <circle cx="23" cy="26" r="3.2" fill="url(#photoGrad)"/>
+    <path d="M18 41 L27 30 L34 37 L39 32 L46 41 Z" fill="url(#photoGrad)"/>
+  </g>
+</svg>
