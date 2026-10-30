@@ -708,7 +708,20 @@
 
   // Делегирование кликов по кнопкам запуска игр в карточках
   document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.psn-btn-launch-game, .game-banner-link[data-game-url]');
+    const fsBtn = e.target.closest('.game-window__fs-btn');
+    if (fsBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = fsBtn.getAttribute('data-game-url');
+      const title = fsBtn.getAttribute('data-game-title') || 'Игра';
+      if (url) {
+        openGame(url, title);
+        setTimeout(() => toggleFullscreen(), 120);
+      }
+      return;
+    }
+
+    const btn = e.target.closest('.psn-btn-launch-game, .game-banner-link[data-game-url], .game-window__screen[data-game-url]');
     if (btn) {
       e.preventDefault();
       e.stopPropagation();
