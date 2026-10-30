@@ -355,7 +355,10 @@
       return;
     }
     if (item.closest('#game')) {
-      openGame($('.item__row', item).getAttribute('href'));
+      const row = $('.item__row', item);
+      const url = row.getAttribute('data-game-url') || row.getAttribute('href');
+      const title = row.getAttribute('data-game-title') || $('.item__title', item)?.textContent || 'Игра';
+      openGame(url, title);
       return;
     }
     if (item.classList.contains('item--ds2') || item.id === 'itemDs2') {
@@ -422,7 +425,10 @@
     // игру открываем поверх сайта, а не переходом по ссылке
     if (item.closest('#game')) {
       e.preventDefault();
-      openGame($('.item__row', item).getAttribute('href'));
+      const row = $('.item__row', item);
+      const url = row.getAttribute('data-game-url') || row.getAttribute('href');
+      const title = row.getAttribute('data-game-title') || $('.item__title', item)?.textContent || 'Игра';
+      openGame(url, title);
     }
   });
 
@@ -575,45 +581,142 @@
     if (Math.abs(dx) > 40) showMedia(mediaIndex - Math.sign(dx));
   });
 
-  /* ---------- Игры: открываются поверх сайта, без новой вкладки ---------- */
+  /* ---------- Игры: открываются поверх сайта в красивом PS3 Theater окне ---------- */
   const play = $('#play');
+  const playWindow = $('#playWindow');
+  const playStage = $('#playStage');
   const playFrame = $('#playFrame');
   const playClose = $('#playClose');
+  const playBackdrop = $('#playBackdrop');
+  const playTitle = $('#playGameTitle');
+  const playFsBtn = $('#playFullscreenBtn');
+  const playFsIcon = $('#playFsIcon');
+  const playFsLabel = $('#playFsLabel');
+  const playLoader = $('#playLoader');
+  const playFallbackBtn = $('#playFallbackBtn');
   let playWasPlaying = false;
+  let playFallbackTimer = null;
+  let currentActiveGameUrl = '';
 
-  // метка версии в адресе: иначе браузер может отдать старую копию страницы игры
-  // вместе со старыми заголовками защиты, и кадр молча останется чёрным
-  const GAME_BUILD = '2026-09-16';
+  const GAME_BUILD = '2026-10-30';
 
-  function openGame(url) {
-    if (!play || !url) return;
+  function openGame(url, title = 'Игра') {
+    if (!play || !url || url === '#play') return;
+    currentActiveGameUrl = url;
+
+    if (playTitle) playTitle.textContent = title;
+    if (playLoader) {
+      playLoader.style.display = 'flex';
+      playLoader.style.opacity = '1';
+    }
+    if (playFallbackBtn) playFallbackBtn.style.display = 'none';
+
     const finalUrl = url.startsWith('http') ? url : `${url}${url.includes('?') ? '&' : '?'}v=${GAME_BUILD}`;
     playFrame.src = finalUrl;
     play.hidden = false;
+
     // аквариум на фоне на паузу: игра и так грузит видеокарту
     playWasPlaying = Boolean(bgVideo && !bgVideo.paused);
     if (playWasPlaying) bgVideo.pause();
+
+    // Таймаут для показа альтернативной кнопки если фрейм блокируется
+    clearTimeout(playFallbackTimer);
+    playFallbackTimer = setTimeout(() => {
+      if (playLoader && playLoader.style.display !== 'none' && playFallbackBtn) {
+        playFallbackBtn.style.display = 'inline-block';
+      }
+    }, 4500);
+
     // фокус отдаём самой игре, иначе стрелки уходят в разделы сайта под наложением
     playFrame.addEventListener('load', () => {
+      clearTimeout(playFallbackTimer);
+      if (playLoader) {
+        playLoader.style.opacity = '0';
+        setTimeout(() => { if (playLoader) playLoader.style.display = 'none'; }, 280);
+      }
       try { playFrame.focus(); } catch { /* кадр мог быть уже закрыт */ }
     }, { once: true });
   }
 
+  function toggleFullscreen() {
+    const target = playWindow || playStage || play;
+    const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+    if (!isFs) {
+      if (target.requestFullscreen) {
+        target.requestFullscreen().catch(() => {
+          if (play.requestFullscreen) play.requestFullscreen().catch(() => {});
+        });
+      } else if (target.webkitRequestFullscreen) {
+        target.webkitRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  }
+
+  function updateFsUI() {
+    const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+    if (playWindow) playWindow.classList.toggle('is-fullscreen', isFs);
+    if (playFsIcon) playFsIcon.textContent = isFs ? '🗗' : '⛶';
+    if (playFsLabel) playFsLabel.textContent = isFs ? 'В окно' : 'Во весь экран';
+  }
+
   const closeGame = () => {
     playSfx('back');
+    clearTimeout(playFallbackTimer);
+    const isFs = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+    if (isFs) {
+      if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
     play.hidden = true;
-    playFrame.removeAttribute('src'); // выгружаем игру, иначе она крутится в фоне
-    if (playWasPlaying) bgVideo.play().catch(() => {});
+    playFrame.removeAttribute('src'); // выгружаем игру, чтобы остановить звук
+    if (playLoader) {
+      playLoader.style.display = 'flex';
+      playLoader.style.opacity = '1';
+    }
+    if (playFallbackBtn) playFallbackBtn.style.display = 'none';
+    if (playWasPlaying && bgVideo) bgVideo.play().catch(() => {});
   };
 
   if (play) {
-    playClose.addEventListener('click', closeGame);
+    if (playClose) playClose.addEventListener('click', closeGame);
+    if (playBackdrop) playBackdrop.addEventListener('click', closeGame);
+    if (playFsBtn) playFsBtn.addEventListener('click', toggleFullscreen);
+
+    if (playFallbackBtn) {
+      playFallbackBtn.addEventListener('click', () => {
+        if (currentActiveGameUrl) {
+          window.open(currentActiveGameUrl, '_blank', 'popup=yes,width=1280,height=720,menubar=no,toolbar=no,location=no,status=no');
+        }
+      });
+    }
+
+    document.addEventListener('fullscreenchange', updateFsUI);
+    document.addEventListener('webkitfullscreenchange', updateFsUI);
+
     addEventListener('keydown', (e) => {
       if (play.hidden || e.key !== 'Escape') return;
       closeGame();
       e.preventDefault();
     });
   }
+
+  // Делегирование кликов по кнопкам запуска игр в карточках
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.psn-btn-launch-game, .game-banner-link[data-game-url]');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = btn.getAttribute('data-game-url');
+      const title = btn.getAttribute('data-game-title') || 'Игра';
+      if (url) openGame(url, title);
+    }
+  });
 
   /* ---------- Ютуб видосы ---------- */
   const videoList = $('#videoItems');
