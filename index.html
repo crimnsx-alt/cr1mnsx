@@ -82,7 +82,7 @@
     <section class="cat" id="cr1mnsx" data-icon="assets/icons/xmb/users.svg">
       <h2 class="cat__label">cr1mnsx</h2>
       <ul class="cat__items">
-        <li class="item">
+        <li class="item is-selected" id="itemBioDashboard">
           <div class="item__row">
             <div class="item__icon item__icon--photo avatar-static" aria-hidden="true">
               <span class="avatar">
@@ -92,8 +92,8 @@
               </span>
             </div>
             <span class="item__text">
-              <span class="item__title">cr1mnsx</span>
-              <span class="item__sub">best player улиц</span>
+              <span class="item__title">cr1mnsx · Главный хаб</span>
+              <span class="item__sub">best player улиц · Обзор дашборда</span>
             </span>
           </div>
           <div class="item__panel item__panel--profile-dashboard">
@@ -298,6 +298,427 @@
             </div>
           </div>
         </li>
+        <!-- 2. Обо мне · Биография cr1mnsx -->
+        <li class="item" id="itemBioStory">
+          <div class="item__row">
+            <span class="item__icon item__icon--photo">
+              <span class="avatar avatar--bio">
+                <span class="avatar__crop">
+                  <img src="assets/photos/avatar.jpg" alt="cr1mnsx">
+                </span>
+              </span>
+            </span>
+            <span class="item__text">
+              <span class="item__title">Обо мне · Биография cr1mnsx</span>
+              <span class="item__sub">Путь игрока, философия, увлечения и таймлайн 2019–2026</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--wide item__panel--bio">
+            <!-- Hero banner с цитатой -->
+            <div class="bio-hero">
+              <div class="bio-hero__badge">BIOGRAPHY &amp; ROADMAP</div>
+              <h3 class="bio-hero__title">Cr1mnsx · История &amp; Путь</h3>
+              <p class="bio-hero__quote">«Don't you dare go Hollow. Lest my work have been for naught.»</p>
+            </div>
+
+            <!-- Двухколоночный макет биографии -->
+            <div class="bio-grid">
+              <!-- Левая колонка: Обо мне и интересы -->
+              <div class="bio-col bio-col--info">
+                <div class="p-card bio-card">
+                  <div class="p-card-title">
+                    <span class="p-icon-emoji">⚔️</span>
+                    <span>КТО ТАКОЙ CR1MNSX</span>
+                  </div>
+                  <div class="bio-card__text">
+                    Геймер, энтузиаст кибер-эстетики, фанат атмосферных Soulsborne вселенных и разработчик персональных интерфейсов. Начав с соревновательных мобильных арен, прошел путь через хардкорные испытания Лордрана и Дранглика к сотням трофеев на PlayStation 5.
+                  </div>
+                  <div class="bio-tags">
+                    <span class="bio-tag">🎮 PS5 &amp; PC</span>
+                    <span class="bio-tag">⚔️ Soulsborne</span>
+                    <span class="bio-tag">🎧 Phonk &amp; Wave</span>
+                    <span class="bio-tag">📺 Twitch Streamer</span>
+                    <span class="bio-tag">💻 Web Artisan</span>
+                  </div>
+                </div>
+
+                <div class="p-card bio-card">
+                  <div class="p-card-title">
+                    <span class="p-icon-emoji">✨</span>
+                    <span>УВЛЕЧЕНИЯ &amp; ВАЙБ</span>
+                  </div>
+                  <div class="bio-interests-list">
+                    <div class="bio-interest-item">
+                      <span class="bio-interest-icon">🎮</span>
+                      <div class="bio-interest-info">
+                        <strong>Hardcore &amp; Action Gaming</strong>
+                        <span>Выбивание сложных трофеев, изучение лора и механик игр FromSoftware.</span>
+                      </div>
+                    </div>
+                    <div class="bio-interest-item">
+                      <span class="bio-interest-icon">🎧</span>
+                      <div class="bio-interest-info">
+                        <strong>Музыка для ночных каток</strong>
+                        <span>Drift Phonk, Dark Synthwave, Russian Post-Punk и оркестровые саундтреки.</span>
+                      </div>
+                    </div>
+                    <div class="bio-interest-item">
+                      <span class="bio-interest-icon">💻</span>
+                      <div class="bio-interest-info">
+                        <strong>Интерфейсы &amp; Код</strong>
+                        <span>Создание ретро-футуристичных UI, вдохновленных эстетикой PS3 и киберпанком.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Интерактивный виджет случайной цитаты -->
+                <div class="p-card bio-card bio-card--quote-widget">
+                  <div class="p-card-title">
+                    <span class="p-icon-emoji">🔥</span>
+                    <span>МУДРОСТЬ ДРАНГЛИКА</span>
+                    <button type="button" class="bio-quote-btn" id="bioNewQuoteBtn" title="Получить новую цитату">
+                      <span>Сменить 🎲</span>
+                    </button>
+                  </div>
+                  <blockquote class="bio-quote-box" id="bioQuoteText">
+                    «There is no path. Beyond the scope of light, beyond the reach of Dark... what could possibly await us?»
+                  </blockquote>
+                  <div class="bio-quote-author" id="bioQuoteAuthor">— Aldia, Scholar of the First Sin</div>
+                </div>
+              </div>
+
+              <!-- Правая колонка: Интерактивный таймлайн 2019–2026 -->
+              <div class="bio-col bio-col--timeline">
+                <div class="p-card bio-card">
+                  <div class="p-card-title">
+                    <span class="p-icon-emoji">⏳</span>
+                    <span>ТАЙМЛАЙН ПУТИ (2019 — 2026)</span>
+                  </div>
+                  <div class="bio-timeline">
+                    <div class="bio-timeline-item">
+                      <div class="bio-timeline-dot"></div>
+                      <div class="bio-timeline-date">2019</div>
+                      <div class="bio-timeline-content">
+                        <strong>Старт в Brawl Stars</strong>
+                        <p>Начало пути под тегом #2RGUQJQ0R, первые клубные баталии и выход в топы.</p>
+                      </div>
+                    </div>
+
+                    <div class="bio-timeline-item">
+                      <div class="bio-timeline-dot"></div>
+                      <div class="bio-timeline-date">2021</div>
+                      <div class="bio-timeline-content">
+                        <strong>Знакомство с Soulsborne</strong>
+                        <p>Первое прохождение Dark Souls Remastered. Рождение любви к хардкорным челленджам.</p>
+                      </div>
+                    </div>
+
+                    <div class="bio-timeline-item">
+                      <div class="bio-timeline-dot bio-timeline-dot--plat"></div>
+                      <div class="bio-timeline-date">2022</div>
+                      <div class="bio-timeline-content">
+                        <strong>Первая платина на PSN 🏆</strong>
+                        <p>100% прохождение Marvel's Spider-Man Remastered на консоли PlayStation.</p>
+                      </div>
+                    </div>
+
+                    <div class="bio-timeline-item">
+                      <div class="bio-timeline-dot bio-timeline-dot--plat"></div>
+                      <div class="bio-timeline-date">2023</div>
+                      <div class="bio-timeline-content">
+                        <strong>Вторая платина &amp; Twitch</strong>
+                        <p>Платина в Miles Morales, первые прямые трансляции каток на Twitch-канале cr1mnsx.</p>
+                      </div>
+                    </div>
+
+                    <div class="bio-timeline-item">
+                      <div class="bio-timeline-dot"></div>
+                      <div class="bio-timeline-date">2024</div>
+                      <div class="bio-timeline-content">
+                        <strong>Рубеж 40,000+ кубков &amp; 640+ трофеев</strong>
+                        <p>Покорение 186 уровня PSN, 40k кубков в Brawl Stars, активные рейды в Helldivers 2.</p>
+                      </div>
+                    </div>
+
+                    <div class="bio-timeline-item bio-timeline-item--active">
+                      <div class="bio-timeline-dot bio-timeline-dot--glow"></div>
+                      <div class="bio-timeline-date">2025–2026</div>
+                      <div class="bio-timeline-content">
+                        <strong>Персональный PS3 XMB Био-Хаб</strong>
+                        <p>Запуск интерактивного пространства cr1mnsx, объединяющего гейминг, музыку и сообщество.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. Gaming Profile · Витрина достижений -->
+        <li class="item" id="itemGamingShowcase">
+          <div class="item__row">
+            <span class="item__icon item__icon--photo">
+              <span class="icon-tile icon-tile--trophy" style="background: rgba(226, 232, 240, 0.15); border: 1px solid rgba(226, 232, 240, 0.3);">
+                <img src="assets/icons/trophies/plat.svg" alt="Trophies">
+              </span>
+            </span>
+            <span class="item__text">
+              <span class="item__title">Gaming Profile · Витрина трофеев</span>
+              <span class="item__sub">Платины, PSN статистика, любимые серии и боевой сетап</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--wide item__panel--gaming">
+            <!-- Хедер трофеев -->
+            <div class="p-card gs-summary-card">
+              <div class="gs-summary-header">
+                <div class="gs-summary-left">
+                  <span class="psn-badge psn-badge--plat">PSN LEVEL 186</span>
+                  <h3 class="gs-summary-title">Трофейный стенд Cr1mnsx</h3>
+                  <span class="gs-summary-subtitle">647 полученных трофеев · PlayStation Network</span>
+                </div>
+                <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
+                  <span>PSN.GG ↗</span>
+                </a>
+              </div>
+              <div class="gs-trophies-row">
+                <div class="gs-tr-box gs-tr-box--plat">
+                  <img src="assets/icons/trophies/plat.svg" alt="Platinum">
+                  <div class="gs-tr-val">2</div>
+                  <div class="gs-tr-label">Платины</div>
+                </div>
+                <div class="gs-tr-box gs-tr-box--gold">
+                  <img src="assets/icons/trophies/gold.svg" alt="Gold">
+                  <div class="gs-tr-val">20</div>
+                  <div class="gs-tr-label">Золото</div>
+                </div>
+                <div class="gs-tr-box gs-tr-box--silver">
+                  <img src="assets/icons/trophies/silver.svg" alt="Silver">
+                  <div class="gs-tr-val">128</div>
+                  <div class="gs-tr-label">Серебро</div>
+                </div>
+                <div class="gs-tr-box gs-tr-box--bronze">
+                  <img src="assets/icons/trophies/bronze.svg" alt="Bronze">
+                  <div class="gs-tr-val">497</div>
+                  <div class="gs-tr-label">Бронза</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Витрина платин -->
+            <div class="p-card gs-platinum-showcase">
+              <div class="p-card-title">
+                <span class="p-icon-emoji">🌟</span>
+                <span>ВИТРИНА ПЛАТИНОВЫХ НАГРАД (100% ЗАВЕРШЕНИЕ)</span>
+              </div>
+              <div class="gs-plat-grid">
+                <a class="gs-plat-card" href="https://psnprofiles.com/trophies/11786-marvels-spider-man-remastered/Cr1mnsx" target="_blank" rel="noopener">
+                  <div class="gs-plat-backdrop" style="background-image: url('assets/photos/games/ds1-remastered.jpg');"></div>
+                  <div class="gs-plat-inner">
+                    <img class="gs-plat-icon" src="assets/icons/trophies/plat.svg" alt="Platinum">
+                    <div class="gs-plat-info">
+                      <span class="gs-plat-status">🏆 100% PLATINUM</span>
+                      <strong class="gs-plat-name">Marvel's Spider-Man Remastered</strong>
+                      <span class="gs-plat-desc">"Be Greater" · Полная зачистка всех районов Нью-Йорка на 100%</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a class="gs-plat-card" href="https://psnprofiles.com/trophies/11805-marvels-spider-man-miles-morales/Cr1mnsx" target="_blank" rel="noopener">
+                  <div class="gs-plat-backdrop" style="background-image: url('assets/photos/souls/ds2-last-played-hd.jpg');"></div>
+                  <div class="gs-plat-inner">
+                    <img class="gs-plat-icon" src="assets/icons/trophies/plat.svg" alt="Platinum">
+                    <div class="gs-plat-info">
+                      <span class="gs-plat-status">🏆 100% PLATINUM</span>
+                      <strong class="gs-plat-name">Marvel's Spider-Man: Miles Morales</strong>
+                      <span class="gs-plat-desc">"Be Yourself" · Биоэлектричество, Гарлем и спасение города</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Сетка: Любимые серии & Сетап -->
+            <div class="gs-bottom-grid">
+              <div class="p-card gs-series-card">
+                <div class="p-card-title">
+                  <span class="p-icon-emoji">👑</span>
+                  <span>ЛЮБИМЫЕ ФРАНШИЗЫ</span>
+                </div>
+                <div class="gs-series-list">
+                  <div class="gs-series-row">
+                    <span class="gs-series-rank">1</span>
+                    <div class="gs-series-info">
+                      <strong>Dark Souls Trilogy</strong>
+                      <span>FromSoftware · Вершина хардкорного левелдизайна и лора</span>
+                    </div>
+                    <span class="gs-series-tag">Фаворит №1</span>
+                  </div>
+                  <div class="gs-series-row">
+                    <span class="gs-series-rank">2</span>
+                    <div class="gs-series-info">
+                      <strong>Marvel's Spider-Man</strong>
+                      <span>Insomniac Games · 2 платины, эталонная динамика полетов</span>
+                    </div>
+                    <span class="gs-series-tag gs-series-tag--plat">2 Платины</span>
+                  </div>
+                  <div class="gs-series-row">
+                    <span class="gs-series-rank">3</span>
+                    <div class="gs-series-info">
+                      <strong>The Witcher 3: Wild Hunt</strong>
+                      <span>CD Projekt RED · Непревзойденный нарратив и атмосфера</span>
+                    </div>
+                    <span class="gs-series-tag">RPG Classic</span>
+                  </div>
+                  <div class="gs-series-row">
+                    <span class="gs-series-rank">4</span>
+                    <div class="gs-series-info">
+                      <strong>Grand Theft Auto Series</strong>
+                      <span>Rockstar Games · Vice City &amp; GTA V PS5 Edition</span>
+                    </div>
+                    <span class="gs-series-tag">Legenda</span>
+                  </div>
+                  <div class="gs-series-row">
+                    <span class="gs-series-rank">5</span>
+                    <div class="gs-series-info">
+                      <strong>Brawl Stars</strong>
+                      <span>Supercell · 40k+ кубков, 108 бойцов, соревновательный скилл</span>
+                    </div>
+                    <span class="gs-series-tag gs-series-tag--bs">40k Cups</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-card gs-rig-card">
+                <div class="p-card-title">
+                  <span class="p-icon-emoji">⚡</span>
+                  <span>БОЕВОЙ СЕТАП</span>
+                </div>
+                <div class="gs-rig-list">
+                  <div class="gs-rig-item">
+                    <span class="gs-rig-icon">🎮</span>
+                    <div class="gs-rig-info">
+                      <strong>PlayStation 5</strong>
+                      <span>Ultra-HD Blu-ray Edition · 4K HDR 60/120 FPS</span>
+                    </div>
+                  </div>
+                  <div class="gs-rig-item">
+                    <span class="gs-rig-icon">🕹️</span>
+                    <div class="gs-rig-info">
+                      <strong>DualSense Midnight Black</strong>
+                      <span>Адаптивные курки и тактильная отдача haptic feedback</span>
+                    </div>
+                  </div>
+                  <div class="gs-rig-item">
+                    <span class="gs-rig-icon">🖥️</span>
+                    <div class="gs-rig-info">
+                      <strong>High-Refresh Gaming Display</strong>
+                      <span>144Hz Fast Response, насыщенная цветопередача</span>
+                    </div>
+                  </div>
+                  <div class="gs-rig-item">
+                    <span class="gs-rig-icon">🎧</span>
+                    <div class="gs-rig-info">
+                      <strong>3D Spatial Audio</strong>
+                      <span>Точное позиционирование шагов и звуков боя</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- 4. Трофеи сайта · Достижения -->
+        <li class="item" id="itemSiteTrophies">
+          <div class="item__row">
+            <span class="item__icon item__icon--photo">
+              <span class="icon-tile icon-tile--star" style="background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3);">
+                <img src="assets/icons/trophies/gold.svg" alt="Trophies">
+              </span>
+            </span>
+            <span class="item__text">
+              <span class="item__title">Трофеи сайта · Достижения</span>
+              <span class="item__sub">Интерактивная система наград XMB (X/4)</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--wide item__panel--trophies">
+            <div class="p-card site-tr-summary">
+              <div class="site-tr-summary__header">
+                <div>
+                  <h3 class="site-tr-summary__title">Достижения посетителя сайта</h3>
+                  <span class="site-tr-summary__sub">Исследуйте разделы сайта cr1mnsx, чтобы открыть все 4 приза</span>
+                </div>
+                <div class="site-tr-badge" id="siteTrophyCountBadge">1 / 4</div>
+              </div>
+              <div class="site-tr-progress-bar">
+                <div class="site-tr-progress-fill" id="siteTrophyProgressFill" style="width: 25%;"></div>
+              </div>
+            </div>
+
+            <div class="site-tr-grid">
+              <!-- Трофей 1: Бронза -->
+              <div class="site-tr-card is-unlocked" id="trCardWelcome">
+                <div class="site-tr-card__icon-wrap">
+                  <img src="assets/icons/trophies/bronze.svg" alt="Bronze Trophy">
+                </div>
+                <div class="site-tr-card__body">
+                  <div class="site-tr-card__type">БРОНЗОВЫЙ ПРИЗ</div>
+                  <strong class="site-tr-card__name">Добро пожаловать в Дранглик</strong>
+                  <p class="site-tr-card__desc">Посетить био-сайт cr1mnsx и войти в XMB интерфейс.</p>
+                </div>
+                <div class="site-tr-card__status" id="trStatusWelcome">Получен 🏆</div>
+              </div>
+
+              <!-- Трофей 2: Серебро -->
+              <div class="site-tr-card" id="trCardBio">
+                <div class="site-tr-card__icon-wrap">
+                  <img src="assets/icons/trophies/silver.svg" alt="Silver Trophy">
+                </div>
+                <div class="site-tr-card__body">
+                  <div class="site-tr-card__type">СЕРЕБРЯНЫЙ ПРИЗ</div>
+                  <strong class="site-tr-card__name">Хранитель Огня</strong>
+                  <p class="site-tr-card__desc">Открыть и прочитать раздел «Биография cr1mnsx» с таймлайном.</p>
+                </div>
+                <div class="site-tr-card__status" id="trStatusBio">Заблокирован 🔒</div>
+              </div>
+
+              <!-- Трофей 3: Золото -->
+              <div class="site-tr-card" id="trCardGaming">
+                <div class="site-tr-card__icon-wrap">
+                  <img src="assets/icons/trophies/gold.svg" alt="Gold Trophy">
+                </div>
+                <div class="site-tr-card__body">
+                  <div class="site-tr-card__type">ЗОЛОТОЙ ПРИЗ</div>
+                  <strong class="site-tr-card__name">Платиновый Охотник</strong>
+                  <p class="site-tr-card__desc">Изучить витрину платиновых наград в разделе Gaming Showcase.</p>
+                </div>
+                <div class="site-tr-card__status" id="trStatusGaming">Заблокирован 🔒</div>
+              </div>
+
+              <!-- Трофей 4: Платина -->
+              <div class="site-tr-card" id="trCardPlatinum">
+                <div class="site-tr-card__icon-wrap">
+                  <img src="assets/icons/trophies/plat.svg" alt="Platinum Trophy">
+                </div>
+                <div class="site-tr-card__body">
+                  <div class="site-tr-card__type">ПЛАТИНОВЫЙ ПРИЗ</div>
+                  <strong class="site-tr-card__name">Истинный путник</strong>
+                  <p class="site-tr-card__desc">Осмотреть все категории XMB (Профиль, Музыка, PS5, Игры, Twitch, Линки).</p>
+                </div>
+                <div class="site-tr-card__status" id="trStatusPlatinum">Заблокирован 🔒</div>
+              </div>
+            </div>
+
+            <div class="site-tr-actions">
+              <button type="button" class="site-tr-btn" id="btnResetSiteTrophies">
+                <span>Сбросить трофеи (для повторного теста) 🔄</span>
+              </button>
+            </div>
+          </div>
+        </li>
+
       </ul>
     </section>
 
@@ -354,6 +775,70 @@
             </div>
           </div>
         </li>
+        <!-- 2. Музыкальный вайб & Плейлисты -->
+        <li class="item" id="itemMusicVibe">
+          <div class="item__row">
+            <span class="item__icon"><img src="assets/icons/xmb/music.svg" alt="Music Vibe"></span>
+            <span class="item__text">
+              <span class="item__title">Музыкальный вайб &amp; Плейлисты</span>
+              <span class="item__sub">Любимые стили, фон для ночных каток и эстетика звука</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--wide item__panel--music-vibe">
+            <div class="p-card mv-header-card">
+              <div class="p-card-title">
+                <span class="p-icon-emoji">🎧</span>
+                <span>ЗВУКОВАЯ ЭСТЕТИКА CR1MNSX</span>
+              </div>
+              <p class="mv-desc">Музыка — ключевой элемент атмосферы для каток в Dark Souls, Brawl Stars и ночных сессий кодинга.</p>
+            </div>
+
+            <div class="mv-grid">
+              <div class="mv-genre-card mv-genre-card--phonk">
+                <div class="mv-genre-header">
+                  <span class="mv-genre-icon">⚡</span>
+                  <span class="mv-genre-tag">Energy &amp; Drive</span>
+                </div>
+                <strong class="mv-genre-title">Drift &amp; Aggressive Phonk</strong>
+                <p class="mv-genre-desc">Глубокие басы, cowbell-мелодии и мощный ритм для максимальной концентрации во время каток.</p>
+              </div>
+
+              <div class="mv-genre-card mv-genre-card--synth">
+                <div class="mv-genre-header">
+                  <span class="mv-genre-icon">🌃</span>
+                  <span class="mv-genre-tag">Cyber-Retro</span>
+                </div>
+                <strong class="mv-genre-title">Dark Synthwave &amp; Cyberpunk</strong>
+                <p class="mv-genre-desc">Неоновый ретрофутуризм, аналоговые синтезаторы и вайб ночного Лос-Сантоса.</p>
+              </div>
+
+              <div class="mv-genre-card mv-genre-card--doomer">
+                <div class="mv-genre-header">
+                  <span class="mv-genre-icon">🌧️</span>
+                  <span class="mv-genre-tag">Melancholy</span>
+                </div>
+                <strong class="mv-genre-title">Russian Post-Punk &amp; Doomer</strong>
+                <p class="mv-genre-desc">Гитарная меланхолия, холодная атмосфера панелек и кинематографичный звук.</p>
+              </div>
+
+              <div class="mv-genre-card mv-genre-card--ost">
+                <div class="mv-genre-header">
+                  <span class="mv-genre-icon">⚔️</span>
+                  <span class="mv-genre-tag">Dark Fantasy</span>
+                </div>
+                <strong class="mv-genre-title">Soulsborne &amp; Game OSTs</strong>
+                <p class="mv-genre-desc">Эпические хоровые и скрипичные темы Маджулы, Лордрана, Людвига и Гаэля.</p>
+              </div>
+            </div>
+
+            <div class="mv-action-row">
+              <a class="psn-btn-profile psn-btn-profile--brawl" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener">
+                <span>Слушать главный плейлист на Яндекс Музыке ↗</span>
+              </a>
+            </div>
+          </div>
+        </li>
+
 
         <!-- 2. Ссылка на открытие в приложении / веб-версии -->
         <li class="item">
@@ -1610,7 +2095,43 @@
     <section class="cat" id="links" data-icon="assets/icons/xmb/network.svg">
       <h2 class="cat__label">Линки</h2>
       <ul class="cat__items">
-        <li class="item"><a class="item__row" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/yandexmusic.svg" alt="Яндекс Музыка"></span></span><span class="item__text"><span class="item__title">Яндекс Музыка</span><span class="item__sub">music.yandex.ru · Мой плейлист &amp; любимые треки</span></span></a></li>
+                <!-- 1. Поделиться & QR-код -->
+        <li class="item item--share is-selected" id="itemShareBio">
+          <div class="item__row">
+            <span class="item__icon"><span class="icon-tile icon-tile--stats"><img src="assets/icons/xmb/network.svg" alt="Share"></span></span>
+            <span class="item__text">
+              <span class="item__title">Поделиться &amp; QR-код</span>
+              <span class="item__sub">Открыть сайт на смартфоне или скопировать ссылку</span>
+            </span>
+          </div>
+          <div class="item__panel item__panel--wide item__panel--share">
+            <div class="p-card share-card">
+              <div class="share-grid">
+                <div class="share-qr-box">
+                  <div class="share-qr-frame">
+                    <img src="assets/photos/qr-cr1mnsx.svg" alt="QR-код сайта cr1mnsx" width="160" height="160">
+                  </div>
+                  <span class="share-qr-hint">Наведите камеру телефона для перехода</span>
+                </div>
+                <div class="share-info-box">
+                  <span class="psn-badge">LINK-IN-BIO</span>
+                  <h3 class="share-title">Поделиться сайтом Cr1mnsx</h3>
+                  <p class="share-desc">Персональная биография и интерактивный хаб в дизайне PlayStation 3 XMB с трофеями, музыкой и веб-играми.</p>
+                  <div class="share-url-pill" id="shareUrlDisplay">https://crimnsx-alt.github.io/cr1mnsx</div>
+                  <div class="share-btn-row">
+                    <button type="button" class="psn-btn-profile" id="btnCopyShareUrl">
+                      <span id="btnCopyShareText">Скопировать ссылку 📋</span>
+                    </button>
+                    <a class="psn-btn-profile psn-btn-profile--psn" href="https://github.com/crimnsx-alt/cr1mnsx" target="_blank" rel="noopener">
+                      <span>GitHub репозиторий ↗</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+<li class="item"><a class="item__row" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/yandexmusic.svg" alt="Яндекс Музыка"></span></span><span class="item__text"><span class="item__title">Яндекс Музыка</span><span class="item__sub">music.yandex.ru · Мой плейлист &amp; любимые треки</span></span></a></li>
         <li class="item"><a class="item__row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/vk.png" alt="VK"></span></span><span class="item__text"><span class="item__title">ВКонтакте</span><span class="item__sub">vk.ru/cr1mnsx</span></span></a></li>
         <li class="item"><a class="item__row" href="https://steamcommunity.com/profiles/76561199335958843" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--steam"><img src="assets/icons/social/steam.svg" alt="Steam"></span></span><span class="item__text"><span class="item__title">Steam Профиль</span><span class="item__sub">cr1mnsx</span></span></a></li>
         <li class="item"><a class="item__row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/icons/social/twitch.png" alt="Twitch"></span></span><span class="item__text"><span class="item__title">Twitch Профиль</span><span class="item__sub">twitch.tv/cr1mnsx</span></span></a></li>

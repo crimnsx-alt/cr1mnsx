@@ -243,6 +243,24 @@
         gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.15);
         osc.start(t);
         osc.stop(t + 0.16);
+      } else if (type === 'trophy') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1046.5, t);
+        gain.gain.setValueAtTime(0.08, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+        osc.start(t);
+        osc.stop(t + 0.36);
+
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(1318.5, t + 0.08);
+        gain2.gain.setValueAtTime(0.09, t + 0.08);
+        gain2.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.start(t + 0.08);
+        osc2.stop(t + 1.25);
       } else if (type === 'back') {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(660, t);
@@ -282,16 +300,22 @@
   const ps3ToastSub = $('#ps3ToastSub');
   let toastTimer = null;
 
-  const showPs3Toast = (title, sub) => {
+  const ps3ToastIcon = ps3Toast ? ps3Toast.querySelector('.ps3-toast__icon') : null;
+  const showPs3Toast = (title, sub, iconHtml) => {
     if (!ps3Toast) return;
     if (ps3ToastTitle && title) ps3ToastTitle.textContent = title;
     if (ps3ToastSub && sub) ps3ToastSub.textContent = sub;
+    if (ps3ToastIcon) {
+      if (iconHtml) ps3ToastIcon.innerHTML = iconHtml;
+      else ps3ToastIcon.innerHTML = '🎮';
+    }
     ps3Toast.classList.add('is-show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       ps3Toast.classList.remove('is-show');
     }, 4500);
   };
+  window.showPs3Toast = showPs3Toast;
 
   function selectCat(k) {
     if (typeof k === 'string') {
@@ -302,6 +326,9 @@
     if (next === current) return;
     current = next;
     playSfx('cat');
+    // Trophy hook for categories visited
+    if (window.trackCatVisit) window.trackCatVisit(next);
+
     if (window.ps3WaveImpulse) window.ps3WaveImpulse();
     render();
     if (window.innerWidth <= 768) {
@@ -316,6 +343,9 @@
     if (next === selected[current]) return;
     selected[current] = next;
     playSfx('item');
+    // Trophy hook for bio / gaming showcase
+    if (window.checkNavTrophy) window.checkNavTrophy(current, next);
+
     if (window.ps3WaveImpulse) window.ps3WaveImpulse();
     render();
   }
@@ -1888,4 +1918,225 @@
   initPs3ClockWidget();
   initAvatarHoverZoom();
   initYandexMusicWidget();
+
+  /* ==========================================================================
+     ИНТЕРАКТИВНЫЕ ВИДЖЕТЫ BIO: ТРОФЕИ САЙТА, ЦИТАТНИК, ПОДЕЛИТЬСЯ
+     ========================================================================== */
+
+  // 1. Система трофеев сайта (PlayStation 3 Trophies)
+  function initSiteTrophies() {
+    const STORAGE_KEY = 'cr1mnsx_site_trophies_v1';
+    const TROPHIES = {
+      welcome: {
+        id: 'welcome',
+        name: 'Добро пожаловать в Дранглик',
+        desc: 'Посетить био-сайт cr1mnsx и войти в XMB интерфейс',
+        grade: 'Бронзовый приз',
+        icon: '<img src="assets/icons/trophies/bronze.svg" width="22" height="22" alt="Bronze">'
+      },
+      bio: {
+        id: 'bio',
+        name: 'Хранитель Огня',
+        desc: 'Открыть и прочитать раздел «Биография cr1mnsx»',
+        grade: 'Серебряный приз',
+        icon: '<img src="assets/icons/trophies/silver.svg" width="22" height="22" alt="Silver">'
+      },
+      gaming: {
+        id: 'gaming',
+        name: 'Платиновый Охотник',
+        desc: 'Изучить витрину платиновых наград в разделе Gaming Showcase',
+        grade: 'Золотой приз',
+        icon: '<img src="assets/icons/trophies/gold.svg" width="22" height="22" alt="Gold">'
+      },
+      explorer: {
+        id: 'explorer',
+        name: 'Истинный путник',
+        desc: 'Осмотреть все категории XMB меню сайта',
+        grade: 'Платиновый приз',
+        icon: '<img src="assets/icons/trophies/plat.svg" width="24" height="24" alt="Platinum">'
+      }
+    };
+
+    let unlocked = new Set();
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (Array.isArray(saved)) saved.forEach(k => unlocked.add(k));
+    } catch {}
+
+    const visitedCats = new Set([0]);
+
+    function save() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(unlocked)));
+      } catch {}
+    }
+
+    function renderTrophiesUI() {
+      const countBadge = document.getElementById('siteTrophyCountBadge');
+      const progressFill = document.getElementById('siteTrophyProgressFill');
+      const total = Object.keys(TROPHIES).length;
+      const count = unlocked.size;
+
+      if (countBadge) countBadge.textContent = `${count} / ${total}`;
+      if (progressFill) progressFill.style.width = `${(count / total) * 100}%`;
+
+      // Update cards
+      Object.keys(TROPHIES).forEach(key => {
+        const cardId = key === 'welcome' ? 'trCardWelcome' :
+                       key === 'bio' ? 'trCardBio' :
+                       key === 'gaming' ? 'trCardGaming' : 'trCardPlatinum';
+        const statusId = key === 'welcome' ? 'trStatusWelcome' :
+                         key === 'bio' ? 'trStatusBio' :
+                         key === 'gaming' ? 'trStatusGaming' : 'trStatusPlatinum';
+        const card = document.getElementById(cardId);
+        const status = document.getElementById(statusId);
+        if (card && status) {
+          const isUnlocked = unlocked.has(key);
+          card.classList.toggle('is-unlocked', isUnlocked);
+          status.textContent = isUnlocked ? 'Получен 🏆' : 'Заблокирован 🔒';
+        }
+      });
+    }
+
+    function unlockTrophy(key) {
+      if (unlocked.has(key) || !TROPHIES[key]) return;
+      unlocked.add(key);
+      save();
+      renderTrophiesUI();
+
+      // Play PS3 Trophy Chime
+      playSfx('trophy');
+
+      // Show PS3 Toast
+      const tr = TROPHIES[key];
+      showPs3Toast(`Вы получили приз! (${tr.grade})`, tr.name, tr.icon);
+    }
+
+    window.unlockSiteTrophy = unlockTrophy;
+
+    window.trackCatVisit = (catIdx) => {
+      visitedCats.add(catIdx);
+      if (visitedCats.size >= cats.length) {
+        unlockTrophy('explorer');
+      }
+      if (cats[catIdx] && cats[catIdx].id === 'souls') {
+        unlockTrophy('gaming');
+      }
+    };
+
+    window.checkNavTrophy = (catIdx, itemIdx) => {
+      const curCat = cats[catIdx];
+      if (!curCat) return;
+      const curItems = itemsOf(catIdx);
+      const curItem = curItems[itemIdx];
+      if (!curItem) return;
+
+      if (curItem.id === 'itemBioStory') {
+        unlockTrophy('bio');
+      } else if (curItem.id === 'itemGamingShowcase') {
+        unlockTrophy('gaming');
+      }
+    };
+
+    // Reset button
+    const resetBtn = document.getElementById('btnResetSiteTrophies');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        unlocked.clear();
+        save();
+        renderTrophiesUI();
+        playSfx('ok');
+        showPs3Toast('Сброс трофеев', 'Прогресс достижений сайта сброшен для теста');
+      });
+    }
+
+    // Auto unlock Welcome trophy on load after short delay
+    setTimeout(() => {
+      unlockTrophy('welcome');
+    }, 1800);
+
+    renderTrophiesUI();
+  }
+
+  // 2. Интерактивный генератор цитат Dark Souls
+  function initBioQuoteWidget() {
+    const quotes = [
+      { text: "«Don't you dare go Hollow. Lest my work have been for naught.»", author: "— Laurentius of the Great Swamp" },
+      { text: "«Praise the Sun! The sun is a wondrous body. Like a magnificent father!»", author: "— Solaire of Astora" },
+      { text: "«There is no path. Beyond the scope of light, beyond the reach of Dark... what could possibly await us?»", author: "— Aldia, Scholar of the First Sin" },
+      { text: "«My name is Lucatiel. I beg of you, remember my name. For I may not myself, but a little while...»", author: "— Lucatiel of Mirrah" },
+      { text: "«Don't get yourself killed. Neither of us wants to see you go Hollow.»", author: "— Andre of Astora" },
+      { text: "«Ashen one, hearest thou my voice still?»", author: "— Fire Keeper" },
+      { text: "«A hunter must hunt. Even in a dream.»", author: "— Eileen the Crow" },
+      { text: "«Hesitation is defeat.»", author: "— Isshin, the Sword Saint" }
+    ];
+
+    const quoteText = document.getElementById('bioQuoteText');
+    const quoteAuthor = document.getElementById('bioQuoteAuthor');
+    const newQuoteBtn = document.getElementById('bioNewQuoteBtn');
+    let currentIndex = 0;
+
+    if (newQuoteBtn && quoteText && quoteAuthor) {
+      newQuoteBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        playSfx('ok');
+
+        let nextIdx;
+        do {
+          nextIdx = Math.floor(Math.random() * quotes.length);
+        } while (nextIdx === currentIndex && quotes.length > 1);
+        currentIndex = nextIdx;
+
+        quoteText.style.opacity = '0';
+        quoteAuthor.style.opacity = '0';
+        setTimeout(() => {
+          quoteText.textContent = quotes[currentIndex].text;
+          quoteAuthor.textContent = quotes[currentIndex].author;
+          quoteText.style.opacity = '1';
+          quoteAuthor.style.opacity = '1';
+        }, 150);
+      });
+    }
+  }
+
+  // 3. Копирование ссылки на профиль (Share & QR)
+  function initShareBioWidget() {
+    const copyBtn = document.getElementById('btnCopyShareUrl');
+    const copyText = document.getElementById('btnCopyShareText');
+    const url = 'https://crimnsx-alt.github.io/cr1mnsx';
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(url);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = url;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          }
+          playSfx('ok');
+          if (copyText) copyText.textContent = 'Скопировано! ✓';
+          showPs3Toast('Ссылка скопирована', 'Поделитесь био-профилем cr1mnsx');
+          setTimeout(() => {
+            if (copyText) copyText.textContent = 'Скопировать ссылку 📋';
+          }, 3000);
+        } catch {
+          prompt('Скопируйте ссылку вручную:', url);
+        }
+      });
+    }
+  }
+
+  initSiteTrophies();
+  initBioQuoteWidget();
+  initShareBioWidget();
 })();
