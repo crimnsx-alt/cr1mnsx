@@ -3590,7 +3590,157 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   }
 }
 
+/* ==================================================
+   РАЗДЕЛ ОНЛАЙН-ИГР MINGAME (XMB)
+   ================================================== */
+.xmb-on #game .item.is-selected .item__panel {
+  display: block;
+  position: absolute;
+  top: -14px;
+  left: calc(var(--col) + 18px + 440px + 36px);
+  width: min(540px, calc(100vw - var(--ix, 20vw) - var(--col) - 510px));
+  margin: 0;
+  z-index: 40 !important;
+  animation: psnPanelFadeIn .35s var(--ease);
+}
 
+.item__panel--game {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Иконки игр в левой колонке XMB */
+.item__icon--game {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(12, 20, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease);
+  flex-shrink: 0;
+}
+
+.item__icon--game img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 11px;
+}
+
+.item.is-selected .item__icon--game {
+  transform: scale(1.15);
+  border-color: rgba(0, 190, 255, 0.85);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.65), 0 0 18px rgba(0, 190, 255, 0.55);
+}
+
+/* Медиа-контейнер для баннера и видео-превью */
+.game-banner-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 11px;
+}
+
+.game-banner-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.game-banner-video.has-video {
+  opacity: 1;
+}
+
+.game-online-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 230, 118, 0.22);
+  border: 1px solid rgba(0, 230, 118, 0.55);
+  color: #00e676;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-shadow: 0 0 8px rgba(0, 230, 118, 0.6);
+}
+
+.game-meta {
+  background: linear-gradient(135deg, rgba(16, 26, 44, 0.88), rgba(8, 14, 28, 0.94));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 36px rgba(0, 4, 16, 0.7), 0 0 18px rgba(0, 168, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Кнопки запуска игры */
+.psn-btn-profile--play {
+  background: linear-gradient(135deg, rgba(0, 168, 255, 0.45) 0%, rgba(0, 80, 200, 0.8) 100%) !important;
+  border-color: rgba(0, 200, 255, 0.65) !important;
+  box-shadow: 0 4px 18px rgba(0, 168, 255, 0.35) !important;
+  font-weight: 600 !important;
+  transition: all .25s var(--ease) !important;
+}
+
+.psn-btn-profile--play:hover {
+  background: linear-gradient(135deg, rgba(0, 200, 255, 0.7) 0%, rgba(0, 110, 255, 0.95) 100%) !important;
+  border-color: rgba(140, 230, 255, 0.95) !important;
+  box-shadow: 0 6px 24px rgba(0, 190, 255, 0.6), 0 0 16px rgba(0, 220, 255, 0.5) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+.psn-btn-profile--port {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(126, 34, 206, 0.75) 100%) !important;
+  border-color: rgba(192, 132, 252, 0.6) !important;
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.3) !important;
+  font-weight: 600 !important;
+  transition: all .25s var(--ease) !important;
+}
+
+.psn-btn-profile--port:hover {
+  background: linear-gradient(135deg, rgba(192, 132, 252, 0.65) 0%, rgba(147, 51, 234, 0.9) 100%) !important;
+  border-color: rgba(233, 213, 255, 0.9) !important;
+  box-shadow: 0 6px 24px rgba(168, 85, 247, 0.55), 0 0 16px rgba(192, 132, 252, 0.5) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+@media (max-width: 768px) {
+  .xmb-on #game .item.is-selected .item__panel {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 14px auto 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+}
 
 /* ==================================================
    APPLE HIG ACCESSIBILITY SUITE

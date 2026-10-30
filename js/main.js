@@ -174,6 +174,24 @@
       if (typeof onMafanyaDeselected === 'function') onMafanyaDeselected();
       else if (typeof unloadTwitchXmbIframe === 'function') unloadTwitchXmbIframe();
     }
+
+    // Управление воспроизведением видео-превью игр MinGame при навигации в XMB
+    if (currentCatId === 'game') {
+      const selectedGameItem = itemsOf(current)[selected[current]];
+      const allGameVideos = $$('#game .game-banner-video');
+      allGameVideos.forEach((v) => { if (!v.paused) v.pause(); });
+      if (selectedGameItem) {
+        const v = selectedGameItem.querySelector('.game-banner-video');
+        if (v && (v.currentSrc || v.querySelector('source[src]'))) {
+          v.classList.add('has-video');
+          v.play().catch(() => {});
+        }
+      }
+    } else {
+      const allGameVideos = $$('#game .game-banner-video');
+      allGameVideos.forEach((v) => { if (!v.paused) v.pause(); });
+    }
+
     if (typeof initAeroTilt === 'function') initAeroTilt();
   };
 
