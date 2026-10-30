@@ -1,4 +1,11 @@
 {
+  "name": "cr1mnsx-xmb",
+  "version": "1.0.0",
+  "description": "PlayStation 3 XMB & Frutiger Aero personal site",
+  "scripts": {
+    "start": "npx -y serve . -l 8080",
+    "dev": "npx -y serve . -l 8080"
+  },
   "dependencies": {
     "psn-api": "^2.18.1"
   }

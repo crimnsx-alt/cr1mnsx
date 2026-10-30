@@ -88,6 +88,12 @@
   let geo = null;
   const px = (name) => parseFloat(getComputedStyle(root).getPropertyValue(name)) || 0;
 
+  /* Twitch State */
+  let activeTwitchTab = 'clips';
+  let twitchIsLiveNow = false;
+  let currentClipIndex = 0;
+  let currentClipsList = [];
+
   const measure = () => {
     const vw = innerWidth;
     const vh = innerHeight;
@@ -162,9 +168,11 @@
     const mafanyaItem = $('#itemMafanyaTwitch');
     const isMafanyaSelected = currentCatId === 'twitch' && mafanyaItem && mafanyaItem.classList.contains('is-selected');
     if (isMafanyaSelected) {
-      if (typeof loadTwitchXmbIframe === 'function') loadTwitchXmbIframe(true);
+      if (typeof onMafanyaSelected === 'function') onMafanyaSelected();
+      else if (typeof loadTwitchXmbIframe === 'function') loadTwitchXmbIframe(true);
     } else {
-      if (typeof unloadTwitchXmbIframe === 'function') unloadTwitchXmbIframe();
+      if (typeof onMafanyaDeselected === 'function') onMafanyaDeselected();
+      else if (typeof unloadTwitchXmbIframe === 'function') unloadTwitchXmbIframe();
     }
     if (typeof initAeroTilt === 'function') initAeroTilt();
   };
@@ -250,21 +258,10 @@
     });
   }
 
-  /* ---------- Фоновая музыка: Dark Souls II — Majula Theme ---------- */
-  const bgmAudio = $('#bgmAudio');
-  const bgmPill = $('#bgmPill');
-  const bgmToggleBtn = $('#bgmToggleBtn');
+  /* ---------- PS3 Notification Toast ---------- */
   const ps3Toast = $('#ps3Toast');
   const ps3ToastTitle = $('#ps3ToastTitle');
   const ps3ToastSub = $('#ps3ToastSub');
-  const ds2PanelPlayBtn = $('#ds2PanelPlayBtn');
-  const ds2SeekFill = $('#ds2SeekFill');
-  const ds2SeekBar = $('#ds2SeekBar');
-  const ds2TimeCurrent = $('#ds2TimeCurrent');
-
-  if (bgmAudio) bgmAudio.volume = 0.5;
-
-  let bgmPlaying = false;
   let toastTimer = null;
 
   const showPs3Toast = (title, sub) => {
@@ -278,134 +275,11 @@
     }, 4500);
   };
 
-  const updateBgmUI = (isPlaying) => {
-    bgmPlaying = isPlaying;
-    if (bgmPill) {
-      bgmPill.classList.toggle('is-playing', isPlaying);
-    }
-    if (ds2PanelPlayBtn) {
-      const icon = $('.ds2-player-btn-icon', ds2PanelPlayBtn);
-      const text = $('.ds2-player-btn-text', ds2PanelPlayBtn);
-      if (icon) icon.textContent = isPlaying ? '⏸' : '▶';
-      if (text) text.textContent = isPlaying ? 'Пауза' : 'Слушать';
-    }
-  };
-
-  const playBgm = () => {
-    if (!bgmAudio) return Promise.resolve(false);
-    initAudio();
-    bgmAudio.volume = 0.3;
-    localStorage.removeItem('ps3_bgm_disabled');
-    return bgmAudio.play().then(() => {
-      updateBgmUI(true);
-      showPs3Toast('Dark Souls II — Majula', 'Тема Маджулы · Motoi Sakuraba');
-      removeAutoStartListeners();
-      return true;
-    }).catch((err) => {
-      updateBgmUI(false);
-      return false;
-    });
-  };
-
-  const pauseBgm = () => {
-    if (!bgmAudio) return;
-    bgmAudio.pause();
-    localStorage.setItem('ps3_bgm_disabled', '1');
-    updateBgmUI(false);
-  };
-
-  const toggleBgm = () => {
-    if (!bgmAudio) return;
-    if (bgmAudio.paused) {
-      playBgm();
-      playSfx('ok');
-    } else {
-      pauseBgm();
-      playSfx('back');
-    }
-  };
-
-  if (bgmToggleBtn) {
-    bgmToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleBgm();
-    });
-  }
-
-  if (ds2PanelPlayBtn) {
-    ds2PanelPlayBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleBgm();
-    });
-  }
-
-  if (bgmAudio) {
-    bgmAudio.addEventListener('timeupdate', () => {
-      if (!bgmAudio.duration) return;
-      const progress = (bgmAudio.currentTime / bgmAudio.duration) * 100;
-      if (ds2SeekFill) ds2SeekFill.style.width = progress + '%';
-      if (ds2TimeCurrent) {
-        const curM = Math.floor(bgmAudio.currentTime / 60);
-        const curS = Math.floor(bgmAudio.currentTime % 60).toString().padStart(2, '0');
-        ds2TimeCurrent.textContent = `${curM}:${curS}`;
-      }
-    });
-
-    bgmAudio.addEventListener('play', () => updateBgmUI(true));
-    bgmAudio.addEventListener('pause', () => updateBgmUI(false));
-    bgmAudio.addEventListener('ended', () => updateBgmUI(false));
-  }
-
-  if (ds2SeekBar) {
-    ds2SeekBar.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!bgmAudio || !bgmAudio.duration) return;
-      const rect = ds2SeekBar.getBoundingClientRect();
-      const pos = (e.clientX - rect.left) / rect.width;
-      bgmAudio.currentTime = Math.max(0, Math.min(1, pos)) * bgmAudio.duration;
-      if (bgmAudio.paused) playBgm();
-    });
-  }
-
-  // Автоматический запуск фоновой темы при первом взаимодействии (громкость 30%):
-  const gestureEvents = ['pointerdown', 'touchstart', 'touchend', 'mousedown', 'keydown', 'wheel', 'scroll', 'click'];
-  const onUserGestureForBgm = () => {
-    if (localStorage.getItem('ps3_bgm_disabled') === '1') {
-      removeAutoStartListeners();
-      return;
-    }
-    if (bgmAudio && bgmAudio.paused) {
-      bgmAudio.volume = 0.3;
-      bgmAudio.play().then(() => {
-        updateBgmUI(true);
-        showPs3Toast('Dark Souls II — Majula', 'Тема Маджулы · Motoi Sakuraba');
-        removeAutoStartListeners();
-      }).catch(() => {});
-    }
-  };
-
-  const removeAutoStartListeners = () => {
-    gestureEvents.forEach(evt => {
-      window.removeEventListener(evt, onUserGestureForBgm, { capture: true });
-      document.removeEventListener(evt, onUserGestureForBgm, { capture: true });
-    });
-  };
-
-  function startBgmIfAllowed() {
-    try {
-      if (localStorage.getItem('ps3_bgm_disabled') !== '1') {
-        gestureEvents.forEach(evt => {
-          window.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
-          document.addEventListener(evt, onUserGestureForBgm, { capture: true, passive: true });
-        });
-        playBgm();
-      }
-    } catch (e) {
-      console.warn('BGM auto-start deferred:', e);
-    }
-  }
-
   function selectCat(k) {
+    if (typeof k === 'string') {
+      const idx = cats.findIndex(c => c.id === k);
+      if (idx !== -1) k = idx;
+    }
     const next = clamp(k, 0, cats.length - 1);
     if (next === current) return;
     current = next;
@@ -428,7 +302,13 @@
     render();
   }
 
-  window.xmbGoto = (catIdx, itemIdx = 0) => {
+  window.xmbGoto = (catTarget, itemIdx = 0) => {
+    let catIdx = catTarget;
+    if (typeof catTarget === 'string') {
+      const idx = cats.findIndex(c => c.id === catTarget);
+      if (idx !== -1) catIdx = idx;
+      else catIdx = 0;
+    }
     selectCat(catIdx);
     selectItem(itemIdx);
     if (window.innerWidth <= 768) {
@@ -449,13 +329,11 @@
       window.open('https://www.twitch.tv/mafanyaking', '_blank', 'noopener');
       return;
     }
-    if (isMedia(item)) {
-      openViewer(item);
+    if (item.closest('#cr1mnsx')) {
       return;
     }
-    const zoom = $('.item__zoom', item);
-    if (zoom) {
-      openViewer(zoom);
+    if (isMedia(item)) {
+      openViewer(item);
       return;
     }
     if (item.closest('#game')) {
@@ -501,13 +379,7 @@
       return;
     }
     if (e.target.closest('.item__panel a') || e.target.closest('.item__panel button') || e.target.closest('.ds2-seek-bar')) return;
-    // аватарка в «О себе» открывается в просмотрщике
-    const zoom = e.target.closest('.cat.is-current .item.is-selected .item__zoom');
-    if (zoom) {
-      e.preventDefault();
-      openViewer(zoom);
-      return;
-    }
+
     const item = e.target.closest('.cat.is-current .item');
     if (!item) return;
     const j = itemsOf(current).indexOf(item);
@@ -636,8 +508,7 @@
 
   function openViewer(item) {
     lastFocus = document.activeElement;
-    // аватарка открывается одна, фото и видео — вместе с остальными из раздела
-    viewerItems = item.classList.contains('item__zoom') ? [item] : $$('.item--photo, .item--clip', item.closest('.cat'));
+    viewerItems = $$('.item--photo, .item--clip', item.closest('.cat'));
     viewer.classList.toggle('is-single', viewerItems.length < 2);
     // аквариум на фоне ставим на паузу, пока смотрят фото или видео
     bgWasPlaying = Boolean(bgVideo && !bgVideo.paused);
@@ -842,6 +713,18 @@
   });
   if (document.fonts) document.fonts.ready.then(render);
 
+  const handleHash = () => {
+    const raw = location.hash.replace(/^#/, '');
+    if (!raw) return;
+    const [hCat, hItem] = raw.split(':');
+    const catIdx = cats.findIndex(c => c.id === hCat);
+    if (catIdx !== -1) {
+      window.xmbGoto(catIdx, hItem !== undefined ? parseInt(hItem, 10) : 0);
+    }
+  };
+  handleHash();
+  window.addEventListener('hashchange', handleHash);
+
   /* Клик по плашке посетителей в шапке ведёт сразу в категорию «Об этом сайте» к статистике */
   const visitorPill = $('#visitorPill');
   if (visitorPill) {
@@ -858,7 +741,7 @@
   /* ---------- Brawl Stars: Синхронизация статистики с Brawlify (#2RGUQJQ0R) ---------- */
   const initBrawlStarsSync = () => {
     const TAG = '2RGUQJQ0R';
-    const CACHE_KEY = 'bs_profile_2rguqjq0r_v3';
+    const CACHE_KEY = 'bs_profile_2rguqjq0r_v4';
     const CACHE_TTL = 30 * 60 * 1000; // 30 минут
 
     const elTrophies = $('#bs-trophies');
@@ -869,6 +752,7 @@
     const elClub = $('#bs-club');
     const elSyncStatus = $('#bs-sync-status');
     const elSubPreview = $('#bs-sub-preview');
+    const refreshBtn = $('#bsRefreshBtn');
 
     const updateDOM = (data, isLive = false) => {
       if (!data) return;
@@ -883,17 +767,46 @@
       if (elBrawlers && data.brawlers) elBrawlers.textContent = data.brawlers;
       if (elClub && data.club) elClub.textContent = data.club;
       if (elSubPreview && data.trophies) {
-        elSubPreview.textContent = `🏆 ${Number(data.trophies).toLocaleString('ru-RU')} кубков · 3v3 победы · Ежедневный актив · brawlify.com`;
+        elSubPreview.textContent = `🏆 ${Number(data.trophies).toLocaleString('ru-RU')} кубков · 108 бойцов · Ежедневный актив · #2RGUQJQ0R`;
       }
       if (elSyncStatus) {
-        elSyncStatus.textContent = isLive ? '🟢 Live с Brawlify' : '🟢 Синхронизировано';
+        elSyncStatus.textContent = isLive ? '🟢 Live: ~40k' : '🟢 Синхронизировано';
       }
     };
 
-    // Очистка старых версий кэша с заниженными кубками
+    // Очистка старых версий кэша с заниженными кубками (38k)
     try {
-      ['bs_profile_2rguqjq0r', 'bs_profile_2rguqjq0r_v2'].forEach(k => localStorage.removeItem(k));
+      ['bs_profile_2rguqjq0r', 'bs_profile_2rguqjq0r_v2', 'bs_profile_2rguqjq0r_v3'].forEach(k => localStorage.removeItem(k));
     } catch { /* ignore */ }
+
+    // Интерактивное мгновенное обновление кубков в реальном времени
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const curVal = elTrophies ? elTrophies.textContent.replace(/[^\d]/g, '') : '39950';
+        const input = window.prompt('Укажите текущее количество кубков в Brawl Stars (например: 40050):', curVal);
+        if (!input) return;
+
+        const num = parseInt(input.replace(/[^\d]/g, ''), 10);
+        if (!isNaN(num) && num > 1000) {
+          const updated = {
+            trophies: num,
+            highest: Math.max(num, 40120),
+            brawlers: '108 / 108',
+            victories3v3: 2840,
+            showdown: 1530,
+            club: '0.3.7|teams'
+          };
+          updateDOM(updated, true);
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ data: updated, timestamp: Date.now() }));
+          } catch {}
+          playSfx('ok');
+          showPs3Toast('Brawl Stars', `Кубки обновлены: ${num.toLocaleString('ru-RU')}`);
+        }
+      });
+    }
 
     // 1. Проверяем свежий кэш в localStorage
     let hasFreshCache = false;
@@ -901,7 +814,7 @@
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
-        if (parsed?.data?.trophies && parsed.data.trophies >= 35000) {
+        if (parsed?.data?.trophies && parsed.data.trophies >= 39000) {
           updateDOM(parsed.data, false);
           if (Date.now() - parsed.timestamp < CACHE_TTL) {
             hasFreshCache = true;
@@ -912,19 +825,19 @@
 
     // 2. Чтение локального JSON файла (assets/data/brawl.json или data/brawl.json)
     const loadLocalJson = async () => {
-      const jsonPaths = ['assets/data/brawl.json', 'data/brawl.json'];
+      const jsonPaths = ['data/brawl.json', 'assets/data/brawl.json'];
       for (const p of jsonPaths) {
         try {
-          const resp = await fetch(p);
+          const resp = await fetch(`${p}?_=${Date.now()}`);
           if (resp.ok) {
             const raw = await resp.json();
-            if (raw && raw.trophies && raw.trophies >= 35000) {
+            if (raw && raw.trophies && raw.trophies >= 38000) {
               const normalized = {
                 trophies: raw.trophies,
                 highest: raw.highestTrophies || raw.highest || raw.trophies,
-                victories3v3: raw.victories3v3,
-                showdown: raw.showdown || ((raw.soloVictories || 0) + (raw.duoVictories || 0)),
-                brawlers: raw.brawlers || `${raw.brawlersUnlocked || 106} / ${raw.brawlersTotal || 108}`,
+                victories3v3: raw.victories3v3 || 2840,
+                showdown: raw.showdown || 1530,
+                brawlers: raw.brawlers || `${raw.brawlersUnlocked || 108} / ${raw.brawlersTotal || 108}`,
                 club: raw.club || '0.3.7|teams'
               };
               updateDOM(normalized, false);
@@ -939,86 +852,8 @@
       return false;
     };
 
-    // 3. Парсер HTML страницы Brawlify
-    const parseBrawlifyHTML = (html) => {
-      if (!html || html.includes('Just a moment...') || html.includes('challenges.cloudflare.com')) {
-        return null;
-      }
-      try {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const textContent = doc.body.textContent || '';
-        if (!textContent.includes(TAG)) return null;
-
-        const res = {};
-        const trophiesMatch = textContent.match(/Trophies[:\s]+([\d,]+)/i) || textContent.match(/([\d,]{4,6})\s*Trophies/i);
-        if (trophiesMatch) res.trophies = parseInt(trophiesMatch[1].replace(/,/g, ''), 10);
-
-        const highestMatch = textContent.match(/Highest[:\s]+([\d,]+)/i) || textContent.match(/Highest Trophies[:\s]+([\d,]+)/i);
-        if (highestMatch) res.highest = parseInt(highestMatch[1].replace(/,/g, ''), 10);
-
-        const v3Match = textContent.match(/3v3 Victories[:\s]+([\d,]+)/i) || textContent.match(/Victories[:\s]+([\d,]+)/i);
-        if (v3Match) res.victories3v3 = parseInt(v3Match[1].replace(/,/g, ''), 10);
-
-        const soloMatch = textContent.match(/Solo Victories[:\s]+([\d,]+)/i);
-        const duoMatch = textContent.match(/Duo Victories[:\s]+([\d,]+)/i);
-        if (soloMatch || duoMatch) {
-          const s = soloMatch ? parseInt(soloMatch[1].replace(/,/g, ''), 10) : 0;
-          const d = duoMatch ? parseInt(duoMatch[1].replace(/,/g, ''), 10) : 0;
-          res.showdown = (s + d) || `${s} / ${d}`;
-        }
-
-        const brawlerMatch = textContent.match(/Brawlers[:\s]+(\d+)\s*\/\s*(\d+)/i) || textContent.match(/(\d+)\s*\/\s*(\d+)\s*Brawlers/i);
-        if (brawlerMatch) res.brawlers = `${brawlerMatch[1]} / ${brawlerMatch[2]}`;
-
-        const clubMatch = doc.querySelector('.club-name, [class*="club"]') || textContent.match(/Club[:\s]+([^\n\r]+)/i);
-        if (clubMatch) {
-          res.club = (clubMatch.textContent || clubMatch[1] || '').trim().replace(/Club:?/i, '').trim();
-        }
-
-        // Защита от старых или битых данных: трофеи должны быть не ниже 35000
-        return (res.trophies && res.trophies >= 35000) ? res : null;
-      } catch {
-        return null;
-      }
-    };
-
-    // 4. Онлайн обновление через CORS-прокси (только если нет свежего кэша)
-    const fetchOnline = async () => {
-      const loaded = await loadLocalJson();
-      if (hasFreshCache && loaded) return;
-
-      const targetUrl = `https://brawlify.com/player/${TAG}`;
-      const proxyList = [
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-        `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`,
-        `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
-      ];
-
-      for (const pUrl of proxyList) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 6000);
-          const resp = await fetch(pUrl, { signal: controller.signal });
-          clearTimeout(timeoutId);
-          if (resp.ok) {
-            const html = await resp.text();
-            const data = parseBrawlifyHTML(html);
-            if (data && data.trophies >= 35000) {
-              updateDOM(data, true);
-              try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
-              } catch { /* ignore */ }
-              return;
-            }
-          }
-        } catch {
-          // тихо пропускаем таймауты
-        }
-      }
-    };
-
-    fetchOnline();
+    // Загружаем локальные данные
+    loadLocalJson();
   };
 
   /* ---------- PlayStation 5: Синхронизация последней запущенной игры ---------- */
@@ -1147,18 +982,30 @@
         }
       });
       elBars.forEach(el => { el.style.width = `${pct}%`; });
-      const extraRank = rank ? ` · ${rank} Rank` : '';
-      const progressStr = (earned > 0 && total > 0)
-        ? `🏆 ${earned}/${total} трофеев (${pct}%)${extraRank}`
-        : `🏆 Прогресс: ${pct}%${extraRank}`;
-      elProgresses.forEach(el => { el.textContent = progressStr; });
+      const extraRank = rank ? ` · Rank ${rank}` : '';
+      elProgresses.forEach(el => {
+        el.innerHTML = `<img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="14" height="14"> <span><b>${pct}%</b> (${earned}/${total} трофеев)${extraRank}</span>`;
+      });
+
+      // 5. Обновление счетчиков трофеев в карточке профиля cr1mnsx
+      if (game.platinum !== undefined || game.trophy_breakdown) {
+        const pl = game.platinum !== undefined ? game.platinum : (game.trophy_breakdown?.platinum || 0);
+        const g = game.gold !== undefined ? game.gold : (game.trophy_breakdown?.gold || 0);
+        const s = game.silver !== undefined ? game.silver : (game.trophy_breakdown?.silver || 0);
+        const b = game.bronze !== undefined ? game.bronze : (game.trophy_breakdown?.bronze || 0);
+        $$('.ps5-stat-plat').forEach(el => { el.innerHTML = `<b>${pl}</b>`; });
+        $$('.ps5-stat-gold').forEach(el => { el.innerHTML = `<b>${g}</b>`; });
+        $$('.ps5-stat-silver').forEach(el => { el.innerHTML = `<b>${s}</b>`; });
+        $$('.ps5-stat-bronze').forEach(el => { el.innerHTML = `<b>${b}</b>`; });
+        $$('.ps5-stat-trophy-pct').forEach(el => { el.innerHTML = `<b>${pct}%</b>`; });
+      }
     };
 
-    // Клик по плашке в шапке переносит в категорию Games к последней игре
+    // Клик по плашке в шапке переносит в категорию PlayStation 5 к последней игре
     const topPill = $('#ps5TopPill');
     if (topPill) {
       topPill.addEventListener('click', () => {
-        if (window.xmbGoto) window.xmbGoto(1, 1);
+        if (window.xmbGoto) window.xmbGoto('souls', 1);
       });
     }
 
@@ -1166,7 +1013,7 @@
     const initAmbientGameBanners = () => {
       $$('.game-banner-link').forEach(link => {
         const img = $('img.game-banner-img', link);
-        if (img && !$('.game-banner-bg', link) && !img.src.includes('brawl-stars-banner') && !img.src.includes('ds2-majula') && !img.src.includes('terminal')) {
+        if (img && !$('.game-banner-bg', link) && !img.src.includes('brawl-stars-banner') && !img.src.includes('terminal')) {
           const bg = document.createElement('img');
           bg.className = 'game-banner-bg';
           bg.src = img.src;
@@ -1217,7 +1064,11 @@
                 trophies_earned: rawGame.trophies_earned !== undefined ? rawGame.trophies_earned : (rawGame.trophy_breakdown ? (rawGame.trophy_breakdown.bronze + rawGame.trophy_breakdown.silver + rawGame.trophy_breakdown.gold + rawGame.trophy_breakdown.platinum) : 0),
                 trophies_total: rawGame.trophies_total !== undefined ? rawGame.trophies_total : 0,
                 rank: rawGame.rank || 'D',
-                last_played_text: rawGame.last_played_text || rawGame.last_played || '29 сентября 2026',
+                bronze: rawGame.bronze !== undefined ? rawGame.bronze : rawGame.trophy_breakdown?.bronze,
+                silver: rawGame.silver !== undefined ? rawGame.silver : rawGame.trophy_breakdown?.silver,
+                gold: rawGame.gold !== undefined ? rawGame.gold : rawGame.trophy_breakdown?.gold,
+                platinum: rawGame.platinum !== undefined ? rawGame.platinum : rawGame.trophy_breakdown?.platinum,
+                last_played_text: rawGame.last_played_text || rawGame.last_played || '8 октября 2026',
                 is_playing_now: isPlayingNow
               };
 
@@ -1233,52 +1084,9 @@
       return false;
     };
 
-    // Запускаем немедленно и ставим периодический опрос каждые 30 секунд
+    // Запускаем немедленно и ставим периодический опрос раз в 60 секунд
     loadLocalPSN();
-    setInterval(loadLocalPSN, 30000);
-
-    // 3. Fallback: парсинг профиля через CORS-прокси (только если локальные файлы недоступны)
-    const targetUrl = `https://psn.gg/profile/${PSN_USER}`;
-    const proxyList = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
-      `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(targetUrl)}`
-    ];
-
-    const fetchViaProxies = async () => {
-      // Запускаем только если loadLocalPSN не дал результата
-      const loaded = await loadLocalPSN();
-      if (loaded) return;
-
-      for (const pUrl of proxyList) {
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 6000);
-          const resp = await fetch(pUrl, { signal: controller.signal });
-          clearTimeout(timeoutId);
-          if (resp.ok) {
-            const html = await resp.text();
-            const doc = new DOMParser().parseFromString(html, 'text/html');
-            const gameRow = doc.querySelector('.game-row, .library-item, #gamesTable tr, tr.game');
-            if (!gameRow) continue;
-
-            const titleEl = gameRow.querySelector('.title, .game-title, a[href*="/game/"]');
-            const imgEl = gameRow.querySelector('img.game, img.cover, img');
-            if (titleEl) {
-              const gameData = {
-                title: titleEl.textContent.trim(),
-                image: imgEl ? (imgEl.getAttribute('data-src') || imgEl.src) : '',
-                platform: 'PS5',
-                last_played_text: 'Недавно'
-              };
-              updateDOM(gameData);
-              return;
-            }
-          }
-        } catch {}
-      }
-    };
-
-    fetchViaProxies();
+    setInterval(loadLocalPSN, 60000);
   };
 
   /* ==================================================
@@ -1376,15 +1184,67 @@
   }
 
   /* ==================================================
-     2. ПРАВАЯ ПАНЕЛЬ СТРИМА МАФАНИ (XMB WIDGET)
+     2. ПРАВАЯ ПАНЕЛЬ СТРИМА И КЛИПОВ МАФАНИ (XMB WIDGET)
      ================================================== */
+  const MAFANYA_CLIPS = [
+    {
+      id: "298570751",
+      slug: "HotVivaciousFriesVoteYea-9fkRtKnjkuqCoaQg",
+      title: "на очки смотрите",
+      views: "64k просмотров",
+      duration: "0:08",
+      thumb: "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b4bb6b4a-2c12-49e4-a9ff-6418a2f89981/landscape/thumb/thumb-0000000000-1920x1080.jpg"
+    },
+    {
+      id: "1876292169",
+      slug: "EnthusiasticFastSandpiperCoolCat-fhmWZJABduephwMf",
+      title: "зажигалку",
+      views: "57k просмотров",
+      duration: "0:04",
+      thumb: "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/c47f1092-4d00-4cbd-8c42-fe3b63257056/landscape/thumb/thumb-0000000000-1280x720.jpg"
+    },
+    {
+      id: "1799801386",
+      slug: "TemperedSpoopyAlpacaDansGame-UKZVZihVQIKHU2hD",
+      title: "????????",
+      views: "37k просмотров",
+      duration: "0:25",
+      thumb: "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/a351f8ad-2197-468a-b064-a3380d1c97dc/landscape/thumb/thumb-0000000000-1280x720.jpg"
+    },
+    {
+      id: "1791436173",
+      slug: "ArbitraryArborealBeeTF2John-xuGhXsTHBi53TZgW",
+      title: "Вакхо",
+      views: "28k просмотров",
+      duration: "0:15",
+      thumb: "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/695abb9f-07e3-4c47-a58a-eabd7726bf03/landscape/thumb/thumb-0000000000-1920x1080.jpg"
+    },
+    {
+      id: "3383108569",
+      slug: "GrossAmericanFlyRalpherZ-tWCiQng70gWa3dfY",
+      title: "YandexGO",
+      views: "26k просмотров",
+      duration: "0:25",
+      thumb: "https://static-cdn.jtvnw.net/twitch-video-assets/twitch-vap-video-assets-prod-us-west-2/b530daf4-7215-47c2-9a03-c5176e773213/landscape/thumb/thumb-0000000000-1280x720.jpg"
+    }
+  ];
+
+  currentClipsList = [...MAFANYA_CLIPS];
+  currentClipIndex = 0;
+  activeTwitchTab = 'clips';
+  twitchIsLiveNow = false;
+
+  function getTwitchParentQuery() {
+    const currentHost = window.location.hostname || 'crimnsx-alt.github.io';
+    const hosts = ['crimnsx-alt.github.io', 'localhost', '127.0.0.1'];
+    if (currentHost && !hosts.includes(currentHost)) hosts.push(currentHost);
+    return hosts.map(h => `parent=${encodeURIComponent(h)}`).join('&');
+  }
+
   function loadTwitchXmbIframe(autoplay = true) {
     const iframe = $('#twitchXmbIframe');
     if (!iframe) return;
-    const currentHost = window.location.hostname || 'crimnsx-alt.github.io';
-    const hosts = ['crimnsx-alt.github.io', 'localhost', '127.0.0.1'];
-    if (!hosts.includes(currentHost) && currentHost) hosts.push(currentHost);
-    const parentQuery = hosts.map(h => `parent=${encodeURIComponent(h)}`).join('&');
+    const parentQuery = getTwitchParentQuery();
     const targetSrc = `https://player.twitch.tv/?channel=mafanyaking&${parentQuery}&muted=false&autoplay=${autoplay ? 'true' : 'false'}`;
     if (iframe.src !== targetSrc) {
       iframe.src = targetSrc;
@@ -1392,10 +1252,128 @@
   }
 
   function unloadTwitchXmbIframe() {
-    const iframe = $('#twitchXmbIframe');
-    if (iframe && iframe.src) {
-      iframe.src = '';
+    const liveIframe = $('#twitchXmbIframe');
+    if (liveIframe && liveIframe.src) liveIframe.src = '';
+    const clipIframe = $('#twitchClipIframe');
+    if (clipIframe && clipIframe.src) clipIframe.src = '';
+  }
+
+  function loadTwitchClip(index = 0, autoplay = false) {
+    if (!currentClipsList.length) return;
+    const safeIndex = clamp(index, 0, currentClipsList.length - 1);
+    currentClipIndex = safeIndex;
+    const clip = currentClipsList[safeIndex];
+
+    const clipIframe = $('#twitchClipIframe');
+    if (clipIframe && clip) {
+      const parentQuery = getTwitchParentQuery();
+      const targetSrc = `https://clips.twitch.tv/embed?clip=${encodeURIComponent(clip.slug)}&${parentQuery}&autoplay=${autoplay ? 'true' : 'false'}`;
+      if (clipIframe.src !== targetSrc) {
+        clipIframe.src = targetSrc;
+      }
     }
+
+    const nowPlayingEl = $('#twitchClipsNowPlaying');
+    if (nowPlayingEl && clip) {
+      nowPlayingEl.textContent = `▶ «${clip.title}»`;
+    }
+
+    const ctaLink = $('#twitchXmbCta');
+    const ctaText = $('#twitchCtaText');
+    if (ctaLink && clip) {
+      ctaLink.href = `https://clips.twitch.tv/${clip.slug}`;
+      if (ctaText) ctaText.textContent = `Смотреть клип «${clip.title}» на Twitch ↗`;
+    }
+
+    // Подсветка активной карточки
+    const cards = $$('.twitch-clip-card');
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-active', i === safeIndex);
+    });
+  }
+
+  function renderTwitchClips() {
+    const carousel = $('#twitchClipsCarousel');
+    if (!carousel) return;
+    carousel.innerHTML = currentClipsList.map((clip, idx) => `
+      <button type="button" class="twitch-clip-card ${idx === currentClipIndex ? 'is-active' : ''}" data-index="${idx}" aria-label="Смотреть клип: ${clip.title}">
+        <div class="twitch-clip-thumb-wrap">
+          <img class="twitch-clip-thumb" src="${clip.thumb}" alt="${clip.title}" loading="lazy">
+          <span class="twitch-clip-dur">${clip.duration}</span>
+          <div class="twitch-clip-play-icon">▶</div>
+        </div>
+        <div class="twitch-clip-meta">
+          <strong class="twitch-clip-title" title="${clip.title}">${clip.title}</strong>
+          <span class="twitch-clip-views">${clip.views}</span>
+        </div>
+      </button>
+    `).join('');
+
+    $$('.twitch-clip-card', carousel).forEach((card) => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = parseInt(card.dataset.index, 10);
+        if (!isNaN(idx)) {
+          playSfx('ok');
+          loadTwitchClip(idx, true);
+        }
+      });
+    });
+  }
+
+  function switchTwitchTab(tabName) {
+    activeTwitchTab = tabName;
+    const tabClipsBtn = $('#twitchTabClips');
+    const tabLiveBtn = $('#twitchTabLive');
+    const clipIframe = $('#twitchClipIframe');
+    const liveIframe = $('#twitchXmbIframe');
+    const clipsSection = $('#twitchClipsSection');
+    const ctaLink = $('#twitchXmbCta');
+    const ctaText = $('#twitchCtaText');
+
+    if (tabName === 'clips') {
+      if (tabClipsBtn) {
+        tabClipsBtn.classList.add('is-active');
+        tabClipsBtn.setAttribute('aria-selected', 'true');
+      }
+      if (tabLiveBtn) {
+        tabLiveBtn.classList.remove('is-active');
+        tabLiveBtn.setAttribute('aria-selected', 'false');
+      }
+      if (clipIframe) clipIframe.style.display = 'block';
+      if (liveIframe) liveIframe.style.display = 'none';
+      if (clipsSection) clipsSection.style.display = 'flex';
+
+      loadTwitchClip(currentClipIndex, false);
+    } else if (tabName === 'live') {
+      if (tabLiveBtn) {
+        tabLiveBtn.classList.add('is-active');
+        tabLiveBtn.setAttribute('aria-selected', 'true');
+      }
+      if (tabClipsBtn) {
+        tabClipsBtn.classList.remove('is-active');
+        tabClipsBtn.setAttribute('aria-selected', 'false');
+      }
+      if (liveIframe) liveIframe.style.display = 'block';
+      if (clipIframe) clipIframe.style.display = 'none';
+      if (clipsSection) clipsSection.style.display = 'none';
+
+      loadTwitchXmbIframe(true);
+      if (ctaLink) ctaLink.href = 'https://www.twitch.tv/mafanyaking';
+      if (ctaText) ctaText.textContent = 'Открыть канал Влада на Twitch ↗';
+    }
+  }
+
+  function onMafanyaSelected() {
+    if (activeTwitchTab === 'live' || twitchIsLiveNow) {
+      loadTwitchXmbIframe(true);
+    } else {
+      loadTwitchClip(currentClipIndex, false);
+    }
+  }
+
+  function onMafanyaDeselected() {
+    unloadTwitchXmbIframe();
   }
 
   function updateTwitchUI(info) {
@@ -1411,6 +1389,10 @@
     const catEl = $('#twitchXmbCategory');
     const viewersEl = $('#twitchXmbViewers');
     const uptimeEl = $('#twitchXmbUptime');
+    const lastDateEl = $('#twitchXmbLastDate');
+    const tabLiveLabel = $('#twitchTabLiveLabel');
+
+    twitchIsLiveNow = Boolean(info.isLive);
 
     if (info.followers && subEl) {
       const k = Math.round(info.followers / 1000);
@@ -1429,6 +1411,7 @@
       if (topPillDot) topPillDot.classList.add('is-live');
       if (topPillText) topPillText.textContent = 'Мафаня 🔴 LIVE';
       if (menuBadge) menuBadge.style.display = 'inline-flex';
+      if (tabLiveLabel) tabLiveLabel.textContent = `🔴 Прямой эфир (${Number(info.viewers || 0).toLocaleString('ru-RU')})`;
 
       if (titleEl && info.title) titleEl.textContent = info.title;
       if (catEl && info.game) catEl.textContent = `🎮 ${info.game}`;
@@ -1437,6 +1420,10 @@
         uptimeEl.style.display = 'inline-flex';
         uptimeEl.textContent = `⏱ ${info.uptime}`;
       }
+      if (lastDateEl) lastDateEl.style.display = 'none';
+
+      // Если стример запустил эфир — автоматически переключаем на вкладку прямого эфира
+      switchTwitchTab('live');
     } else {
       if (statusPill) {
         statusPill.classList.remove('is-live');
@@ -1446,15 +1433,28 @@
       if (topPillDot) topPillDot.classList.remove('is-live');
       if (topPillText) topPillText.textContent = 'Мафаня';
       if (menuBadge) menuBadge.style.display = 'none';
+      if (tabLiveLabel) tabLiveLabel.textContent = 'Канал Twitch';
 
       if (titleEl) {
         titleEl.textContent = info.lastBroadcastTitle 
           ? `Последний стрим: «${info.lastBroadcastTitle}»` 
           : 'Канал Влада Мафани на Twitch';
       }
-      if (catEl) catEl.textContent = '🎮 Общение';
-      if (viewersEl) viewersEl.textContent = '👥 Оффлайн';
+      if (catEl) catEl.textContent = '🎮 Общение & Пранки';
+      if (viewersEl) viewersEl.textContent = '👥 561k фолловеров';
       if (uptimeEl) uptimeEl.style.display = 'none';
+      if (lastDateEl && info.startedAt) {
+        lastDateEl.style.display = 'inline-flex';
+        const d = new Date(info.startedAt);
+        if (!isNaN(d.getTime())) {
+          lastDateEl.textContent = `⏱ ${d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })}`;
+        }
+      }
+
+      // При оффлайне остаёмся на вкладке клипов
+      if (activeTwitchTab !== 'live') {
+        switchTwitchTab('clips');
+      }
     }
   }
 
@@ -1470,6 +1470,7 @@
             isLive,
             title: user.stream?.title || user.lastBroadcast?.title || 'Стрим Влада Мафани',
             lastBroadcastTitle: user.lastBroadcast?.title,
+            startedAt: user.lastBroadcast?.startedAt,
             viewers: user.stream?.viewersCount || 0,
             game: user.stream?.game?.displayName || 'Just Chatting',
             followers: user.followers,
@@ -1497,6 +1498,43 @@
     updateTwitchUI({ isLive: false });
   }
 
+  async function fetchDynamicClips() {
+    try {
+      const res = await fetch('https://gql.twitch.tv/gql', {
+        method: 'POST',
+        headers: { 'Client-Id': 'kimne78kx3ncx6brgo4mv6wki5h1ko' },
+        body: JSON.stringify({
+          query: 'query { user(login: "mafanyaking") { clips(first: 6) { edges { node { id slug title viewCount durationSeconds thumbnailURL } } } } }'
+        })
+      });
+      if (res.ok) {
+        const json = await res.json();
+        const edges = json?.data?.user?.clips?.edges;
+        if (Array.isArray(edges) && edges.length > 0) {
+          const dynamicClips = edges.map(e => {
+            const n = e.node;
+            const viewsK = n.viewCount >= 1000 ? `${Math.round(n.viewCount / 1000)}k` : n.viewCount;
+            const min = Math.floor(n.durationSeconds / 60);
+            const sec = String(Math.floor(n.durationSeconds % 60)).padStart(2, '0');
+            return {
+              id: n.id,
+              slug: n.slug,
+              title: n.title,
+              views: `${viewsK} просмотров`,
+              duration: `${min}:${sec}`,
+              thumb: n.thumbnailURL
+            };
+          });
+          currentClipsList = dynamicClips;
+          renderTwitchClips();
+          if (activeTwitchTab === 'clips') {
+            loadTwitchClip(currentClipIndex, false);
+          }
+        }
+      }
+    } catch {}
+  }
+
   function initTwitchXmbWidget() {
     const topPill = $('#twitchTopPill');
     if (topPill) {
@@ -1511,8 +1549,29 @@
       });
     }
 
-    // Первичная проверка статуса стрима и периодический опрос раз в 60 сек
+    // Вкладки клипы / стрим
+    const tabClips = $('#twitchTabClips');
+    const tabLive = $('#twitchTabLive');
+    if (tabClips) {
+      tabClips.addEventListener('click', (e) => {
+        e.preventDefault();
+        playSfx('ok');
+        switchTwitchTab('clips');
+      });
+    }
+    if (tabLive) {
+      tabLive.addEventListener('click', (e) => {
+        e.preventDefault();
+        playSfx('ok');
+        switchTwitchTab('live');
+      });
+    }
+
+    // Первичный рендер клипов и проверка статуса
+    renderTwitchClips();
+    switchTwitchTab('clips');
     checkTwitchLiveStatus();
+    fetchDynamicClips();
     setInterval(checkTwitchLiveStatus, 60000);
   }
 
@@ -1551,11 +1610,148 @@
     });
   }
 
-  startBgmIfAllowed();
+  /* ---------- Яндекс Музыка: Управление плейлистом и виджетом ---------- */
+  function initYandexMusicWidget() {
+    const DEFAULT_EMBED = 'https://music.yandex.ru/iframe/playlist/446019089/3';
+    const DEFAULT_URL = 'https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f';
+    const STORAGE_KEY_EMBED = 'ym_embed_src_cr1mnsx_v4';
+    const STORAGE_KEY_URL = 'ym_web_url_cr1mnsx_v4';
+
+    const iframe = $('#ymIframePlayer');
+    const profilePlayBtn = $('#ymProfilePlayBtn');
+    const changeBtn = $('#ymChangePlaylistBtn');
+    const profileExtLink = $('#ymProfileExtLink');
+    const directLink = $('#ymDirectLink');
+
+    const parseYandexMusicUrl = (input) => {
+      if (!input) return null;
+      const trimmed = input.trim();
+
+      // Прямой iframe URL
+      if (trimmed.includes('music.yandex.ru/iframe/')) {
+        return {
+          embed: trimmed,
+          web: trimmed.replace('/iframe/', '/').replace('#', '')
+        };
+      }
+
+      // Плейлист вида playlists/lk.UUID
+      const lkMatch = trimmed.match(/playlists\/(lk\.[a-zA-Z0-9_-]+)/i);
+      if (lkMatch) {
+        const embedUrl = (lkMatch[1] === 'lk.67e283d6-a061-4e6d-b74f-27e04c3f412f')
+          ? 'https://music.yandex.ru/iframe/playlist/446019089/3'
+          : `https://music.yandex.ru/iframe/playlist/${lkMatch[1]}`;
+        return {
+          embed: embedUrl,
+          web: `https://music.yandex.ru/playlists/${lkMatch[1]}`
+        };
+      }
+
+      // Плейлист: music.yandex.ru/users/USER/playlists/KIND
+      const plMatch = trimmed.match(/(?:users\/([^\/\s]+)\/playlists\/(\d+))/i);
+      if (plMatch) {
+        const user = plMatch[1];
+        const kind = plMatch[2];
+        return {
+          embed: `https://music.yandex.ru/iframe/playlist/${user}/${kind}`,
+          web: `https://music.yandex.ru/users/${user}/playlists/${kind}`
+        };
+      }
+
+      // Короткий формат: USER/KIND
+      const shortPlMatch = trimmed.match(/^([a-zA-Z0-9._-]+)\/(\d+)$/);
+      if (shortPlMatch) {
+        return {
+          embed: `https://music.yandex.ru/iframe/playlist/${shortPlMatch[1]}/${shortPlMatch[2]}`,
+          web: `https://music.yandex.ru/users/${shortPlMatch[1]}/playlists/${shortPlMatch[2]}`
+        };
+      }
+
+      // Альбом: music.yandex.ru/album/12345
+      const albMatch = trimmed.match(/album\/(\d+)/i);
+      if (albMatch) {
+        return {
+          embed: `https://music.yandex.ru/iframe/#album/${albMatch[1]}`,
+          web: `https://music.yandex.ru/album/${albMatch[1]}`
+        };
+      }
+
+      // Трек: music.yandex.ru/album/123/track/456 или music.yandex.ru/track/456
+      const trkMatch = trimmed.match(/track\/(\d+)/i);
+      if (trkMatch) {
+        return {
+          embed: `https://music.yandex.ru/iframe/#track/${trkMatch[1]}`,
+          web: `https://music.yandex.ru/track/${trkMatch[1]}`
+        };
+      }
+
+      if (trimmed.startsWith('http')) {
+        return {
+          embed: DEFAULT_EMBED,
+          web: trimmed
+        };
+      }
+
+      return null;
+    };
+
+    const applyUrls = (embedUrl, webUrl) => {
+      if (iframe && embedUrl) iframe.src = embedUrl;
+      if (profileExtLink && webUrl) profileExtLink.href = webUrl;
+      if (directLink && webUrl) directLink.href = webUrl;
+    };
+
+    // 1. Восстановление сохранённого плейлиста из localStorage
+    try {
+      const savedEmbed = localStorage.getItem(STORAGE_KEY_EMBED) || DEFAULT_EMBED;
+      const savedWeb = localStorage.getItem(STORAGE_KEY_URL) || DEFAULT_URL;
+      applyUrls(savedEmbed, savedWeb);
+    } catch {}
+
+    // 2. Клик на кнопку «Слушать в ветке Музыки ♫» в профиле cr1mnsx
+    if (profilePlayBtn) {
+      profilePlayBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        playSfx('ok');
+        window.xmbGoto('music', 0);
+        showPs3Toast('Яндекс Музыка', 'Открыт плеер плейлиста');
+      });
+    }
+
+    // 3. Кнопка «Сменить плейлист»
+    if (changeBtn) {
+      changeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const currentUrl = localStorage.getItem(STORAGE_KEY_URL) || DEFAULT_URL;
+        const input = window.prompt(
+          'Вставьте ссылку на ваш плейлист или трек в Яндекс Музыке\n(например: https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f):',
+          currentUrl
+        );
+        if (!input) return;
+
+        const parsed = parseYandexMusicUrl(input);
+        if (parsed) {
+          applyUrls(parsed.embed, parsed.web);
+          try {
+            localStorage.setItem(STORAGE_KEY_EMBED, parsed.embed);
+            localStorage.setItem(STORAGE_KEY_URL, parsed.web);
+          } catch {}
+          playSfx('ok');
+          showPs3Toast('Плейлист обновлён', 'Яндекс Музыка успешно подключена');
+        } else {
+          alert('Не удалось распознать ссылку на Яндекс Музыку. Проверьте формат.');
+        }
+      });
+    }
+  }
+
   initBrawlStarsSync();
   initPS5LastPlayedSync();
   initAeroTilt();
   initTwitchXmbWidget();
   initPs3ClockWidget();
   initAvatarHoverZoom();
+  initYandexMusicWidget();
 })();

@@ -12,7 +12,7 @@
 }
 
 :root {
-  --font: "Dots", "M PLUS 1p", "Hiragino Kaku Gothic ProN", "Segoe UI", sans-serif;
+  --font: "Dots", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "M PLUS 1p", "Segoe UI", Roboto, system-ui, sans-serif;
   --cat-icon: 68px;
   --col: 140px;
   --shadow: 0 1px 2px rgba(0, 0, 0, .45);
@@ -93,7 +93,7 @@ a { color: inherit; }
   border-radius: 6px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   font-size: 13.5px;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -171,98 +171,7 @@ a { color: inherit; }
 }
 
 
-/* ---------- Фоновая музыка Dark Souls 2 Majula (BGM Pill) ---------- */
-.bgm-pill {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
 
-.bgm-pill__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 36px;
-  padding: 0 14px 0 11px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, .18) 0%, rgba(20, 32, 54, .75) 55%, rgba(10, 18, 32, .9) 100%);
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 18px;
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, .45), inset 0 1px 1px rgba(255, 255, 255, .35);
-  transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease, background .25s ease;
-  font-family: inherit;
-}
-
-.bgm-pill__btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  border-color: rgba(255, 180, 90, .8);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, .55), 0 0 16px rgba(255, 160, 60, .4), inset 0 1px 2px rgba(255, 255, 255, .6);
-}
-
-.bgm-pill.is-playing .bgm-pill__btn {
-  border-color: rgba(255, 190, 100, .85);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, .6), 0 0 16px rgba(255, 170, 70, .45), inset 0 1px 1px rgba(255, 255, 255, .45);
-}
-
-.bgm-pill__waves {
-  display: inline-flex;
-  align-items: flex-end;
-  gap: 2px;
-  height: 14px;
-  width: 14px;
-}
-
-.bgm-bar {
-  display: block;
-  width: 2.5px;
-  height: 3px;
-  background: #ffbe6a;
-  border-radius: 2px;
-  opacity: .5;
-  transition: height .2s ease, opacity .2s ease;
-}
-
-.bgm-pill.is-playing .bgm-bar {
-  opacity: 1;
-  animation: bgmBarWave .8s ease-in-out infinite alternate;
-}
-
-.bgm-pill.is-playing .bgm-bar.b1 { animation-delay: 0s; }
-.bgm-pill.is-playing .bgm-bar.b2 { animation-delay: .2s; }
-.bgm-pill.is-playing .bgm-bar.b3 { animation-delay: .4s; }
-.bgm-pill.is-playing .bgm-bar.b4 { animation-delay: .15s; }
-
-@keyframes bgmBarWave {
-  0% { height: 3px; }
-  100% { height: 14px; background: #ffe2a8; }
-}
-
-.bgm-pill__icon {
-  font-size: 13px;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.6));
-}
-
-.bgm-pill__info {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  line-height: 1.15;
-}
-
-.bgm-pill__title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .3px;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,.8);
-}
-
-.bgm-pill__sub {
-  font-size: 10px;
-  color: rgba(255, 210, 150, .92);
-  text-shadow: 0 1px 2px rgba(0,0,0,.8);
-}
 
 /* ---------- Аутентичное PS3 всплывающее уведомление ---------- */
 .ps3-toast {
@@ -670,19 +579,41 @@ a { color: inherit; }
   width: min(760px, calc(100vw - var(--ix, 20vw) - 20px));
   margin: 0;
   opacity: .6;
+  z-index: 2;
   transition: transform .36s var(--ease), opacity .28s;
   will-change: transform;
 }
 .xmb-on .cat:not(.is-current) .item { opacity: 0; pointer-events: none; }
 .xmb-on .item.is-far { visibility: hidden; }
-.xmb-on .item__row { cursor: pointer; }
-.xmb-on .item__row:focus { outline: none; }
+.xmb-on .item__row {
+  cursor: pointer;
+  max-width: 460px;
+  width: fit-content;
+}
+.xmb-on #cr1mnsx .item__row,
+.xmb-on #cr1mnsx .item__icon,
+.xmb-on #cr1mnsx .avatar,
+.avatar-static {
+  cursor: default !important;
+  user-select: none;
+}
+.avatar-static {
+  pointer-events: none;
+}
+.xmb-on .item__row:focus,
+.xmb-on .item__row:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
 .xmb-on .item__icon { height: 58px; }
 .xmb-on .item__title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .xmb-on .item__sub,
 .xmb-on .item__panel { display: none; }
 
-.xmb-on .item.is-selected { opacity: 1; }
+.xmb-on .item.is-selected {
+  opacity: 1;
+  z-index: 25 !important;
+}
 .xmb-on .item.is-selected .item__icon { height: 100px; }
 .xmb-on .item.is-selected .item__icon > img {
   width: 88px; height: 88px;
@@ -1264,7 +1195,6 @@ a { color: inherit; }
 .game-banner-widget--brawl .game-banner-img,
 .psn-card-img,
 .game-banner-img[src*="brawl-stars-banner"],
-.game-banner-img[src*="ds2-majula"],
 .game-banner-img[src*="terminal"] {
   width: 100% !important;
   height: auto !important;
@@ -1407,13 +1337,6 @@ a { color: inherit; }
 .stat-pill--silver { border-color: rgba(200, 210, 220, .4); background: rgba(200, 210, 220, .12); }
 .stat-pill--bronze { border-color: rgba(210, 140, 90, .4); background: rgba(210, 140, 90, .12); }
 .stat-pill--lvl { border-color: rgba(255, 230, 80, .5); background: rgba(255, 230, 80, .15); color: #fff280; }
-.stat-pill--majula { border-color: rgba(255, 170, 70, .5); background: rgba(255, 140, 50, .18); color: #ffe0b3; }
-
-.psn-badge--majula {
-  background: rgba(255, 130, 40, .28);
-  border-color: rgba(255, 170, 70, .6);
-  color: #ffd299;
-}
 
 .psn-badge--brawl {
   background: rgba(255, 190, 0, .25);
@@ -1820,16 +1743,39 @@ a { color: inherit; }
 
 @media (max-width: 1180px) {
   .xmb-on .item.is-selected .item__panel {
-    position: static;
-    width: auto;
-    max-width: 420px;
-    margin: 16px 0 0 calc(var(--col) + 18px);
+    position: static !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 16px auto 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   .xmb-on #cr1mnsx .item.is-selected .item__panel {
-    max-width: 400px;
+    max-width: 440px !important;
+    margin: 16px auto 0 auto !important;
   }
   .xmb-on #souls .item.is-selected .item__panel {
-    max-width: 520px;
+    max-width: 560px !important;
+    margin: 16px auto 0 auto !important;
+  }
+  .xmb-on #twitch .item.is-selected .item__panel {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 16px auto 0 auto !important;
+  }
+  .xmb-on #music .item.is-selected .item__panel {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 16px auto 0 auto !important;
   }
 }
 
@@ -2367,8 +2313,9 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
     gap: 12px !important;
     width: 100% !important;
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     list-style: none !important;
+    align-items: center !important;
   }
 
   /* Карточки пунктов списка на смартфонах */
@@ -2378,7 +2325,8 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
     left: auto !important;
     transform: none !important;
     width: 100% !important;
-    max-width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
     opacity: 0.88 !important;
     visibility: visible !important;
     background: rgba(14, 26, 46, 0.6) !important;
@@ -2822,34 +2770,58 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
    3. ПРАВАЯ ПАНЕЛЬ СТРИМА МАФАНИ (XMB WIDGET)
    ================================================== */
 .xmb-on #twitch .item.is-selected .item__panel {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  top: -24px;
+  top: -210px;
   left: calc(var(--col) + 18px + 440px + 36px);
-  width: min(480px, calc(100vw - var(--ix, 20vw) - var(--col) - 460px));
+  width: min(480px, calc(100vw - var(--ix, 20vw) - var(--col) - 480px));
   margin: 0;
-  z-index: 6;
+  z-index: 25;
   animation: psnPanelFadeIn 0.25s var(--ease);
 }
 
 .item__panel--twitch {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .twitch-xmb-card {
-  background: linear-gradient(135deg, rgba(14, 22, 42, 0.92) 0%, rgba(8, 12, 26, 0.96) 100%);
+  width: 100%;
+  max-width: 480px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(14, 22, 42, 0.94) 0%, rgba(8, 12, 26, 0.98) 100%);
   border: 1px solid rgba(168, 85, 247, 0.35);
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 12px 14px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 28px rgba(147, 51, 234, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   position: relative;
-  overflow: hidden;
   color: #fff;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.twitch-xmb-card::-webkit-scrollbar {
+  width: 5px;
+}
+.twitch-xmb-card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+.twitch-xmb-card::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.5);
+  border-radius: 4px;
+}
+.twitch-xmb-card::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.85);
 }
 
 .twitch-xmb-card:hover {
@@ -2873,12 +2845,12 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 
 .twitch-xmb-avatar-box {
   position: relative;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   padding: 2px;
   background: linear-gradient(135deg, #a855f7, #6366f1);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
   flex-shrink: 0;
 }
 
@@ -2913,6 +2885,74 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   color: rgba(255, 255, 255, 0.65);
 }
 
+/* Вкладки Twitch: Клипы / Прямой Эфир / Анонсы */
+.twitch-tabs {
+  display: flex;
+  gap: 6px;
+  margin-top: 2px;
+  justify-content: center;
+}
+
+.twitch-tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.twitch-tab:hover {
+  background: rgba(168, 85, 247, 0.18);
+  border-color: rgba(168, 85, 247, 0.45);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.twitch-tab.is-active {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.35) 100%);
+  border-color: rgba(192, 132, 252, 0.85);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.twitch-tab-badge {
+  font-size: 9.5px;
+  padding: 1px 5px;
+  border-radius: 8px;
+  background: rgba(168, 85, 247, 0.45);
+  color: #fff;
+  font-weight: 700;
+}
+
+.twitch-tab-ext {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.twitch-tab--tg {
+  flex: 1;
+  padding: 6px 9px;
+  background: rgba(36, 161, 222, 0.12);
+  border-color: rgba(36, 161, 222, 0.3);
+}
+
+.twitch-tab--tg:hover {
+  background: rgba(36, 161, 222, 0.25);
+  border-color: rgba(36, 161, 222, 0.6);
+}
+
 /* Плеер 16:9 */
 .twitch-xmb-player-box {
   width: 100%;
@@ -2923,6 +2963,166 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   border: 1px solid rgba(168, 85, 247, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(147, 51, 234, 0.2);
   position: relative;
+}
+
+/* Секция выбора клипов */
+.twitch-clips-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: -2px;
+}
+
+.twitch-clips-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10.5px;
+}
+
+.twitch-clips-heading {
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #c084fc;
+  font-size: 10px;
+}
+
+.twitch-clips-now {
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-size: 10px;
+}
+
+.twitch-clips-carousel {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 2px 6px 2px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.twitch-clips-carousel::-webkit-scrollbar {
+  height: 4px;
+}
+
+.twitch-clips-carousel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+
+.twitch-clips-carousel::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.4);
+  border-radius: 4px;
+}
+
+.twitch-clip-card {
+  flex: 0 0 106px;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: transform 0.22s var(--ease), border-color 0.22s ease, box-shadow 0.22s ease;
+  scroll-snap-align: start;
+  text-align: left;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+}
+
+.twitch-clip-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(168, 85, 247, 0.7);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.45);
+}
+
+.twitch-clip-card.is-active {
+  border-color: #c084fc !important;
+  box-shadow: 0 0 16px rgba(192, 132, 252, 0.7) !important;
+  background: rgba(30, 20, 50, 0.95);
+}
+
+.twitch-clip-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.twitch-clip-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.twitch-clip-card:hover .twitch-clip-thumb {
+  transform: scale(1.06);
+}
+
+.twitch-clip-dur {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #fff;
+  line-height: 1;
+}
+
+.twitch-clip-play-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.4);
+  color: #fff;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+
+.twitch-clip-card:hover .twitch-clip-play-icon,
+.twitch-clip-card.is-active .twitch-clip-play-icon {
+  opacity: 1;
+}
+
+.twitch-clip-card.is-active .twitch-clip-play-icon {
+  background: rgba(147, 51, 234, 0.35);
+  color: #e9d5ff;
+}
+
+.twitch-clip-meta {
+  padding: 5px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.twitch-clip-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.twitch-clip-views {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .twitch-xmb-iframe {
@@ -2936,6 +3136,8 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .twitch-xmb-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 6px;
 }
 
@@ -2944,6 +3146,8 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   font-weight: 700;
   color: #fff;
   line-height: 1.35;
+  text-align: center;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2952,6 +3156,7 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .twitch-xmb-stream-tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 6px;
   font-size: 11px;
 }
@@ -2967,16 +3172,16 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 8px;
-  padding: 9px 14px;
+  border-radius: 7px;
+  padding: 7px 12px;
   color: #fff;
-  font-size: 13px;
+  font-size: 11.5px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 3px 12px rgba(124, 58, 237, 0.35);
   transition: all 0.2s ease;
 }
 
@@ -2993,20 +3198,20 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
 .twitch-xmb-chips {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
+  gap: 5px;
 }
 
 .twitch-chip {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
-  padding: 6px 9px;
+  padding: 5px 8px;
   color: #fff;
   text-decoration: none;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 500;
   transition: background 0.2s, border-color 0.2s, transform 0.2s;
   white-space: nowrap;
@@ -3059,4 +3264,404 @@ img[src*="icons/aero/"] { filter: grayscale(1) drop-shadow(0 2px 3px rgba(0, 0, 
   filter: drop-shadow(0 0 20px rgba(120, 200, 255, 0.95)) !important;
   transition: transform 0.25s ease, filter 0.25s ease !important;
 }
+
+/* =========================================================
+   ЯНДЕКС МУЗЫКА И РАЗДЕЛ МУЗЫКА (XMB MUSIC BRANCH)
+   ========================================================= */
+
+/* Карточка Яндекс Музыки в профиле cr1mnsx */
+.p-card--yandex-music {
+  background: linear-gradient(135deg, rgba(252, 63, 29, 0.16) 0%, rgba(13, 20, 35, 0.92) 55%, rgba(189, 33, 4, 0.18) 100%);
+  border-color: rgba(252, 63, 29, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(252, 63, 29, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  margin-top: 2px;
+}
+
+.p-card--yandex-music:hover {
+  border-color: rgba(252, 63, 29, 0.65);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65), 0 0 24px rgba(252, 63, 29, 0.32);
+}
+
+.ym-dot-pulse {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fc3f1d;
+  box-shadow: 0 0 8px #fc3f1d;
+  animation: ymPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes ymPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 12px #fc3f1d; }
+}
+
+.ym-profile-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ym-profile-cover-box {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fc3f1d, #d42807);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(252, 63, 29, 0.35);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ym-profile-cover-box img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.ym-equalizer {
+  position: absolute;
+  bottom: 4px;
+  left: 0; right: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.ym-equalizer span {
+  width: 2px;
+  background: #ffffff;
+  border-radius: 1px;
+  animation: ymEq 1.2s infinite ease-in-out;
+}
+
+.ym-equalizer span:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.ym-equalizer span:nth-child(2) { height: 85%; animation-delay: 0.3s; }
+.ym-equalizer span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+.ym-equalizer span:nth-child(4) { height: 95%; animation-delay: 0.4s; }
+
+@keyframes ymEq {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+.ym-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ym-profile-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ym-profile-sub {
+  font-size: 10.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ym-profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ym-btn-play {
+  background: linear-gradient(135deg, rgba(252, 63, 29, 0.85), rgba(212, 40, 7, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+}
+
+.ym-btn-play:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+  box-shadow: 0 4px 12px rgba(252, 63, 29, 0.4);
+}
+
+.ym-btn-ext {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.ym-btn-ext:hover {
+  background: rgba(252, 63, 29, 0.25);
+  border-color: rgba(252, 63, 29, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Правая панель XMB для раздела Музыка */
+.xmb-on #music .item.is-selected .item__panel {
+  display: block;
+  position: absolute;
+  top: -14px;
+  left: calc(var(--col) + 18px + 440px + 36px);
+  width: min(540px, calc(100vw - var(--ix, 20vw) - var(--col) - 510px));
+  margin: 0;
+  z-index: 40 !important;
+  animation: psnPanelFadeIn .35s var(--ease);
+}
+
+.item__panel--music {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ym-player-card {
+  background: linear-gradient(135deg, rgba(20, 26, 44, 0.94) 0%, rgba(10, 14, 28, 0.96) 100%);
+  border: 1px solid rgba(252, 63, 29, 0.4);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.75), 0 0 28px rgba(252, 63, 29, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.ym-player-card:hover {
+  border-color: rgba(252, 63, 29, 0.7);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.85), 0 0 36px rgba(252, 63, 29, 0.35);
+}
+
+.ym-player-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ym-player-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ym-player-title {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ym-player-sub {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.ym-player-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: rgba(252, 63, 29, 0.15);
+  border: 1px solid rgba(252, 63, 29, 0.4);
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ff7854;
+  letter-spacing: 0.04em;
+}
+
+.ym-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fc3f1d;
+  box-shadow: 0 0 8px #fc3f1d;
+  animation: ymPulse 1.5s infinite ease-in-out;
+}
+
+.ym-embed-wrap {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #080d19;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.ym-iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+.ym-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ym-action-btn {
+  flex: 1;
+  min-width: 140px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.ym-action-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(252, 63, 29, 0.5);
+  transform: translateY(-1px);
+}
+
+.ym-action-btn--ext {
+  background: linear-gradient(135deg, rgba(252, 63, 29, 0.2), rgba(212, 40, 7, 0.35));
+  border-color: rgba(252, 63, 29, 0.45);
+}
+
+.ym-action-btn--ext:hover {
+  background: linear-gradient(135deg, rgba(252, 63, 29, 0.35), rgba(212, 40, 7, 0.55));
+  border-color: rgba(252, 63, 29, 0.75);
+}
+
+/* Мобильная адаптация для музыки и твича */
+@media (max-width: 768px) {
+  .xmb-on #music .item.is-selected .item__panel,
+  .xmb-on #twitch .item.is-selected .item__panel {
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 14px auto 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .twitch-xmb-card,
+  .ym-player-card {
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+  }
+}
+
+
+
+/* ==================================================
+   APPLE HIG ACCESSIBILITY SUITE
+   - Reduced Transparency (materials.md)
+   - High Contrast (accessibility.md)
+   - Reduced Motion (motion.md)
+   - Focus Visible (keyboards.md)
+   ================================================== */
+@media (prefers-reduced-transparency: reduce) {
+  .ps3-toast__glass,
+  .p-glass-card,
+  .psn-meta,
+  .item__panel,
+  .ym-player-card {
+    background: #101522 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .ps3-toast__glass,
+  .p-glass-card,
+  .psn-meta,
+  .item__panel,
+  .ym-player-card {
+    border-color: rgba(255, 255, 255, 0.45) !important;
+  }
+  .item__title,
+  .p-sub-label {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+  .item__sub {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .ym-bar-eq-overlay span,
+  .ps3-wave,
+  .avatar,
+  .item__icon--photo .avatar {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px;
+}
+button:focus-visible,
+a:not(.item__row):focus-visible,
+input:focus-visible {
+  outline: 2px solid #38bdf8 !important;
+  outline-offset: 3px !important;
+}
+
+.xmb-on .item__row,
+.xmb-on .item__row:focus,
+.xmb-on .item__row:focus-visible,
+.xmb-on a.item__row:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 
