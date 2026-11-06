@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PlayStation®5 — System UI</title>
+  <title>PlayStation®5 — Welcome Hub &amp; Explore (cr1mnsx)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261106-ps5-v12" />
+  <link rel="stylesheet" href="css/style.css?v=20261106-ps5-v16" />
   <script>
-    // Immediately unregister any old Service Workers and clear stale caches
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {
-        for (const reg of regs) reg.unregister();
+        for (const r of regs) r.unregister();
       });
     }
     if ('caches' in window) {
@@ -22,189 +21,398 @@
 </head>
 <body>
   <!-- ========================================================================
-       PS5 1:1 VIEWPORT STAGE
-       Supports all 3 reference screens with 100% pixel-accurate geometry:
-       1. Welcome Hub (EN Topographic Reference)
-       2. Центр приветствия (RU Cherry Blossom Reference)
-       3. Explore — Meet the family (PS5 Hardware Reference)
+       1. DYNAMIC FULL-SCREEN BACKGROUND LAYER
        ======================================================================== -->
-  <div class="ps5-stage" id="ps5Stage" data-screen="welcome-en">
+  <div class="ps5-bg-layer">
+    <div class="ps5-bg-art is-visible" id="ps5BgArt" style="background-image: url('assets/ps5ish/crops/ps5-welcome-bg.png');"></div>
+    <canvas id="ps5Particles" class="ps5-particles"></canvas>
+    <div class="ps5-bg-vignette" id="ps5BgVignette"></div>
+  </div>
 
-    <!-- Background Layer -->
-    <div class="ps5-bg-layer">
-      <div class="ps5-bg-img is-active" id="bgWelcomeEn" style="background-image: url('assets/ps5ish/crops/ps5-welcome-bg.png');"></div>
-      <div class="ps5-bg-img" id="bgWelcomeRu" style="background-image: url('assets/ps5ish/ps5-welcome-ru-ref.jpg');"></div>
-      <div class="ps5-bg-img" id="bgExplore" style="background-image: url('assets/ps5ish/ps5-explore-ref.jpg');"></div>
-      <canvas id="ps5Particles" class="ps5-particles"></canvas>
-    </div>
+  <!-- ========================================================================
+       2. UNIFIED PS5 SCREEN (Top Bar + Interactive Game Ribbon + Active View)
+       ======================================================================== -->
+  <div class="ps5-screen" id="ps5Screen">
+
+    <!-- TOP SYSTEM BAR (Games | Media ... Search, Settings, Profile, Clock) -->
+    <header class="ps5-topbar">
+      <nav class="ps5-nav-tabs" aria-label="Main Categories">
+        <button class="ps5-tab is-active" id="tabGames" data-tab="games" type="button">Games</button>
+        <button class="ps5-tab" id="tabMedia" data-tab="media" type="button">Media</button>
+      </nav>
+
+      <div class="ps5-status-cluster">
+        <!-- Search Icon -->
+        <button class="ps5-icon-btn" id="ps5SearchBtn" type="button" title="Explore / Search">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round">
+            <circle cx="10.5" cy="10.5" r="6.3"></circle>
+            <line x1="15.3" y1="15.3" x2="20.6" y2="20.6"></line>
+          </svg>
+        </button>
+
+        <!-- Settings Gear Icon (Click to toggle EN / RU language & live cr1mnsx stats) -->
+        <button class="ps5-icon-btn" id="ps5SettingsBtn" type="button" title="Toggle EN / RU &amp; Live cr1mnsx Data">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+            <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
+          </svg>
+        </button>
+
+        <!-- PS5 Smiley Profile Avatar (Click for cr1mnsx Live Telemetry Modal) -->
+        <button class="ps5-avatar-btn" id="ps5ProfileBtn" type="button" title="cr1mnsx PSN &amp; Brawl Stars Profile">
+          <svg viewBox="0 0 24 24" width="20" height="20">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#ffffff"/>
+            <circle cx="8.8" cy="10" r="1.4" fill="#0b0d17"/>
+            <circle cx="15.2" cy="10" r="1.4" fill="#0b0d17"/>
+            <path d="M8.2 14.2c1 1.5 2.3 2.2 3.8 2.2s2.8-.7 3.8-2.2" fill="none" stroke="#0b0d17" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <!-- Clock -->
+        <time class="ps5-clock" id="ps5Clock">10:24AM</time>
+      </div>
+    </header>
+
+    <!-- GAME TILE RIBBON (Top-Aligned; Active Tile Enlarges & Shows Label at Bottom-Right) -->
+    <section class="ps5-ribbon-wrap" aria-label="Home Screen Ribbon">
+      <div class="ps5-games-ribbon" id="ps5GamesRibbon">
+
+        <!-- Left Edge Peek Tile: PlayStation Plus -->
+        <button class="ps5-tile ps5-tile--peek-left" data-tile-id="psplus" type="button" aria-label="PlayStation Plus">
+          <div class="ps5-tile-art ps5-tile-art--dark">
+            <svg viewBox="0 0 36 36" width="24" height="24">
+              <path d="M15 6h6v9h9v6h-9v9h-6v-9H6v-6h9V6z" fill="#facc15"/>
+            </svg>
+          </div>
+          <span class="ps5-tile-active-label">PlayStation Plus</span>
+        </button>
+
+        <!-- Tile 1: PlayStation Store -->
+        <button class="ps5-tile" data-tile-id="store" type="button" aria-label="PlayStation Store">
+          <div class="ps5-tile-art ps5-tile-art--store">
+            <img src="assets/ps5ish/PlaystationStore.png" alt="PS Store" class="ps5-store-bag-img" />
+          </div>
+          <span class="ps5-tile-active-label">PlayStation Store</span>
+        </button>
+
+        <!-- Tile 2 (Default Active): Welcome Hub -->
+        <button class="ps5-tile is-active" data-tile-id="welcome" type="button" aria-label="Welcome">
+          <div class="ps5-tile-art ps5-tile-art--welcome">
+            <svg viewBox="0 0 64 64" width="42" height="42" class="ps5-welcome-glyphs">
+              <rect x="9" y="9" width="17" height="17" rx="1.5" fill="none" stroke="#e5e7eb" stroke-width="4.4"/>
+              <polygon points="46.5,8.5 56,26 37,26" fill="none" stroke="#e5e7eb" stroke-width="4.4" stroke-linejoin="round"/>
+              <g stroke="#e5e7eb" stroke-width="4.4" stroke-linecap="square">
+                <line x1="10" y1="38" x2="25" y2="53"/>
+                <line x1="25" y1="38" x2="10" y2="53"/>
+              </g>
+              <circle cx="46.5" cy="45.5" r="8.8" fill="none" stroke="#e5e7eb" stroke-width="4.4"/>
+            </svg>
+          </div>
+          <span class="ps5-tile-active-label" id="welcomeTileLabel">Welcome</span>
+        </button>
+
+        <!-- Tile 3: Uncharted: Legacy of Thieves Collection -->
+        <button class="ps5-tile" data-tile-id="uncharted" type="button" aria-label="Uncharted">
+          <div class="ps5-tile-art">
+            <img src="assets/ps5ish/crops/tile-uncharted.png" alt="Uncharted" />
+          </div>
+          <span class="ps5-tile-active-label">UNCHARTED: Legacy of Thieves Collection</span>
+        </button>
+
+        <!-- Tile 4: ASTRO BOT -->
+        <button class="ps5-tile" data-tile-id="astrobot" type="button" aria-label="ASTRO BOT">
+          <div class="ps5-tile-art">
+            <img src="assets/ps5ish/crops/tile-astrobot.png" alt="ASTRO BOT" />
+          </div>
+          <span class="ps5-tile-active-label">ASTRO BOT</span>
+        </button>
+
+        <!-- Tile 5: ASTRO's PLAYROOM -->
+        <button class="ps5-tile" data-tile-id="astro-playroom" type="button" aria-label="ASTRO's PLAYROOM">
+          <div class="ps5-tile-art">
+            <img src="assets/ps5ish/crops/tile-astro-playroom.png" alt="ASTRO's PLAYROOM" />
+          </div>
+          <span class="ps5-tile-active-label">ASTRO's PLAYROOM</span>
+        </button>
+
+        <!-- Tile 6: The Last of Us Part II Remastered -->
+        <button class="ps5-tile" data-tile-id="tlou2" type="button" aria-label="The Last of Us Part II Remastered">
+          <div class="ps5-tile-art">
+            <img src="assets/ps5ish/crops/tile-tlou2.png" alt="The Last of Us Part II Remastered" />
+          </div>
+          <span class="ps5-tile-active-label">The Last of Us™ Part II Remastered</span>
+        </button>
+
+        <!-- Tile 7: PS Remote Play -->
+        <button class="ps5-tile" data-tile-id="remoteplay" type="button" aria-label="PS Remote Play">
+          <div class="ps5-tile-art ps5-tile-art--dark">
+            <svg viewBox="0 0 40 40" width="30" height="30" fill="none">
+              <circle cx="20" cy="9" r="1.4" fill="#ffffff"/>
+              <circle cx="20" cy="13" r="1.4" fill="#ffffff"/>
+              <circle cx="20" cy="17" r="1.4" fill="#ffffff"/>
+              <path d="M13 21h14c2.5 0 4.3 2 4.8 4.6l.9 5c.3 1.7-.9 3.2-2.6 3.2-1 0-1.9-.5-2.5-1.3l-1.9-2.5h-11.4l-1.9 2.5c-.6.8-1.5 1.3-2.5 1.3-1.7 0-2.9-1.5-2.6-3.2l.9-5C8.7 23 10.5 21 13 21z" stroke="#ffffff" stroke-width="2"/>
+            </svg>
+          </div>
+          <span class="ps5-tile-active-label">PS Remote Play</span>
+        </button>
+
+        <!-- Tile 8: Game Library -->
+        <button class="ps5-tile" data-tile-id="library" type="button" aria-label="Game Library">
+          <div class="ps5-tile-art ps5-tile-art--dark">
+            <svg viewBox="0 0 40 40" width="28" height="28" fill="#ffffff">
+              <rect x="9" y="10" width="6" height="5" rx="1"/>
+              <rect x="17" y="10" width="6" height="5" rx="1"/>
+              <rect x="25" y="10" width="6" height="5" rx="1"/>
+              <rect x="9" y="17" width="6" height="5" rx="1"/>
+              <rect x="17" y="17" width="6" height="5" rx="1"/>
+              <path d="M21 23h8c1.6 0 2.8 1.2 3.1 2.8l.5 3c.2 1-.5 1.9-1.5 1.9-.6 0-1.1-.3-1.5-.8l-1.1-1.4h-7l-1.1 1.4c-.4.5-.9.8-1.5.8-1 0-1.7-.9-1.5-1.9l.5-3c.3-1.6 1.5-2.8 3.1-2.8z"/>
+            </svg>
+          </div>
+          <span class="ps5-tile-active-label">Game Library</span>
+        </button>
+
+      </div>
+    </section>
 
     <!-- ======================================================================
-         SCREEN 1: WELCOME HUB (Dark Topographic PS5 Reference 1:1)
+         3A. WELCOME HUB BENTO GRID (100% Real Crisp HTML/CSS/SVG + Seamless 3D Icons)
          ====================================================================== -->
-    <section class="ps5-view ps5-view--welcome-en" id="viewWelcomeEn">
-      <!-- Top System Bar -->
-      <header class="ps5-topbar">
-        <nav class="ps5-nav-tabs" aria-label="Categories">
-          <button class="ps5-tab is-active" data-switch-screen="welcome-en" type="button">Games</button>
-          <button class="ps5-tab" data-switch-screen="explore" type="button">Media</button>
-        </nav>
-
-        <div class="ps5-status-right">
-          <button class="ps5-top-icon" data-switch-screen="explore" type="button" title="Search / Explore">
-            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round">
-              <circle cx="10.5" cy="10.5" r="6.2"></circle>
-              <line x1="15.2" y1="15.2" x2="20.5" y2="20.5"></line>
-            </svg>
-          </button>
-          <button class="ps5-top-icon" data-switch-screen="welcome-ru" type="button" title="Switch to RU Центр приветствия">
-            <svg viewBox="0 0 24 24" width="19" height="19" fill="#ffffff">
-              <path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
-            </svg>
-          </button>
-          <button class="ps5-top-icon" data-open-modal="psn" type="button" title="cr1mnsx Profile">
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              <rect x="2" y="2" width="20" height="20" rx="5" fill="#ffffff"/>
-              <circle cx="8.8" cy="10" r="1.4" fill="#0b0d17"/>
-              <circle cx="15.2" cy="10" r="1.4" fill="#0b0d17"/>
-              <path d="M8.2 14.2c1 1.5 2.3 2.2 3.8 2.2s2.8-.7 3.8-2.2" fill="none" stroke="#0b0d17" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <time class="ps5-clock">10:24AM</time>
-        </div>
-      </header>
-
-      <!-- Exact 9-Tile Game Ribbon from Reference 1 -->
-      <div class="ps5-ribbon-en">
-        <button class="ps5-r-tile ps5-r-tile--peek" data-switch-screen="explore" type="button" aria-label="PlayStation Plus">
-          <img src="assets/ps5ish/crops/tile-psplus.png" alt="" />
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="explore" type="button" aria-label="PlayStation Store">
-          <img src="assets/ps5ish/crops/tile-store.png" alt="PlayStation Store" />
-          <span class="ps5-r-label">PlayStation Store</span>
-        </button>
-        <button class="ps5-r-tile is-selected" data-switch-screen="welcome-en" type="button" aria-label="Welcome">
-          <img src="assets/ps5ish/crops/tile-welcome.png" alt="Welcome" />
-          <span class="ps5-r-label">Welcome</span>
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="explore" type="button" aria-label="Uncharted">
-          <img src="assets/ps5ish/crops/tile-uncharted.png" alt="Uncharted" />
-          <span class="ps5-r-label">UNCHARTED: Legacy of Thieves Collection</span>
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="explore" type="button" aria-label="ASTRO BOT">
-          <img src="assets/ps5ish/crops/tile-astrobot.png" alt="ASTRO BOT" />
-          <span class="ps5-r-label">ASTRO BOT</span>
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="explore" type="button" aria-label="ASTRO's PLAYROOM">
-          <img src="assets/ps5ish/crops/tile-astro-playroom.png" alt="ASTRO's PLAYROOM" />
-          <span class="ps5-r-label">ASTRO's PLAYROOM</span>
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="explore" type="button" aria-label="The Last of Us Part II Remastered">
-          <img src="assets/ps5ish/crops/tile-tlou2.png" alt="The Last of Us Part II Remastered" />
-          <span class="ps5-r-label">The Last of Us™ Part II Remastered</span>
-        </button>
-        <button class="ps5-r-tile" data-switch-screen="welcome-ru" type="button" aria-label="PS Remote Play">
-          <img src="assets/ps5ish/crops/tile-remoteplay.png" alt="PS Remote Play" />
-          <span class="ps5-r-label">PS Remote Play</span>
-        </button>
-        <button class="ps5-r-tile" data-open-modal="psn" type="button" aria-label="Game Library">
-          <img src="assets/ps5ish/crops/tile-library.png" alt="Game Library" />
-          <span class="ps5-r-label">Game Library</span>
-        </button>
-      </div>
-
-      <!-- Left "<" Arrow -->
-      <button class="ps5-left-arrow" data-switch-screen="welcome-ru" type="button" aria-label="Previous View">
-        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <main class="ps5-welcome-hub" id="ps5WelcomeView">
+      <!-- Left Navigation Chevron (<) -->
+      <button class="ps5-hub-chevron ps5-hub-chevron--left" id="ps5ChevronLeft" type="button" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
 
-      <!-- Exact 1:1 Welcome Hub Bento Cards -->
-      <div class="ps5-bento-en">
-        <!-- Col 1: Online Friends + PlayStation Store (Horizon Forbidden West) -->
+      <div class="ps5-bento-grid">
+        <!-- COLUMN 1: Online Friends (Top) + PlayStation Store Horizon (Bottom) -->
         <div class="ps5-bento-col">
-          <button class="ps5-card-btn ps5-card-btn--friends" data-open-modal="psn" type="button">
-            <img src="assets/ps5ish/crops/card-friends-full.png" alt="Online Friends — 4" />
-          </button>
-          <button class="ps5-card-btn ps5-card-btn--store" data-switch-screen="explore" type="button">
-            <img src="assets/ps5ish/crops/card-horizon-store.png" alt="PlayStation Store — Horizon Forbidden West" />
-          </button>
+          <!-- Widget 1: Online Friends -->
+          <article class="ps5-widget ps5-widget--friends" id="widgetFriends" tabindex="0">
+            <header class="ps5-widget-header">
+              <div class="ps5-widget-title-group">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <rect x="2" y="5" width="12" height="12" rx="3" fill="#ffffff"/>
+                  <circle cx="5.8" cy="9.8" r="1" fill="#171a21"/>
+                  <circle cx="10.2" cy="9.8" r="1" fill="#171a21"/>
+                  <path d="M5.5 12.8c.7.9 1.5 1.3 2.5 1.3s1.8-.4 2.5-1.3" stroke="#171a21" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                  <rect x="11" y="2" width="11" height="11" rx="2.5" fill="#9ca3af" opacity="0.7"/>
+                </svg>
+                <span id="lblOnlineFriends">Online Friends</span>
+              </div>
+              <div class="ps5-friends-online-badge">
+                <span class="ps5-green-dot"></span>
+                <span>4</span>
+              </div>
+            </header>
+
+            <div class="ps5-friends-avatars">
+              <img src="assets/ps5ish/crops/friends-avatars-clean.png" alt="Online Friends Avatars" class="ps5-friends-avatars-strip" />
+            </div>
+
+            <p class="ps5-friends-names" id="lblFriendsList">
+              Zane Richardsons, Space_Carrot10, DRJuiceXI,<br />Elisa Woods
+            </p>
+          </article>
+
+          <!-- Widget 2: PlayStation Store — Horizon Forbidden West -->
+          <article class="ps5-widget ps5-widget--store" id="widgetStore" tabindex="0">
+            <img src="assets/ps5ish/crops/card-horizon-store.png" alt="Horizon Forbidden West" class="ps5-card-bg-img" />
+          </article>
         </div>
 
-        <!-- Col 2: Accessibility + Trophies (with real 3D Platinum/Gold/Silver/Bronze cups) -->
+        <!-- COLUMN 2: Accessibility (Top) + Trophies (Bottom) -->
         <div class="ps5-bento-col">
-          <button class="ps5-card-btn ps5-card-btn--acc" data-switch-screen="welcome-ru" type="button">
-            <img src="assets/ps5ish/crops/card-accessibility-full.png" alt="Accessibility" />
-          </button>
-          <button class="ps5-card-btn ps5-card-btn--trophies" data-open-modal="psn" type="button">
-            <img src="assets/ps5ish/crops/card-trophies-full.png" alt="Trophies — Total: 380" />
-          </button>
+          <!-- Widget 3: Accessibility -->
+          <article class="ps5-widget ps5-widget--accessibility" id="widgetAccessibility" tabindex="0">
+            <div class="ps5-acc-left">
+              <header class="ps5-widget-header">
+                <div class="ps5-widget-title-group">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ffffff" stroke-width="2">
+                    <circle cx="12" cy="12" r="9.5"/>
+                    <circle cx="12" cy="7.5" r="1.3" fill="#ffffff" stroke="none"/>
+                    <path d="M7.5 10.5h9M12 10.5v4.5M9.5 18.5l2.5-3.5 2.5 3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span id="lblAccessibility">Accessibility</span>
+                </div>
+              </header>
+              <p class="ps5-acc-desc" id="lblAccessibilityDesc">Make your PS5 more usable for you.</p>
+            </div>
+            <img src="assets/ps5ish/crops/accessibility-emblem-clean.png" alt="Accessibility" class="ps5-acc-emblem" />
+          </article>
+
+          <!-- Widget 4: Trophies (Seamless 3D Platinum, Gold, Silver, Bronze Cups) -->
+          <article class="ps5-widget ps5-widget--trophies" id="widgetTrophies" tabindex="0">
+            <header class="ps5-widget-header">
+              <div class="ps5-widget-title-group">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="#ffffff">
+                  <path d="M18 2H6v2H2v5c0 2.21 1.79 4 4 4h.35c.78 2.3 2.77 4.01 5.15 4.41V20H8v2h8v-2h-3.5v-2.59c2.38-.4 4.37-2.11 5.15-4.41H18c2.21 0 4-1.79 4-4V4h-4V2zm-14 7V6h2v5c-1.1 0-2-.9-2-2zm16 0c0 1.1-.9 2-2 2V6h2v3z"/>
+                </svg>
+                <span id="lblTrophies">Trophies</span>
+              </div>
+              <span class="ps5-trophies-total" id="ps5TrophiesTotal">Total: 380</span>
+            </header>
+
+            <div class="ps5-trophies-cups-row">
+              <div class="ps5-trophy-col">
+                <img src="assets/ps5ish/crops/trophy-plat-clean.png" alt="Platinum" class="ps5-trophy-3d" />
+                <span class="ps5-trophy-num" id="ps5CountPlat">1</span>
+              </div>
+              <div class="ps5-trophy-col">
+                <img src="assets/ps5ish/crops/trophy-gold-clean.png" alt="Gold" class="ps5-trophy-3d" />
+                <span class="ps5-trophy-num" id="ps5CountGold">20</span>
+              </div>
+              <div class="ps5-trophy-col">
+                <img src="assets/ps5ish/crops/trophy-silver-clean.png" alt="Silver" class="ps5-trophy-3d" />
+                <span class="ps5-trophy-num" id="ps5CountSilver">67</span>
+              </div>
+              <div class="ps5-trophy-col">
+                <img src="assets/ps5ish/crops/trophy-bronze-clean.png" alt="Bronze" class="ps5-trophy-3d" />
+                <span class="ps5-trophy-num" id="ps5CountBronze">292</span>
+              </div>
+            </div>
+
+            <footer class="ps5-trophies-footer">
+              <div class="ps5-trophy-level-row">
+                <div class="ps5-level-left">
+                  <span class="ps5-level-crest">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                      <circle cx="12" cy="12" r="10" fill="#7c2d12" stroke="#f97316" stroke-width="1.6"/>
+                      <path d="M8 7h8v3.5c0 2.2-1.8 4-4 4s-4-1.8-4-4V7zm2.5 8.5h3v2h-3v-2z" fill="#fdba74"/>
+                    </svg>
+                  </span>
+                  <span class="ps5-level-text" id="ps5TrophyLevel">Level 128</span>
+                </div>
+                <span class="ps5-level-pct" id="ps5TrophyPct">33%</span>
+              </div>
+              <div class="ps5-level-bar-track">
+                <div class="ps5-level-bar-fill" id="ps5TrophyBarFill" style="width: 33%;"></div>
+              </div>
+            </footer>
+          </article>
         </div>
 
-        <!-- Col 3: DualSense/Earbuds Battery Rings + Wishlist (Gran Turismo 7) -->
+        <!-- COLUMN 3: Controller & Earbuds Battery Rings (Top) + Wishlist GT7 (Bottom) -->
         <div class="ps5-bento-col">
-          <button class="ps5-card-btn ps5-card-btn--battery" data-switch-screen="welcome-ru" type="button">
-            <img src="assets/ps5ish/crops/card-battery-full.png" alt="Controller & Earbuds Battery" />
-          </button>
-          <button class="ps5-card-btn ps5-card-btn--wishlist" data-switch-screen="explore" type="button">
-            <img src="assets/ps5ish/crops/card-gt7-wishlist.png" alt="Wishlist — Gran Turismo 7" />
-          </button>
+          <!-- Widget 5: 3 Thin Circular Battery Gauges -->
+          <article class="ps5-widget ps5-widget--battery" id="widgetBattery" tabindex="0">
+            <div class="ps5-battery-rings-row">
+              <!-- Ring 1: Green DualSense Controller -->
+              <div class="ps5-battery-ring-item">
+                <svg class="ps5-ring-svg" viewBox="0 0 72 72">
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-bg" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-track" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-progress ps5-ring-progress--green" stroke-dasharray="194.8" stroke-dashoffset="28" />
+                </svg>
+                <div class="ps5-ring-inner">
+                  <svg viewBox="0 0 36 26" width="24" height="17" fill="#ffffff" class="ps5-device-glyph">
+                    <path d="M10.5 4h15c3.2 0 5.6 2.5 6.3 5.7l1.4 7.2c.5 2.4-1.3 4.6-3.7 4.6-1.4 0-2.7-.7-3.5-1.9l-2.6-3.6H12.6L10 19.6c-.8 1.2-2.1 1.9-3.5 1.9-2.4 0-4.2-2.2-3.7-4.6l1.4-7.2C4.9 6.5 7.3 4 10.5 4z"/>
+                  </svg>
+                  <svg viewBox="0 0 20 10" width="13" height="7" class="ps5-mini-batt">
+                    <rect x="1" y="1.5" width="15" height="7" rx="1.2" fill="none" stroke="#d1d5db" stroke-width="1.3"/>
+                    <rect x="16.8" y="3.3" width="2" height="3.4" rx="0.5" fill="#d1d5db"/>
+                    <rect x="3" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                    <rect x="7" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                    <rect x="11" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Ring 2: Orange/Amber DualSense Controller -->
+              <div class="ps5-battery-ring-item">
+                <svg class="ps5-ring-svg" viewBox="0 0 72 72">
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-bg" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-track" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-progress ps5-ring-progress--amber" stroke-dasharray="194.8" stroke-dashoffset="132" />
+                </svg>
+                <div class="ps5-ring-inner">
+                  <svg viewBox="0 0 36 26" width="24" height="17" fill="#ffffff" class="ps5-device-glyph">
+                    <path d="M10.5 4h15c3.2 0 5.6 2.5 6.3 5.7l1.4 7.2c.5 2.4-1.3 4.6-3.7 4.6-1.4 0-2.7-.7-3.5-1.9l-2.6-3.6H12.6L10 19.6c-.8 1.2-2.1 1.9-3.5 1.9-2.4 0-4.2-2.2-3.7-4.6l1.4-7.2C4.9 6.5 7.3 4 10.5 4z"/>
+                  </svg>
+                  <svg viewBox="0 0 20 10" width="13" height="7" class="ps5-mini-batt">
+                    <rect x="1" y="1.5" width="15" height="7" rx="1.2" fill="none" stroke="#d1d5db" stroke-width="1.3"/>
+                    <rect x="16.8" y="3.3" width="2" height="3.4" rx="0.5" fill="#d1d5db"/>
+                    <rect x="3" y="3.2" width="3.2" height="3.6" fill="#ffffff"/>
+                    <rect x="7.2" y="3.2" width="3.2" height="3.6" fill="#ffffff"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Ring 3: Green PS Pulse Explore Earbuds -->
+              <div class="ps5-battery-ring-item">
+                <svg class="ps5-ring-svg" viewBox="0 0 72 72">
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-bg" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-track" />
+                  <circle cx="36" cy="36" r="31" class="ps5-ring-progress ps5-ring-progress--green" stroke-dasharray="194.8" stroke-dashoffset="22" />
+                </svg>
+                <div class="ps5-ring-inner">
+                  <svg viewBox="0 0 36 26" width="24" height="17" fill="#ffffff" class="ps5-device-glyph">
+                    <path d="M13 4.5c-3 0-5.2 2.6-5.2 6.2 0 3.2 1.8 5.8 4.4 6.2 1.2.2 2.3-.6 2.3-1.9V6.8c0-1.3-1-2.3-1.5-2.3zm-1.8 4.8a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z"/>
+                    <path d="M23 7.5c3 0 5.2 2.6 5.2 6.2 0 3.2-1.8 5.8-4.4 6.2-1.2.2-2.3-.6-2.3-1.9V9.8c0-1.3 1-2.3 1.5-2.3zm1.8 4.8a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z"/>
+                  </svg>
+                  <svg viewBox="0 0 20 10" width="13" height="7" class="ps5-mini-batt">
+                    <rect x="1" y="1.5" width="15" height="7" rx="1.2" fill="none" stroke="#d1d5db" stroke-width="1.3"/>
+                    <rect x="16.8" y="3.3" width="2" height="3.4" rx="0.5" fill="#d1d5db"/>
+                    <rect x="3" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                    <rect x="7" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                    <rect x="11" y="3.2" width="3" height="3.6" fill="#ffffff"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Widget 6: Wishlist — Gran Turismo 7 -->
+          <article class="ps5-widget ps5-widget--wishlist" id="widgetWishlist" tabindex="0">
+            <img src="assets/ps5ish/crops/card-gt7-wishlist.png" alt="Gran Turismo 7 Wishlist" class="ps5-card-bg-img" />
+          </article>
         </div>
 
-        <!-- Col 4: Right-edge Peeking Card (Friend Activity / Nanami with ">" chevron) -->
-        <div class="ps5-bento-col ps5-bento-col--peek">
-          <button class="ps5-card-btn ps5-card-btn--peek" data-switch-screen="explore" type="button">
-            <img src="assets/ps5ish/crops/card-friend-activity.png" alt="Friend Activity — Nanami" />
-          </button>
+        <!-- COLUMN 4: Right-edge Peeking Card (Friend Activity / Nanami) -->
+        <div class="ps5-bento-col">
+          <article class="ps5-widget ps5-widget--peek" id="widgetFriendActivity" tabindex="0" title="Next Screen (Explore)">
+            <img src="assets/ps5ish/crops/card-friend-activity.png" alt="Friend Activity" class="ps5-card-bg-img" />
+          </article>
         </div>
       </div>
-    </section>
+    </main>
 
     <!-- ======================================================================
-         SCREEN 2: ЦЕНТР ПРИВЕТСТВИЯ (RU Cherry Blossom PS5 Reference 1:1)
+         3B. PS5 EXPLORE & GAME HUB VIEW (Matches Reference "Meet the family" 1:1)
+         Shown when selecting Explore, PS Store, Uncharted, Astro Bot, etc.
          ====================================================================== -->
-    <section class="ps5-view ps5-view--welcome-ru" id="viewWelcomeRu" hidden>
-      <!-- Invisible interactive hotspots aligned 1:1 over the RU PS5 Reference -->
-      <div class="ps5-ru-topbar-hotspots">
-        <button class="ps5-hotspot" style="left: 4.5%; top: 3%; width: 32%; height: 7%;" data-switch-screen="welcome-en" type="button" title="Switch to EN Welcome Hub"></button>
-        <button class="ps5-hotspot" style="left: 71%; top: 3%; width: 25%; height: 7%;" data-open-modal="psn" type="button" title="Open cr1mnsx Profile"></button>
+    <main class="ps5-explore-view" id="ps5ExploreView" hidden>
+      <!-- Left Hero Typography Block -->
+      <div class="ps5-explore-hero">
+        <p class="ps5-explore-kicker" id="exploreKicker">Official news from PlayStation | 32 minutes ago</p>
+        <h1 class="ps5-explore-title" id="exploreTitle">Meet the family</h1>
+        <p class="ps5-explore-desc" id="exploreDesc">
+          From the Media Remote to the PS5 consoles themselves, take a visual tour of the PlayStation 5 hardware family.
+        </p>
       </div>
 
-      <div class="ps5-ru-ribbon-hotspots">
-        <button class="ps5-hotspot" style="left: 8.8%; top: 11.5%; width: 8.8%; height: 15.5%;" data-switch-screen="welcome-en" type="button" title="Центр приветствия"></button>
-        <button class="ps5-hotspot" style="left: 18.4%; top: 11.5%; width: 42%; height: 10.5%;" data-switch-screen="explore" type="button" title="Перейти к Explore / Играм"></button>
+      <!-- Bottom Row of 5 Rectangular 16:9 Media / Activity Cards -->
+      <div class="ps5-media-cards-row" id="ps5MediaCardsRow">
+        <article class="ps5-media-card" data-open-modal="psn" tabindex="0">
+          <img src="assets/ps5ish/crops/explore-card-1.png" alt="Meet the family" id="mediaImg1" />
+        </article>
+        <article class="ps5-media-card" data-open-modal="brawl" tabindex="0">
+          <img src="assets/ps5ish/crops/explore-card-2.png" alt="Welcome to London" id="mediaImg2" />
+        </article>
+        <article class="ps5-media-card" data-open-modal="psn" tabindex="0">
+          <img src="assets/ps5ish/crops/explore-card-3.png" alt="PS5 console details revealed" id="mediaImg3" />
+        </article>
+        <article class="ps5-media-card" data-open-modal="brawl" tabindex="0">
+          <img src="assets/ps5ish/crops/explore-card-4.png" alt="Announcement Trailer" id="mediaImg4" />
+        </article>
+        <article class="ps5-media-card ps5-media-card--peek" data-open-modal="psn" tabindex="0">
+          <img src="assets/ps5ish/crops/explore-card-5.png" alt="New games" id="mediaImg5" />
+        </article>
       </div>
-
-      <div class="ps5-ru-cards-hotspots">
-        <button class="ps5-hotspot" style="left: 8.9%; top: 48.5%; width: 26.6%; height: 14.2%;" data-open-modal="psn" type="button" title="Беспроводной контроллер DualSense"></button>
-        <button class="ps5-hotspot" style="left: 8.9%; top: 64.5%; width: 26.6%; height: 14.2%;" data-open-modal="psn" type="button" title="Память консоли — 34,37 ГБ"></button>
-        <button class="ps5-hotspot" style="left: 36.9%; top: 64.5%; width: 26.6%; height: 14.2%;" data-open-modal="psn" type="button" title="Призы — Всего: 2273 (cr1mnsx: 709)"></button>
-        <button class="ps5-hotspot" style="left: 64.7%; top: 48.5%; width: 26.6%; height: 14.2%;" data-switch-screen="welcome-en" type="button" title="Специальные возможности"></button>
-      </div>
-    </section>
+    </main>
 
     <!-- ======================================================================
-         SCREEN 3: EXPLORE — MEET THE FAMILY (PS5 Hardware Reference 1:1)
-         ====================================================================== -->
-    <section class="ps5-view ps5-view--explore" id="viewExplore" hidden>
-      <!-- Top Bar Hotspots -->
-      <button class="ps5-hotspot" style="left: 3.5%; top: 2.5%; width: 18%; height: 6.5%;" data-switch-screen="welcome-en" type="button" title="Back to Welcome Hub"></button>
-      <button class="ps5-hotspot" style="left: 69%; top: 2.5%; width: 28%; height: 6.5%;" data-open-modal="brawl" type="button" title="Open Live Brawl Stars & PSN Stats"></button>
-
-      <!-- Ribbon Hotspots -->
-      <button class="ps5-hotspot" style="left: 1.5%; top: 10.5%; width: 6%; height: 10.5%;" data-switch-screen="welcome-en" type="button" title="PlayStation Store / Welcome"></button>
-      <button class="ps5-hotspot" style="left: 7.8%; top: 10.5%; width: 9.4%; height: 16.5%;" data-switch-screen="welcome-en" type="button" title="Explore -> Welcome Hub"></button>
-      <button class="ps5-hotspot" style="left: 17.8%; top: 10.5%; width: 54%; height: 10.5%;" data-switch-screen="welcome-ru" type="button" title="Switch to RU Центр приветствия"></button>
-
-      <!-- Bottom 5 Media Cards Hotspots -->
-      <button class="ps5-hotspot" style="left: 8.1%; top: 77.2%; width: 19.7%; height: 19.6%;" data-open-modal="psn" type="button" title="Meet the family"></button>
-      <button class="ps5-hotspot" style="left: 29.4%; top: 77.2%; width: 19.7%; height: 19.6%;" data-open-modal="brawl" type="button" title="Welcome to London"></button>
-      <button class="ps5-hotspot" style="left: 50.7%; top: 77.2%; width: 19.7%; height: 19.6%;" data-open-modal="psn" type="button" title="PS5 console details revealed"></button>
-      <button class="ps5-hotspot" style="left: 72.0%; top: 77.2%; width: 19.7%; height: 19.6%;" data-open-modal="brawl" type="button" title="Announcement Trailer"></button>
-    </section>
-
-    <!-- ======================================================================
-         MODAL DRAWER FOR CR1MNSX LIVE PSN & BRAWL STARS TELEMETRY
+         4. TELEMETRY MODAL DRAWER (Live cr1mnsx PSN & Brawl Stars JSON Data)
          ====================================================================== -->
     <div class="ps5-modal-backdrop" id="ps5ModalBackdrop" hidden>
       <div class="ps5-modal-card" role="dialog" aria-modal="true" aria-labelledby="ps5ModalTitle">
@@ -213,12 +421,7 @@
             <span class="ps5-modal-kicker" id="ps5ModalKicker">PLAYSTATION®5 SYSTEM TELEMETRY</span>
             <h2 class="ps5-modal-title" id="ps5ModalTitle">cr1mnsx — Live Account Overview</h2>
           </div>
-          <div class="ps5-modal-actions">
-            <button class="ps5-modal-switch" data-modal-switch="welcome-en" type="button">EN Welcome</button>
-            <button class="ps5-modal-switch" data-modal-switch="welcome-ru" type="button">RU Центр</button>
-            <button class="ps5-modal-switch" data-modal-switch="explore" type="button">PS5 Explore</button>
-            <button class="ps5-modal-close" id="ps5ModalClose" type="button">✕</button>
-          </div>
+          <button class="ps5-modal-close" id="ps5ModalClose" type="button">✕ Close</button>
         </header>
         <div class="ps5-modal-body" id="ps5ModalBody"></div>
       </div>
@@ -226,6 +429,6 @@
 
   </div>
 
-  <script src="js/main.js?v=20261106-ps5-v12"></script>
+  <script src="js/main.js?v=20261106-ps5-v17"></script>
 </body>
 </html>
