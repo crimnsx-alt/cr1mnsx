@@ -1,0 +1,21 @@
+{
+  "name": "cr1mnsx — PlayStation 5 & Brawl Stars Hub",
+  "short_name": "cr1mnsx",
+  "description": "Интерактивный хаб cr1mnsx в стиле PlayStation XMB & Apple Liquid Glass — Live-статистика PS5 и Brawl Stars.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#020713",
+  "theme_color": "#0b2a5a",
+  "icons": [
+    {
+      "src": "assets/icons/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

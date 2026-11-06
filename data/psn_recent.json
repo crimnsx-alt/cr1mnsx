@@ -1,14 +1,29 @@
 {
-  "updated_at": "2026-11-06T12:17:27.889Z",
+  "updated_at": "2026-11-06T12:31:54.934Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
   "is_playing_now": false,
+  "last_available_date": "2026-11-06T09:45:34.262Z",
+  "account_summary": {
+    "trophyLevel": 199,
+    "progress": 0,
+    "tier": 2,
+    "earnedTrophies": {
+      "bronze": 548,
+      "silver": 138,
+      "gold": 21,
+      "platinum": 2
+    },
+    "totalTrophies": 709
+  },
   "game": {
     "title": "Minecraft",
-    "platform": "PS4",
+    "platform": "PS5",
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+    "play_count": 57,
     "progress_percent": 0,
     "trophies_earned": 0,
     "trophies_total": 0,
@@ -18,6 +33,112 @@
     "gold": 0,
     "platinum": 0,
     "last_played_text": "6 ноября 2026",
-    "play_duration": ""
-  }
+    "play_duration": "14 ч. 58 мин."
+  },
+  "recent_history": [
+    {
+      "title": "Minecraft",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 0,
+      "rank": "E",
+      "last_played": "6 ноября 2026",
+      "play_duration": "14 ч. 58 мин.",
+      "play_count": 57
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
+      "rank": "D",
+      "last_played": "6 ноября 2026",
+      "play_duration": "32 ч. 26 мин.",
+      "play_count": 55
+    },
+    {
+      "title": "DARK SOULS™ III",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+      "progress_percent": 12,
+      "trophies_earned": 9,
+      "trophies_total": 43,
+      "rank": "D",
+      "last_played": "5 ноября 2026",
+      "play_duration": "13 ч. 17 мин.",
+      "play_count": 13
+    },
+    {
+      "title": "Tomb Raider IV-VI Remastered",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202409/1221/c785b0366d8f84a18dd17a0d046fdee92ccd6195d79c81a1.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202409/1221/85006e3582d8b415bf4b7b2aa884c8ddf2f1a7d5d7d2083e.jpg",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 169,
+      "rank": "E",
+      "last_played": "4 ноября 2026",
+      "play_duration": "57 мин.",
+      "play_count": 1
+    },
+    {
+      "title": "Cyberpunk 2077",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/1517/UyPJCxbE3EoeLtUxjoFBnsD4.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202202/1517/a1krxU0VRlOC3ULeUjeFGEcA.png",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 58,
+      "rank": "E",
+      "last_played": "1 ноября 2026",
+      "play_duration": "10 ч. 17 мин.",
+      "play_count": 5
+    },
+    {
+      "title": "Kingdom Come: Deliverance II",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202408/1208/05a84ce968125d79fa36484c5a756a1c8d9b05622aae21c1.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202408/1209/1ccd8c6eb043c9c80a49c871ca64891055651141b55324c2.jpg",
+      "progress_percent": 4,
+      "trophies_earned": 5,
+      "trophies_total": 84,
+      "rank": "E",
+      "last_played": "28 октября 2026",
+      "play_duration": "8 ч. 10 мин.",
+      "play_count": 6
+    },
+    {
+      "title": "RESIDENT EVIL 7 biohazard",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0207/V6IViuKogBMRtajqjnYrcj0e.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0509/XhJB07xH50P8jRQO7L0kOqgQ.png",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 0,
+      "rank": "E",
+      "last_played": "27 октября 2026",
+      "play_duration": "31 мин.",
+      "play_count": 1
+    },
+    {
+      "title": "Marvel's Spider-Man",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
+      "progress_percent": 16,
+      "trophies_earned": 17,
+      "trophies_total": 74,
+      "rank": "D",
+      "last_played": "25 октября 2026",
+      "play_duration": "75 ч. 37 мин.",
+      "play_count": 129
+    }
+  ]
 }

@@ -294,6 +294,49 @@
     });
   }
 
+  /* ---------- Переключатель темы (Dark XMB / Apple Light Glass) ---------- */
+  const themeToggleBtn = $('#themeToggle');
+  let currentTheme = localStorage.getItem('cr1mnsx_theme') || 'dark';
+  const applyTheme = (theme) => {
+    currentTheme = theme === 'light' ? 'light' : 'dark';
+    root.dataset.theme = currentTheme;
+    if (themeToggleBtn) {
+      themeToggleBtn.textContent = currentTheme === 'light' ? '☀️' : '🌙';
+      themeToggleBtn.title = currentTheme === 'light'
+        ? 'Тема: Apple Light Glass (нажмите для Dark XMB)'
+        : 'Тема: Dark XMB (нажмите для Apple Light Glass)';
+    }
+  };
+  applyTheme(currentTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const next = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try { localStorage.setItem('cr1mnsx_theme', next); } catch {}
+      playSfx('ok');
+      showPs3Toast(
+        'Тема оформления',
+        next === 'light' ? 'Активирован режим Apple Light Glass ☀️' : 'Активирован режим PlayStation Dark XMB 🌙',
+        next === 'light' ? '☀️' : '🌙'
+      );
+    });
+  }
+
+  /* ---------- Интерактивное получение трофеев по клику (Trophy Unlock Simulation) ---------- */
+  document.addEventListener('click', (e) => {
+    const trEl = e.target.closest('[data-trophy-grade]');
+    if (!trEl) return;
+    e.stopPropagation();
+    const grade = trEl.getAttribute('data-trophy-grade') || 'Приз PSN';
+    const name = trEl.getAttribute('data-trophy-name') || 'PlayStation Network · Cr1mnsx';
+    const imgEl = trEl.querySelector('img');
+    const iconHtml = imgEl ? `<img src="${imgEl.getAttribute('src')}" width="22" height="22" alt="">` : '🏆';
+    playSfx('trophy');
+    showPs3Toast(`Приз PlayStation Network (${grade})`, name, iconHtml);
+  });
+
   /* ---------- PS3 Notification Toast ---------- */
   const ps3Toast = $('#ps3Toast');
   const ps3ToastTitle = $('#ps3ToastTitle');
@@ -905,7 +948,7 @@
   /* ---------- Brawl Stars: Синхронизация статистики с Brawlify (#2RGUQJQ0R) ---------- */
   const initBrawlStarsSync = () => {
     const TAG = '2RGUQJQ0R';
-    const CACHE_KEY = 'bs_profile_2rguqjq0r_v4';
+    const CACHE_KEY = 'bs_profile_2rguqjq0r_v5';
     const CACHE_TTL = 30 * 60 * 1000; // 30 минут
 
     const elTrophies = $('#bs-trophies');
@@ -917,6 +960,8 @@
     const elSyncStatus = $('#bs-sync-status');
     const elSubPreview = $('#bs-sub-preview');
     const refreshBtn = $('#bsRefreshBtn');
+    const elTopBrawlersGrid = $('#bsTopBrawlersGrid');
+    const elRecentBattlesList = $('#bsRecentBattlesList');
 
     const updateDOM = (data, isLive = false) => {
       if (!data) return;
@@ -947,6 +992,42 @@
       const dashClub = $('#dash-bs-club');
       if (dashClub && data.club) dashClub.textContent = `🛡️ ${data.club}`;
 
+      // Рендер витрины топ-6 бойцов (Brawler Showcase)
+      if (elTopBrawlersGrid && Array.isArray(data.topBrawlers) && data.topBrawlers.length > 0) {
+        elTopBrawlersGrid.innerHTML = data.topBrawlers.slice(0, 6).map((b) => {
+          const iconSrc = b.id ? `https://cdn.brawlify.com/brawlers/borderless/${b.id}.png` : 'assets/icons/aero/brawl-stars.png';
+          return `
+            <div class="bs-brawler-card" title="${b.name} · Сила ${b.power || 11} · Ранг ${b.rank || 50}">
+              <img class="bs-brawler-icon" src="${iconSrc}" alt="${b.name}" loading="lazy" onerror="this.onerror=null;this.src='assets/icons/aero/brawl-stars.png';">
+              <div class="bs-brawler-info">
+                <span class="bs-brawler-name">${b.name}</span>
+                <span class="bs-brawler-trophies">🏆 ${Number(b.trophies || 0).toLocaleString('ru-RU')} · P${b.power || 11}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Рендер последних боёв (Battlelog)
+      if (elRecentBattlesList && Array.isArray(data.recentBattles) && data.recentBattles.length > 0) {
+        elRecentBattlesList.innerHTML = data.recentBattles.slice(0, 4).map((bt) => {
+          const isWin = bt.result === 'victory' || bt.result === 'rank_1' || bt.result === 'rank_2' || (bt.trophyChange && bt.trophyChange > 0);
+          const deltaVal = bt.trophyChange !== undefined && bt.trophyChange !== null
+            ? (bt.trophyChange > 0 ? `+${bt.trophyChange} 🏆` : `${bt.trophyChange} 🏆`)
+            : (isWin ? 'Победа 🏆' : 'Матч');
+          return `
+            <div class="bs-battle-pill ${isWin ? 'bs-battle-pill--win' : 'bs-battle-pill--loss'}">
+              <div class="bs-battle-info">
+                <span>${isWin ? '🟢' : '🔴'}</span>
+                <span class="bs-battle-mode">${bt.mode || '3v3'}</span>
+                <span class="bs-battle-map">· ${bt.map || 'Арена'}${bt.brawler ? ` (${bt.brawler})` : ''}</span>
+              </div>
+              <span class="bs-battle-delta">${deltaVal}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
       if (elSubPreview && data.trophies) {
         elSubPreview.textContent = `🏆 ${formattedTrophies} кубков · 108 бойцов · Ежедневный актив · #2RGUQJQ0R`;
       }
@@ -957,7 +1038,7 @@
 
     // Очистка старых версий кэша с заниженными кубками (38k)
     try {
-      ['bs_profile_2rguqjq0r', 'bs_profile_2rguqjq0r_v2', 'bs_profile_2rguqjq0r_v3'].forEach(k => localStorage.removeItem(k));
+      ['bs_profile_2rguqjq0r', 'bs_profile_2rguqjq0r_v2', 'bs_profile_2rguqjq0r_v3', 'bs_profile_2rguqjq0r_v4'].forEach(k => localStorage.removeItem(k));
     } catch { /* ignore */ }
 
     // Интерактивное мгновенное обновление кубков в реальном времени
@@ -990,16 +1071,12 @@
     }
 
     // 1. Проверяем свежий кэш в localStorage
-    let hasFreshCache = false;
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         const parsed = JSON.parse(cached);
         if (parsed?.data?.trophies && parsed.data.trophies >= 39000) {
           updateDOM(parsed.data, false);
-          if (Date.now() - parsed.timestamp < CACHE_TTL) {
-            hasFreshCache = true;
-          }
         }
       }
     } catch { /* ignore cache read error */ }
@@ -1019,7 +1096,9 @@
                 victories3v3: raw.victories3v3 || 2840,
                 showdown: raw.showdown || 1530,
                 brawlers: raw.brawlers || `${raw.brawlersUnlocked || 108} / ${raw.brawlersTotal || 108}`,
-                club: raw.club || '0.3.7|teams'
+                club: raw.club || '0.3.7|teams',
+                topBrawlers: raw.topBrawlers || [],
+                recentBattles: raw.recentBattles || []
               };
               updateDOM(normalized, false);
               try {
@@ -1037,10 +1116,10 @@
     loadLocalJson();
   };
 
-  /* ---------- PlayStation 5: Синхронизация последней запущенной игры ---------- */
+  /* ---------- PlayStation 5: Синхронизация последней запущенной игры и сводки аккаунта ---------- */
   const initPS5LastPlayedSync = () => {
     const PSN_USER = 'Cr1mnsx';
-    const CACHE_KEY = 'ps5_last_played_cr1mnsx_v2';
+    const CACHE_KEY = 'ps5_last_played_cr1mnsx_v3';
 
     const elTitles = $$('.ps5-last-game-title');
     const elImgs = $$('.ps5-last-game-img');
@@ -1048,8 +1127,9 @@
     const elStatuses = $$('.ps5-last-game-status');
     const elProgresses = $$('.ps5-last-game-progress');
     const elBars = $$('.ps5-last-game-bar');
+    const elDurations = $$('.ps5-last-game-duration');
 
-    const updateDOM = (game) => {
+    const updateDOM = (game, accountSummary = null, recentHistory = null) => {
       if (!game || !game.title) return;
 
       const title = game.title;
@@ -1059,8 +1139,63 @@
       const earned = game.trophies_earned !== undefined ? Number(game.trophies_earned) : 0;
       const total = game.trophies_total !== undefined ? Number(game.trophies_total) : 0;
       const rank = game.rank || 'D';
-      const lastPlayedText = game.last_played_text || game.last_played || '29 сентября 2026';
+      const lastPlayedText = game.last_played_text || game.last_played || '8 октября 2026';
       const isPlaying = !!game.is_playing_now;
+      const totalAccountTrophies = accountSummary?.total_trophies || 709;
+
+      // 0. Обновление времени в игре на карточке PS5
+      if (game.play_duration) {
+        const durLabel = game.play_count
+          ? `⏱ ${game.play_duration} · ${game.play_count} зап.`
+          : `⏱ ${game.play_duration}`;
+        elDurations.forEach(el => { el.textContent = durLabel; });
+      }
+
+      // 0b. Обновление глобальной статистики аккаунта PSN (LVL 199, 709 трофеев)
+      if (accountSummary) {
+        const lvl = accountSummary.trophy_level || 199;
+        const tot = accountSummary.total_trophies || 709;
+        const et = accountSummary.earned_trophies || {};
+        const platCount = et.platinum !== undefined ? et.platinum : 2;
+        const goldCount = et.gold !== undefined ? et.gold : 21;
+        const silverCount = et.silver !== undefined ? et.silver : 138;
+        const bronzeCount = et.bronze !== undefined ? et.bronze : 548;
+
+        $$('.psn-acc-level').forEach(el => { el.textContent = `LVL ${lvl}`; });
+        $$('.psn-acc-level-full').forEach(el => { el.textContent = `PSN LEVEL ${lvl}`; });
+        $$('.psn-acc-level-num').forEach(el => { el.textContent = `${lvl}`; });
+        $$('.psn-acc-total').forEach(el => { el.textContent = `${tot}`; });
+        $$('.psn-acc-total-label').forEach(el => { el.textContent = `${tot} трофеев (${platCount} платины)`; });
+        $$('.psn-acc-plat').forEach(el => { el.textContent = `${platCount}`; });
+        $$('.psn-acc-gold').forEach(el => { el.textContent = `${goldCount}`; });
+        $$('.psn-acc-silver').forEach(el => { el.textContent = `${silverCount}`; });
+        $$('.psn-acc-bronze').forEach(el => { el.textContent = `${bronzeCount}`; });
+      }
+
+      // 0c. Рендер списка последних запусков на PS5 с часами игры
+      if (Array.isArray(recentHistory) && recentHistory.length > 0) {
+        const html = recentHistory.slice(0, 4).map((g) => {
+          const gPlat = g.platform || 'PS5';
+          const gDur = g.play_duration || 'В игре';
+          const gSub = g.play_count
+            ? `${g.last_played || 'Недавно'} · ${g.play_count} запусков`
+            : `${g.last_played || 'Недавно'}`;
+          return `
+            <a class="ps5-hist-row" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="${g.title} (${gPlat}) — ${gDur}">
+              <img class="ps5-hist-thumb" src="${g.image || ''}" alt="${g.title}" loading="lazy">
+              <div class="ps5-hist-info">
+                <span class="ps5-hist-title">${g.title}</span>
+                <span class="ps5-hist-sub">${gSub}</span>
+              </div>
+              <div class="ps5-hist-meta">
+                <span class="ps5-hist-dur">⏱ ${gDur}</span>
+                <span class="pgc-cover-badge" style="position:static;">${gPlat}</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+        $$('.ps5-recent-history-list').forEach(listEl => { listEl.innerHTML = html; });
+      }
 
       // 1. Шапка: кнопка-плашка PS5
       const topPillText = $('#ps5TopPillText');
@@ -1077,7 +1212,7 @@
       if (psnSub) {
         psnSub.textContent = isPlaying
           ? `🟢 В игре прямо сейчас на PS5: ${title}`
-          : `🎮 Последний запуск: ${title} (${lastPlayedText}) · 647 трофеев`;
+          : `🎮 Последний запуск: ${title} (${lastPlayedText}) · ${totalAccountTrophies} трофеев`;
       }
 
       // 3. Отдельный пункт в списке игр: #itemPs5Latest
@@ -1088,9 +1223,10 @@
 
         const sub = $('.ps5-latest-sub', latestItem);
         if (sub) {
+          const durPart = game.play_duration ? ` · ⏱ ${game.play_duration}` : '';
           sub.textContent = isPlaying
-            ? `🟢 В игре прямо сейчас на PS5 · ${pct}% трофеев`
-            : `🎮 Последний запуск на PS5 · ${lastPlayedText} · ${pct}% трофеев`;
+            ? `🟢 В игре прямо сейчас на PS5 · ${pct}% трофеев${durPart}`
+            : `🎮 Последний запуск на PS5 · ${lastPlayedText} · ${pct}% трофеев${durPart}`;
         }
 
         const thumb = $('.ps5-latest-thumb', latestItem);
@@ -1210,8 +1346,8 @@
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
-        const { data } = JSON.parse(cached);
-        if (data) updateDOM(data);
+        const { data, accountSummary, recentHistory } = JSON.parse(cached);
+        if (data) updateDOM(data, accountSummary, recentHistory);
       }
     } catch {}
 
@@ -1225,14 +1361,19 @@
             const json = await res.json();
             let rawGame = null;
             let isPlayingNow = false;
+            let accountSummary = null;
+            let recentHistory = null;
 
             if (json && typeof json === 'object') {
               if (Array.isArray(json)) {
                 rawGame = json[0];
                 isPlayingNow = rawGame?.status?.includes('Играет прямо сейчас') || false;
+                recentHistory = json.slice(0, 6);
               } else {
                 rawGame = json.game || json.last_played || (Array.isArray(json.games) ? json.games[0] : null);
                 isPlayingNow = json.is_playing_now !== undefined ? !!json.is_playing_now : (rawGame?.status?.includes('Играет прямо сейчас') || false);
+                accountSummary = json.account_summary || null;
+                recentHistory = json.recent_history || (Array.isArray(json.games) ? json.games.slice(0, 6) : null);
               }
             }
 
@@ -1250,12 +1391,19 @@
                 gold: rawGame.gold !== undefined ? rawGame.gold : rawGame.trophy_breakdown?.gold,
                 platinum: rawGame.platinum !== undefined ? rawGame.platinum : rawGame.trophy_breakdown?.platinum,
                 last_played_text: rawGame.last_played_text || rawGame.last_played || '8 октября 2026',
+                play_duration: rawGame.play_duration || '',
+                play_count: rawGame.play_count || 0,
                 is_playing_now: isPlayingNow
               };
 
-              updateDOM(game);
+              updateDOM(game, accountSummary, recentHistory);
               try {
-                localStorage.setItem(CACHE_KEY, JSON.stringify({ data: game, timestamp: Date.now() }));
+                localStorage.setItem(CACHE_KEY, JSON.stringify({
+                  data: game,
+                  accountSummary,
+                  recentHistory,
+                  timestamp: Date.now()
+                }));
               } catch {}
               return true;
             }
@@ -2156,4 +2304,11 @@
   initSiteTrophies();
   initBioQuoteWidget();
   initShareBioWidget();
+
+  /* ---------- PWA Service Worker Registration ---------- */
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    });
+  }
 })();

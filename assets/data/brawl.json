@@ -16,5 +16,101 @@
   "rankedElo": 2680,
   "status": "40,000+ Trophies · Daily Active",
   "brawlifyUrl": "https://brawlify.com/player/2RGUQJQ0R",
-  "brawltimeUrl": "https://brawltime.ninja/profile/2RGUQJQ0R"
+  "brawltimeUrl": "https://brawltime.ninja/profile/2RGUQJQ0R",
+  "topBrawlers": [
+    {
+      "id": 16000000,
+      "name": "SHELLY",
+      "titleRu": "Шелли",
+      "power": 11,
+      "rank": 30,
+      "trophies": 1004,
+      "highestTrophies": 1020,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000000.png"
+    },
+    {
+      "id": 16000011,
+      "name": "MORTIS",
+      "titleRu": "Мортис",
+      "power": 11,
+      "rank": 30,
+      "trophies": 1012,
+      "highestTrophies": 1035,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000011.png"
+    },
+    {
+      "id": 16000023,
+      "name": "LEON",
+      "titleRu": "Леон",
+      "power": 11,
+      "rank": 29,
+      "trophies": 965,
+      "highestTrophies": 988,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000023.png"
+    },
+    {
+      "id": 16000001,
+      "name": "COLT",
+      "titleRu": "Кольт",
+      "power": 11,
+      "rank": 29,
+      "trophies": 954,
+      "highestTrophies": 970,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000001.png"
+    },
+    {
+      "id": 16000012,
+      "name": "CROW",
+      "titleRu": "Ворон",
+      "power": 11,
+      "rank": 28,
+      "trophies": 920,
+      "highestTrophies": 940,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000012.png"
+    },
+    {
+      "id": 16000043,
+      "name": "EDGAR",
+      "titleRu": "Эдгар",
+      "power": 11,
+      "rank": 28,
+      "trophies": 910,
+      "highestTrophies": 932,
+      "icon": "https://cdn.brawlify.com/brawlers/borderless/16000043.png"
+    }
+  ],
+  "recentBattles": [
+    {
+      "mode": "brawlBall",
+      "modeRu": "Броулбол",
+      "map": "Трипл-дриблинг",
+      "result": "victory",
+      "trophyChange": 8,
+      "brawler": "Мортис"
+    },
+    {
+      "mode": "knockout",
+      "modeRu": "Нокаут",
+      "map": "В чистом поле",
+      "result": "victory",
+      "trophyChange": 9,
+      "brawler": "Леон"
+    },
+    {
+      "mode": "soloShowdown",
+      "modeRu": "Соло ШД",
+      "map": "Штольня",
+      "result": "victory",
+      "trophyChange": 10,
+      "brawler": "Шелли"
+    },
+    {
+      "mode": "gemGrab",
+      "modeRu": "Захват кристаллов",
+      "map": "Роковая шахта",
+      "result": "defeat",
+      "trophyChange": -6,
+      "brawler": "Кольт"
+    }
+  ]
 }

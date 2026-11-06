@@ -12,12 +12,24 @@
 }
 
 :root {
-  --font: "Dots", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "M PLUS 1p", "Segoe UI", Roboto, system-ui, sans-serif;
+  --font: "Dots", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "SF Pro", "M PLUS 1p", "Segoe UI", Roboto, system-ui, sans-serif;
   --cat-icon: 68px;
   --col: 140px;
   --shadow: 0 1px 2px rgba(0, 0, 0, .45);
   --glow: 0 0 12px rgba(255, 255, 255, .65), 0 0 24px rgba(120, 190, 255, .35), 0 1px 2px rgba(0, 0, 0, .45);
   --ease: cubic-bezier(.16, 1, .3, 1);
+  --ease-press: cubic-bezier(.2, .8, .2, 1);
+  /* Apple Design System Semantic Tokens */
+  --surface-base: #020713;
+  --surface-card: rgba(13, 20, 35, 0.92);
+  --surface-raised: rgba(20, 30, 52, 0.95);
+  --surface-glass: rgba(8, 14, 28, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-highlight: rgba(255, 255, 255, 0.28);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(226, 232, 240, 0.85);
+  --text-tertiary: #8da2c0;
+  --accent-apple-blue: #155BD0;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -79,27 +91,69 @@ a { color: inherit; }
 }
 .baro__gif { display: none !important; }
 
-/* ---------- Аутентичный статус-бар PS3/PS5 (Сеть PSN, Контроллер, Батарея, Время) ---------- */
+/* ---------- Аутентичный статус-бар PS3/PS5 + Apple Liquid Glass Controls ---------- */
+.status-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 8px;
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s var(--ease), border-color 0.2s ease, background 0.2s ease, box-shadow 0.25s ease;
+}
+
+.status-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.65), 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+.status-btn:active {
+  transform: scale(0.93);
+  transition: transform 0.08s var(--ease-press);
+}
+
+.status-btn.is-muted {
+  opacity: 0.65;
+}
+
 .ps3-clock-bar {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   height: 30px;
   padding: 0 12px;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
-  font-size: 13.5px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "SST", "Helvetica Neue", "Segoe UI", Arial, sans-serif;
+  font-size: 13px;
   font-weight: 500;
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
   user-select: none;
   cursor: default;
-  transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
 }
 
 .ps3-clock-bar:hover {
@@ -917,15 +971,31 @@ a { color: inherit; }
   font-variant-numeric: tabular-nums;
 }
 
+.pgc-duration-pill {
+  font-size: 9px;
+  font-weight: 600;
+  color: #bae6fd;
+  background: rgba(0, 112, 209, 0.28);
+  border: 1px solid rgba(125, 211, 252, 0.35);
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
 /* ==========================================================================
    Apple Design Improvements: Brawl Stars Landing Card & Spring Physics
+   (HIG Layer Discipline: Content cards use standard elevated materials,
+    reserving backdrop-filter strictly for floating chrome)
    ========================================================================== */
 
 .bsc-card {
   position: relative;
   display: block;
-  background: linear-gradient(135deg, rgba(32, 20, 10, 0.88) 0%, rgba(18, 11, 6, 0.94) 100%);
-  border: 1px solid rgba(251, 191, 36, 0.22);
+  background: linear-gradient(135deg, rgba(32, 20, 10, 0.94) 0%, rgba(18, 11, 6, 0.98) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.24);
   border-radius: 14px;
   overflow: hidden;
   text-decoration: none;
@@ -935,8 +1005,6 @@ a { color: inherit; }
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
               box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
 .bsc-card:hover {
@@ -1144,16 +1212,14 @@ a { color: inherit; }
 }
 
 .p-card {
-  background: rgba(13, 20, 35, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 14px;
   padding: 11px 12px;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
               box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
   position: relative;
   overflow: hidden;
 }
@@ -5590,3 +5656,331 @@ input:focus-visible {
 .share-card {
   flex-shrink: 0 !important;
 }
+
+/* ==========================================================================
+   6. PS5 LIVE RECENT HISTORY & BRAWL STARS BRAWLER SHOWCASE / BATTLELOG
+   ========================================================================== */
+.p-card--ps5-history {
+  margin-bottom: 8px;
+  padding: 10px 12px;
+}
+
+.ps5-history-live-tag {
+  margin-left: auto;
+  font-size: 8.5px;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.ps5-history-block {
+  margin: 10px 0 12px;
+  background: rgba(8, 15, 30, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.ps5-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9px;
+  font-weight: 800;
+  color: #93c5fd;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.ps5-recent-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ps5-hist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 0.2s var(--ease), background 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ps5-hist-row:hover {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateX(2px);
+}
+
+.ps5-hist-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #050a14;
+}
+
+.ps5-hist-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ps5-hist-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ps5-hist-sub {
+  font-size: 9.5px;
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+
+.ps5-hist-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.ps5-hist-dur {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #bae6fd;
+  background: rgba(0, 112, 209, 0.25);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Brawl Stars Brawler Showcase & Battlelog */
+.bs-showcase-section {
+  margin: 10px 0;
+  background: rgba(12, 10, 22, 0.65);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.bs-showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #fde68a;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.bs-showcase-sub {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.bs-brawlers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+@media (max-width: 520px) {
+  .bs-brawlers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bs-brawler-card {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 7px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s var(--ease), border-color 0.2s ease, background 0.2s ease;
+  min-width: 0;
+}
+
+.bs-brawler-card:hover {
+  transform: translateY(-1px);
+  background: rgba(251, 191, 36, 0.12);
+  border-color: rgba(251, 191, 36, 0.45);
+}
+
+.bs-brawler-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #1e1b4b;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+.bs-brawler-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bs-brawler-name {
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bs-brawler-trophies {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #fbbf24;
+  font-variant-numeric: tabular-nums;
+}
+
+.bs-battles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bs-battle-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 10.5px;
+}
+
+.bs-battle-pill--win {
+  border-left: 3px solid #22c55e;
+  background: rgba(34, 197, 94, 0.08);
+}
+
+.bs-battle-pill--loss {
+  border-left: 3px solid #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.bs-battle-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.bs-battle-mode {
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+}
+
+.bs-battle-map {
+  color: #94a3b8;
+  font-size: 9.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bs-battle-delta {
+  font-weight: 800;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.bs-battle-pill--win .bs-battle-delta {
+  color: #4ade80;
+}
+
+.bs-battle-pill--loss .bs-battle-delta {
+  color: #f87171;
+}
+
+/* Interactive Trophy Badges (Tactile Press & Cursor) */
+.gs-tr-box[role="button"],
+.p-tr-item[data-trophy-grade],
+.stat-pill[data-trophy-grade] {
+  cursor: pointer;
+  user-select: none;
+}
+
+.gs-tr-box[role="button"]:active,
+.p-tr-item[data-trophy-grade]:active,
+.stat-pill[data-trophy-grade]:active {
+  transform: scale(0.94) !important;
+  transition: transform 0.08s var(--ease-press) !important;
+}
+
+/* ==========================================================================
+   7. APPLE LIGHT GLASS THEME (html[data-theme="light"])
+   ========================================================================== */
+html[data-theme="light"] {
+  --surface-base: #eef4fb;
+  --surface-card: rgba(255, 255, 255, 0.92);
+  --surface-raised: rgba(255, 255, 255, 0.96);
+  --surface-glass: rgba(255, 255, 255, 0.78);
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-highlight: rgba(21, 91, 208, 0.35);
+}
+
+html[data-theme="light"] .bg {
+  background: linear-gradient(155deg, #1d4ed8 0%, #3b82f6 48%, #0284c7 100%);
+}
+
+html[data-theme="light"] .bg::after {
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.14) 30%, rgba(15, 23, 42, 0.22) 100%);
+}
+
+html[data-theme="light"] .ps3-clock-bar,
+html[data-theme="light"] .status-btn {
+  background: rgba(15, 23, 42, 0.62);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+}
+
+html[data-theme="light"] .p-card,
+html[data-theme="light"] .psn-meta,
+html[data-theme="light"] .bio-hero,
+html[data-theme="light"] .site-tr-card,
+html[data-theme="light"] .mv-genre-card {
+  background: rgba(15, 28, 56, 0.84);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 10px 28px rgba(10, 22, 48, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+

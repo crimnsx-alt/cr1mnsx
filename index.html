@@ -3,19 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>cr1mnsx</title>
-  <meta name="description" content="cr1mnsx — PlayStation 5, Games, Twitch & Projects">
+  <title>cr1mnsx — PlayStation 5, Brawl Stars, Twitch &amp; Projects</title>
+  <meta name="description" content="Интерактивный хаб cr1mnsx в стиле PlayStation XMB &amp; Apple Liquid Glass — Live-статистика PS5, трофеи, Brawl Stars (#2RGUQJQ0R), стримы и проекты.">
   <meta name="theme-color" content="#0b2a5a">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" href="assets/icons/favicon.png?v=klogo">
   <link rel="shortcut icon" href="favicon.ico?v=klogo">
   <link rel="apple-touch-icon" href="assets/icons/favicon.png?v=klogo">
 
-  <!-- M PLUS 1p — шрифт M+, как в XMB-теме RetroArch; по духу близок к системному Rodin у PS3 -->
+  <!-- OpenGraph / Telegram / Discord Rich Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://crimnsx-alt.github.io/cr1mnsx/">
+  <meta property="og:title" content="cr1mnsx — PlayStation 5 &amp; Brawl Stars Live Hub">
+  <meta property="og:description" content="PSN LVL 199 · 709 трофеев · Brawl Stars 40k+ (#2RGUQJQ0R) · Интерактивный XMB дашборд в стиле Apple Liquid Glass.">
+  <meta property="og:image" content="https://crimnsx-alt.github.io/cr1mnsx/assets/photos/brawl-stars-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="cr1mnsx — PlayStation 5 &amp; Brawl Stars Live Hub">
+  <meta name="twitter:description" content="PSN LVL 199 · 709 трофеев · Brawl Stars 40k+ (#2RGUQJQ0R) · Интерактивный XMB дашборд.">
+  <meta name="twitter:image" content="https://crimnsx-alt.github.io/cr1mnsx/assets/photos/brawl-stars-banner.jpg">
+
+  <!-- Inter (Apple UI typography) + M PLUS 1p (XMB Rodin aesthetic) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=M+PLUS+1p:wght@300;400;500;700&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20260929-v3">
+  <link rel="stylesheet" href="css/style.css?v=20261106-apple">
   <script src="js/boot.js"></script>
 </head>
 <body>
@@ -25,8 +37,12 @@
     <video id="bgVideo" muted loop playsinline preload="none" poster="assets/video/bg-poster.jpg"></video>
   </div>
 
-  <div class="status" aria-hidden="true">
-    <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation Network & System Time">
+  <div class="status" role="region" aria-label="Системная панель статуса">
+    <div class="status-controls">
+      <button type="button" class="status-btn" id="soundToggle" title="Звук PS3 XMB: Включен" aria-label="Переключить звук интерфейса">🔊</button>
+      <button type="button" class="status-btn" id="themeToggle" title="Тема оформления: Dark XMB / Apple Light Glass" aria-label="Переключить тему оформления">🌙</button>
+    </div>
+    <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation Network &amp; System Time">
       <div class="ps3-status-cluster">
         <span class="ps3-status-psn">PSN</span>
         <svg class="ps3-status-signal" viewBox="0 0 16 12" width="13" height="10" fill="currentColor">
@@ -113,9 +129,7 @@
                 <div class="pgc-details">
                   <div class="pgc-top-line">
                     <span class="pgc-tag ps5-last-game-status">ПОСЛЕДНИЙ ЗАПУСК НА PLAYSTATION 5 · 8 ОКТЯБРЯ 2026</span>
-                    <svg class="pgc-ps-icon" viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
-                      <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
-                    </svg>
+                    <span class="pgc-duration-pill ps5-last-game-duration" title="Общее время и количество запусков на консоли">⏱ 14 ч. 58 мин.</span>
                   </div>
                   <div class="pgc-title ps5-last-game-title" id="ps5-last-game-title">DARK SOULS™ II: Scholar of the First Sin</div>
                   <div class="pgc-bottom-row">
@@ -201,7 +215,7 @@
               <div class="p-card p-card--stats">
                 <div class="p-card-title">
                   <span>СТАТИСТИКА PSN</span>
-                  <span style="margin-left: auto; color: #38bdf8; font-size: 10px;">LVL 186</span>
+                  <span class="psn-acc-level" style="margin-left: auto; color: #38bdf8; font-size: 10px; font-variant-numeric: tabular-nums;">LVL 199</span>
                 </div>
                 <div class="p-stat-list">
                   <div class="p-trophy-box">
@@ -213,10 +227,10 @@
                       <div class="p-bar-fill ps5-last-game-bar" style="width: 27%;"></div>
                     </div>
                     <div class="p-trophy-row ps5-stat-trophy-row">
-                      <span class="p-tr-item" title="Платина"><img class="ps-tr-icon" src="assets/icons/trophies/plat.svg" alt="Platinum"><b class="ps5-stat-plat">0</b></span>
-                      <span class="p-tr-item" title="Золото"><img class="ps-tr-icon" src="assets/icons/trophies/gold.svg" alt="Gold"><b class="ps5-stat-gold">0</b></span>
-                      <span class="p-tr-item" title="Серебро"><img class="ps-tr-icon" src="assets/icons/trophies/silver.svg" alt="Silver"><b class="ps5-stat-silver">5</b></span>
-                      <span class="p-tr-item" title="Бронза"><img class="ps-tr-icon" src="assets/icons/trophies/bronze.svg" alt="Bronze"><b class="ps5-stat-bronze">9</b></span>
+                      <span class="p-tr-item" data-trophy-grade="Платиновый приз" data-trophy-name="Платина PSN · Cr1mnsx" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/plat.svg" alt="Platinum"><b class="ps5-stat-plat">0</b></span>
+                      <span class="p-tr-item" data-trophy-grade="Золотой приз" data-trophy-name="Золотой трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/gold.svg" alt="Gold"><b class="ps5-stat-gold">0</b></span>
+                      <span class="p-tr-item" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряный трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/silver.svg" alt="Silver"><b class="ps5-stat-silver">5</b></span>
+                      <span class="p-tr-item" data-trophy-grade="Бронзовый приз" data-trophy-name="Бронзовый трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/bronze.svg" alt="Bronze"><b class="ps5-stat-bronze">9</b></span>
                     </div>
                   </div>
 
@@ -226,7 +240,7 @@
                     </div>
                     <div class="p-stat-info">
                       <span class="p-sub-label">ВСЕГО ТРОФЕЕВ PSN</span>
-                      <strong class="p-main-val">647 трофеев (2 платины)</strong>
+                      <strong class="p-main-val psn-acc-total-label">709 трофеев (2 платины)</strong>
                     </div>
                   </div>
 
@@ -241,6 +255,15 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Карточка: НЕДАВНИЕ ЗАПУСКИ НА PS5 (LIVE ИСТОРИЯ С ЧАСАМИ) -->
+            <div class="p-card p-card--ps5-history" id="ps5RecentHistoryCard">
+              <div class="p-card-title">
+                <span>🕹️ НЕДАВНИЕ ЗАПУСКИ НА PS5</span>
+                <span class="ps5-history-live-tag">PSN API · LIVE</span>
+              </div>
+              <div class="ps5-recent-history-list"></div>
             </div>
 
             <!-- Новая карточка: ЯНДЕКС МУЗЫКА -->
@@ -503,33 +526,33 @@
             <div class="p-card gs-summary-card">
               <div class="gs-summary-header">
                 <div class="gs-summary-left">
-                  <span class="psn-badge psn-badge--plat">PSN LEVEL 186</span>
+                  <span class="psn-badge psn-badge--plat psn-acc-level-full">PSN LEVEL 199</span>
                   <h3 class="gs-summary-title">Трофейный стенд Cr1mnsx</h3>
-                  <span class="gs-summary-subtitle">647 полученных трофеев · PlayStation Network</span>
+                  <span class="gs-summary-subtitle"><b class="psn-acc-total">709</b> полученных трофеев · PlayStation Network</span>
                 </div>
                 <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                   <span>PSN.GG ↗</span>
                 </a>
               </div>
               <div class="gs-trophies-row">
-                <div class="gs-tr-box gs-tr-box--plat">
+                <div class="gs-tr-box gs-tr-box--plat" role="button" tabindex="0" data-trophy-grade="Платиновый приз" data-trophy-name="Платиновый коллекционер (2 платины)" title="Нажмите для звукового эффекта трофея PS3">
                   <img src="assets/icons/trophies/plat.svg" alt="Platinum">
-                  <div class="gs-tr-val">2</div>
+                  <div class="gs-tr-val psn-acc-plat">2</div>
                   <div class="gs-tr-label">Платины</div>
                 </div>
-                <div class="gs-tr-box gs-tr-box--gold">
+                <div class="gs-tr-box gs-tr-box--gold" role="button" tabindex="0" data-trophy-grade="Золотой приз" data-trophy-name="Мастер испытаний (Золотые трофеи PSN)" title="Нажмите для звукового эффекта трофея PS3">
                   <img src="assets/icons/trophies/gold.svg" alt="Gold">
-                  <div class="gs-tr-val">20</div>
+                  <div class="gs-tr-val psn-acc-gold">21</div>
                   <div class="gs-tr-label">Золото</div>
                 </div>
-                <div class="gs-tr-box gs-tr-box--silver">
+                <div class="gs-tr-box gs-tr-box--silver" role="button" tabindex="0" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряный арсенал PSN" title="Нажмите для звукового эффекта трофея PS3">
                   <img src="assets/icons/trophies/silver.svg" alt="Silver">
-                  <div class="gs-tr-val">128</div>
+                  <div class="gs-tr-val psn-acc-silver">138</div>
                   <div class="gs-tr-label">Серебро</div>
                 </div>
-                <div class="gs-tr-box gs-tr-box--bronze">
+                <div class="gs-tr-box gs-tr-box--bronze" role="button" tabindex="0" data-trophy-grade="Бронзовый приз" data-trophy-name="Фундамент приключений (Бронза PSN)" title="Нажмите для звукового эффекта трофея PS3">
                   <img src="assets/icons/trophies/bronze.svg" alt="Bronze">
-                  <div class="gs-tr-val">497</div>
+                  <div class="gs-tr-val psn-acc-bronze">548</div>
                   <div class="gs-tr-label">Бронза</div>
                 </div>
               </div>
@@ -902,7 +925,7 @@
             <span class="item__icon item__icon--photo"><img src="assets/icons/ps-gothic.jpg" alt="PlayStation Network" style="border-radius: 6px;"></span>
             <span class="item__text">
               <span class="item__title">PlayStation Network · Профиль Cr1mnsx</span>
-              <span class="item__sub" id="psnHeaderSub">🎮 Последний запуск: DARK SOULS™ II: Scholar of the First Sin (8 октября 2026) · 647 трофеев</span>
+              <span class="item__sub" id="psnHeaderSub">🎮 Последний запуск: DARK SOULS™ II: Scholar of the First Sin (8 октября 2026) · 709 трофеев</span>
             </span>
           </a>
           <div class="item__panel item__panel--psn">
@@ -940,12 +963,21 @@
               </a>
 
               <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--plat" title="Платиновые трофеи на PSN (Spider-Man Remastered & Miles Morales)"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt="Platinum"> <b>2</b> платины</div>
-                <div class="stat-pill stat-pill--gold"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="Gold"> <b>20</b> золотых</div>
-                <div class="stat-pill stat-pill--silver"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt="Silver"> <b>128</b> серебра</div>
-                <div class="stat-pill stat-pill--bronze"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt="Bronze"> <b>497</b> бронзы</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b>186</b> LVL</div>
+                <div class="stat-pill stat-pill--plat" data-trophy-grade="Платиновый приз" data-trophy-name="Платиновые трофеи PSN" title="Платиновые трофеи на PSN (Spider-Man Remastered &amp; Miles Morales)"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt="Platinum"> <b class="psn-acc-plat">2</b> платины</div>
+                <div class="stat-pill stat-pill--gold" data-trophy-grade="Золотой приз" data-trophy-name="Золотые трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="Gold"> <b class="psn-acc-gold">21</b> золотых</div>
+                <div class="stat-pill stat-pill--silver" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряные трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt="Silver"> <b class="psn-acc-silver">138</b> серебра</div>
+                <div class="stat-pill stat-pill--bronze" data-trophy-grade="Бронзовый приз" data-trophy-name="Бронзовые трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt="Bronze"> <b class="psn-acc-bronze">548</b> бронзы</div>
+                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b class="psn-acc-level-num">199</b> LVL</div>
               </div>
+
+              <!-- История недавних игр PS5 с точным временем (PSN API) -->
+              <div class="ps5-history-block">
+                <div class="ps5-history-header">
+                  <span>🕹️ НЕДАВНИЕ ЗАПУСКИ И ВРЕМЯ В ИГРЕ (PSN API)</span>
+                </div>
+                <div class="ps5-recent-history-list"></div>
+              </div>
+
               <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
                 <span>Открыть профиль на PSN.GG</span>
                 <span class="psn-btn-arrow">↗</span>
@@ -1345,6 +1377,25 @@
                 <div class="stat-pill stat-pill--silver" title="Победы в одиночном и парном столкновении (ШД)"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> Соло / Дуо: <b id="bs-showdown">1,530</b></div>
                 <div class="stat-pill" title="Текущий клуб игрока"><span class="stat-trophy">🛡️</span> Клуб: <b id="bs-club">0.3.7|teams</b></div>
               </div>
+
+              <!-- Витрина топ-бойцов профиля (Brawler Showcase) -->
+              <div class="bs-showcase-section">
+                <div class="bs-showcase-header">
+                  <span>⭐ ТОП БОЙЦОВ ПРОФИЛЯ (MAX TIER · POWER 11)</span>
+                  <span class="bs-showcase-sub">Top 6</span>
+                </div>
+                <div class="bs-brawlers-grid" id="bsTopBrawlersGrid"></div>
+              </div>
+
+              <!-- История последних боёв (Recent Battlelog) -->
+              <div class="bs-showcase-section">
+                <div class="bs-showcase-header">
+                  <span>⚔️ НЕДАВНИЕ МАТЧИ (BATTLELOG)</span>
+                  <span class="bs-showcase-sub">#2RGUQJQ0R</span>
+                </div>
+                <div class="bs-battles-list" id="bsRecentBattlesList"></div>
+              </div>
+
               <div class="bs-action-links" style="display: flex; gap: 8px; flex-wrap: wrap;">
                 <button type="button" class="psn-btn-profile" id="bsRefreshBtn" style="flex: 1; min-width: 170px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; color:#fff;" title="Обновить текущие кубки">
                   <span>Обновить кубки 🔄</span>

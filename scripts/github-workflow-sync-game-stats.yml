@@ -1,0 +1,56 @@
+name: Sync PS5 & Brawl Stars Live Stats
+
+on:
+  schedule:
+    # Запуск каждые 30 минут (24/7 облачная синхронизация)
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Sync PlayStation 5 Activity
+        env:
+          PSN_NPSSO: ${{ secrets.PSN_NPSSO }}
+        run: |
+          if [ -n "$PSN_NPSSO" ]; then
+            node scripts/sync_psn.mjs
+          else
+            echo "ℹ️ Секрет PSN_NPSSO не задан в GitHub Secrets — пропуск облачной синхронизации PSN."
+          fi
+
+      - name: Sync Brawl Stars Profile
+        env:
+          BRAWL_STARS_TOKEN: ${{ secrets.BRAWL_STARS_TOKEN }}
+        run: node scripts/sync_brawl.mjs
+
+      - name: Commit and Push updated stats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/psn_recent.json data/psn_games.json assets/data/psn_games.json data/brawl.json assets/data/brawl.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "✅ Нет изменений для коммита."
+          else
+            git commit -m "chore(sync): автообновление игровой активности PS5 и Brawl Stars [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
