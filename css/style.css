@@ -1,994 +1,1010 @@
 /* ==========================================================================
-   PlayStation 5 Official System Software Theme — cr1mnsx
-   Exact Recreation of PS5 Welcome Hub, Games Ribbon & Activity Cards
+   PlayStation 5 System Software UI — 1:1 Reference Recreation
    ========================================================================== */
 
+[hidden] {
+  display: none !important;
+}
+
 @font-face {
-  font-family: 'TitilliumWeb';
+  font-family: 'SST-PS5';
   src: url('../assets/fonts/TitilliumWeb-Regular.ttf') format('truetype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: 'TitilliumWeb';
+  font-family: 'SST-PS5';
   src: url('../assets/fonts/TitilliumWeb-SemiBold.ttf') format('truetype');
   font-weight: 600;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
-  font-family: 'TitilliumWeb';
-  src: url('../assets/fonts/TitilliumWeb-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+  font-family: 'SST-PS5';
+  src: url('../assets/fonts/TitilliumWeb-Light.ttf') format('truetype');
+  font-weight: 300;
 }
 
 :root {
-  /* Цветовая палитра PS5 Welcome Hub из референса */
-  --ps5-bg-deep: #030611;
-  --ps5-bg-mid: #090e1f;
-  --ps5-surface: rgba(14, 20, 35, 0.78);
-  --ps5-surface-hover: rgba(26, 35, 58, 0.88);
-  --ps5-card-border: rgba(255, 255, 255, 0.12);
-  --ps5-card-focus-border: #ffffff;
-  
-  --ps5-accent-blue: #0070d1;
-  --ps5-accent-cyan: #38bdf8;
-  --ps5-accent-gold: #facc15;
-  --ps5-accent-orange: #fb923c;
-  --ps5-accent-green: #22c55e;
-
-  --ps5-text-main: #f8fafc;
-  --ps5-text-muted: rgba(226, 232, 240, 0.72);
-  --ps5-text-dim: rgba(148, 163, 184, 0.6);
-
-  --font-ps5: 'TitilliumWeb', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --spring-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ps5-bg-deep: #060811;
+  --ps5-card-bg: rgba(21, 24, 33, 0.94);
+  --ps5-card-border: rgba(255, 255, 255, 0.07);
+  --ps5-text-white: #f9fafb;
+  --ps5-text-muted: #8e95a5;
+  --ps5-green: #22c55e;
+  --ps5-amber: #f59e0b;
+  --font-ps5: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
-html, body {
+html,
+body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--ps5-bg-deep);
-  color: var(--ps5-text-main);
+  background-color: var(--ps5-bg-deep);
+  color: var(--ps5-text-white);
   font-family: var(--font-ps5);
-  font-size: 15px;
-  line-height: 1.4;
-  user-select: none;
   -webkit-font-smoothing: antialiased;
 }
 
-button {
-  font-family: inherit;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-/* ================= 1. БЭКГРАУНД PS5 С ТОПОГРАФИЧЕСКИМИ ЛИНИЯМИ И БОКЕ ================= */
-.ps5-background-layer {
+/* --------------------------------------------------------------------------
+   1. BACKGROUND LAYER (Authentic PS5 Welcome Hub Topographic Artwork + Canvas)
+   -------------------------------------------------------------------------- */
+.ps5-bg-layer {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
+  background: #060811;
 }
 
-/* Фирменный абстрактный неоновый фон Welcome Hub (из референса) */
-.ps5-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(85% 65% at 75% 20%, rgba(14, 116, 220, 0.32) 0%, transparent 70%),
-    radial-gradient(60% 45% at 20% 80%, rgba(13, 148, 136, 0.22) 0%, transparent 60%),
-    radial-gradient(40% 40% at 85% 75%, rgba(126, 34, 206, 0.25) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(3, 6, 17, 0.65) 0%, rgba(3, 6, 17, 0.92) 100%),
-    url('../assets/ps5ish/GameGrid21-9.jpg') center/cover no-repeat;
-  filter: contrast(1.1) brightness(0.9);
-  transition: opacity 0.5s ease;
-}
-
-/* Динамический арт игры при фокусе */
 .ps5-bg-art {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center 25%;
+  background-size: 100% 100%;
+  background-position: center top;
+  background-repeat: no-repeat;
   opacity: 0;
-  transform: scale(1.04);
-  filter: saturate(1.15) brightness(0.55);
-  transition: opacity 0.6s var(--spring-ease), transform 0.8s var(--spring-ease);
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s ease;
 }
 
-.ps5-bg-art.is-active {
+.ps5-bg-art.is-visible {
   opacity: 1;
-  transform: scale(1);
 }
 
-.ps5-bg-art::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(3, 6, 17, 0.95) 0%, rgba(3, 6, 17, 0.5) 45%, rgba(3, 6, 17, 0.6) 100%),
-    linear-gradient(180deg, rgba(3, 6, 17, 0.75) 0%, transparent 35%, rgba(3, 6, 17, 0.95) 100%);
-}
-
-.ps5-particles-canvas {
+.ps5-particles {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* ================= 2. СЕТКА ЭКРАНА ================= */
+.ps5-bg-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(circle at 75% 22%, transparent 30%, rgba(5, 7, 14, 0.38) 85%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. MAIN SCREEN CONTAINER
+   -------------------------------------------------------------------------- */
 .ps5-screen {
   position: relative;
   z-index: 10;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 24px 44px 18px 44px;
+  justify-content: flex-start;
 }
 
-/* ================= 3. ВЕРХНИЙ БАР (GAMES / MEDIA & STATUS) ================= */
-.ps5-top-bar {
+/* --------------------------------------------------------------------------
+   3. TOP SYSTEM BAR (Games | Media ... Search, Settings, Profile, 10:24AM)
+   -------------------------------------------------------------------------- */
+.ps5-topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
+  padding: 2.9vh 4.8vw 0 4.8vw;
+  height: 7.4vh;
+  flex-shrink: 0;
 }
 
 .ps5-nav-tabs {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 2.8vw;
 }
 
 .ps5-tab {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--ps5-text-muted);
-  position: relative;
-  padding: 4px 2px;
-  transition: color 0.2s ease, transform 0.2s var(--spring-ease);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.46);
+  font-family: var(--font-ps5);
+  font-size: clamp(17px, 1.55vw, 23px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .ps5-tab:hover {
-  color: #fff;
-  transform: translateY(-1px);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .ps5-tab.is-active {
   color: #ffffff;
+  font-weight: 600;
 }
 
-.ps5-tab.is-active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 3px;
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-}
-
-.ps5-system-status {
+.ps5-status-cluster {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 2.3vw;
+}
+
+.ps5-mode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-ps5);
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ps5-mode-pill:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.ps5-mode-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
 .ps5-icon-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  background: none;
+  border: none;
+  color: #ffffff;
+  opacity: 0.92;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--ps5-text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 50%;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .ps5-icon-btn:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.06);
-}
-
-.ps5-profile-btn {
-  padding: 0;
-}
-
-.ps5-avatar-wrap {
-  position: relative;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 0 12px rgba(0, 112, 209, 0.6);
-  transition: transform 0.2s var(--spring-ease), border-color 0.2s ease;
-}
-
-.ps5-avatar-wrap:hover {
+  opacity: 1;
   transform: scale(1.08);
-  border-color: #ffffff;
 }
 
-.ps5-avatar-wrap video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.ps5-avatar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  transition: transform 0.2s ease;
 }
 
-.ps5-online-badge {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 2px solid #030611;
+.ps5-avatar-btn:hover {
+  transform: scale(1.08);
+}
+
+.ps5-smiley-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ps5-clock {
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--ps5-text-main);
-  letter-spacing: 0.02em;
-  margin-left: 6px;
+  font-size: clamp(17px, 1.55vw, 23px);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
+  margin-left: 0.4vw;
 }
 
-/* ================= 4. ГОРИЗОНТАЛЬНАЯ ЛЕНТА ПЛИТОК ИГР ================= */
-.ps5-games-ribbon-container {
-  margin-top: 18px;
-  overflow: visible;
+/* --------------------------------------------------------------------------
+   4. GAME TILE RIBBON (Top-Aligned, Active Tile Enlarges & Shows Right Label)
+   -------------------------------------------------------------------------- */
+.ps5-ribbon-wrap {
+  margin-top: 2.2vh;
+  width: 100%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 15;
 }
 
 .ps5-games-ribbon {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 10px 4px;
-  scrollbar-width: none;
+  align-items: flex-start;
+  gap: 0.65vw;
+  padding-left: 0;
+  overflow: visible;
 }
 
-.ps5-games-ribbon::-webkit-scrollbar {
-  display: none;
-}
-
-.ps5-game-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  outline: none;
-  cursor: pointer;
-  transition: transform 0.24s var(--spring-ease);
-}
-
-/* Сквиркл плитки игры */
-.ps5-tile-squircle {
+.ps5-tile {
   position: relative;
-  width: 84px;
-  height: 84px;
-  border-radius: 20px;
-  background: rgba(22, 27, 43, 0.8);
-  border: 2.5px solid transparent;
+  width: clamp(54px, 5.4vw, 76px);
+  height: clamp(54px, 5.4vw, 76px);
+  border-radius: 13px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: width 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+              height 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.22s ease;
+}
+
+/* Leftmost PS Plus tile peeking off left screen edge */
+.ps5-tile--peek-left {
+  margin-left: -3.6vw;
+  opacity: 0.85;
+}
+
+.ps5-tile-art {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  transition: all 0.24s var(--spring-ease);
+  background: #141720;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
 }
 
-.ps5-tile-squircle img {
+.ps5-tile-art img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 17px;
+  display: block;
 }
 
-/* Значок PlayStation Store */
-.ps5-tile-store {
-  background: linear-gradient(135deg, #00439c 0%, #0070d1 100%);
+.ps5-tile-art--dark {
+  background: linear-gradient(180deg, #1b1f2a 0%, #12151e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.ps5-tile-store img {
-  width: 50%;
-  height: 50%;
+.ps5-tile-art--store {
+  background: linear-gradient(180deg, #1a1e29 0%, #10131b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ps5-tile-art--store .ps5-store-bag-img {
+  width: 48%;
+  height: 48%;
   object-fit: contain;
 }
 
-/* Плитка Welcome Hub (с четырьмя символами PlayStation) */
-.ps5-tile-welcome {
-  background: linear-gradient(145deg, #182035 0%, #0e1424 100%);
-  border: 2.5px solid rgba(255, 255, 255, 0.15);
+.ps5-tile-art--welcome {
+  background: linear-gradient(180deg, #323641 0%, #1b1e26 100%);
 }
 
-.ps5-symbols-icon {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 1;
+.ps5-welcome-glyphs {
+  width: 52%;
+  height: 52%;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
 }
 
-.sym-sq { color: #f472b6; }
-.sym-tr { color: #34d399; }
-.sym-cr { color: #60a5fa; }
-.sym-ci { color: #f87171; }
-
-.ps5-tile-library {
-  background: rgba(30, 41, 68, 0.7);
-  color: var(--ps5-text-muted);
+/* SELECTED / ACTIVE TILE (108x108 proportional scale, glowing silver frame) */
+.ps5-tile.is-active {
+  width: clamp(88px, 9.2vw, 132px);
+  height: clamp(88px, 9.2vw, 132px);
+  border-radius: 19px;
+  padding: 3px;
+  background: #090b12;
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.22), 0 14px 30px rgba(0, 0, 0, 0.65);
+  z-index: 5;
 }
 
-/* Название под плиткой */
-.ps5-tile-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ps5-text-muted);
-  white-space: nowrap;
-  max-width: 96px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0.8;
-  transition: color 0.2s ease, opacity 0.2s ease;
+.ps5-tile.is-active .ps5-tile-art {
+  border-radius: 14px;
 }
 
-/* ФОКУС ПЛИТКИ PS5 (Белая рамка + увеличение) */
-.ps5-game-tile:hover .ps5-tile-squircle,
-.ps5-game-tile.is-focused .ps5-tile-squircle {
-  transform: scale(1.15);
-  border-color: #ffffff;
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.9),
-    0 12px 32px rgba(0, 112, 209, 0.55);
-}
-
-.ps5-game-tile.is-focused .ps5-tile-title {
-  color: #ffffff;
-  font-weight: 700;
-  opacity: 1;
-}
-
-/* ================= 5. НИЖНЯЯ РАБОЧАЯ ЗОНА (WELCOME HUB / ACTIVITY) ================= */
-.ps5-content-stage {
-  flex: 1;
-  margin-top: 24px;
-  position: relative;
-  display: flex;
-  overflow: hidden;
-}
-
-.ps5-welcome-view {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.ps5-stage-nav-arrow {
+/* Title label appears ONLY for the active tile, positioned beside its bottom-right corner */
+.ps5-tile-active-label {
+  display: none;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  left: calc(100% + 0.8vw);
+  bottom: 0.35vh;
+  white-space: nowrap;
+  font-size: clamp(15px, 1.48vw, 22px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.86);
+  pointer-events: none;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.ps5-tile.is-active .ps5-tile-active-label {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   5. WELCOME HUB BENTO GRID (Bottom 46.5% of Screen, Matching Reference 1:1)
+   -------------------------------------------------------------------------- */
+.ps5-welcome-hub {
+  position: relative;
+  margin-top: auto;
+  margin-bottom: 4.4vh;
+  height: 46.5vh;
+  min-height: 290px;
+  max-height: 430px;
+  padding-left: 9vw;
+  padding-right: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Left & Right Navigation Arrows (< and >) */
+.ps5-hub-chevron {
+  position: absolute;
+  top: 1.4vh;
   width: 38px;
   height: 38px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-size: 26px;
-  line-height: 1;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  z-index: 25;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 25;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.ps5-stage-nav-arrow:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: translateY(-50%) scale(1.1);
+.ps5-hub-chevron:hover {
+  color: #ffffff;
+  transform: scale(1.12);
 }
 
-.ps5-stage-nav-arrow--left { left: -14px; }
-.ps5-stage-nav-arrow--right { right: -14px; }
+.ps5-hub-chevron--left {
+  left: 1.5vw;
+}
 
-/* 3-колоночная сетка виджетов из референса */
-.ps5-widgets-grid {
+.ps5-hub-chevron--right {
+  right: 1.4vw;
+  color: rgba(255, 255, 255, 0.95);
+  background: rgba(15, 18, 26, 0.65);
+  border-radius: 50%;
+}
+
+/* 4-Column Grid (3 Full Columns + 1 Right-Edge Peek Column) */
+.ps5-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 7.3vw;
+  gap: 1.35vw;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1.15fr 1.15fr 1.1fr 0.35fr;
-  gap: 18px;
-  align-items: stretch;
 }
 
-.ps5-widget-col {
+.ps5-bento-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 2.1vh;
+  height: 100%;
+  min-width: 0;
 }
 
-/* Общие стили карточки PS5 */
-.ps5-card {
+/* Base Widget Card Styling */
+.ps5-widget {
   position: relative;
-  background: var(--ps5-surface);
-  border: 1.5px solid var(--ps5-card-border);
-  border-radius: 18px;
-  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--ps5-card-bg);
+  border: 1px solid var(--ps5-card-border);
   overflow: hidden;
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.24s var(--spring-ease), border-color 0.24s ease, box-shadow 0.24s ease;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
 }
 
-.ps5-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.7);
+.ps5-widget:hover,
+.ps5-widget:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35), 0 16px 34px rgba(0, 0, 0, 0.7);
+  outline: none;
 }
 
-.ps5-card-header {
+.ps5-widget-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  width: 100%;
 }
 
-.ps5-card-title-wrap {
+.ps5-widget-title-group {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: clamp(12.5px, 1.12vw, 16px);
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.ps5-card-header-icon {
-  color: var(--ps5-text-muted);
-}
-
-.ps5-card-title {
-  font-size: 14.5px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ps5-card-desc {
-  font-size: 13px;
-  color: var(--ps5-text-muted);
-}
-
-.ps5-card-meta {
-  font-size: 13px;
-  color: var(--ps5-text-muted);
-}
-
-.ps5-card-meta strong {
-  color: #fff;
-}
-
-/* Карточка 1: Online Friends */
-.ps5-card--friends {
-  flex: 1.35;
+/* --- COLUMN 1: Online Friends (64%) + PlayStation Store (36%) --- */
+.ps5-widget--friends {
+  flex: 64;
+  padding: 2.2vh 1.35vw;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
-.ps5-badge-online {
+.ps5-friends-online-badge {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
+  font-size: clamp(13px, 1.15vw, 16px);
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .ps5-green-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--ps5-accent-green);
-  box-shadow: 0 0 8px var(--ps5-accent-green);
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
 }
 
-.ps5-friends-avatars-row {
+.ps5-friends-avatars {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 6px 0;
+  justify-content: flex-start;
+  margin: auto 0;
 }
 
-.ps5-friend-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.ps5-friend-avatar:hover {
-  transform: scale(1.12);
-  border-color: #fff;
-}
-
-.ps5-friend-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.ps5-friends-avatars-strip {
+  width: 92%;
+  max-height: 11.5vh;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
 }
 
 .ps5-friends-names {
-  font-size: 12px;
+  font-size: clamp(11px, 0.98vw, 14px);
+  line-height: 1.38;
   color: var(--ps5-text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 400;
 }
 
-/* Баннер PlayStation Store под друзьями */
-.ps5-card--store-banner {
-  flex: 0.9;
-  position: relative;
-  padding: 14px 16px;
-  justify-content: flex-end;
-  text-decoration: none;
+.ps5-widget--store {
+  flex: 31;
+  padding: 0;
 }
 
-.ps5-store-banner-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.65);
-  transition: transform 0.4s ease;
-}
-
-.ps5-card--store-banner:hover .ps5-store-banner-bg {
-  transform: scale(1.05);
-}
-
-.ps5-store-banner-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.ps5-store-tag {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--ps5-accent-cyan);
-}
-
-.ps5-store-game-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ps5-store-pills {
-  display: flex;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-.ps5-platform-pill {
-  font-size: 9.5px;
-  font-weight: 800;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-/* Карточка 2: Accessibility */
-.ps5-card--accessibility {
-  flex: 0.85;
-}
-
-/* Карточка 3: Trophies Widget */
-.ps5-card--trophies {
-  flex: 1.4;
-  justify-content: space-between;
-  text-decoration: none;
-}
-
-.ps5-trophies-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 6px 0;
-}
-
-.ps5-tr-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.ps5-tr-cup {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-  transition: transform 0.2s ease;
-}
-
-.ps5-tr-col:hover .ps5-tr-cup {
-  transform: translateY(-2px) scale(1.1);
-}
-
-.ps5-tr-count {
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ps5-level-section {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 6px;
-}
-
-.ps5-level-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-}
-
-.ps5-level-star {
-  font-size: 14px;
-}
-
-.ps5-level-label strong {
-  color: #fff;
-  font-weight: 700;
-}
-
-.ps5-level-pct {
-  margin-left: auto;
-  font-size: 12px;
-  color: var(--ps5-text-muted);
-}
-
-.ps5-progress-bar {
+.ps5-card-bg-img {
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.15);
+  height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* --- COLUMN 2: Accessibility (29%) + Trophies (71%) --- */
+.ps5-widget--accessibility {
+  flex: 29;
+  padding: 2vh 1.35vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ps5-acc-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-right: 8px;
+}
+
+.ps5-acc-desc {
+  font-size: clamp(11px, 0.96vw, 13.8px);
+  color: var(--ps5-text-muted);
+  font-weight: 400;
+}
+
+.ps5-acc-emblem {
+  width: clamp(42px, 4.4vw, 62px);
+  height: clamp(42px, 4.4vw, 62px);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Widget 4: Trophies Card */
+.ps5-widget--trophies {
+  flex: 66;
+  padding: 2vh 1.35vw 1.6vh 1.35vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ps5-trophies-total {
+  font-size: clamp(12.5px, 1.1vw, 15.5px);
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.ps5-trophies-cups-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: end;
+  justify-items: center;
+  margin: auto 0;
+  padding-top: 0.4vh;
+}
+
+.ps5-trophy-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9vh;
+}
+
+.ps5-trophy-3d {
+  height: clamp(42px, 7.6vh, 66px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+}
+
+.ps5-trophy-3d--plat {
+  height: clamp(45px, 8.1vh, 70px);
+}
+
+.ps5-trophy-num {
+  font-size: clamp(12.5px, 1.12vw, 16px);
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.ps5-trophies-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.ps5-trophy-level-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ps5-level-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ps5-level-crest {
+  display: flex;
+  align-items: center;
+}
+
+.ps5-level-text,
+.ps5-level-pct {
+  font-size: clamp(11px, 0.98vw, 14px);
+  color: var(--ps5-text-muted);
+  font-weight: 400;
+}
+
+.ps5-level-bar-track {
+  width: 100%;
+  height: 3px;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
   overflow: hidden;
 }
 
-.ps5-progress-fill {
+.ps5-level-bar-fill {
   height: 100%;
+  background: #d1d5db;
   border-radius: 999px;
-  background: linear-gradient(90deg, #facc15, #f59e0b);
+  transition: width 0.5s ease;
 }
 
-/* Карточка 4: Accessories (DualSense батареи в кольцах) */
-.ps5-card--accessories {
-  flex: 0.95;
+/* --- COLUMN 3: Battery Rings (29%) + Wishlist GT7 (66%) --- */
+.ps5-widget--battery {
+  flex: 29;
+  padding: 0.8vh 1.2vw;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.ps5-accessories-row {
+.ps5-battery-rings-row {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 100%;
+  height: 100%;
 }
 
-.ps5-acc-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.ps5-gauge {
+.ps5-battery-ring-item {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: clamp(54px, 5.7vw, 78px);
+  height: clamp(54px, 5.7vw, 78px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.ps5-gauge svg {
+.ps5-ring-svg {
   width: 100%;
   height: 100%;
   transform: rotate(-90deg);
 }
 
-.ps5-gauge-track {
+.ps5-ring-bg {
+  fill: rgba(28, 32, 43, 0.92);
+}
+
+.ps5-ring-track {
   fill: none;
   stroke: rgba(255, 255, 255, 0.12);
-  stroke-width: 3.5;
+  stroke-width: 2.6;
 }
 
-.ps5-gauge-val {
+.ps5-ring-progress {
   fill: none;
-  stroke-width: 3.5;
+  stroke-width: 2.6;
   stroke-linecap: round;
-  transition: stroke-dashoffset 0.6s ease;
 }
 
-.val-green { stroke: #22c55e; }
-.val-orange { stroke: #fb923c; }
-.val-cyan { stroke: #38bdf8; }
+.ps5-ring-progress--green {
+  stroke: #22c55e;
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.45));
+}
 
-.ps5-acc-icon {
+.ps5-ring-progress--amber {
+  stroke: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.45));
+}
+
+.ps5-ring-inner {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  gap: 3px;
+  padding-top: 3px;
 }
 
-.ps5-battery-mini {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--ps5-text-muted);
+.ps5-device-glyph {
+  width: 40%;
+  height: auto;
+  display: block;
 }
 
-/* Карточка 5: Wishlist */
-.ps5-card--wishlist {
-  flex: 1.3;
-  position: relative;
-  justify-content: flex-end;
-  padding: 14px 16px;
+.ps5-mini-batt {
+  width: 21%;
+  height: auto;
+  display: block;
+  opacity: 0.9;
 }
 
-.ps5-wishlist-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.65);
+/* Widget 6: Wishlist GT7 */
+.ps5-widget--wishlist {
+  flex: 66;
+  padding: 0;
 }
 
-.ps5-wishlist-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+/* --- COLUMN 4: Right-edge Peeking Card (Friend Activity) --- */
+.ps5-widget--peek {
+  flex: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
 }
 
-.ps5-wishlist-tag {
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.ps5-wishlist-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* Крайний обрезанный слайд */
-.ps5-col-edge {
-  opacity: 0.5;
-}
-
-.ps5-card--friend-activity {
-  height: 100%;
-}
-
-.ps5-edge-preview {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-align: center;
-  margin-top: 14px;
-}
-
-.ps5-edge-preview img {
-  border-radius: 12px;
-}
-
-/* ================= 6. GAME DETAIL HERO VIEW ================= */
+/* --------------------------------------------------------------------------
+   6. GAME HUB VIEW (Shown when a specific game tile is focused)
+   -------------------------------------------------------------------------- */
 .ps5-game-detail-view {
-  width: 100%;
-  height: 100%;
+  margin-top: auto;
+  margin-bottom: 4.5vh;
+  padding: 0 5.5vw 0 8.8vw;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  gap: 3.4vh;
+  height: 62vh;
+}
+
+.ps5-game-hero-row {
+  display: flex;
+  align-items: flex-end;
   justify-content: space-between;
-  padding: 10px 0 20px 0;
-  animation: ps5FadeUp 0.35s var(--spring-ease);
+  gap: 4vw;
 }
 
-@keyframes ps5FadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+.ps5-game-info-left {
+  max-width: 540px;
 }
 
-.ps5-game-hero-info {
-  max-width: 680px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ps5-game-hero-badges {
-  display: flex;
-  gap: 8px;
-}
-
-.ps5-hero-badge {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.ps5-badge-ps5 {
-  background: #0070d1;
-  color: #fff;
-}
-
-.ps5-game-hero-title {
-  font-size: 40px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-}
-
-.ps5-game-hero-sub {
-  font-size: 16px;
-  color: var(--ps5-text-muted);
-}
-
-.ps5-hero-actions {
+.ps5-game-meta-badges {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 12px;
+  gap: 10px;
+  margin-bottom: 1.2vh;
+}
+
+.ps5-skew-badge {
+  display: inline-block;
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transform: skewX(-12deg);
+  border-radius: 2px;
+}
+
+.ps5-skew-badge--white {
+  background: #ffffff;
+  color: #090b10;
+}
+
+.ps5-game-status-tag {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 500;
+}
+
+.ps5-game-title {
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin-bottom: 1vh;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.ps5-game-subtitle {
+  font-size: clamp(13.5px, 1.15vw, 17px);
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 2.6vh;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.ps5-game-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .ps5-play-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 32px;
+  height: 48px;
+  padding: 0 38px;
   border-radius: 999px;
+  border: none;
   background: #ffffff;
-  color: #030611;
+  color: #090b12;
+  font-family: var(--font-ps5);
   font-size: 16px;
-  font-weight: 800;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
-  transition: transform 0.2s var(--spring-ease), box-shadow 0.2s ease;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ps5-play-btn:hover {
   transform: scale(1.04);
-  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 32px rgba(255, 255, 255, 0.6);
 }
 
-.ps5-hero-sub-btn {
-  padding: 14px 22px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+.ps5-more-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(25, 29, 40, 0.82);
+  color: #ffffff;
   font-size: 15px;
-  font-weight: 700;
-  transition: background 0.2s ease;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.ps5-hero-sub-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+.ps5-more-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
 }
 
-/* Activity Cards под выбранной игрой */
-.ps5-activity-cards-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  max-width: 900px;
-}
-
-.ps5-act-card {
-  padding: 14px 18px;
+.ps5-game-stat-box {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 26px;
   border-radius: 16px;
-  background: rgba(16, 23, 40, 0.75);
+  background: rgba(18, 22, 32, 0.84);
   border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.ps5-game-stat-col {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  backdrop-filter: blur(20px);
 }
 
-.ps5-act-tag {
-  font-size: 11px;
-  color: var(--ps5-accent-cyan);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.ps5-act-title {
-  font-size: 14px;
-  color: #fff;
-  font-weight: 700;
-}
-
-.ps5-act-progress {
+.ps5-game-stat-label {
   font-size: 12px;
   color: var(--ps5-text-muted);
 }
 
-/* ================= 7. НИЖНИЙ CONTROLLER HELP BAR ================= */
-.ps5-footer-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 38px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 13px;
-  color: var(--ps5-text-dim);
+.ps5-game-stat-val {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.ps5-controller-hints {
-  display: flex;
-  align-items: center;
-  gap: 22px;
+.ps5-activities-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
-.ps5-hint-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.ps5-activity-card {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(20, 24, 34, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ps5-activity-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.ps5-act-kicker {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #38bdf8;
+  margin-bottom: 6px;
+}
+
+.ps5-act-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.ps5-act-meta {
+  font-size: 12.5px;
   color: var(--ps5-text-muted);
 }
 
-.ps5-btn-glyph {
-  display: inline-flex;
+/* --------------------------------------------------------------------------
+   7. TELEMETRY MODAL (PSN & Brawl Stars Live Data Drawer)
+   -------------------------------------------------------------------------- */
+.ps5-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(4, 6, 12, 0.78);
+  backdrop-filter: blur(18px);
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 19px;
-  height: 19px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 4vh 5vw;
+}
+
+.ps5-modal-card {
+  width: min(920px, 100%);
+  max-height: 84vh;
+  background: rgba(20, 24, 34, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ps5-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ps5-modal-kicker {
+  display: block;
   font-size: 11px;
-  font-weight: 800;
-  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  margin-bottom: 4px;
+}
+
+.ps5-modal-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ps5-modal-close {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-family: var(--font-ps5);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.ps5-modal-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.ps5-modal-body {
+  padding: 24px 28px;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.ps5-telemetry-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ps5-telemetry-item h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ps5-telemetry-item p {
+  font-size: 12.5px;
+  color: var(--ps5-text-muted);
 }
