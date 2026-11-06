@@ -27,20 +27,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=M+PLUS+1p:wght@300;400;500;700&display=swap">
 
-  <link rel="stylesheet" href="css/style.css?v=20261106-apple">
+  <link rel="stylesheet" href="css/style.css?v=20261106-ps3xmb">
   <script src="js/boot.js"></script>
 </head>
 <body>
 
-  <!-- Фон: аквариум с рыбками. Источник видео выбирает js/main.js -->
+  <!-- Фон PS3 XMB: живая волна (ps3wave.js) + динамический арт выбранной игры PIC1.PNG -->
   <div class="bg" aria-hidden="true">
+    <div class="ps3-pic1-bg" id="ps3Pic1Bg"></div>
     <video id="bgVideo" muted loop playsinline preload="none" poster="assets/video/bg-poster.jpg"></video>
   </div>
 
-  <div class="status" role="region" aria-label="Системная панель статуса">
+  <div class="status" role="region" aria-label="Системная панель статуса PlayStation 3">
     <div class="status-controls">
+      <button type="button" class="status-btn status-btn--pill" id="waveColorBtn" title="Сменить цвет шёлковой волны PS3 XMB (△)" aria-label="Сменить цвет волны PS3">
+        <span class="ps3-glyph ps3-glyph--triangle">△</span>
+        <span>Цвет</span>
+      </button>
       <button type="button" class="status-btn" id="soundToggle" title="Звук PS3 XMB: Включен" aria-label="Переключить звук интерфейса">🔊</button>
-      <button type="button" class="status-btn" id="themeToggle" title="Тема оформления: Dark XMB / Apple Light Glass" aria-label="Переключить тему оформления">🌙</button>
+      <button type="button" class="status-btn" id="themeToggle" title="Тема оформления: PS3 Dark XMB / Light Glass" aria-label="Переключить тему оформления">🌙</button>
     </div>
     <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation Network &amp; System Time">
       <div class="ps3-status-cluster">
@@ -2288,6 +2293,27 @@
     </section>
   </main>
 
+  <!-- Нижняя системная панель подсказок контроллера PlayStation 3 (XMB Guide Bar) -->
+  <footer class="ps3-bottom-bar" role="toolbar" aria-label="Панель управления PlayStation 3 XMB">
+    <div class="ps3-bottom-bar__left">
+      <button type="button" class="ps3-guide-btn" data-ps3-act="enter" title="Открыть выбранный пункт (Enter)">
+        <span class="ps3-glyph ps3-glyph--cross">✕</span><span>Ввод</span>
+      </button>
+      <button type="button" class="ps3-guide-btn" data-ps3-act="psn" title="Перейти к PlayStation 5 Live">
+        <span class="ps3-glyph ps3-glyph--square">□</span><span>PS5 Live</span>
+      </button>
+      <button type="button" class="ps3-guide-btn" data-ps3-act="brawl" title="Перейти к Brawl Stars (#2RGUQJQ0R)">
+        <span class="ps3-glyph ps3-glyph--circle">○</span><span>Brawl Stars</span>
+      </button>
+      <button type="button" class="ps3-guide-btn" data-ps3-act="color" title="Сменить цвет шёлковой волны PS3">
+        <span class="ps3-glyph ps3-glyph--triangle">△</span><span id="ps3ColorNameLabel">Волна: Синяя</span>
+      </button>
+    </div>
+    <div class="ps3-bottom-bar__right">
+      <span class="ps3-nav-hint">←/→ Разделы · ↑/↓ Пункты · Колесо мыши</span>
+    </div>
+  </footer>
+
   <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Просмотр фото" hidden>
     <img class="viewer__img" id="viewerImg" alt="">
     <video class="viewer__video" id="viewerVideo" controls playsinline preload="metadata" hidden></video>
@@ -2355,8 +2381,8 @@
     </div>
   </div>
 
-  <script src="js/ps3wave.js"></script>
+  <script src="js/ps3wave.js?v=20261106-ps3xmb"></script>
   <script src="js/analytics.js?v=20260927-v2"></script>
-  <script src="js/main.js?v=20260929-v3"></script>
+  <script src="js/main.js?v=20261106-ps3xmb"></script>
 </body>
 </html>

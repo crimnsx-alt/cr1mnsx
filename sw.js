@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cr1mnsx-xmb-v20261106';
+const CACHE_NAME = 'cr1mnsx-ps3xmb-v20261106-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style.css?v=20261106-apple',
+  './css/style.css?v=20261106-ps3xmb',
   './js/boot.js',
-  './js/main.js'
+  './js/ps3wave.js?v=20261106-ps3xmb',
+  './js/main.js?v=20261106-ps3xmb'
 ];
 
 self.addEventListener('install', (event) => {
@@ -61,3 +62,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+

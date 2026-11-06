@@ -114,6 +114,40 @@
       step: narrow ? 58 : Math.max(64, vh * 0.085),
     };
     root.style.setProperty('--ix', `${Math.max(8, anchorX + catIcon / 2 - col / 2)}px`);
+    root.style.setProperty('--sel-y', `${geo.selY}px`);
+  };
+
+  /* ---------- PS3 XMB Dynamic PIC1.PNG Game Backdrop ---------- */
+  const pic1El = $('#ps3Pic1Bg');
+  let lastPic1Url = '';
+
+  const updatePs3Pic1 = () => {
+    if (!pic1El) return;
+    const cat = cats[current];
+    if (!cat) return;
+    const catId = cat.id;
+    const items = itemsOf(current);
+    const selItem = items[selected[current]];
+
+    let artUrl = '';
+    if (selItem && (catId === 'souls' || catId === 'game')) {
+      const bannerImg = selItem.querySelector('.game-banner-img, .ps5-last-game-img, .ps5-latest-banner');
+      const iconImg = selItem.querySelector('.item__icon img');
+      const candidate = (bannerImg && bannerImg.getAttribute('src')) || (iconImg && iconImg.getAttribute('src')) || '';
+      if (candidate && !candidate.endsWith('.svg')) {
+        artUrl = candidate;
+      }
+    }
+
+    if (artUrl) {
+      if (artUrl !== lastPic1Url) {
+        lastPic1Url = artUrl;
+        pic1El.style.backgroundImage = `url("${artUrl}")`;
+      }
+      root.classList.add('has-pic1');
+    } else {
+      root.classList.remove('has-pic1');
+    }
   };
 
   const loadThumb = (item) => {
@@ -193,6 +227,7 @@
     }
 
     if (typeof initAeroTilt === 'function') initAeroTilt();
+    updatePs3Pic1();
   };
 
   /* ---------- Аудио-эффекты PS3 XrossMediaBar (Web Audio API) ---------- */
@@ -2304,6 +2339,71 @@
   initSiteTrophies();
   initBioQuoteWidget();
   initShareBioWidget();
+
+  /* ---------- PS3 System Chrome: Wave Color Cycling & Bottom Guide Bar ---------- */
+  function initPs3SystemChrome() {
+    const waveColorBtn = $('#waveColorBtn');
+    const cycleWave = () => {
+      if (window.ps3Wave && typeof window.ps3Wave.cycleColor === 'function') {
+        const theme = window.ps3Wave.cycleColor();
+        playSfx('ok');
+        if (theme && theme.name) {
+          showPs3Toast('Тема волны PS3 XMB', `Цвет шёлка: ${theme.name}`);
+        }
+      }
+    };
+
+    if (waveColorBtn) {
+      waveColorBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        cycleWave();
+      });
+    }
+
+    $$('[data-ps3-act]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const act = btn.getAttribute('data-ps3-act');
+        if (act === 'color') {
+          cycleWave();
+        } else if (act === 'psn') {
+          const soulsIdx = cats.findIndex((c) => c.id === 'souls');
+          if (soulsIdx >= 0) {
+            selected[soulsIdx] = 0;
+            selectCat(soulsIdx);
+            showPs3Toast('PlayStation 5 Live', 'Переход к профилю PSN и трофеям');
+          }
+        } else if (act === 'brawl') {
+          const soulsIdx = cats.findIndex((c) => c.id === 'souls');
+          if (soulsIdx >= 0) {
+            const items = itemsOf(soulsIdx);
+            const bsIdx = items.findIndex((it) => it.id === 'itemBrawlStars');
+            selected[soulsIdx] = bsIdx >= 0 ? bsIdx : 0;
+            selectCat(soulsIdx);
+            showPs3Toast('Brawl Stars Live', 'Профиль Cr1mnsx (#2RGUQJQ0R)');
+          }
+        } else if (act === 'enter') {
+          const selItem = itemsOf(current)[selected[current]];
+          if (selItem) {
+            const playBtn = selItem.querySelector('[data-play-game]');
+            const rowLink = selItem.querySelector('a.item__row[href]');
+            if (playBtn) {
+              playBtn.click();
+            } else if (rowLink && rowLink.getAttribute('href') && rowLink.getAttribute('href') !== '#') {
+              playSfx('ok');
+              window.open(rowLink.href, rowLink.target || '_self');
+            } else {
+              playSfx('ok');
+            }
+          }
+        }
+      });
+    });
+  }
+
+  initPs3SystemChrome();
 
   /* ---------- PWA Service Worker Registration ---------- */
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {

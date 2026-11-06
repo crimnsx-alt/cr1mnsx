@@ -1,9 +1,11 @@
 /**
- * ps3wave.js — Unified PS3 XMB Engine v4.0 (Ultra-Performance 60-120 FPS)
- * ------------------------------------------------------------------------
- * Объединенный движок: волны PS3 XMB + звездное поле + пылинки + созвездия + глифы
- * Всё рисуется на ОДНОМ Canvas в ОДНОМ анимационном цикле с аппаратным ускорением.
- * На дисплеях Retina Mac работает на 60–120 FPS без просадок и нагрева.
+ * ps3wave.js — Authentic PlayStation 3 XrossMediaBar (XMB) Silk Wave Engine v5.0
+ * ------------------------------------------------------------------------------
+ * Поддерживает:
+ * - 7 официальных цветовых тем волн Sony PS3 (Original Blue, Ruby Red, Emerald,
+ *   Amethyst Purple, Amber Gold, Midnight Onyx, Pearl Light)
+ * - Прозрачное смешивание с динамическим фоном игры PIC1.PNG (.has-pic1)
+ * - Аппаратное ускорение 60–120 FPS на одном Canvas
  */
 (() => {
   'use strict';
@@ -20,72 +22,140 @@
       bgVideo.removeAttribute('src');
       bgVideo.style.display = 'none';
     }
-    bgContainer.prepend(canvas);
+    bgContainer.appendChild(canvas);
   } else {
     document.body.prepend(canvas);
   }
 
   const ctx = canvas.getContext('2d', { alpha: true });
-  // На экранах Retina DPR 1.0 дает идеальную шелковистую мягкость волн и 4-кратную экономию GPU
   const dpr = 1.0;
   let W = 0, H = 0;
 
+  /* -- ОФИЦИАЛЬНЫЕ ЦВЕТОВЫЕ СХЕМЫ PS3 SYSTEM SOFTWARE -- */
+  const PS3_THEMES = [
+    {
+      id: 'blue',
+      name: 'Синяя (PS3 Original)',
+      sky: ['#051329', '#0b2958', '#061a3c', '#020713'],
+      wave0: 'rgba(255, 255, 255, 0.44)',
+      wave1: 'rgba(56, 165, 255, 0.24)',
+      wave2: 'rgba(10, 50, 130, 0.01)',
+      strokeMain: 'rgba(235, 248, 255, 0.62)',
+      strokeGlow: 'rgba(96, 185, 255, 0.32)'
+    },
+    {
+      id: 'ruby',
+      name: 'Рубиновая (Ruby Red)',
+      sky: ['#260610', '#4d0d20', '#2e0714', '#0e0206'],
+      wave0: 'rgba(255, 235, 240, 0.44)',
+      wave1: 'rgba(244, 63, 94, 0.25)',
+      wave2: 'rgba(110, 12, 35, 0.01)',
+      strokeMain: 'rgba(255, 228, 235, 0.62)',
+      strokeGlow: 'rgba(251, 113, 133, 0.32)'
+    },
+    {
+      id: 'amethyst',
+      name: 'Аметист (Amethyst)',
+      sky: ['#16072b', '#2e1059', '#1b0938', '#080212'],
+      wave0: 'rgba(248, 238, 255, 0.44)',
+      wave1: 'rgba(168, 85, 247, 0.25)',
+      wave2: 'rgba(65, 18, 120, 0.01)',
+      strokeMain: 'rgba(243, 232, 255, 0.62)',
+      strokeGlow: 'rgba(192, 132, 252, 0.32)'
+    },
+    {
+      id: 'emerald',
+      name: 'Изумруд (Emerald)',
+      sky: ['#04221c', '#094538', '#052922', '#020e0b'],
+      wave0: 'rgba(235, 255, 248, 0.42)',
+      wave1: 'rgba(16, 185, 129, 0.24)',
+      wave2: 'rgba(6, 78, 59, 0.01)',
+      strokeMain: 'rgba(209, 250, 229, 0.60)',
+      strokeGlow: 'rgba(52, 211, 153, 0.30)'
+    },
+    {
+      id: 'gold',
+      name: 'Золото Дранглика (Gold)',
+      sky: ['#241504', '#472a08', '#291704', '#0d0701'],
+      wave0: 'rgba(255, 248, 225, 0.44)',
+      wave1: 'rgba(245, 158, 11, 0.25)',
+      wave2: 'rgba(120, 53, 15, 0.01)',
+      strokeMain: 'rgba(254, 243, 199, 0.62)',
+      strokeGlow: 'rgba(251, 191, 36, 0.32)'
+    },
+    {
+      id: 'onyx',
+      name: 'Чёрный Оникс (PS3 Slim)',
+      sky: ['#090d16', '#131c2e', '#0b101b', '#030509'],
+      wave0: 'rgba(255, 255, 255, 0.38)',
+      wave1: 'rgba(148, 163, 184, 0.20)',
+      wave2: 'rgba(15, 23, 42, 0.01)',
+      strokeMain: 'rgba(241, 245, 249, 0.55)',
+      strokeGlow: 'rgba(148, 163, 184, 0.28)'
+    }
+  ];
+
+  let currentThemeIdx = 0;
+  try {
+    const savedId = localStorage.getItem('ps3_wave_color');
+    if (savedId) {
+      const idx = PS3_THEMES.findIndex(t => t.id === savedId);
+      if (idx !== -1) currentThemeIdx = idx;
+    }
+  } catch {}
+
+  const updateWaveLabel = () => {
+    const theme = PS3_THEMES[currentThemeIdx];
+    const lbl = document.getElementById('ps3ColorNameLabel');
+    if (lbl && theme) lbl.textContent = `Волна: ${theme.name.split(' ')[0]}`;
+  };
+
+  window.setPs3WaveColor = (idOrIdx) => {
+    if (typeof idOrIdx === 'number') {
+      currentThemeIdx = ((idOrIdx % PS3_THEMES.length) + PS3_THEMES.length) % PS3_THEMES.length;
+    } else {
+      const idx = PS3_THEMES.findIndex(t => t.id === idOrIdx);
+      if (idx !== -1) currentThemeIdx = idx;
+    }
+    const theme = PS3_THEMES[currentThemeIdx];
+    try { localStorage.setItem('ps3_wave_color', theme.id); } catch {}
+    updateWaveLabel();
+    if (window.ps3WaveImpulse) window.ps3WaveImpulse();
+    return theme;
+  };
+
+  window.cyclePs3WaveColor = () => {
+    return window.setPs3WaveColor(currentThemeIdx + 1);
+  };
+
+  window.getPs3WaveTheme = () => PS3_THEMES[currentThemeIdx];
+
+  window.addEventListener('DOMContentLoaded', updateWaveLabel);
+
   /* -- ПРЕДРАСЧИТАННЫЕ КЭШ-ТЕКСТУРЫ (OFFSCREEN) -- */
-  // 1. Пылинка PS3
   const moteCanvas = document.createElement('canvas');
   moteCanvas.width = 32;
   moteCanvas.height = 32;
   const mCtx = moteCanvas.getContext('2d');
   const mGrad = mCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
   mGrad.addColorStop(0, 'rgba(255,255,255,1)');
-  mGrad.addColorStop(0.35, 'rgba(165,220,255,0.75)');
-  mGrad.addColorStop(0.7, 'rgba(100,180,255,0.25)');
+  mGrad.addColorStop(0.35, 'rgba(185,230,255,0.78)');
+  mGrad.addColorStop(0.7, 'rgba(120,190,255,0.25)');
   mGrad.addColorStop(1, 'rgba(80,160,255,0)');
   mCtx.fillStyle = mGrad;
   mCtx.fillRect(0, 0, 32, 32);
 
-  // 2. Искра гребня волны
   const sparkCanvas = document.createElement('canvas');
   sparkCanvas.width = 32;
   sparkCanvas.height = 32;
   const sCtx = sparkCanvas.getContext('2d');
   const sGrad = sCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
   sGrad.addColorStop(0, 'rgba(255,255,255,1)');
-  sGrad.addColorStop(0.35, 'rgba(120,210,255,0.85)');
-  sGrad.addColorStop(0.75, 'rgba(60,140,255,0.3)');
+  sGrad.addColorStop(0.35, 'rgba(160,225,255,0.85)');
+  sGrad.addColorStop(0.75, 'rgba(80,160,255,0.3)');
   sGrad.addColorStop(1, 'rgba(40,110,240,0)');
   sCtx.fillStyle = sGrad;
   sCtx.fillRect(0, 0, 32, 32);
-
-  // 3. Глифы кнопок PlayStation (✕, ○, □, △)
-  const PS_GLYPHS = ['\u2715', '\u25cb', '\u25a1', '\u25b3'];
-  const PS_COLORS = ['rgba(130,180,255,', 'rgba(240,115,135,', 'rgba(170,220,255,', 'rgba(150,235,170,'];
-  const cachedGlyphs = PS_GLYPHS.map((glyph, idx) => {
-    const gCan = document.createElement('canvas');
-    gCan.width = 64;
-    gCan.height = 64;
-    const gCtx = gCan.getContext('2d');
-    gCtx.font = '28px sans-serif';
-    gCtx.textAlign = 'center';
-    gCtx.textBaseline = 'middle';
-    gCtx.shadowColor = PS_COLORS[idx] + '0.85)';
-    gCtx.shadowBlur = 8;
-    gCtx.fillStyle = PS_COLORS[idx] + '0.95)';
-    gCtx.fillText(glyph, 32, 32);
-    return gCan;
-  });
-
-  // 4. Ореол курсора
-  const haloCanvas = document.createElement('canvas');
-  haloCanvas.width = 128;
-  haloCanvas.height = 128;
-  const hCtx = haloCanvas.getContext('2d');
-  const hGrad = hCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
-  hGrad.addColorStop(0, 'rgba(120,195,255,0.07)');
-  hGrad.addColorStop(0.5, 'rgba(70,145,255,0.025)');
-  hGrad.addColorStop(1, 'rgba(20,60,180,0)');
-  hCtx.fillStyle = hGrad;
-  hCtx.fillRect(0, 0, 128, 128);
 
   /* -- МЫШЬ И ПАРАЛЛАКС -- */
   let mouseX = -9999, mouseY = -9999;
@@ -104,79 +174,58 @@
     mouseY = -9999;
   });
 
-  /* -- ЗВЕЗДНОЕ ПОЛЕ (3 СЛОЯ) -- */
-  const STAR_LAYERS = [
-    { count: 70, r: 0.7, color: 'rgba(205,230,255,0.45)', parallax: 0.012 },
-    { count: 40, r: 1.1, color: 'rgba(215,235,255,0.40)', parallax: 0.024 },
-    { count: 18, r: 1.6, color: 'rgba(230,245,255,0.35)', parallax: 0.038 },
-  ];
-  const starsByLayer = [[], [], []];
-
   /* -- ПЫЛИНКИ PS3 DUST MOTES -- */
-  const DUST_COUNT = 45;
+  const DUST_COUNT = 42;
   const dust = [];
   const makeDust = (forceBottom) => ({
     x: Math.random() * W,
     y: forceBottom ? H + Math.random() * 30 : Math.random() * H,
-    r: Math.random() * 1.8 + 0.6,
-    vy: -(Math.random() * 0.32 + 0.1),
-    vx: (Math.random() - 0.5) * 0.16,
-    baseAlpha: Math.random() * 0.45 + 0.25,
+    r: Math.random() * 1.7 + 0.55,
+    vy: -(Math.random() * 0.28 + 0.08),
+    vx: (Math.random() - 0.5) * 0.15,
+    baseAlpha: Math.random() * 0.45 + 0.22,
     phaseSeed: Math.random() * Math.PI * 2,
     twinkle: Math.random() * 0.014 + 0.005,
   });
 
-  /* -- ВОЛНЫ PS3 -- */
+  /* -- ВОЛНЫ PS3 XMB SILK RIBBONS -- */
   const waves = [
     {
-      baseY: 0.58,
-      speed: 0.007,
-      colorStop0: 'rgba(255, 255, 255, 0.42)',
-      colorStop1: 'rgba(50, 150, 255, 0.22)',
-      colorStop2: 'rgba(10, 50, 130, 0.01)',
-      strokeColor: 'rgba(255, 255, 255, 0.55)',
+      baseY: 0.57,
+      speed: 0.0068,
       harmonics: [
-        { freq: 0.0016, amp: 55, phase: 0 },
-        { freq: 0.0034, amp: 28, phase: 1.2 },
+        { freq: 0.0015, amp: 54, phase: 0 },
+        { freq: 0.0032, amp: 26, phase: 1.2 },
         { freq: 0.0008, amp: 20, phase: 2.5 }
       ]
     },
     {
-      baseY: 0.52,
-      speed: -0.006,
-      colorStop0: 'rgba(220, 245, 255, 0.35)',
-      colorStop1: 'rgba(30, 110, 230, 0.18)',
-      colorStop2: 'rgba(5, 30, 90, 0.01)',
-      strokeColor: 'rgba(210, 240, 255, 0.48)',
+      baseY: 0.51,
+      speed: -0.0056,
       harmonics: [
-        { freq: 0.0019, amp: 48, phase: 2.0 },
-        { freq: 0.0041, amp: 24, phase: 0.5 },
-        { freq: 0.0011, amp: 18, phase: 3.1 }
+        { freq: 0.0018, amp: 46, phase: 2.0 },
+        { freq: 0.0039, amp: 22, phase: 0.5 },
+        { freq: 0.0010, amp: 18, phase: 3.1 }
       ]
     },
     {
-      baseY: 0.65,
-      speed: 0.005,
-      colorStop0: 'rgba(200, 240, 255, 0.28)',
-      colorStop1: 'rgba(20, 90, 210, 0.14)',
-      colorStop2: 'rgba(2, 20, 60, 0.0)',
-      strokeColor: 'rgba(180, 220, 255, 0.38)',
+      baseY: 0.64,
+      speed: 0.0048,
       harmonics: [
-        { freq: 0.0013, amp: 65, phase: 1.0 },
-        { freq: 0.0027, amp: 32, phase: 2.8 },
-        { freq: 0.0006, amp: 25, phase: 0.2 }
+        { freq: 0.0012, amp: 62, phase: 1.0 },
+        { freq: 0.0026, amp: 30, phase: 2.8 },
+        { freq: 0.0006, amp: 24, phase: 0.2 }
       ]
     }
   ];
 
-  /* -- СПАРКИ ГРЕБНЕЙ ВОЛН -- */
   const waveY = (wd, x, t) => {
     let y = H * wd.baseY;
     for (const h of wd.harmonics) y += Math.sin(x * h.freq + t * wd.speed + h.phase) * h.amp;
     return y;
   };
 
-  const SPARK_PER_WAVE = 6;
+  const SPARK_PER_WAVE = 7;
   const sparks = [];
   const makeSpark = (wIdx, t) => {
     const x = Math.random() * W;
@@ -184,76 +233,46 @@
     return {
       wIdx, x, y,
       life: 0,
-      maxLife: 45 + Math.floor(Math.random() * 50),
-      vx: (Math.random() - 0.5) * 1.6,
-      vy: -(Math.random() * 1.1 + 0.25),
-      size: Math.random() * 1.6 + 0.7,
+      maxLife: 48 + Math.floor(Math.random() * 52),
+      vx: (Math.random() - 0.5) * 1.4,
+      vy: -(Math.random() * 1.0 + 0.22),
+      size: Math.random() * 1.5 + 0.7,
     };
   };
 
-  /* -- ГЛИФЫ КНОПОК PLAYSTATION -- */
-  const GLYPH_COUNT = 12;
-  const glyphs = [];
-  const makeGlyph = () => ({
-    idx: Math.floor(Math.random() * PS_GLYPHS.length),
-    x: Math.random() * W,
-    y: Math.random() * H,
-    size: Math.random() * 20 + 13,
-    alpha: Math.random() * 0.14 + 0.04,
-    rotSpeed: (Math.random() - 0.5) * 0.007,
-    rot: Math.random() * Math.PI * 2,
-    vy: -(Math.random() * 0.15 + 0.04),
-  });
-
-  /* -- СОЗВЕЗДИЯ КУРСОРА -- */
-  const MICRO_COUNT = 75;
-  const CONNECT_RADIUS = 88;
-  const micro = [];
-  const makeMicro = () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.22,
-    vy: (Math.random() - 0.5) * 0.22,
-    r: Math.random() * 0.9 + 0.4,
-  });
-
   /* -- КЛИК-СПАРКИ -- */
   const clickBursts = [];
-  const triggerBurst = (bx, by, count = 16) => {
+  const triggerBurst = (bx, by, count = 14) => {
     for (let i = 0; i < count; i++) {
       const angle = Math.random() * Math.PI * 2;
-      const speed = Math.random() * 3.4 + 1.2;
+      const speed = Math.random() * 3.2 + 1.0;
       clickBursts.push({
         x: bx,
         y: by,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life: 0,
-        maxLife: 30 + Math.floor(Math.random() * 20),
-        size: Math.random() * 2.0 + 0.8,
-        colorType: Math.random() > 0.4 ? 'cyan' : (Math.random() > 0.5 ? 'white' : 'gold'),
+        maxLife: 28 + Math.floor(Math.random() * 18),
+        size: Math.random() * 1.9 + 0.8,
       });
     }
   };
 
   window.addEventListener('pointerdown', (e) => {
-    triggerBurst(e.clientX, e.clientY, 14);
+    triggerBurst(e.clientX, e.clientY, 12);
   }, { passive: true });
 
   window.ps3ParticleBurst = (x, y, count) => triggerBurst(x, y, count);
 
   let impulse = 0;
+  let time = 0;
   window.ps3WaveImpulse = () => {
-    impulse = Math.min(impulse + 1.2, 2.5);
+    impulse = Math.min(impulse + 1.1, 2.2);
     waves.forEach((_, wIdx) => {
-      for (let i = 0; i < 5; i++) sparks.push(makeSpark(wIdx, time));
+      for (let i = 0; i < 4; i++) sparks.push(makeSpark(wIdx, time));
     });
-    const spawnX = Math.min(W * 0.28, 380);
-    const spawnY = H * 0.38;
-    triggerBurst(spawnX, spawnY, 8);
   };
 
-  /* -- RESIZE -- */
   const resize = () => {
     W = window.innerWidth;
     H = window.innerHeight;
@@ -263,23 +282,8 @@
     canvas.style.height = `${H}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    STAR_LAYERS.forEach((layer, lIdx) => {
-      starsByLayer[lIdx] = [];
-      for (let i = 0; i < layer.count; i++) {
-        const bx = Math.random() * W;
-        const by = Math.random() * H;
-        starsByLayer[lIdx].push({ baseX: bx, baseY: by, x: bx, y: by });
-      }
-    });
-
     dust.length = 0;
     for (let i = 0; i < DUST_COUNT; i++) dust.push(makeDust(false));
-
-    glyphs.length = 0;
-    for (let i = 0; i < GLYPH_COUNT; i++) glyphs.push(makeGlyph());
-
-    micro.length = 0;
-    for (let i = 0; i < MICRO_COUNT; i++) micro.push(makeMicro());
 
     sparks.length = 0;
     waves.forEach((_, wIdx) => {
@@ -290,9 +294,6 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  /* -- ЕДИНЫЙ ВЫСОКОСКОРОСТНОЙ ЦИКЛ РЕНДЕРИНГА -- */
-  let time = 0;
-
   const animate = () => {
     time += 1;
     impulse *= 0.96;
@@ -302,41 +303,41 @@
     smoothMX += (targetMX - smoothMX) * 0.045;
     smoothMY += (targetMY - smoothMY) * 0.045;
 
-    // 1. Градиент ночного космоса PS3
+    const theme = PS3_THEMES[currentThemeIdx] || PS3_THEMES[0];
+    const hasPic1 = document.documentElement.classList.contains('has-pic1');
+    const isLight = document.documentElement.dataset.theme === 'light';
+
+    // 1. Фон PS3 (если активен PIC1.PNG арт игры — рисуем полупрозрачную вуаль, чтобы арт светился сквозь волны)
+    ctx.save();
+    if (hasPic1) {
+      ctx.globalAlpha = 0.52;
+    }
     const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
-    bgGrad.addColorStop(0, '#061328');
-    bgGrad.addColorStop(0.45, '#0b2654');
-    bgGrad.addColorStop(0.75, '#071b3e');
-    bgGrad.addColorStop(1, '#020713');
+    if (isLight) {
+      bgGrad.addColorStop(0, '#1e40af');
+      bgGrad.addColorStop(0.48, '#2563eb');
+      bgGrad.addColorStop(0.82, '#1d4ed8');
+      bgGrad.addColorStop(1, '#0f172a');
+    } else {
+      bgGrad.addColorStop(0, theme.sky[0]);
+      bgGrad.addColorStop(0.45, theme.sky[1]);
+      bgGrad.addColorStop(0.78, theme.sky[2]);
+      bgGrad.addColorStop(1, theme.sky[3]);
+    }
     ctx.fillStyle = bgGrad;
     ctx.fillRect(0, 0, W, H);
+    ctx.restore();
 
-    // 2. Звезды (3 батч-вызова fill)
-    for (let lIdx = 0; lIdx < STAR_LAYERS.length; lIdx++) {
-      const layer = STAR_LAYERS[lIdx];
-      const arr = starsByLayer[lIdx];
-      ctx.beginPath();
-      for (let i = 0; i < arr.length; i++) {
-        const s = arr[i];
-        s.x = s.baseX + smoothMX * layer.parallax * W;
-        s.y = s.baseY + smoothMY * layer.parallax * H;
-        ctx.moveTo(s.x + layer.r, s.y);
-        ctx.arc(s.x, s.y, layer.r, 0, Math.PI * 2);
-      }
-      ctx.fillStyle = layer.color;
-      ctx.fill();
-    }
-
-    // 3. Волны PS3 (Additive Blending)
+    // 2. Шёлковые ленты волн PS3 XMB (Additive Blending)
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
 
-    const boost = 1 + impulse * 0.45;
+    const boost = 1 + impulse * 0.42;
     const step = 10;
 
     for (let wIdx = 0; wIdx < waves.length; wIdx++) {
       const w = waves[wIdx];
-      const cy = H * w.baseY;
+      const cy = H * w.baseY + smoothMY * 12;
 
       ctx.beginPath();
       ctx.moveTo(0, H);
@@ -356,48 +357,48 @@
       ctx.lineTo(W, H);
       ctx.closePath();
 
-      const waveGrad = ctx.createLinearGradient(0, cy - 80 * boost, 0, H);
-      waveGrad.addColorStop(0, w.colorStop0);
-      waveGrad.addColorStop(0.3, w.colorStop1);
-      waveGrad.addColorStop(0.85, w.colorStop2);
+      const waveGrad = ctx.createLinearGradient(0, cy - 85 * boost, 0, H);
+      waveGrad.addColorStop(0, theme.wave0);
+      waveGrad.addColorStop(0.32, theme.wave1);
+      waveGrad.addColorStop(0.88, theme.wave2);
       ctx.fillStyle = waveGrad;
       ctx.fill();
 
-      // Двойной контур гребня (без дорогого shadowBlur)
+      // Двойной шелковый контур гребня волны PS3
       ctx.beginPath();
       for (let pi = 0; pi < points.length; pi++) {
         const p = points[pi];
         if (pi === 0) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       }
-      ctx.lineWidth = 3.6;
-      ctx.strokeStyle = 'rgba(128, 195, 255, 0.28)';
+      ctx.lineWidth = 3.4;
+      ctx.strokeStyle = theme.strokeGlow;
       ctx.stroke();
 
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = w.strokeColor;
+      ctx.lineWidth = 1.4;
+      ctx.strokeStyle = theme.strokeMain;
       ctx.stroke();
     }
 
-    // 4. Спарки гребней волн
+    // 3. Искры на гребнях волн PS3
     for (let i = 0; i < sparks.length; i++) {
       const s = sparks[i];
       s.life++;
       s.x += s.vx;
       s.y += s.vy;
-      s.vy += 0.035;
+      s.vy += 0.032;
       if (s.life >= s.maxLife || s.y > H + 20 || s.x < -10 || s.x > W + 10) {
         sparks[i] = makeSpark(s.wIdx, time);
         continue;
       }
       const prog = s.life / s.maxLife;
       const a = prog < 0.2 ? prog / 0.2 : 1 - (prog - 0.2) / 0.8;
-      const sz = s.size * 5.2;
-      ctx.globalAlpha = a * 0.9;
+      const sz = s.size * 5.0;
+      ctx.globalAlpha = a * 0.88;
       ctx.drawImage(sparkCanvas, s.x - sz / 2, s.y - sz / 2, sz, sz);
     }
 
-    // 5. Клик-всплески искр
+    // 4. Клик-всплески
     if (clickBursts.length > 0) {
       for (let i = clickBursts.length - 1; i >= 0; i--) {
         const b = clickBursts[i];
@@ -406,48 +407,24 @@
         b.y += b.vy;
         b.vx *= 0.94;
         b.vy *= 0.94;
-
         if (b.life >= b.maxLife) {
           clickBursts.splice(i, 1);
           continue;
         }
-
         const p = b.life / b.maxLife;
         const a = (1 - p) * 0.85;
-        const color = b.colorType === 'cyan'
-          ? `rgba(120,210,255,${a})`
-          : (b.colorType === 'gold' ? `rgba(255,210,130,${a})` : `rgba(255,255,255,${a})`);
-
         ctx.beginPath();
         ctx.arc(b.x, b.y, b.size * (1 - p * 0.4), 0, Math.PI * 2);
-        ctx.fillStyle = color;
+        ctx.fillStyle = `rgba(185, 230, 255, ${a})`;
         ctx.fill();
       }
     }
 
     ctx.restore();
 
-    // 6. Ореол курсора
-    if (mouseX > 0 && mouseY > 0) {
-      const hSize = 220;
-      ctx.drawImage(haloCanvas, mouseX - hSize / 2, mouseY - hSize / 2, hSize, hSize);
-    }
-
-    // 7. Пылинки PS3
+    // 5. Мерцающие пылинки PS3
     for (let i = 0; i < dust.length; i++) {
       const d = dust[i];
-      if (mouseX > 0) {
-        const dx = d.x - mouseX;
-        const dy = d.y - mouseY;
-        const distSq = dx * dx + dy * dy;
-        if (distSq < 8100 && distSq > 1) {
-          const dist = Math.sqrt(distSq);
-          const force = (1 - dist / 90) * 0.38;
-          d.x += (dx / dist) * force;
-          d.y += (dy / dist) * force;
-        }
-      }
-
       d.x += d.vx;
       d.y += d.vy;
       d.phaseSeed += d.twinkle;
@@ -457,75 +434,11 @@
       }
       const pulse = 0.6 + 0.4 * Math.sin(time * d.twinkle + d.phaseSeed);
       const a = d.baseAlpha * pulse;
-      const sz = d.r * 5.0;
+      const sz = d.r * 4.8;
       ctx.globalAlpha = a;
       ctx.drawImage(moteCanvas, d.x - sz / 2, d.y - sz / 2, sz, sz);
     }
     ctx.globalAlpha = 1;
-
-    // 8. Глифы кнопок PlayStation
-    for (let i = 0; i < glyphs.length; i++) {
-      const g = glyphs[i];
-      g.y += g.vy;
-      g.rot += g.rotSpeed;
-      if (g.y < -30) Object.assign(g, makeGlyph(), { y: H + 30 });
-      ctx.save();
-      ctx.translate(g.x, g.y);
-      ctx.rotate(g.rot);
-      ctx.globalAlpha = g.alpha;
-      const s = g.size * 1.8;
-      ctx.drawImage(cachedGlyphs[g.idx], -s / 2, -s / 2, s, s);
-      ctx.restore();
-    }
-
-    // 9. Созвездия курсора
-    ctx.beginPath();
-    for (let i = 0; i < micro.length; i++) {
-      const m = micro[i];
-      m.x += m.vx;
-      m.y += m.vy;
-      if (m.x < 0) m.x = W;
-      if (m.x > W) m.x = 0;
-      if (m.y < 0) m.y = H;
-      if (m.y > H) m.y = 0;
-      ctx.moveTo(m.x + m.r, m.y);
-      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-    }
-    ctx.fillStyle = 'rgba(200,230,255,0.28)';
-    ctx.fill();
-
-    if (mouseX > 0) {
-      const near = [];
-      for (let i = 0; i < micro.length; i++) {
-        const m = micro[i];
-        const dx = m.x - mouseX, dy = m.y - mouseY;
-        if (dx * dx + dy * dy < CONNECT_RADIUS * CONNECT_RADIUS) near.push(m);
-      }
-      if (near.length > 0) {
-        ctx.beginPath();
-        for (let i = 0; i < near.length; i++) {
-          for (let j = i + 1; j < near.length; j++) {
-            const dx = near[i].x - near[j].x, dy = near[i].y - near[j].y;
-            const dSq = dx * dx + dy * dy;
-            if (dSq > 4600) continue;
-            ctx.moveTo(near[i].x, near[i].y);
-            ctx.lineTo(near[j].x, near[j].y);
-          }
-        }
-        ctx.strokeStyle = 'rgba(180,220,255,0.14)';
-        ctx.lineWidth = 0.55;
-        ctx.stroke();
-
-        ctx.beginPath();
-        for (let i = 0; i < near.length; i++) {
-          ctx.moveTo(mouseX, mouseY);
-          ctx.lineTo(near[i].x, near[i].y);
-        }
-        ctx.strokeStyle = 'rgba(220,240,255,0.1)';
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
 
     requestAnimationFrame(animate);
   };

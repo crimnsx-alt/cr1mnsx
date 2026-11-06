@@ -219,3 +219,4 @@ main().catch(err => {
   console.error("❌ Ошибка синхронизации Brawl Stars:", err);
   process.exit(1);
 });
+
