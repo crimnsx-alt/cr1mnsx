@@ -1,7 +1,6 @@
 /* ==========================================================================
-   cr1mnsx — PlayStation 5 (PS5) Welcome Hub & Activity Cards Design System
-   Complete PS5 UI Architecture (v6.0)
-   Based on PS5ish System UI Architecture
+   PlayStation 5 Official System Software Theme — cr1mnsx
+   Exact Recreation of PS5 Welcome Hub, Games Ribbon & Activity Cards
    ========================================================================== */
 
 @font-face {
@@ -29,3906 +28,967 @@
 }
 
 :root {
-  /* PS5 UI Geometry */
-  --cat-icon: 42px;
-  --item-icon: 52px;
-  --col: 340px;
-  --ix: 28px;
-  --sel-y: 84px;
+  /* Цветовая палитра PS5 Welcome Hub из референса */
+  --ps5-bg-deep: #030611;
+  --ps5-bg-mid: #090e1f;
+  --ps5-surface: rgba(14, 20, 35, 0.78);
+  --ps5-surface-hover: rgba(26, 35, 58, 0.88);
+  --ps5-card-border: rgba(255, 255, 255, 0.12);
+  --ps5-card-focus-border: #ffffff;
+  
+  --ps5-accent-blue: #0070d1;
+  --ps5-accent-cyan: #38bdf8;
+  --ps5-accent-gold: #facc15;
+  --ps5-accent-orange: #fb923c;
+  --ps5-accent-green: #22c55e;
 
-  /* Typography — TitilliumWeb (PS5ish) + Inter (PS5 SST / Apple UI) */
-  --font-sans: 'TitilliumWeb', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-xmb: 'TitilliumWeb', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+  --ps5-text-main: #f8fafc;
+  --ps5-text-muted: rgba(226, 232, 240, 0.72);
+  --ps5-text-dim: rgba(148, 163, 184, 0.6);
 
-  /* Emil Kowalski & Apple Fluid Spring Physics */
-  --spring-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --spring-snappy: cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* PS5ish Authentic Palette (from Constants.xaml) */
-  --ps5-bg-start: #090c13;
-  --ps5-bg-end: #181a1e;
-  --ps5-control-bg: #222328;
-  --ps5-selection: #8d919d;
-  --ps5-overlay: #bb000000;
-
-  --text-primary: #f5f5f5;
-  --text-secondary: rgba(226, 232, 240, 0.84);
-  --text-muted: rgba(148, 163, 184, 0.78);
-
-  --ps3-surface: linear-gradient(165deg, rgba(22, 23, 27, 0.82) 0%, rgba(9, 12, 19, 0.90) 100%);
-  --ps3-surface-elevated: linear-gradient(165deg, rgba(34, 35, 40, 0.88) 0%, rgba(18, 20, 26, 0.95) 100%);
-  --ps3-border: rgba(255, 255, 255, 0.12);
-  --ps3-border-bright: rgba(255, 255, 255, 0.88);
-  --ps3-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
-  --ps3-shadow: 0 22px 54px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.45);
-
-  --accent-psn: #0f42d7;
-  --accent-cyan: #38bdf8;
-  --accent-brawl: #f59e0b;
-  --accent-twitch: #a855f7;
-  --accent-green: #22c55e;
-  --accent-danger: #ef4444;
-
-  --radius-xl: 20px;
-  --radius-lg: 16px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
+  --font-ps5: 'TitilliumWeb', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --spring-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---------- Light Mode (PS5 White DualSense Shell) ---------- */
-html[data-theme="light"] {
-  --text-primary: #0f172a;
-  --text-secondary: rgba(15, 23, 42, 0.80);
-  --text-muted: rgba(51, 65, 85, 0.72);
-  --ps3-surface: linear-gradient(165deg, rgba(255, 255, 255, 0.86) 0%, rgba(241, 245, 249, 0.94) 100%);
-  --ps3-surface-elevated: linear-gradient(165deg, rgba(255, 255, 255, 0.96) 0%, rgba(226, 232, 240, 0.96) 100%);
-  --ps3-border: rgba(15, 23, 42, 0.12);
-  --ps3-border-bright: rgba(0, 112, 209, 0.65);
-  --ps3-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(15, 23, 42, 0.06);
-  --ps3-shadow: 0 18px 42px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
-}
-
-/* ==========================================================================
-   1. RESET & BASE TYPOGRAPHY
-   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  min-height: 100%;
-  background: #030712;
-  color: var(--text-primary);
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.45;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-::selection {
-  background: rgba(0, 112, 209, 0.4);
-  color: #fff;
-}
-
-html.xmb-on,
-html.xmb-on body {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  background: var(--ps5-bg-deep);
+  color: var(--ps5-text-main);
+  font-family: var(--font-ps5);
+  font-size: 15px;
+  line-height: 1.4;
   user-select: none;
-}
-
-img, svg, video {
-  display: block;
-  max-width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
-  font: inherit;
-  color: inherit;
-  background: none;
+  font-family: inherit;
   border: none;
+  background: none;
+  color: inherit;
   cursor: pointer;
 }
 
-[hidden] {
-  display: none !important;
-}
-
-/* Tabular numerals for all live counters, levels, trophies, and clocks */
-.pgc-lvl-pill,
-.pgc-tr,
-.pgc-game-pct,
-.bsc-trophies-val,
-.bsc-pill,
-.stat-pill b,
-.gs-tr-val,
-.gs-lvl-num,
-.kpi-val,
-.ps3-clock-date,
-.ps3-clock-time,
-.site-tr-count,
-.ps5-hist-dur,
-.bs-battle-delta,
-.bs-brawler-card__tr {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ==========================================================================
-   2. PS5 BACKGROUND LAYER: HDR BOKEH AURA + FULLSCREEN GAME HUB ARTWORK
-   ========================================================================== */
-.bg {
+/* ================= 1. БЭКГРАУНД PS5 С ТОПОГРАФИЧЕСКИМИ ЛИНИЯМИ И БОКЕ ================= */
+.ps5-background-layer {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: radial-gradient(120% 90% at 65% 20%, #071e4a 0%, #03091c 60%, #01040c 100%);
 }
 
-/* Dynamic PS5 Game Hub Full-Screen Background Artwork */
-.ps3-pic1-bg {
-  position: absolute;
-  inset: -2%;
-  z-index: 0;
-  background-position: center 22%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transform: scale(1.04);
-  filter: saturate(1.15) contrast(1.06) brightness(0.56);
-  transition: opacity 0.65s var(--spring-out), transform 1.1s var(--spring-out);
-}
-
-/* PS5 cinematic vignette mask over Game Hub Art so UI cards pop cleanly */
-.ps3-pic1-bg::after {
-  content: '';
+/* Фирменный абстрактный неоновый фон Welcome Hub (из референса) */
+.ps5-bg-overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(95% 85% at 68% 36%, rgba(4, 9, 22, 0.18) 0%, rgba(3, 8, 20, 0.80) 70%, rgba(2, 5, 14, 0.95) 100%),
-    linear-gradient(90deg, rgba(2, 6, 16, 0.90) 0%, rgba(2, 6, 16, 0.45) 36%, rgba(2, 6, 16, 0.50) 100%),
-    linear-gradient(180deg, rgba(2, 6, 16, 0.65) 0%, transparent 25%, rgba(2, 6, 16, 0.88) 100%);
+    radial-gradient(85% 65% at 75% 20%, rgba(14, 116, 220, 0.32) 0%, transparent 70%),
+    radial-gradient(60% 45% at 20% 80%, rgba(13, 148, 136, 0.22) 0%, transparent 60%),
+    radial-gradient(40% 40% at 85% 75%, rgba(126, 34, 206, 0.25) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(3, 6, 17, 0.65) 0%, rgba(3, 6, 17, 0.92) 100%),
+    url('../assets/ps5ish/GameGrid21-9.jpg') center/cover no-repeat;
+  filter: contrast(1.1) brightness(0.9);
+  transition: opacity 0.5s ease;
 }
 
-html.has-pic1 .ps3-pic1-bg {
+/* Динамический арт игры при фокусе */
+.ps5-bg-art {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 25%;
+  opacity: 0;
+  transform: scale(1.04);
+  filter: saturate(1.15) brightness(0.55);
+  transition: opacity 0.6s var(--spring-ease), transform 0.8s var(--spring-ease);
+}
+
+.ps5-bg-art.is-active {
   opacity: 1;
   transform: scale(1);
 }
 
-.ps3-wave-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.bg::after {
+.ps5-bg-art::after {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 2;
-  background: radial-gradient(55% 35% at 78% 10%, rgba(251, 191, 36, 0.08) 0%, transparent 70%);
-  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(3, 6, 17, 0.95) 0%, rgba(3, 6, 17, 0.5) 45%, rgba(3, 6, 17, 0.6) 100%),
+    linear-gradient(180deg, rgba(3, 6, 17, 0.75) 0%, transparent 35%, rgba(3, 6, 17, 0.95) 100%);
 }
 
-/* ==========================================================================
-   3. PS5 TOP-RIGHT STATUS CLUSTER & DUALSENSE MONOCHROME GLYPHS
-   ========================================================================== */
-.ps3-glyph {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 6px rgba(0, 0, 0, 0.35);
-  color: #ffffff;
-  font-size: 10.5px;
-  font-weight: 800;
-  line-height: 1;
-  flex-shrink: 0;
+.ps5-particles-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-html[data-theme="light"] .ps3-glyph {
-  background: rgba(15, 23, 42, 0.1);
-  border-color: rgba(15, 23, 42, 0.25);
-  color: #0f172a;
-}
-
-.status {
-  position: fixed;
-  top: 16px;
-  right: 28px;
-  z-index: 65;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.status-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.status-btn {
-  height: 40px;
-  min-width: 40px;
-  padding: 0 11px;
-  border-radius: 999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: rgba(12, 18, 34, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--ps3-bevel), 0 8px 22px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px) saturate(165%);
-  -webkit-backdrop-filter: blur(20px) saturate(165%);
-  transition: transform 0.18s var(--spring-snappy), border-color 0.2s ease, background 0.2s ease;
-}
-
-.status-btn--pill {
-  padding: 0 14px 0 9px;
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.status-btn:hover {
-  transform: translateY(-1px);
-  border-color: rgba(255, 255, 255, 0.65);
-  background: rgba(24, 36, 64, 0.85);
-}
-
-.status-btn:active {
-  transform: scale(0.95);
-}
-
-/* PS5 Top-Right Clock & PSN Pill */
-.ps3-clock-bar {
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(12, 18, 34, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: var(--ps3-bevel), 0 8px 22px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px) saturate(165%);
-  -webkit-backdrop-filter: blur(20px) saturate(165%);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: #f8fafc;
-}
-
-html[data-theme="light"] .ps3-clock-bar,
-html[data-theme="light"] .status-btn {
-  background: rgba(255, 255, 255, 0.86);
-  color: #0f172a;
-  border-color: rgba(15, 23, 42, 0.14);
-}
-
-.ps3-status-cluster {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ps3-status-psn {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: #0070d1;
-  color: #fff;
-  box-shadow: 0 0 10px rgba(0, 112, 209, 0.65);
-}
-
-.ps3-status-signal {
-  color: #38bdf8;
-}
-
-.ps3-status-pad-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-  font-size: 9.5px;
-  font-weight: 800;
-}
-
-.ps3-status-battery {
-  color: #4ade80;
-}
-
-.ps3-status-divider {
-  width: 1px;
-  height: 15px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.ps3-clock-date {
-  opacity: 0.78;
-  font-size: 12px;
-}
-
-.ps3-clock-time {
-  font-weight: 700;
-  font-size: 13.5px;
-  letter-spacing: 0.02em;
-}
-
-.ps3-clock-icon {
-  display: inline-flex;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* ==========================================================================
-   4. PS5 FLOATING CONTROL CENTER DOCK (.ps3-bottom-bar)
-   ========================================================================== */
-.ps3-bottom-bar {
-  position: fixed;
-  left: 50%;
-  right: auto;
-  bottom: 12px;
-  transform: translateX(-50%);
-  height: 46px;
-  padding: 0 20px;
-  border-radius: 999px;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  background: rgba(11, 17, 32, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: var(--ps3-bevel), 0 16px 40px rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(22px) saturate(170%);
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  color: rgba(248, 250, 252, 0.92);
-  white-space: nowrap;
-}
-
-html[data-theme="light"] .ps3-bottom-bar {
-  background: rgba(255, 255, 255, 0.90);
-  border-color: rgba(15, 23, 42, 0.14);
-  color: #0f172a;
-}
-
-.ps3-bottom-bar__left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ps3-guide-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: inherit;
-  transition: background 0.18s ease, transform 0.18s var(--spring-snappy), box-shadow 0.18s ease;
-}
-
-.ps3-guide-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.45);
-  transform: translateY(-1px);
-}
-
-.ps3-guide-btn:active {
-  transform: scale(0.96);
-}
-
-.ps3-nav-hint {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  padding-left: 12px;
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-/* ==========================================================================
-   5. PS5 NOTIFICATION TOAST (UPPER-RIGHT TROPHY / SYSTEM POPUP)
-   ========================================================================== */
-.ps3-toast {
-  position: fixed;
-  top: 66px;
-  right: 28px;
-  z-index: 95;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate3d(24px, -8px, 0) scale(0.96);
-  transition: opacity 0.32s var(--spring-out), transform 0.38s var(--spring-out);
-}
-
-.ps3-toast.is-show,
-.ps3-toast.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
-.ps3-toast__glass {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 280px;
-  max-width: 380px;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: linear-gradient(165deg, rgba(20, 28, 48, 0.94) 0%, rgba(10, 14, 26, 0.98) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.72), 0 0 24px rgba(0, 112, 209, 0.35);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-}
-
-.ps3-toast__icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  background: radial-gradient(circle, rgba(0, 112, 209, 0.45) 0%, rgba(15, 23, 42, 0.9) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  flex-shrink: 0;
-}
-
-.ps3-toast__title {
-  font-size: 13px;
-  font-weight: 800;
-  color: #fff;
-}
-
-.ps3-toast__sub {
-  font-size: 11.5px;
-  color: rgba(203, 213, 225, 0.88);
-  margin-top: 1px;
-}
-
-/* ==========================================================================
-   6. AUTHENTIC PLAYSTATION 5 (PS5) DASHBOARD LAYOUT ARCHITECTURE
-      - Top Navigation Pill Bar (.xmb-cats)
-      - Left PS5 Squircle Tile Dock (.cat__items)
-      - Right Full-Widescreen PS5 Welcome Hub & Game Stage (.item__panel)
-   ========================================================================== */
-.xmb {
+/* ================= 2. СЕТКА ЭКРАНА ================= */
+.ps5-screen {
   position: relative;
   z-index: 10;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 44px 18px 44px;
 }
 
-/* PS5 Top Navigation Bar (Media / Games / Profile Switcher) */
-.xmb-cats {
-  position: fixed;
-  top: 14px;
-  left: 28px;
-  height: 44px;
-  padding: 4px;
-  border-radius: 999px;
-  z-index: 65;
+/* ================= 3. ВЕРХНИЙ БАР (GAMES / MEDIA & STATUS) ================= */
+.ps5-top-bar {
   display: flex;
   align-items: center;
-  gap: 4px;
-  background: rgba(11, 17, 32, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: var(--ps3-bevel), 0 10px 28px rgba(0, 0, 0, 0.42);
-  backdrop-filter: blur(20px) saturate(165%);
-  -webkit-backdrop-filter: blur(20px) saturate(165%);
-  pointer-events: auto;
+  justify-content: space-between;
+  height: 52px;
 }
 
-html[data-theme="light"] .xmb-cats {
-  background: rgba(255, 255, 255, 0.86);
-  border-color: rgba(15, 23, 42, 0.14);
+.ps5-nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
-.xmb-cats::before {
-  display: none;
-}
-
-.xmb-cat {
+.ps5-tab {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ps5-text-muted);
   position: relative;
-  width: auto;
-  height: 34px;
-  padding: 0 14px;
+  padding: 4px 2px;
+  transition: color 0.2s ease, transform 0.2s var(--spring-ease);
+}
+
+.ps5-tab:hover {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.ps5-tab.is-active {
+  color: #ffffff;
+}
+
+.ps5-tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
   border-radius: 999px;
-  pointer-events: auto;
-  display: inline-flex;
-  flex-direction: row;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.ps5-system-status {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ps5-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  opacity: 0.68;
-  transition:
-    background 0.24s var(--spring-out),
-    color 0.24s ease,
-    opacity 0.24s ease,
-    transform 0.22s var(--spring-snappy),
-    box-shadow 0.24s ease;
+  color: var(--ps5-text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
 }
 
-.xmb-cat img {
-  width: 19px;
-  height: 19px;
-  object-fit: contain;
-  transition: transform 0.24s var(--spring-out), filter 0.24s ease;
-}
-
-.xmb-cat:hover {
-  opacity: 0.95;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* PS5 Active Tab Pill (Pure White / Glowing Focus) */
-.xmb-cat.is-current {
-  opacity: 1;
-  background: #ffffff;
-  color: #060b16;
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.28),
-    0 6px 20px rgba(0, 112, 209, 0.52);
-}
-
-html[data-theme="light"] .xmb-cat.is-current {
-  background: #0070d1;
-  color: #ffffff;
-}
-
-.xmb-cat.is-current img {
+.ps5-icon-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: scale(1.06);
-  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
 }
 
-.xmb-cat__label {
-  position: static;
-  transform: none;
-  white-space: nowrap;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: inherit;
-  opacity: 1;
-  pointer-events: none;
-}
-
-.xmb-cat.is-current .xmb-cat__label {
-  color: #060b16;
-  font-weight: 800;
-  text-shadow: none;
-}
-
-html[data-theme="light"] .xmb-cat.is-current .xmb-cat__label {
-  color: #ffffff;
-}
-
-/* Category Section & Left PS5 Tile Dock (.cat__items) */
-.cat__label {
-  display: none;
-}
-
-.xmb-on .cat {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.26s ease, visibility 0.26s ease;
-}
-
-.xmb-on .cat.is-current {
-  opacity: 1;
-  visibility: visible;
-}
-
-.cat__items {
-  list-style: none;
-  margin: 0;
+.ps5-profile-btn {
   padding: 0;
 }
 
-.xmb-on .cat__items {
-  position: fixed;
-  top: 74px;
-  left: 28px;
-  bottom: 70px;
-  width: var(--col);
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 4px 8px 18px 4px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  pointer-events: auto;
-  z-index: 35;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
-}
-
-.xmb-on .cat__items::-webkit-scrollbar {
-  width: 5px;
-}
-
-.xmb-on .cat__items::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-}
-
-.xmb-on .item {
-  position: static;
-  width: 100%;
-  pointer-events: auto;
-}
-
-/* PS5 Squircle Tile Card Row (Left Dock Entry) */
-.item__row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 9px 12px;
-  border-radius: 16px;
-  cursor: pointer;
-  background: rgba(13, 19, 34, 0.62);
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  opacity: 0.78;
-  transition:
-    opacity 0.22s ease,
-    background 0.22s ease,
-    border-color 0.22s ease,
-    transform 0.22s var(--spring-snappy),
-    box-shadow 0.22s ease;
-}
-
-html[data-theme="light"] .item__row {
-  background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(15, 23, 42, 0.10);
-}
-
-.item__row:hover {
-  opacity: 0.96;
-  background: rgba(22, 32, 56, 0.78);
-  border-color: rgba(255, 255, 255, 0.28);
-  transform: translateX(2px);
-}
-
-/* Authentic PS5 White Focus Border Ring + PSN Blue Glow on Selected Tile */
-.xmb-on .item.is-selected > .item__row {
-  opacity: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 112, 209, 0.44) 0%,
-    rgba(16, 24, 45, 0.92) 100%
-  );
-  border-color: #ffffff;
-  box-shadow:
-    0 0 0 1.5px rgba(255, 255, 255, 0.92),
-    0 10px 28px rgba(0, 112, 209, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transform: translateX(3px);
-}
-
-html[data-theme="light"] .xmb-on .item.is-selected > .item__row {
-  background: linear-gradient(
-    135deg,
-    rgba(0, 112, 209, 0.18) 0%,
-    rgba(255, 255, 255, 0.96) 100%
-  );
-  border-color: #0070d1;
-  box-shadow:
-    0 0 0 1.5px #0070d1,
-    0 10px 24px rgba(0, 112, 209, 0.22);
-}
-
-/* Item Squircle Icon & Tiles */
-.item__icon {
-  position: relative;
-  width: var(--item-icon);
-  height: var(--item-icon);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 14px;
-  transition: transform 0.28s var(--spring-out), filter 0.28s ease;
-}
-
-.item__icon img,
-.item__icon svg {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
-}
-
-.item__icon--photo {
-  overflow: hidden;
-  border-radius: 13px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
-}
-
-.item__icon--photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.xmb-on .item.is-selected .item__icon {
-  transform: scale(1.05);
-}
-
-/* Custom Icon Tiles */
-.icon-tile {
-  width: 46px;
-  height: 46px;
-  border-radius: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.88), rgba(15, 23, 42, 0.96));
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  box-shadow: var(--ps3-bevel), 0 6px 14px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-}
-
-.icon-tile img,
-.icon-tile svg {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-}
-
-.icon-tile--ps5-live {
-  background: linear-gradient(145deg, #0070d1, #003791);
-  border-color: rgba(147, 197, 253, 0.55);
-}
-
-.icon-tile--brawl {
-  background: linear-gradient(145deg, #f59e0b, #b45309);
-  border-color: rgba(253, 224, 71, 0.5);
-}
-
-.icon-tile--brawl img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.icon-tile--twitch {
-  background: linear-gradient(145deg, #9333ea, #4c1d95);
-  color: #fff;
-}
-
-.icon-tile--tg {
-  background: linear-gradient(145deg, #38bdf8, #0284c7);
-  color: #fff;
-}
-
-.icon-tile--tt {
-  background: linear-gradient(145deg, #18181b, #09090b);
-  color: #fff;
-}
-
-.icon-tile--trophy {
-  background: linear-gradient(145deg, #eab308, #854d0e);
-  color: #fff;
-}
-
-.icon-tile--qr {
-  background: linear-gradient(145deg, #0070d1, #1e3a8a);
-  color: #fff;
-}
-
-/* Avatar in Profile Dock */
-.avatar {
-  display: block;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #ffffff;
-  box-shadow: 0 0 14px rgba(0, 112, 209, 0.6);
-}
-
-.avatar__video,
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Item Text */
-.item__text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  flex: 1;
-}
-
-.item__title {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.item__sub {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-top: 2px;
-}
-
-/* ==========================================================================
-   7. PS5 FULL-WIDESCREEN WELCOME HUB & GAME STAGE (.item__panel)
-   ========================================================================== */
-.xmb-on .item__panel {
-  display: none;
-}
-
-@media (min-width: 769px) {
-  .xmb-on .item.is-selected .item__panel {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    position: fixed;
-    top: 74px;
-    left: calc(var(--ix, 28px) + var(--col, 340px) + 20px);
-    right: 28px;
-    bottom: 70px;
-    width: auto;
-    max-width: 1240px;
-    max-height: none;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 4px 12px 24px 4px;
-    pointer-events: auto;
-    z-index: 40;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
-    animation: ps5StageReveal 0.34s var(--spring-out);
-  }
-
-  .xmb-on .item.is-selected .item__panel::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .xmb-on .item.is-selected .item__panel::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 999px;
-  }
-}
-
-@keyframes ps5StageReveal {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 10px, 0) scale(0.99);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-/* ==========================================================================
-   8. UNIVERSAL PS3 GLASS CARD PRIMITIVES (.p-card, .pgc-card, .bsc-card, .psn-meta)
-   ========================================================================== */
-.p-card,
-.pgc-card,
-.bsc-card,
-.psn-meta,
-.bio-hero,
-.bio-card,
-.bio-timeline,
-.gs-summary-card,
-.gs-plat-card,
-.gs-panel,
-.site-tr-summary,
-.site-tr-card,
-.ym-player-card,
-.mv-genre-card,
-.mv-fav-bar,
-.twitch-xmb-card,
-.game-window,
-.share-card,
-.kpi-card {
-  position: relative;
-  background: var(--ps3-surface);
-  border: 1px solid var(--ps3-border);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--ps3-bevel), var(--ps3-shadow);
-  backdrop-filter: blur(22px) saturate(165%);
-  -webkit-backdrop-filter: blur(22px) saturate(165%);
-}
-
-.p-card {
-  padding: 16px 18px;
-}
-
-.p-card__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.p-card__title {
-  font-family: var(--font-xmb);
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(147, 197, 253, 0.95);
-}
-
-html[data-theme="light"] .p-card__title {
-  color: #1d4ed8;
-}
-
-.p-card__live {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.p-live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 8px #4ade80;
-}
-
-/* ==========================================================================
-   9. MAIN HUB BENTO DASHBOARD (#itemBioDashboard)
-   ========================================================================== */
-.item__panel--bio {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-/* Widescreen PS5 Welcome Hub Bento Grid on desktop */
-@media (min-width: 980px) {
-  #itemBioDashboard .item__panel--bio {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    align-items: stretch;
-  }
-
-  #itemBioDashboard .item__panel--bio > .pgc-card,
-  #itemBioDashboard .item__panel--bio > .bsc-card,
-  #itemBioDashboard .item__panel--bio > .p-card--yandex-music,
-  #itemBioDashboard .item__panel--bio > .p-card--profiles {
-    grid-column: span 1;
-    margin: 0;
-  }
-
-  #itemBioDashboard .item__panel--bio > .profile-mid-row,
-  #itemBioDashboard .item__panel--bio > .p-card--ps5-history {
-    grid-column: 1 / -1;
-  }
-}
-
-/* --- PlayStation 5 Hero Card (.pgc-card) --- */
-.pgc-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  overflow: hidden;
-  border-color: rgba(96, 165, 250, 0.35);
-  transition: transform 0.24s var(--spring-snappy), border-color 0.24s ease;
-}
-
-.pgc-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(147, 197, 253, 0.65);
-}
-
-.pgc-glow {
-  position: absolute;
-  top: -40%;
-  right: -20%;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.28) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.pgc-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.pgc-user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.pgc-avatar-wrap {
-  position: relative;
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-}
-
-.pgc-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(96, 165, 250, 0.8);
-}
-
-.pgc-online-dot {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #22c55e;
-  border: 2px solid #091022;
-}
-
-.pgc-user-info {
-  min-width: 0;
-}
-
-.pgc-name-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.pgc-name {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.pgc-plus-badge {
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: linear-gradient(135deg, #facc15, #ca8a04);
-  color: #0f172a;
-  font-size: 9.5px;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-}
-
-.pgc-status-text {
-  display: block;
-  font-size: 11px;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.pgc-lvl-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(30, 58, 138, 0.55);
-  border: 1px solid rgba(147, 197, 253, 0.4);
-  font-size: 11.5px;
-  font-weight: 800;
-  color: #93c5fd;
-  flex-shrink: 0;
-}
-
-/* Trophies Row inside PGC */
-.pgc-trophies {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-
-.pgc-tr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 6px 8px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.ps-trophy-img {
-  width: 15px;
-  height: 15px;
-  object-fit: contain;
-}
-
-/* Last Played Game Box inside PGC */
-.pgc-game-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px;
-  border-radius: 12px;
-  background: rgba(10, 16, 31, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.pgc-cover-wrap {
-  position: relative;
-  width: 82px;
-  height: 54px;
-  border-radius: 8px;
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.pgc-cover {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.pgc-cover-badge {
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  background: rgba(15, 23, 42, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-}
-
-.pgc-game-meta {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.pgc-game-tag-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-.pgc-game-tag {
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: #60a5fa;
-}
-
-.pgc-game-pct {
-  font-size: 11px;
-  font-weight: 800;
-  color: #facc15;
-}
-
-.pgc-game-title {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.pgc-game-sub-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.pgc-game-dur {
-  color: #93c5fd;
-  font-weight: 600;
-}
-
-.pgc-bar {
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-  margin-top: 2px;
-}
-
-.pgc-bar-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #3b82f6, #38bdf8);
-}
-
-/* --- Brawl Stars Hero Card (.bsc-card) --- */
-.bsc-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  overflow: hidden;
-  border-color: rgba(245, 158, 11, 0.35);
-  transition: transform 0.24s var(--spring-snappy), border-color 0.24s ease;
-}
-
-.bsc-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(251, 191, 36, 0.68);
-}
-
-.bsc-glow {
-  position: absolute;
-  top: -40%;
-  right: -20%;
-  width: 240px;
-  height: 240px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.bsc-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.bsc-user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.bsc-icon-wrap {
-  width: 42px;
-  height: 42px;
-  border-radius: 11px;
-  overflow: hidden;
-  border: 1.5px solid rgba(251, 191, 36, 0.65);
-  flex-shrink: 0;
-}
-
-.bsc-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.bsc-name-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.bsc-name {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.bsc-tag-badge {
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: rgba(245, 158, 11, 0.22);
-  border: 1px solid rgba(251, 191, 36, 0.45);
-  color: #fde047;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.bsc-status-text {
-  display: block;
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.bsc-trophies-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(180, 83, 9, 0.45);
-  border: 1px solid rgba(251, 191, 36, 0.5);
-  color: #fef08a;
-  font-size: 13px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-.bsc-stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-
-.bsc-pill {
-  padding: 7px 8px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  font-size: 11px;
-  color: var(--text-secondary);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bsc-pill b {
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.bsc-fav-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  font-size: 11.5px;
-}
-
-.bsc-fav-label {
-  color: #fbbf24;
-  font-weight: 700;
-}
-
-.bsc-fav-list {
-  color: var(--text-secondary);
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* --- Mid Row: Status + Quote (.profile-mid-row) --- */
-.profile-mid-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.p-status-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.p-status-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 12.5px;
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.p-status-label {
-  color: var(--text-secondary);
-}
-
-.p-status-val {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.p-status-val--accent {
-  color: #60a5fa;
-}
-
-.p-quote {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.p-quote p {
-  margin: 0;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--text-primary);
-  line-height: 1.5;
-  transition: opacity 0.2s ease;
-}
-
-.p-quote footer {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #93c5fd;
-  transition: opacity 0.2s ease;
-}
-
-.p-quote-refresh-btn {
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.4);
-  font-size: 11px;
-  font-weight: 600;
-  color: #93c5fd;
-}
-
-.p-quote-refresh-btn:hover {
-  background: rgba(59, 130, 246, 0.35);
-}
-
-/* --- PS5 Recent History Card (.p-card--ps5-history) --- */
-.ps5-recent-history-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.ps5-hist-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 11px;
-  background: rgba(10, 16, 31, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  transition: transform 0.18s var(--spring-snappy), border-color 0.2s ease;
-}
-
-.ps5-hist-row:hover {
-  transform: translateY(-1px);
-  border-color: rgba(96, 165, 250, 0.5);
-}
-
-.ps5-hist-thumb {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.ps5-hist-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.ps5-hist-title {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ps5-hist-sub {
-  font-size: 10.5px;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.ps5-hist-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-  flex-shrink: 0;
-}
-
-.ps5-hist-dur {
-  font-size: 11px;
-  font-weight: 700;
-  color: #93c5fd;
-}
-
-/* --- Yandex Music Compact Card & Profiles Row --- */
-.ym-compact-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(10, 16, 31, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  transition: border-color 0.2s ease, transform 0.2s var(--spring-snappy);
-}
-
-.ym-compact-link:hover {
-  transform: translateY(-1px);
-  border-color: rgba(250, 204, 21, 0.55);
-}
-
-.ym-compact-icon {
+.ps5-avatar-wrap {
   position: relative;
   width: 38px;
   height: 38px;
-  border-radius: 10px;
-  background: rgba(250, 204, 21, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.ym-compact-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.ym-compact-name {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.ym-compact-sub {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.ym-compact-btn {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #facc15, #eab308);
-  color: #0f172a;
-  font-size: 11.5px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-.p-links-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.p-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 13px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  transition: transform 0.18s var(--spring-snappy), border-color 0.2s ease;
-}
-
-.p-chip:hover {
-  transform: translateY(-1px);
-  border-color: rgba(147, 197, 253, 0.6);
-}
-
-/* ==========================================================================
-   10. BIO STORY (#itemBioStory), GAMING SHOWCASE (#itemGamingShowcase), TROPHIES (#itemSiteTrophies)
-   ========================================================================== */
-.bio-hero {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.bio-hero__top {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.bio-hero__avatar {
-  position: relative;
-  width: 52px;
-  height: 52px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(96, 165, 250, 0.75);
-  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 12px rgba(0, 112, 209, 0.6);
+  transition: transform 0.2s var(--spring-ease), border-color 0.2s ease;
 }
 
-.bio-hero__avatar img {
+.ps5-avatar-wrap:hover {
+  transform: scale(1.08);
+  border-color: #ffffff;
+}
+
+.ps5-avatar-wrap video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.bio-hero__name {
-  margin: 0;
-  font-size: 17px;
-  font-weight: 800;
+.ps5-online-badge {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #030611;
 }
 
-.bio-hero__tag {
-  font-size: 12px;
-  color: #93c5fd;
+.ps5-clock {
+  font-size: 19px;
   font-weight: 600;
+  color: var(--ps5-text-main);
+  letter-spacing: 0.02em;
+  margin-left: 6px;
 }
 
-.bio-hero__lead {
-  margin: 0;
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.55;
+/* ================= 4. ГОРИЗОНТАЛЬНАЯ ЛЕНТА ПЛИТОК ИГР ================= */
+.ps5-games-ribbon-container {
+  margin-top: 18px;
+  overflow: visible;
 }
 
-.bio-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.ps5-games-ribbon {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 10px 4px;
+  scrollbar-width: none;
 }
 
-.bio-card {
-  padding: 14px 16px;
+.ps5-games-ribbon::-webkit-scrollbar {
+  display: none;
+}
+
+.ps5-game-tile {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.24s var(--spring-ease);
 }
 
-.bio-card__head {
+/* Сквиркл плитки игры */
+.ps5-tile-squircle {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 20px;
+  background: rgba(22, 27, 43, 0.8);
+  border: 2.5px solid transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: all 0.24s var(--spring-ease);
+}
+
+.ps5-tile-squircle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 17px;
+}
+
+/* Значок PlayStation Store */
+.ps5-tile-store {
+  background: linear-gradient(135deg, #00439c 0%, #0070d1 100%);
+}
+
+.ps5-tile-store img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
+
+/* Плитка Welcome Hub (с четырьмя символами PlayStation) */
+.ps5-tile-welcome {
+  background: linear-gradient(145deg, #182035 0%, #0e1424 100%);
+  border: 2.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.ps5-symbols-icon {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sym-sq { color: #f472b6; }
+.sym-tr { color: #34d399; }
+.sym-cr { color: #60a5fa; }
+.sym-ci { color: #f87171; }
+
+.ps5-tile-library {
+  background: rgba(30, 41, 68, 0.7);
+  color: var(--ps5-text-muted);
+}
+
+/* Название под плиткой */
+.ps5-tile-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ps5-text-muted);
+  white-space: nowrap;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.8;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* ФОКУС ПЛИТКИ PS5 (Белая рамка + увеличение) */
+.ps5-game-tile:hover .ps5-tile-squircle,
+.ps5-game-tile.is-focused .ps5-tile-squircle {
+  transform: scale(1.15);
+  border-color: #ffffff;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 12px 32px rgba(0, 112, 209, 0.55);
+}
+
+.ps5-game-tile.is-focused .ps5-tile-title {
+  color: #ffffff;
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* ================= 5. НИЖНЯЯ РАБОЧАЯ ЗОНА (WELCOME HUB / ACTIVITY) ================= */
+.ps5-content-stage {
+  flex: 1;
+  margin-top: 24px;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.ps5-welcome-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.ps5-stage-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  transition: all 0.2s ease;
+}
+
+.ps5-stage-nav-arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.ps5-stage-nav-arrow--left { left: -14px; }
+.ps5-stage-nav-arrow--right { right: -14px; }
+
+/* 3-колоночная сетка виджетов из референса */
+.ps5-widgets-grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 1.1fr 0.35fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.ps5-widget-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Общие стили карточки PS5 */
+.ps5-card {
+  position: relative;
+  background: var(--ps5-surface);
+  border: 1.5px solid var(--ps5-card-border);
+  border-radius: 18px;
+  padding: 16px 18px;
+  overflow: hidden;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.24s var(--spring-ease), border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.ps5-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.7);
+}
+
+.ps5-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ps5-card-title-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.bio-card__title {
+.ps5-card-header-icon {
+  color: var(--ps5-text-muted);
+}
+
+.ps5-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ps5-card-desc {
+  font-size: 13px;
+  color: var(--ps5-text-muted);
+}
+
+.ps5-card-meta {
+  font-size: 13px;
+  color: var(--ps5-text-muted);
+}
+
+.ps5-card-meta strong {
+  color: #fff;
+}
+
+/* Карточка 1: Online Friends */
+.ps5-card--friends {
+  flex: 1.35;
+  justify-content: space-between;
+}
+
+.ps5-badge-online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   font-weight: 700;
+  color: #fff;
 }
 
-.bio-card__text {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.bio-card__pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.bio-card__pills span {
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.16);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #93c5fd;
-}
-
-.bio-timeline {
-  padding: 14px 16px;
-}
-
-.bio-timeline__title {
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #93c5fd;
-  margin-bottom: 10px;
-}
-
-.bio-timeline__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.bio-timeline__item {
-  display: flex;
-  gap: 8px;
-  font-size: 11.5px;
-}
-
-.bio-timeline__dot {
+.ps5-green-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #38bdf8;
-  margin-top: 5px;
-  flex-shrink: 0;
+  background: var(--ps5-accent-green);
+  box-shadow: 0 0 8px var(--ps5-accent-green);
 }
 
-.bio-timeline__content strong {
-  display: block;
-  font-size: 12px;
-  color: var(--text-primary);
-}
-
-.bio-timeline__content span {
-  color: var(--text-secondary);
-}
-
-/* Gaming Showcase */
-.gs-summary-card {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.gs-summary-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.gs-lvl-circle {
+.ps5-friends-avatars-row {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin: 6px 0;
 }
 
-.gs-lvl-num {
-  font-size: 24px;
-  font-weight: 900;
-  color: #60a5fa;
-}
-
-.gs-lvl-title {
-  display: block;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.gs-lvl-sub {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.gs-trophies-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.gs-tr-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-}
-
-.gs-tr-val {
-  display: block;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.gs-tr-name {
-  font-size: 10.5px;
-  color: var(--text-secondary);
-}
-
-.gs-section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #93c5fd;
-}
-
-.gs-plat-grid,
-.gs-bottom-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.gs-plat-card,
-.gs-panel {
-  padding: 12px 14px;
-}
-
-.gs-plat-card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.gs-plat-cover {
-  position: relative;
-  width: 64px;
-  height: 64px;
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.gs-plat-cover img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.gs-plat-title {
-  font-size: 13.5px;
-  font-weight: 800;
-}
-
-.gs-plat-desc {
-  margin: 2px 0 6px;
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.gs-plat-bar {
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.gs-plat-bar span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
-}
-
-.gs-fav-list,
-.gs-setup-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.gs-fav-item,
-.gs-setup-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 12px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background: rgba(10, 16, 31, 0.5);
-}
-
-.gs-fav-item img {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-.gs-fav-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.gs-fav-info strong {
-  display: block;
-  font-size: 12px;
-}
-
-.gs-fav-info span {
-  font-size: 10.5px;
-  color: var(--text-secondary);
-}
-
-/* Site Trophies */
-.site-tr-summary {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.site-tr-summary__left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-tr-summary__title {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.site-tr-summary__sub {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.site-tr-progress-wrap {
-  height: 6px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.site-tr-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #facc15, #38bdf8);
-  transition: width 0.35s var(--spring-out);
-}
-
-.site-tr-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.site-tr-card {
-  padding: 12px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  opacity: 0.62;
-  transition: opacity 0.25s ease, border-color 0.25s ease;
-}
-
-.site-tr-card.is-unlocked {
-  opacity: 1;
-  border-color: rgba(250, 204, 21, 0.5);
-}
-
-.site-tr-card__icon {
-  font-size: 22px;
-}
-
-.site-tr-card__info {
-  flex: 1;
-  min-width: 0;
-}
-
-.site-tr-card__title {
-  display: block;
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.site-tr-card__desc {
-  font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.site-tr-card__status {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #facc15;
-}
-
-/* ==========================================================================
-   11. MUSIC (#music), PS5 & BRAWL STARS (#souls)
-   ========================================================================== */
-.ym-player-card {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ym-player-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.ym-player-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.ym-player-title {
-  display: block;
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.ym-player-sub {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.ym-open-btn {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #facc15, #eab308);
-  color: #0f172a;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.ym-iframe-wrap {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.mv-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.mv-genre-card {
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.mv-genre-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #93c5fd;
-}
-
-.mv-genre-title {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.mv-genre-desc {
-  margin: 0;
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.mv-fav-bar {
-  padding: 12px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.mv-fav-label {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: #facc15;
-}
-
-.mv-fav-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.mv-fav-chips span {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 11px;
-}
-
-/* --- PS5 & Brawl Stars Panels (.item__panel--psn) --- */
-.game-banner-widget,
-.psn-terminal-widget {
-  position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.20);
-  box-shadow: var(--ps3-shadow);
-  background: #050b18;
-}
-
-.game-banner-img {
-  width: 100%;
-  height: 185px;
-  object-fit: cover;
-  display: block;
-}
-
-.game-banner-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(18px) brightness(0.45);
-  z-index: 0;
-}
-
-.game-banner-img--contain {
-  position: relative;
-  z-index: 1;
-  object-fit: contain;
-}
-
-.ps5-latest-overlay-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.84);
-  border: 1px solid rgba(96, 165, 250, 0.45);
-  font-size: 11px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* PSN Terminal Header Widget */
-.psn-terminal-widget {
-  padding: 16px 18px;
-  background: linear-gradient(135deg, rgba(23, 37, 84, 0.85) 0%, rgba(10, 16, 34, 0.94) 100%);
-}
-
-.psn-terminal-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.psn-terminal-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.psn-terminal-logo {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(59, 130, 246, 0.25);
-  border: 1px solid rgba(147, 197, 253, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #60a5fa;
-}
-
-.psn-terminal-logo svg {
-  width: 26px;
-  height: 26px;
-}
-
-.psn-terminal-name {
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.psn-terminal-badge {
-  margin-left: 6px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #facc15;
-  color: #0f172a;
-  font-size: 10px;
-  font-weight: 900;
-}
-
-.psn-terminal-status {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11.5px;
-  color: #93c5fd;
-  margin-top: 2px;
-}
-
-.psn-status-dot {
-  width: 7px;
-  height: 7px;
+.ps5-friend-avatar {
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: #22c55e;
-}
-
-.psn-terminal-level {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border-radius: 12px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(147, 197, 253, 0.35);
-}
-
-.psn-level-star {
-  color: #facc15;
-  font-size: 18px;
-}
-
-.psn-level-num {
-  display: block;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.psn-level-label {
-  font-size: 9.5px;
-  color: var(--text-secondary);
-}
-
-/* PSN Meta Container */
-.psn-meta {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.psn-meta__header {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.psn-badge {
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: rgba(59, 130, 246, 0.22);
-  border: 1px solid rgba(96, 165, 250, 0.42);
-  color: #93c5fd;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.psn-badge--brawl {
-  background: rgba(245, 158, 11, 0.24);
-  border-color: rgba(251, 191, 36, 0.5);
-  color: #fde047;
-}
-
-.psn-meta__title {
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.bs-sync-badge {
-  margin-left: auto;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(34, 197, 94, 0.18);
-  border: 1px solid rgba(74, 222, 128, 0.45);
-  color: #86efac;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-/* PS5 Last Played Widget inside PSN Meta */
-.ps5-last-played-widget {
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(10, 16, 31, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.ps5-lp-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11px;
-  color: #93c5fd;
-  font-weight: 700;
-}
-
-.ps5-lp-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.ps5-lp-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #38bdf8;
-}
-
-.ps5-lp-body {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ps5-lp-cover-wrap {
-  position: relative;
-  width: 84px;
-  height: 54px;
-  border-radius: 8px;
   overflow: hidden;
-  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.ps5-lp-cover {
+.ps5-friend-avatar:hover {
+  transform: scale(1.12);
+  border-color: #fff;
+}
+
+.ps5-friend-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.ps5-lp-platform-tag {
-  position: absolute;
-  bottom: 3px;
-  right: 3px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  background: rgba(15, 23, 42, 0.88);
-  font-size: 9px;
-  font-weight: 800;
-}
-
-.ps5-lp-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.ps5-lp-title {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.ps5-lp-sub {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.ps5-lp-progress-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.ps5-lp-progress-bar {
-  flex: 1;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.ps5-lp-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #38bdf8);
-}
-
-.ps5-lp-progress-val {
-  font-size: 11px;
-  font-weight: 700;
-  color: #facc15;
-}
-
-/* PSN Stats Grid */
-.psn-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.stat-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+.ps5-friends-names {
   font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.stat-pill b {
-  color: var(--text-primary);
-  margin-left: auto;
-}
-
-/* Brawl Stars Top Brawlers & Battle Log inside #itemBrawlStars */
-.bs-showcase-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding-top: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.10);
-}
-
-.bs-showcase-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 11.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #fde047;
-}
-
-.bs-showcase-sub {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: none;
-}
-
-.bs-brawlers-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.bs-brawler-card {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 9px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.11);
-}
-
-.bs-brawler-card__img {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-
-.bs-brawler-card__body {
-  min-width: 0;
-  flex: 1;
-}
-
-.bs-brawler-card__name {
-  display: block;
-  font-size: 11.5px;
-  font-weight: 800;
+  color: var(--ps5-text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.bs-brawler-card__tr {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  color: #facc15;
-}
-
-.bs-brawler-card__meta {
-  font-size: 9.5px;
-  color: var(--text-muted);
-}
-
-.bs-battles-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 6px;
-}
-
-.bs-battle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 9px;
-  background: rgba(10, 16, 31, 0.56);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  font-size: 11.5px;
-}
-
-.bs-battle-row.is-win {
-  border-left: 3px solid #22c55e;
-}
-
-.bs-battle-row.is-loss {
-  border-left: 3px solid #ef4444;
-}
-
-.bs-battle-main {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.bs-battle-mode {
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.bs-battle-brawler {
-  font-size: 10px;
-  color: var(--text-secondary);
-}
-
-.bs-battle-delta.is-pos {
-  color: #4ade80;
-  font-weight: 800;
-}
-
-.bs-battle-delta.is-neg {
-  color: #f87171;
-  font-weight: 800;
-}
-
-.bs-links-row {
-  display: flex;
-  gap: 10px;
-}
-
-.psn-btn-profile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.95));
-  border: 1px solid rgba(147, 197, 253, 0.5);
-  box-shadow: var(--ps3-bevel), 0 8px 20px rgba(0, 0, 0, 0.35);
-  color: #fff;
-  font-size: 12.5px;
-  font-weight: 700;
-  transition: transform 0.18s var(--spring-snappy), filter 0.2s ease;
-}
-
-.psn-btn-profile:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.1);
-}
-
-.psn-btn-profile--brawl {
-  flex: 1;
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  border-color: rgba(253, 224, 71, 0.6);
-  color: #0f172a;
-}
-
-.psn-btn-profile--brawl-alt {
-  flex: 1;
-}
-
-/* ==========================================================================
-   12. ONLINE GAMES (#game) & TWITCH STREAMING (#twitch)
-   ========================================================================== */
-.game-window {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.game-window__preview {
+/* Баннер PlayStation Store под друзьями */
+.ps5-card--store-banner {
+  flex: 0.9;
   position: relative;
-  height: 210px;
-  overflow: hidden;
-  background: #040814;
-}
-
-.game-banner-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.game-banner-video.has-video {
-  opacity: 1;
-}
-
-.game-window__preview .game-banner-img {
-  height: 100%;
-}
-
-.game-window__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(4, 8, 20, 0.25) 0%, rgba(4, 8, 20, 0.82) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   padding: 14px 16px;
+  justify-content: flex-end;
+  text-decoration: none;
 }
 
-.game-window__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.game-window__badge {
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: rgba(15, 23, 42, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  font-size: 10.5px;
-  font-weight: 700;
-}
-
-.game-window__badge--accent {
-  background: rgba(37, 99, 235, 0.82);
-  border-color: rgba(147, 197, 253, 0.55);
-}
-
-.game-window__play-fab {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  border: 1px solid rgba(191, 219, 254, 0.65);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.55);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.game-window__body {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.game-window__title {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.game-window__desc {
-  margin: 0;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-}
-
-.game-window__specs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-}
-
-.game-spec {
-  padding: 7px 10px;
-  border-radius: 9px;
-  background: rgba(10, 16, 31, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-}
-
-.game-spec__label {
-  display: block;
-  font-size: 10px;
-  color: var(--text-muted);
-}
-
-.game-spec__val {
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-.game-window__actions {
-  display: flex;
-  gap: 10px;
-}
-
-.game-window__btn-launch {
-  padding: 9px 16px;
-  border-radius: 10px;
-  background: rgba(59, 130, 246, 0.25);
-  border: 1px solid rgba(96, 165, 250, 0.5);
-  color: #93c5fd;
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-/* --- Twitch Card (.twitch-xmb-card) --- */
-.twitch-xmb-card {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.twitch-xmb-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.twitch-xmb-streamer {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.twitch-xmb-avatar-wrap {
-  position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #a855f7;
-}
-
-.twitch-xmb-avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.twitch-xmb-name {
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.twitch-xmb-badge {
-  margin-left: 6px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  background: rgba(168, 85, 247, 0.25);
-  border: 1px solid rgba(192, 132, 252, 0.45);
-  color: #e9d5ff;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.twitch-xmb-sub {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.twitch-tabs {
-  display: flex;
-  gap: 6px;
-}
-
-.twitch-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.twitch-tab.is-active {
-  background: rgba(147, 51, 234, 0.35);
-  border-color: rgba(192, 132, 252, 0.65);
-  color: #f3e8ff;
-}
-
-.twitch-xmb-player-box {
-  position: relative;
-  height: 250px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #060913;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.twitch-xmb-iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.twitch-xmb-loader,
-.twitch-offline-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: rgba(6, 9, 19, 0.86);
-  text-align: center;
-  padding: 16px;
-}
-
-.twitch-clips-carousel {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.twitch-xmb-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.twitch-xmb-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #9333ea, #6b21a8);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-/* ==========================================================================
-   13. SHARE BIO (#links) & SITE STATS (#info)
-   ========================================================================== */
-.share-card {
-  padding: 18px;
-}
-
-.share-grid {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.share-qr-frame {
-  width: 136px;
-  height: 136px;
-  padding: 8px;
-  border-radius: 14px;
-  background: rgba(10, 16, 31, 0.75);
-  border: 1px solid rgba(96, 165, 250, 0.45);
-  flex-shrink: 0;
-}
-
-.share-qr-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.share-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.share-badge {
-  align-self: flex-start;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.2);
-  color: #93c5fd;
-  font-size: 10.5px;
-  font-weight: 800;
-}
-
-.share-title {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 800;
-}
-
-.share-desc {
-  margin: 0;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-}
-
-.share-url-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.share-url-text {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: #93c5fd;
-}
-
-.share-copy-btn {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: #3b82f6;
-  color: #fff;
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-/* Site Stats KPI Grid */
-.stats-kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.kpi-card {
-  padding: 16px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.kpi-label {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.kpi-val {
-  font-size: 22px;
-  font-weight: 900;
-  color: #60a5fa;
-}
-
-/* ==========================================================================
-   14. MEDIA VIEWER (.viewer) & PS3 GAME THEATER MODAL (.play)
-   ========================================================================== */
-.viewer,
-.play {
-  position: fixed;
-  inset: 0;
-  z-index: 120;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(2, 6, 16, 0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.viewer__img,
-.viewer__video {
-  max-width: 90vw;
-  max-height: 82vh;
-  border-radius: 14px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
-}
-
-.viewer__bar {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 8px 16px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.viewer__close {
-  position: fixed;
-  top: 22px;
-  right: 26px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 18px;
-}
-
-.play__backdrop {
-  position: absolute;
-  inset: 0;
-}
-
-.play__window {
-  position: relative;
-  z-index: 1;
-  width: min(1120px, 94vw);
-  height: min(720px, 88vh);
-  display: flex;
-  flex-direction: column;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #050a18;
-  border: 1.5px solid rgba(147, 197, 253, 0.4);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.85);
-}
-
-.play__header,
-.play__footer {
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(15, 23, 42, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.play__footer {
-  border-bottom: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.play__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.play__badge {
-  padding: 3px 8px;
-  border-radius: 5px;
-  background: #2563eb;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.play__title {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.play__controls {
-  display: flex;
-  gap: 8px;
-}
-
-.play__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: rgba(30, 41, 59, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.play__stage {
-  position: relative;
-  flex: 1;
-  background: #000;
-}
-
-.play__frame {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.play__loader {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(5, 10, 24, 0.92);
-}
-
-/* ==========================================================================
-   15. MOBILE & TABLET RESPONSIVE ADAPTATION (@media max-width: 768px)
-   ========================================================================== */
-@media (max-width: 768px) {
-  :root {
-    --cat-icon: 38px;
-    --item-icon: 44px;
-    --col: calc(100vw - 24px);
-  }
-
-  .status {
-    top: 8px;
-    right: 12px;
-    gap: 6px;
-  }
-
-  .status-btn {
-    height: 32px;
-    min-width: 32px;
-    padding: 0 8px;
-    font-size: 11.5px;
-  }
-
-  .ps3-clock-bar {
-    height: 32px;
-    padding: 0 10px;
-    font-size: 11.5px;
-    gap: 8px;
-  }
-
-  .xmb-cats {
-    top: 46px;
-    left: 12px;
-    right: 12px;
-    height: 40px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .xmb-cats::-webkit-scrollbar {
-    display: none;
-  }
-
-  .xmb-cat {
-    height: 30px;
-    padding: 0 11px;
-    flex-shrink: 0;
-  }
-
-  .xmb-on .cat__items {
-    top: 94px;
-    left: 12px;
-    right: 12px;
-    bottom: 58px;
-    width: auto;
-  }
-
-  .ps3-status-cluster--pad,
-  .ps3-status-divider,
-  .ps3-bottom-bar__right {
-    display: none;
-  }
-
-  .ps3-bottom-bar {
-    left: 12px;
-    right: 12px;
-    bottom: 8px;
-    transform: none;
-    height: 40px;
-    padding: 0 10px;
-    justify-content: center;
-  }
-
-  .ps3-bottom-bar__left {
-    gap: 6px;
-  }
-
-  .ps3-guide-btn {
-    font-size: 11px;
-    padding: 4px 8px;
-  }
-
-  .xmb-on .item.is-selected .item__panel {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    position: static;
-    margin-top: 10px;
-    max-height: none;
-    overflow: visible;
-    padding-bottom: 16px;
-  }
-
-  .profile-mid-row,
-  .ps5-recent-history-list,
-  .bio-grid,
-  .bio-timeline__list,
-  .gs-trophies-row,
-  .gs-plat-grid,
-  .gs-bottom-grid,
-  .site-tr-grid,
-  .mv-grid,
-  .psn-stats-grid,
-  .bs-brawlers-grid,
-  .bs-battles-list,
-  .stats-kpi-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .share-grid {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-/* ==========================================================================
-   16. APPLE HIG ACCESSIBILITY (REDUCED MOTION, TRANSPARENCY, HIGH CONTRAST)
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .p-card,
-  .pgc-card,
-  .bsc-card,
-  .psn-meta,
-  .ps3-clock-bar,
-  .status-btn {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    background: #0b1326 !important;
-  }
-}
-
-@media (prefers-contrast: more) {
-  :root {
-    --ps3-border: rgba(255, 255, 255, 0.45);
-  }
-}
-
-/* ==========================================================================
-   17. DETAILED SUB-COMPONENT REFINEMENTS (BIO, SHOWCASE, TROPHIES, MUSIC, TWITCH, SHARE)
-   ========================================================================== */
-.p-card-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-xmb);
-  font-size: 11.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #93c5fd;
-  margin-bottom: 10px;
-}
-
-.bio-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.bio-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.bio-tag {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(37, 99, 235, 0.2);
-  border: 1px solid rgba(96, 165, 250, 0.38);
-  font-size: 11px;
-  font-weight: 700;
-  color: #bfdbfe;
-}
-
-.bio-interests-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.bio-interest-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.52);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.bio-interest-icon {
-  font-size: 18px;
-  line-height: 1.2;
-}
-
-.bio-interest-info strong {
-  display: block;
-  font-size: 12.5px;
-  color: var(--text-primary);
-}
-
-.bio-interest-info span {
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-.bio-quote-btn {
-  margin-left: auto;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.22);
-  border: 1px solid rgba(96, 165, 250, 0.45);
-  color: #93c5fd;
-  font-size: 10.5px;
-  font-weight: 700;
-}
-
-.bio-quote-box {
-  margin: 0 0 6px;
-  font-size: 12.5px;
-  font-style: italic;
-  color: var(--text-primary);
-  transition: opacity 0.2s ease;
-}
-
-.bio-quote-author {
-  font-size: 11px;
-  font-weight: 700;
-  color: #93c5fd;
-  transition: opacity 0.2s ease;
-}
-
-.bio-timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 4px 0;
-  background: none;
-  border: none;
-  box-shadow: none;
-  backdrop-filter: none;
-}
-
-.bio-timeline-item {
-  position: relative;
-  display: flex;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.bio-timeline-item--active {
-  border-color: rgba(96, 165, 250, 0.48);
-  background: rgba(23, 37, 84, 0.45);
-}
-
-.bio-timeline-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #60a5fa;
-  margin-top: 5px;
-  flex-shrink: 0;
-}
-
-.bio-timeline-dot--plat {
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
-}
-
-.bio-timeline-dot--glow {
-  background: #4ade80;
-  box-shadow: 0 0 10px #4ade80;
-}
-
-.bio-timeline-date {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 800;
-  color: #93c5fd;
-  min-width: 42px;
-}
-
-.bio-timeline-content strong {
-  display: block;
-  font-size: 12.5px;
-  margin-bottom: 2px;
-}
-
-.bio-timeline-content p {
-  margin: 0;
-  font-size: 11.5px;
-  color: var(--text-secondary);
-}
-
-/* Gaming Showcase Detailed Elements */
-.gs-summary-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.gs-summary-title {
-  margin: 4px 0 2px;
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.gs-summary-subtitle {
-  font-size: 12px;
-  color: var(--text-secondary);
-}
-
-.gs-tr-box {
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 10px 8px;
-  cursor: pointer;
-  transition: transform 0.18s var(--spring-snappy), border-color 0.2s ease;
-}
-
-.gs-tr-box:hover {
-  transform: translateY(-2px);
-  border-color: rgba(147, 197, 253, 0.55);
-}
-
-.gs-tr-box img {
-  width: 24px;
-  height: 24px;
-}
-
-.gs-tr-label {
-  font-size: 10.5px;
-  color: var(--text-secondary);
-}
-
-.gs-plat-card {
-  position: relative;
-  overflow: hidden;
-  padding: 14px;
-  border-radius: 14px;
-}
-
-.gs-plat-backdrop {
+.ps5-store-banner-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.22;
-  filter: blur(4px);
+  filter: brightness(0.65);
+  transition: transform 0.4s ease;
 }
 
-.gs-plat-inner {
+.ps5-card--store-banner:hover .ps5-store-banner-bg {
+  transform: scale(1.05);
+}
+
+.ps5-store-banner-content {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.gs-plat-icon {
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-}
-
-.gs-plat-status {
-  display: block;
-  font-size: 10px;
-  font-weight: 800;
-  color: #38bdf8;
-}
-
-.gs-plat-name {
-  display: block;
-  font-size: 13.5px;
-  font-weight: 800;
-  margin: 2px 0;
-}
-
-.gs-series-list,
-.gs-rig-list {
-  display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
-.gs-series-row,
-.gs-rig-item {
+.ps5-store-tag {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.gs-series-rank {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background: rgba(59, 130, 246, 0.24);
-  color: #93c5fd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11.5px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-.gs-series-info,
-.gs-rig-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.gs-series-info strong,
-.gs-rig-info strong {
-  display: block;
-  font-size: 12.5px;
-}
-
-.gs-series-info span,
-.gs-rig-info span {
+  gap: 6px;
   font-size: 11px;
-  color: var(--text-secondary);
-}
-
-.gs-series-tag {
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
-  font-size: 10px;
   font-weight: 700;
-  flex-shrink: 0;
+  color: var(--ps5-accent-cyan);
 }
 
-/* Site Trophies Detailed Elements */
-.site-tr-summary__header {
+.ps5-store-game-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ps5-store-pills {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 6px;
+  margin-top: 2px;
 }
 
-.site-tr-badge {
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(250, 204, 21, 0.2);
-  border: 1px solid rgba(250, 204, 21, 0.5);
-  color: #fef08a;
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.site-tr-progress-bar {
-  height: 7px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  overflow: hidden;
-}
-
-.site-tr-progress-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #facc15, #38bdf8);
-  transition: width 0.35s var(--spring-out);
-}
-
-.site-tr-card__icon-wrap {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.site-tr-card__icon-wrap img {
-  width: 24px;
-  height: 24px;
-}
-
-.site-tr-card__body {
-  flex: 1;
-  min-width: 0;
-}
-
-.site-tr-card__type {
+.ps5-platform-pill {
   font-size: 9.5px;
   font-weight: 800;
-  color: #93c5fd;
-  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-.site-tr-card__name {
-  display: block;
-  font-size: 13px;
-  font-weight: 800;
-  margin: 1px 0;
+/* Карточка 2: Accessibility */
+.ps5-card--accessibility {
+  flex: 0.85;
 }
 
-.site-tr-card__desc {
-  margin: 0;
-  font-size: 11px;
-  color: var(--text-secondary);
+/* Карточка 3: Trophies Widget */
+.ps5-card--trophies {
+  flex: 1.4;
+  justify-content: space-between;
+  text-decoration: none;
 }
 
-.site-tr-actions {
+.ps5-trophies-row {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  margin: 6px 0;
 }
 
-.site-tr-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* Music & Vibe Detailed Elements */
-.ym-player-badge {
-  display: inline-flex;
+.ps5-tr-col {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: rgba(250, 204, 21, 0.18);
-  border: 1px solid rgba(250, 204, 21, 0.45);
-  color: #fef08a;
-  font-size: 10.5px;
-  font-weight: 800;
 }
 
-.ym-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #facc15;
+.ps5-tr-cup {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  transition: transform 0.2s ease;
 }
 
-.ym-embed-wrap {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+.ps5-tr-col:hover .ps5-tr-cup {
+  transform: translateY(-2px) scale(1.1);
 }
 
-.ym-iframe {
-  display: block;
-  width: 100%;
-  height: 390px;
-  border: 0;
-}
-
-.ym-controls-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.ym-action-btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: rgba(15, 23, 42, 0.68);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 12px;
+.ps5-tr-count {
+  font-size: 15px;
   font-weight: 700;
+  color: #fff;
 }
 
-.ym-action-btn--ext {
-  background: linear-gradient(135deg, #facc15, #eab308);
-  color: #0f172a;
-  border-color: transparent;
-}
-
-.mv-desc {
-  margin: 0;
-  font-size: 12.5px;
-  color: var(--text-secondary);
-}
-
-.mv-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.mv-genre-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mv-genre-tag {
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(59, 130, 246, 0.2);
-  color: #93c5fd;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-/* Twitch & Share Detailed Elements */
-.twitch-xmb-info {
+.ps5-level-section {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 6px;
 }
 
-.twitch-xmb-stream-title {
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.twitch-xmb-stream-tags {
+.ps5-level-badge {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.ps5-level-star {
+  font-size: 14px;
+}
+
+.ps5-level-label strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.ps5-level-pct {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--ps5-text-muted);
+}
+
+.ps5-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ps5-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #facc15, #f59e0b);
+}
+
+/* Карточка 4: Accessories (DualSense батареи в кольцах) */
+.ps5-card--accessories {
+  flex: 0.95;
+  justify-content: center;
+}
+
+.ps5-accessories-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ps5-acc-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ps5-gauge {
+  position: relative;
+  width: 52px;
+  height: 52px;
+}
+
+.ps5-gauge svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ps5-gauge-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 3.5;
+}
+
+.ps5-gauge-val {
+  fill: none;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.val-green { stroke: #22c55e; }
+.val-orange { stroke: #fb923c; }
+.val-cyan { stroke: #38bdf8; }
+
+.ps5-acc-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.ps5-battery-mini {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ps5-text-muted);
+}
+
+/* Карточка 5: Wishlist */
+.ps5-card--wishlist {
+  flex: 1.3;
+  position: relative;
+  justify-content: flex-end;
+  padding: 14px 16px;
+}
+
+.ps5-wishlist-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.65);
+}
+
+.ps5-wishlist-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ps5-wishlist-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ps5-wishlist-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Крайний обрезанный слайд */
+.ps5-col-edge {
+  opacity: 0.5;
+}
+
+.ps5-card--friend-activity {
+  height: 100%;
+}
+
+.ps5-edge-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.ps5-edge-preview img {
+  border-radius: 12px;
+}
+
+/* ================= 6. GAME DETAIL HERO VIEW ================= */
+.ps5-game-detail-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0 20px 0;
+  animation: ps5FadeUp 0.35s var(--spring-ease);
+}
+
+@keyframes ps5FadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ps5-game-hero-info {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ps5-game-hero-badges {
+  display: flex;
   gap: 8px;
 }
 
-.twitch-meta-item {
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.ps5-hero-badge {
   font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.twitch-xmb-actions {
+.ps5-badge-ps5 {
+  background: #0070d1;
+  color: #fff;
+}
+
+.ps5-game-hero-title {
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.ps5-game-hero-sub {
+  font-size: 16px;
+  color: var(--ps5-text-muted);
+}
+
+.ps5-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.ps5-play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #030611;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s var(--spring-ease), box-shadow 0.2s ease;
+}
+
+.ps5-play-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.6);
+}
+
+.ps5-hero-sub-btn {
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+.ps5-hero-sub-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Activity Cards под выбранной игрой */
+.ps5-activity-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 900px;
+}
+
+.ps5-act-card {
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(16, 23, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
+  backdrop-filter: blur(20px);
 }
 
-.twitch-xmb-cta {
+.ps5-act-tag {
+  font-size: 11px;
+  color: var(--ps5-accent-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.ps5-act-title {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ps5-act-progress {
+  font-size: 12px;
+  color: var(--ps5-text-muted);
+}
+
+/* ================= 7. НИЖНИЙ CONTROLLER HELP BAR ================= */
+.ps5-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  color: var(--ps5-text-dim);
+}
+
+.ps5-controller-hints {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.ps5-hint-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ps5-text-muted);
+}
+
+.ps5-btn-glyph {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, #9333ea, #6b21a8);
-  color: #fff;
-  font-size: 13px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 11px;
   font-weight: 800;
-}
-
-.twitch-xmb-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.twitch-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 11px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  font-size: 11.5px;
-  font-weight: 600;
-}
-
-.twitch-chip img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
-
-.share-qr-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.share-qr-hint {
-  font-size: 10.5px;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.share-info-box {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.share-url-pill {
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(10, 16, 31, 0.68);
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: #93c5fd;
-}
-
-.share-btn-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  color: #fff;
 }

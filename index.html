@@ -3,2386 +3,463 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>cr1mnsx — PlayStation 5, Brawl Stars, Twitch &amp; Projects</title>
-  <meta name="description" content="Интерактивный хаб cr1mnsx в стиле PlayStation XMB &amp; Apple Liquid Glass — Live-статистика PS5, трофеи, Brawl Stars (#2RGUQJQ0R), стримы и проекты.">
-  <meta name="theme-color" content="#0b2a5a">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/png" href="assets/icons/favicon.png?v=klogo">
-  <link rel="shortcut icon" href="favicon.ico?v=klogo">
-  <link rel="apple-touch-icon" href="assets/icons/favicon.png?v=klogo">
-
-  <!-- OpenGraph / Telegram / Discord Rich Preview -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://crimnsx-alt.github.io/cr1mnsx/">
-  <meta property="og:title" content="cr1mnsx — PlayStation 5 &amp; Brawl Stars Live Hub">
-  <meta property="og:description" content="PSN LVL 199 · 709 трофеев · Brawl Stars 40k+ (#2RGUQJQ0R) · Интерактивный XMB дашборд в стиле Apple Liquid Glass.">
-  <meta property="og:image" content="https://crimnsx-alt.github.io/cr1mnsx/assets/photos/brawl-stars-banner.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="cr1mnsx — PlayStation 5 &amp; Brawl Stars Live Hub">
-  <meta name="twitter:description" content="PSN LVL 199 · 709 трофеев · Brawl Stars 40k+ (#2RGUQJQ0R) · Интерактивный XMB дашборд.">
-  <meta name="twitter:image" content="https://crimnsx-alt.github.io/cr1mnsx/assets/photos/brawl-stars-banner.jpg">
-
-  <!-- Inter (Apple UI typography) + M PLUS 1p (XMB Rodin aesthetic) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=M+PLUS+1p:wght@300;400;500;700&display=swap">
-
-  <link rel="stylesheet" href="css/style.css?v=20261106-ps5ui">
-  <script src="js/boot.js"></script>
+  <title>PlayStation 5 — cr1mnsx</title>
+  <meta name="theme-color" content="#060913">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="ps5-body">
 
-  <!-- Фон PS5 UI: живая HDR-подсветка с золотым боке (ps3wave.js) + полноэкранный арт игры -->
-  <div class="bg" aria-hidden="true">
-    <div class="ps3-pic1-bg" id="ps3Pic1Bg"></div>
-    <video id="bgVideo" muted loop playsinline preload="none" poster="assets/video/bg-poster.jpg"></video>
+  <!-- Динамический полноэкранный бэкграунд (Welcome Hub абстрактные неоновые топографические линии + постеры игр) -->
+  <div class="ps5-background-layer" id="ps5BgLayer">
+    <div class="ps5-bg-overlay"></div>
+    <div class="ps5-bg-art" id="ps5BgArt"></div>
+    <canvas id="ps5Particles" class="ps5-particles-canvas"></canvas>
   </div>
 
-  <div class="status" role="region" aria-label="Системная панель статуса PlayStation 5">
-    <div class="status-controls">
-      <button type="button" class="status-btn status-btn--pill" id="waveColorBtn" title="Сменить цвет фоновой подсветки PS5 (△)" aria-label="Сменить подсветку PS5">
-        <span class="ps3-glyph ps3-glyph--triangle">△</span>
-        <span>Подсветка</span>
-      </button>
-      <button type="button" class="status-btn" id="soundToggle" title="Звук интерфейса PS5: Включен" aria-label="Переключить звук интерфейса">🔊</button>
-      <button type="button" class="status-btn" id="themeToggle" title="Тема оформления: PS5 Dark / PS5 White" aria-label="Переключить тему оформления">🌙</button>
-    </div>
-    <div class="ps3-clock-bar" id="ps3ClockBar" title="PlayStation Network &amp; System Time">
-      <div class="ps3-status-cluster">
-        <span class="ps3-status-psn">PSN</span>
-        <svg class="ps3-status-signal" viewBox="0 0 16 12" width="13" height="10" fill="currentColor">
-          <rect x="0.5" y="8.5" width="2" height="3.5" rx="0.5"/>
-          <rect x="4" y="6" width="2" height="6" rx="0.5"/>
-          <rect x="7.5" y="3.5" width="2" height="8.5" rx="0.5"/>
-          <rect x="11" y="0.5" width="2" height="11.5" rx="0.5"/>
-        </svg>
-      </div>
+  <!-- Главный экран PS5 Dashboard -->
+  <div class="ps5-screen">
 
-      <div class="ps3-status-cluster ps3-status-cluster--pad">
-        <span class="ps3-status-pad-badge">1</span>
-        <svg class="ps3-status-battery" viewBox="0 0 22 12" width="16" height="9" fill="none" stroke="currentColor">
-          <rect x="1" y="1" width="16" height="10" rx="2" stroke-width="1.3"/>
-          <path d="M19 4.2 L19 7.8" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="3" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
-          <rect x="7.5" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
-          <rect x="12" y="3" width="3" height="6" fill="currentColor" stroke="none"/>
-        </svg>
-      </div>
+    <!-- Верхний глобальный бар: Вкладки Games/Media слева, Системные иконки и время справа -->
+    <header class="ps5-top-bar">
+      <nav class="ps5-nav-tabs" role="tablist">
+        <button class="ps5-tab is-active" id="tabGames" role="tab" aria-selected="true" data-tab="games">Games</button>
+        <button class="ps5-tab" id="tabMedia" role="tab" aria-selected="false" data-tab="media">Media</button>
+      </nav>
 
-      <div class="ps3-status-divider"></div>
-
-      <div class="ps3-status-cluster ps3-status-cluster--time">
-        <span class="ps3-clock-date" id="ps3ClockDate">10/8</span>
-        <span class="ps3-clock-time" id="ps3ClockTime">20:49</span>
-        <span class="ps3-clock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9.5" />
-            <polyline points="12 6.5 12 12 15.5 13.5" />
+      <div class="ps5-system-status">
+        <button class="ps5-icon-btn" id="btnSearch" title="Поиск" aria-label="Поиск">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
           </svg>
-        </span>
+        </button>
+
+        <button class="ps5-icon-btn" id="btnSettings" title="Настройки" aria-label="Настройки">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <button class="ps5-profile-btn" id="btnProfile" title="Профиль Cr1mnsx" aria-label="Профиль Cr1mnsx">
+          <div class="ps5-avatar-wrap">
+            <video src="assets/video/avatar.mp4" poster="assets/photos/avatar.jpg" autoplay loop muted playsinline></video>
+            <span class="ps5-online-badge"></span>
+          </div>
+        </button>
+
+        <div class="ps5-clock" id="ps5Clock">10:24 AM</div>
       </div>
-    </div>
-  </div>
+    </header>
 
+    <!-- Горизонтальная лента плиток игр и приложений PS5 -->
+    <section class="ps5-games-ribbon-container">
+      <div class="ps5-games-ribbon" id="ps5Ribbon" role="listbox" aria-label="Лента игр PlayStation 5">
+        
+        <!-- 1. PS Store -->
+        <div class="ps5-game-tile" data-game-id="store" tabindex="0" role="option">
+          <div class="ps5-tile-squircle ps5-tile-store">
+            <img src="assets/ps5ish/PlaystationStore.png" alt="PlayStation Store">
+          </div>
+          <span class="ps5-tile-title">PlayStation Store</span>
+        </div>
 
+        <!-- 2. Welcome Hub (Активен по умолчанию) -->
+        <div class="ps5-game-tile is-focused" data-game-id="welcome" tabindex="0" role="option" aria-selected="true">
+          <div class="ps5-tile-squircle ps5-tile-welcome">
+            <div class="ps5-symbols-icon">
+              <span class="sym-sq">□</span>
+              <span class="sym-tr">△</span>
+              <span class="sym-cr">✕</span>
+              <span class="sym-ci">○</span>
+            </div>
+          </div>
+          <span class="ps5-tile-title">Welcome</span>
+        </div>
 
-  <!-- Всплывающее PS3-уведомление -->
-  <div class="ps3-toast" id="ps3Toast" aria-live="polite">
-    <div class="ps3-toast__glass">
-      <div class="ps3-toast__icon">🎮</div>
-      <div class="ps3-toast__content">
-        <div class="ps3-toast__title" id="ps3ToastTitle">PlayStation Network</div>
-        <div class="ps3-toast__sub" id="ps3ToastSub">Cr1mnsx · PlayStation 5</div>
+        <!-- 3. Dark Souls Remastered -->
+        <div class="ps5-game-tile" data-game-id="ds1" tabindex="0" role="option"
+             data-title="Dark Souls Remastered"
+             data-sub="Лордран, костры и путешествие сквозь пепел · 42% завершено"
+             data-banner="assets/photos/games/ds1-remastered.jpg">
+          <div class="ps5-tile-squircle">
+            <img src="assets/photos/games/ds1-remastered.png" alt="Dark Souls Remastered">
+          </div>
+          <span class="ps5-tile-title">Dark Souls Remastered</span>
+        </div>
+
+        <!-- 4. Astro Bot -->
+        <div class="ps5-game-tile" data-game-id="astro" tabindex="0" role="option"
+             data-title="Astro Bot"
+             data-sub="Шедевр платформера PlayStation 5 · 100% DualSense"
+             data-banner="assets/photos/souls/ds2-last-played-hd.jpg">
+          <div class="ps5-tile-squircle">
+            <img src="assets/photos/games/ds2-scholar.jpg" alt="Astro Bot">
+          </div>
+          <span class="ps5-tile-title">Astro Bot</span>
+        </div>
+
+        <!-- 5. Brawl Stars -->
+        <div class="ps5-game-tile" data-game-id="brawl" tabindex="0" role="option"
+             data-title="Brawl Stars"
+             data-sub="🏆 40,000+ кубков · 108/108 бойцов · #2RGUQJQ0R"
+             data-banner="assets/photos/brawl-stars-banner.jpg">
+          <div class="ps5-tile-squircle">
+            <img src="assets/icons/aero/brawl-stars.png" alt="Brawl Stars">
+          </div>
+          <span class="ps5-tile-title">Brawl Stars</span>
+        </div>
+
+        <!-- 6. Dark Souls II: Scholar of the First Sin -->
+        <div class="ps5-game-tile" data-game-id="ds2" tabindex="0" role="option"
+             data-title="DARK SOULS™ II: Scholar of the First Sin"
+             data-sub="Последний запуск на PS5 · 14 ч. 58 мин. · 57 запусков"
+             data-banner="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png">
+          <div class="ps5-tile-squircle">
+            <img src="assets/photos/games/ds2-scholar.jpg" alt="Dark Souls II">
+          </div>
+          <span class="ps5-tile-title">Dark Souls II</span>
+        </div>
+
+        <!-- 7. Red Dead Redemption 2 -->
+        <div class="ps5-game-tile" data-game-id="rdr2" tabindex="0" role="option"
+             data-title="Red Dead Redemption 2"
+             data-sub="Rockstar Games · Эпос Дикого Запада · 15%"
+             data-banner="assets/photos/games/rdr2.jpg">
+          <div class="ps5-tile-squircle">
+            <img src="assets/photos/games/rdr2.png" alt="RDR 2">
+          </div>
+          <span class="ps5-tile-title">Red Dead Redemption 2</span>
+        </div>
+
+        <!-- 8. Helldivers 2 -->
+        <div class="ps5-game-tile" data-game-id="helldivers" tabindex="0" role="option"
+             data-title="Helldivers 2"
+             data-sub="Супер-Земля · Тактический кооператив PS5"
+             data-banner="assets/photos/games/helldivers2.jpg">
+          <div class="ps5-tile-squircle">
+            <img src="assets/photos/games/helldivers2.png" alt="Helldivers 2">
+          </div>
+          <span class="ps5-tile-title">Helldivers 2</span>
+        </div>
+
+        <!-- 9. Game Library (Все игры) -->
+        <div class="ps5-game-tile" data-game-id="library" tabindex="0" role="option">
+          <div class="ps5-tile-squircle ps5-tile-library">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            </svg>
+          </div>
+          <span class="ps5-tile-title">Game Library</span>
+        </div>
+
       </div>
-    </div>
-  </div>
-
-  <main class="xmb" id="xmb">
-
-    <!-- cr1mnsx (Профиль) -->
-    <section class="cat" id="cr1mnsx" data-icon="assets/icons/xmb/users.svg">
-      <h2 class="cat__label">cr1mnsx</h2>
-      <ul class="cat__items">
-        <li class="item is-selected" id="itemBioDashboard">
-          <div class="item__row">
-            <div class="item__icon item__icon--photo avatar-static" aria-hidden="true">
-              <span class="avatar">
-                <span class="avatar__crop">
-                  <video src="assets/video/avatar.mp4" poster="assets/photos/avatar.jpg" autoplay loop muted playsinline></video>
-                </span>
-              </span>
-            </div>
-            <span class="item__text">
-              <span class="item__title">cr1mnsx · Главный хаб</span>
-              <span class="item__sub">best player улиц · Обзор дашборда</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--profile-dashboard">
-            <div class="profile-quote">«Don't you dare go Hollow...»</div>
-
-            <!-- Верхняя карточка: Последняя игра на PS5 -->
-            <a class="pgc-card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
-              <div class="pgc-backdrop">
-                <img class="pgc-backdrop-img ps5-last-game-img" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="DARK SOULS™ II: Scholar of the First Sin" aria-hidden="true">
-                <div class="pgc-backdrop-overlay"></div>
-              </div>
-              <div class="pgc-inner">
-                <div class="pgc-cover-box">
-                  <img class="pgc-cover ps5-last-game-img" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="DARK SOULS™ II: Scholar of the First Sin">
-                  <span class="pgc-cover-badge ps5-last-game-platform">PS5</span>
-                </div>
-                <div class="pgc-details">
-                  <div class="pgc-top-line">
-                    <span class="pgc-tag ps5-last-game-status">ПОСЛЕДНИЙ ЗАПУСК НА PLAYSTATION 5 · 8 ОКТЯБРЯ 2026</span>
-                    <span class="pgc-duration-pill ps5-last-game-duration" title="Общее время и количество запусков на консоли">⏱ 14 ч. 58 мин.</span>
-                  </div>
-                  <div class="pgc-title ps5-last-game-title" id="ps5-last-game-title">DARK SOULS™ II: Scholar of the First Sin</div>
-                  <div class="pgc-bottom-row">
-                    <div class="pgc-bar-track">
-                      <div class="pgc-bar-fill ps5-last-game-bar" style="width: 27%;"></div>
-                    </div>
-                    <span class="pgc-progress-text ps5-last-game-progress" id="ps5-last-game-progress"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="14" height="14"> 14/38 трофеев (27%) · C Rank</span>
-                  </div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Карточка: Активность в Brawl Stars (Apple Liquid Glass) -->
-            <a class="bsc-card" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на Brawlify">
-              <div class="bsc-backdrop">
-                <img class="bsc-backdrop-img" src="assets/photos/brawl-stars-banner.jpg" alt="" aria-hidden="true">
-                <div class="bsc-backdrop-overlay"></div>
-              </div>
-              <div class="bsc-inner">
-                <div class="bsc-cover-box">
-                  <img class="bsc-cover" src="assets/icons/aero/brawl-stars.png" alt="Brawl Stars">
-                  <span class="bsc-cover-badge">BS</span>
-                </div>
-                <div class="bsc-details">
-                  <div class="bsc-top-line">
-                    <span class="bsc-tag"><span class="bs-live-dot"></span> BRAWL STARS · ЕЖЕДНЕВНЫЙ АКТИВ · #2RGUQJQ0R</span>
-                    <span class="bsc-club-badge" id="dash-bs-club">🛡️ 0.3.7|teams</span>
-                  </div>
-                  <div class="bsc-title-row">
-                    <div class="bsc-title">Cr1mnsx · Мейн профиль</div>
-                    <div class="bsc-trophy-count">🏆 <span id="dash-bs-trophies">39,950</span></div>
-                  </div>
-                  <div class="bsc-bottom-row">
-                    <span class="bsc-pill" title="Рекордное количество кубков">🔥 Рекорд: <b id="dash-bs-highest">40,120</b></span>
-                    <span class="bsc-pill" title="Разблокированные бойцы">🔓 Бойцы: <b id="dash-bs-brawlers">108 / 108</b></span>
-                    <span class="bsc-pill" title="Победы 3 на 3">⚔️ 3v3: <b id="dash-bs-3v3">2,840</b></span>
-                  </div>
-                </div>
-              </div>
-            </a>
-
-            <!-- Средний ряд: 2 карточки сеткой (О ИГРОКЕ + СТАТИСТИКА) -->
-            <div class="profile-mid-row">
-              <!-- Карточка: О ИГРОКЕ -->
-              <div class="p-card p-card--player">
-                <div class="p-card-title">О ИГРОКЕ</div>
-                <div class="p-stat-list">
-                  <div class="p-stat-row">
-                    <div class="p-stat-icon">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
-                      </svg>
-                    </div>
-                    <div class="p-stat-info">
-                      <span class="p-sub-label">ПОСЛЕДНИЙ ЗАПУСК</span>
-                      <strong class="p-main-val">PlayStation 5</strong>
-                    </div>
-                  </div>
-
-                  <div class="p-stat-row">
-                    <div class="p-stat-icon">
-                      <span class="p-icon-badge">PC</span>
-                    </div>
-                    <div class="p-stat-info">
-                      <span class="p-sub-label">ПЛАТФОРМА</span>
-                      <strong class="p-main-val">PS5 &amp; PC</strong>
-                    </div>
-                  </div>
-
-                  <div class="p-stat-row">
-                    <div class="p-stat-icon">
-                      <span class="p-icon-emoji">⚔️</span>
-                    </div>
-                    <div class="p-stat-info">
-                      <span class="p-sub-label">ЖАНР</span>
-                      <strong class="p-main-val">Soulslike &amp; Action</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Карточка: СТАТИСТИКА -->
-              <div class="p-card p-card--stats">
-                <div class="p-card-title">
-                  <span>СТАТИСТИКА PSN</span>
-                  <span class="psn-acc-level" style="margin-left: auto; color: #38bdf8; font-size: 10px; font-variant-numeric: tabular-nums;">LVL 199</span>
-                </div>
-                <div class="p-stat-list">
-                  <div class="p-trophy-box">
-                    <div class="p-trophy-header">
-                      <span class="p-sub-label">АКТИВНАЯ ИГРА</span>
-                      <span class="p-trophy-pct ps5-stat-trophy-pct">14/38 (27%)</span>
-                    </div>
-                    <div class="p-bar-track">
-                      <div class="p-bar-fill ps5-last-game-bar" style="width: 27%;"></div>
-                    </div>
-                    <div class="p-trophy-row ps5-stat-trophy-row">
-                      <span class="p-tr-item" data-trophy-grade="Платиновый приз" data-trophy-name="Платина PSN · Cr1mnsx" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/plat.svg" alt="Platinum"><b class="ps5-stat-plat">0</b></span>
-                      <span class="p-tr-item" data-trophy-grade="Золотой приз" data-trophy-name="Золотой трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/gold.svg" alt="Gold"><b class="ps5-stat-gold">0</b></span>
-                      <span class="p-tr-item" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряный трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/silver.svg" alt="Silver"><b class="ps5-stat-silver">5</b></span>
-                      <span class="p-tr-item" data-trophy-grade="Бронзовый приз" data-trophy-name="Бронзовый трофей PSN" title="Нажмите, чтобы проверить звук трофея PS3"><img class="ps-tr-icon" src="assets/icons/trophies/bronze.svg" alt="Bronze"><b class="ps5-stat-bronze">9</b></span>
-                    </div>
-                  </div>
-
-                  <div class="p-stat-row">
-                    <div class="p-stat-icon">
-                      <span class="p-icon-emoji">🏆</span>
-                    </div>
-                    <div class="p-stat-info">
-                      <span class="p-sub-label">ВСЕГО ТРОФЕЕВ PSN</span>
-                      <strong class="p-main-val psn-acc-total-label">709 трофеев (2 платины)</strong>
-                    </div>
-                  </div>
-
-                  <div class="p-stat-row">
-                    <div class="p-stat-icon">
-                      <span class="p-icon-emoji">⭐</span>
-                    </div>
-                    <div class="p-stat-info">
-                      <span class="p-sub-label">ФАВОРИТ</span>
-                      <strong class="p-main-val">Dark Souls Series</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Карточка: НЕДАВНИЕ ЗАПУСКИ НА PS5 (LIVE ИСТОРИЯ С ЧАСАМИ) -->
-            <div class="p-card p-card--ps5-history" id="ps5RecentHistoryCard">
-              <div class="p-card-title">
-                <span>🕹️ НЕДАВНИЕ ЗАПУСКИ НА PS5</span>
-                <span class="ps5-history-live-tag">PSN API · LIVE</span>
-              </div>
-              <div class="ps5-recent-history-list"></div>
-            </div>
-
-            <!-- Новая карточка: ЯНДЕКС МУЗЫКА -->
-            <div class="p-card p-card--yandex-music">
-              <div class="p-card-title">
-                <span class="ym-dot-pulse"></span>
-                <span>ЯНДЕКС МУЗЫКА · ПЛЕЙЛИСТ</span>
-              </div>
-              <div class="ym-profile-widget">
-                <div class="ym-profile-cover-box">
-                  <img src="assets/icons/aero/yandexmusic.svg" alt="Яндекс Музыка">
-                  <div class="ym-equalizer" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-                <div class="ym-profile-info">
-                  <strong class="ym-profile-title" id="ymProfileTitle">Плейлист Cr1mnsx</strong>
-                  <span class="ym-profile-sub" id="ymProfileSub">Яндекс Музыка · Любимые треки</span>
-                  <div class="ym-profile-actions">
-                    <button type="button" class="ym-btn-play" id="ymProfilePlayBtn">
-                      <span>Слушать в ветке Музыки ♫</span>
-                    </button>
-                    <a class="ym-btn-ext" id="ymProfileExtLink" href="https://music.yandex.ru" target="_blank" rel="noopener" aria-label="Открыть в Яндекс Музыке в новой вкладке" title="Открыть в Яндекс Музыке">↗</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Нижняя карточка: ТРАНСЛЯЦИЯ & ПРОФИЛИ -->
-            <div class="p-card p-card--profiles">
-              <div class="p-card-title">
-                <span class="p-broadcast-wave">((•))</span>
-                <span>ТРАНСЛЯЦИЯ &amp; ПРОФИЛИ</span>
-              </div>
-              <div class="p-links-list">
-                <a class="p-link-row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">
-                  <div class="p-link-left">
-                    <span class="p-link-brand p-link-brand--twitch">
-                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                        <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
-                      </svg>
-                    </span>
-                    <span class="p-link-name">Twitch</span>
-                  </div>
-                  <span class="p-link-handle">cr1mnsx</span>
-                </a>
-
-                <a class="p-link-row" href="https://steamcommunity.com/profiles/76561199335958843" target="_blank" rel="noopener">
-                  <div class="p-link-left">
-                    <span class="p-link-brand p-link-brand--steam">
-                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                        <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.005.105.005.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
-                      </svg>
-                    </span>
-                    <span class="p-link-name">Steam</span>
-                  </div>
-                  <span class="p-link-handle">cr1mnsx</span>
-                </a>
-
-                <a class="p-link-row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener">
-                  <div class="p-link-left">
-                    <span class="p-link-brand p-link-brand--vk">
-                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                        <path d="M15.684 0H8.316C2.992 0 0 2.992 0 8.316v7.368C0 21.008 2.992 24 8.316 24h7.368C21.008 24 24 21.008 24 15.684V8.316C24 2.992 21.008 0 15.684 0zm3.605 17.158h-1.637c-.619 0-.81-.492-1.928-1.61-.976-.952-1.41-1.074-1.652-1.074-.338 0-.435.097-.435.564v1.46c0 .393-.127.66-1.282.66-1.897 0-4.01-1.15-5.495-3.292-2.25-3.17-2.871-5.556-2.871-6.046 0-.27.106-.516.63-.516h1.637c.47 0 .647.214.827.718 1.15 3.328 3.076 6.242 3.87 6.242.298 0 .434-.137.434-.888V11.23c-.092-1.393-.81-1.512-.81-2.008 0-.236.197-.474.52-.474h2.569c.356 0 .484.184.484.603v3.254c0 .354.156.474.258.474.204 0 .373-.12.75-.498 1.173-1.314 2.01-3.34 2.01-3.34.11-.237.322-.493.79-.493h1.637c.493 0 .604.256.496.603-.207.962-2.228 3.824-2.33 3.992-.26.39-.36.568 0 1.047.256.342 1.1 1.077 1.666 1.728.855.98 1.513 1.802 1.687 2.373.18.57-.102.872-.56.872z"/>
-                      </svg>
-                    </span>
-                    <span class="p-link-name">ВКонтакте</span>
-                  </div>
-                  <span class="p-link-handle">cr1mnsx</span>
-                </a>
-
-                <a class="p-link-row" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
-                  <div class="p-link-left">
-                    <span class="p-link-brand" style="color: #0070d1;">
-                      <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
-                        <path d="M23.67 16.73c-.5-2.05-2.73-3.03-5.26-2.58l.05-.26c.46-2.39-.77-4.14-3.03-4.59-1.95-.39-3.95.42-5.06 2.05v-8.4c0-.98-.67-1.77-1.5-1.77s-1.5.79-1.5 1.77v14.47c0 .49.17.93.44 1.27.32.41.81.67 1.36.67.75 0 1.38-.49 1.63-1.18.23-.62.48-1.24.75-1.85 1.02-.27 2.18-.46 3.44-.55l-.3 1.58c-.37 1.96.67 3.44 2.59 3.82 1.83.36 3.74-.32 4.79-1.71.69-.92.9-2.07.6-3.19zm-8.87-4.48c.84-.96 2.02-1.37 3.14-1.15 1.15.23 1.77 1.14 1.54 2.37l-.05.26c-1.37.03-2.9.19-4.32.55l-.31-2.03zm3.76 6.32c-.81 1.07-2.18 1.48-3.32 1.25-1.07-.21-1.63-.98-1.42-2.08l.26-1.38c1.32.1 2.65.29 3.93.59.39.73.49 1.46.25 2.12z M7.37 18.2v-1.8c.45.45.98.81 1.56 1.07v1.8c-.62-.27-1.16-.63-1.56-1.07z"/>
-                      </svg>
-                    </span>
-                    <span class="p-link-name">PlayStation Network</span>
-                  </div>
-                  <span class="p-link-handle">Cr1mnsx</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 2. Обо мне · Биография cr1mnsx -->
-        <li class="item" id="itemBioStory">
-          <div class="item__row">
-            <span class="item__icon item__icon--photo">
-              <span class="avatar avatar--bio">
-                <span class="avatar__crop">
-                  <img src="assets/photos/avatar.jpg" alt="cr1mnsx">
-                </span>
-              </span>
-            </span>
-            <span class="item__text">
-              <span class="item__title">Обо мне · Биография cr1mnsx</span>
-              <span class="item__sub">Путь игрока, философия, увлечения и таймлайн 2019–2026</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--wide item__panel--bio">
-            <!-- Hero banner с цитатой -->
-            <div class="bio-hero">
-              <div class="bio-hero__badge">BIOGRAPHY &amp; ROADMAP</div>
-              <h3 class="bio-hero__title">Cr1mnsx · История &amp; Путь</h3>
-              <p class="bio-hero__quote">«Don't you dare go Hollow. Lest my work have been for naught.»</p>
-            </div>
-
-            <!-- Двухколоночный макет биографии -->
-            <div class="bio-grid">
-              <!-- Левая колонка: Обо мне и интересы -->
-              <div class="bio-col bio-col--info">
-                <div class="p-card bio-card">
-                  <div class="p-card-title">
-                    <span class="p-icon-emoji">⚔️</span>
-                    <span>КТО ТАКОЙ CR1MNSX</span>
-                  </div>
-                  <div class="bio-card__text">
-                    Геймер, энтузиаст кибер-эстетики, фанат атмосферных Soulsborne вселенных и разработчик персональных интерфейсов. Начав с соревновательных мобильных арен, прошел путь через хардкорные испытания Лордрана и Дранглика к сотням трофеев на PlayStation 5.
-                  </div>
-                  <div class="bio-tags">
-                    <span class="bio-tag">🎮 PS5 &amp; PC</span>
-                    <span class="bio-tag">⚔️ Soulsborne</span>
-                    <span class="bio-tag">🎧 Phonk &amp; Wave</span>
-                    <span class="bio-tag">📺 Twitch Streamer</span>
-                    <span class="bio-tag">💻 Web Artisan</span>
-                  </div>
-                </div>
-
-                <div class="p-card bio-card">
-                  <div class="p-card-title">
-                    <span class="p-icon-emoji">✨</span>
-                    <span>УВЛЕЧЕНИЯ &amp; ВАЙБ</span>
-                  </div>
-                  <div class="bio-interests-list">
-                    <div class="bio-interest-item">
-                      <span class="bio-interest-icon">🎮</span>
-                      <div class="bio-interest-info">
-                        <strong>Hardcore &amp; Action Gaming</strong>
-                        <span>Выбивание сложных трофеев, изучение лора и механик игр FromSoftware.</span>
-                      </div>
-                    </div>
-                    <div class="bio-interest-item">
-                      <span class="bio-interest-icon">🎧</span>
-                      <div class="bio-interest-info">
-                        <strong>Музыка для ночных каток</strong>
-                        <span>Drift Phonk, Dark Synthwave, Russian Post-Punk и оркестровые саундтреки.</span>
-                      </div>
-                    </div>
-                    <div class="bio-interest-item">
-                      <span class="bio-interest-icon">💻</span>
-                      <div class="bio-interest-info">
-                        <strong>Интерфейсы &amp; Код</strong>
-                        <span>Создание ретро-футуристичных UI, вдохновленных эстетикой PS3 и киберпанком.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Интерактивный виджет случайной цитаты -->
-                <div class="p-card bio-card bio-card--quote-widget">
-                  <div class="p-card-title">
-                    <span class="p-icon-emoji">🔥</span>
-                    <span>МУДРОСТЬ ДРАНГЛИКА</span>
-                    <button type="button" class="bio-quote-btn" id="bioNewQuoteBtn" title="Получить новую цитату">
-                      <span>Сменить 🎲</span>
-                    </button>
-                  </div>
-                  <blockquote class="bio-quote-box" id="bioQuoteText">
-                    «There is no path. Beyond the scope of light, beyond the reach of Dark... what could possibly await us?»
-                  </blockquote>
-                  <div class="bio-quote-author" id="bioQuoteAuthor">— Aldia, Scholar of the First Sin</div>
-                </div>
-              </div>
-
-              <!-- Правая колонка: Интерактивный таймлайн 2019–2026 -->
-              <div class="bio-col bio-col--timeline">
-                <div class="p-card bio-card">
-                  <div class="p-card-title">
-                    <span class="p-icon-emoji">⏳</span>
-                    <span>ТАЙМЛАЙН ПУТИ (2019 — 2026)</span>
-                  </div>
-                  <div class="bio-timeline">
-                    <div class="bio-timeline-item">
-                      <div class="bio-timeline-dot"></div>
-                      <div class="bio-timeline-date">2019</div>
-                      <div class="bio-timeline-content">
-                        <strong>Старт в Brawl Stars</strong>
-                        <p>Начало пути под тегом #2RGUQJQ0R, первые клубные баталии и выход в топы.</p>
-                      </div>
-                    </div>
-
-                    <div class="bio-timeline-item">
-                      <div class="bio-timeline-dot"></div>
-                      <div class="bio-timeline-date">2021</div>
-                      <div class="bio-timeline-content">
-                        <strong>Знакомство с Soulsborne</strong>
-                        <p>Первое прохождение Dark Souls Remastered. Рождение любви к хардкорным челленджам.</p>
-                      </div>
-                    </div>
-
-                    <div class="bio-timeline-item">
-                      <div class="bio-timeline-dot bio-timeline-dot--plat"></div>
-                      <div class="bio-timeline-date">2022</div>
-                      <div class="bio-timeline-content">
-                        <strong>Первая платина на PSN 🏆</strong>
-                        <p>100% прохождение Marvel's Spider-Man Remastered на консоли PlayStation.</p>
-                      </div>
-                    </div>
-
-                    <div class="bio-timeline-item">
-                      <div class="bio-timeline-dot bio-timeline-dot--plat"></div>
-                      <div class="bio-timeline-date">2023</div>
-                      <div class="bio-timeline-content">
-                        <strong>Вторая платина &amp; Twitch</strong>
-                        <p>Платина в Miles Morales, первые прямые трансляции каток на Twitch-канале cr1mnsx.</p>
-                      </div>
-                    </div>
-
-                    <div class="bio-timeline-item">
-                      <div class="bio-timeline-dot"></div>
-                      <div class="bio-timeline-date">2024</div>
-                      <div class="bio-timeline-content">
-                        <strong>Рубеж 40,000+ кубков &amp; 640+ трофеев</strong>
-                        <p>Покорение 186 уровня PSN, 40k кубков в Brawl Stars, активные рейды в Helldivers 2.</p>
-                      </div>
-                    </div>
-
-                    <div class="bio-timeline-item bio-timeline-item--active">
-                      <div class="bio-timeline-dot bio-timeline-dot--glow"></div>
-                      <div class="bio-timeline-date">2025–2026</div>
-                      <div class="bio-timeline-content">
-                        <strong>Персональный PS3 XMB Био-Хаб</strong>
-                        <p>Запуск интерактивного пространства cr1mnsx, объединяющего гейминг, музыку и сообщество.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- 3. Gaming Profile · Витрина достижений -->
-        <li class="item" id="itemGamingShowcase">
-          <div class="item__row">
-            <span class="item__icon item__icon--photo">
-              <span class="icon-tile icon-tile--trophy" style="background: rgba(226, 232, 240, 0.15); border: 1px solid rgba(226, 232, 240, 0.3);">
-                <img src="assets/icons/trophies/plat.svg" alt="Trophies">
-              </span>
-            </span>
-            <span class="item__text">
-              <span class="item__title">Gaming Profile · Витрина трофеев</span>
-              <span class="item__sub">Платины, PSN статистика, любимые серии и боевой сетап</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--wide item__panel--gaming">
-            <!-- Хедер трофеев -->
-            <div class="p-card gs-summary-card">
-              <div class="gs-summary-header">
-                <div class="gs-summary-left">
-                  <span class="psn-badge psn-badge--plat psn-acc-level-full">PSN LEVEL 199</span>
-                  <h3 class="gs-summary-title">Трофейный стенд Cr1mnsx</h3>
-                  <span class="gs-summary-subtitle"><b class="psn-acc-total">709</b> полученных трофеев · PlayStation Network</span>
-                </div>
-                <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
-                  <span>PSN.GG ↗</span>
-                </a>
-              </div>
-              <div class="gs-trophies-row">
-                <div class="gs-tr-box gs-tr-box--plat" role="button" tabindex="0" data-trophy-grade="Платиновый приз" data-trophy-name="Платиновый коллекционер (2 платины)" title="Нажмите для звукового эффекта трофея PS3">
-                  <img src="assets/icons/trophies/plat.svg" alt="Platinum">
-                  <div class="gs-tr-val psn-acc-plat">2</div>
-                  <div class="gs-tr-label">Платины</div>
-                </div>
-                <div class="gs-tr-box gs-tr-box--gold" role="button" tabindex="0" data-trophy-grade="Золотой приз" data-trophy-name="Мастер испытаний (Золотые трофеи PSN)" title="Нажмите для звукового эффекта трофея PS3">
-                  <img src="assets/icons/trophies/gold.svg" alt="Gold">
-                  <div class="gs-tr-val psn-acc-gold">21</div>
-                  <div class="gs-tr-label">Золото</div>
-                </div>
-                <div class="gs-tr-box gs-tr-box--silver" role="button" tabindex="0" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряный арсенал PSN" title="Нажмите для звукового эффекта трофея PS3">
-                  <img src="assets/icons/trophies/silver.svg" alt="Silver">
-                  <div class="gs-tr-val psn-acc-silver">138</div>
-                  <div class="gs-tr-label">Серебро</div>
-                </div>
-                <div class="gs-tr-box gs-tr-box--bronze" role="button" tabindex="0" data-trophy-grade="Бронзовый приз" data-trophy-name="Фундамент приключений (Бронза PSN)" title="Нажмите для звукового эффекта трофея PS3">
-                  <img src="assets/icons/trophies/bronze.svg" alt="Bronze">
-                  <div class="gs-tr-val psn-acc-bronze">548</div>
-                  <div class="gs-tr-label">Бронза</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Витрина платин -->
-            <div class="p-card gs-platinum-showcase">
-              <div class="p-card-title">
-                <span class="p-icon-emoji">🌟</span>
-                <span>ВИТРИНА ПЛАТИНОВЫХ НАГРАД (100% ЗАВЕРШЕНИЕ)</span>
-              </div>
-              <div class="gs-plat-grid">
-                <a class="gs-plat-card" href="https://psnprofiles.com/trophies/11786-marvels-spider-man-remastered/Cr1mnsx" target="_blank" rel="noopener">
-                  <div class="gs-plat-backdrop" style="background-image: url('assets/photos/games/ds1-remastered.jpg');"></div>
-                  <div class="gs-plat-inner">
-                    <img class="gs-plat-icon" src="assets/icons/trophies/plat.svg" alt="Platinum">
-                    <div class="gs-plat-info">
-                      <span class="gs-plat-status">🏆 100% PLATINUM</span>
-                      <strong class="gs-plat-name">Marvel's Spider-Man Remastered</strong>
-                      <span class="gs-plat-desc">"Be Greater" · Полная зачистка всех районов Нью-Йорка на 100%</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a class="gs-plat-card" href="https://psnprofiles.com/trophies/11805-marvels-spider-man-miles-morales/Cr1mnsx" target="_blank" rel="noopener">
-                  <div class="gs-plat-backdrop" style="background-image: url('assets/photos/souls/ds2-last-played-hd.jpg');"></div>
-                  <div class="gs-plat-inner">
-                    <img class="gs-plat-icon" src="assets/icons/trophies/plat.svg" alt="Platinum">
-                    <div class="gs-plat-info">
-                      <span class="gs-plat-status">🏆 100% PLATINUM</span>
-                      <strong class="gs-plat-name">Marvel's Spider-Man: Miles Morales</strong>
-                      <span class="gs-plat-desc">"Be Yourself" · Биоэлектричество, Гарлем и спасение города</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <!-- Сетка: Любимые серии & Сетап -->
-            <div class="gs-bottom-grid">
-              <div class="p-card gs-series-card">
-                <div class="p-card-title">
-                  <span class="p-icon-emoji">👑</span>
-                  <span>ЛЮБИМЫЕ ФРАНШИЗЫ</span>
-                </div>
-                <div class="gs-series-list">
-                  <div class="gs-series-row">
-                    <span class="gs-series-rank">1</span>
-                    <div class="gs-series-info">
-                      <strong>Dark Souls Trilogy</strong>
-                      <span>FromSoftware · Вершина хардкорного левелдизайна и лора</span>
-                    </div>
-                    <span class="gs-series-tag">Фаворит №1</span>
-                  </div>
-                  <div class="gs-series-row">
-                    <span class="gs-series-rank">2</span>
-                    <div class="gs-series-info">
-                      <strong>Marvel's Spider-Man</strong>
-                      <span>Insomniac Games · 2 платины, эталонная динамика полетов</span>
-                    </div>
-                    <span class="gs-series-tag gs-series-tag--plat">2 Платины</span>
-                  </div>
-                  <div class="gs-series-row">
-                    <span class="gs-series-rank">3</span>
-                    <div class="gs-series-info">
-                      <strong>The Witcher 3: Wild Hunt</strong>
-                      <span>CD Projekt RED · Непревзойденный нарратив и атмосфера</span>
-                    </div>
-                    <span class="gs-series-tag">RPG Classic</span>
-                  </div>
-                  <div class="gs-series-row">
-                    <span class="gs-series-rank">4</span>
-                    <div class="gs-series-info">
-                      <strong>Grand Theft Auto Series</strong>
-                      <span>Rockstar Games · Vice City &amp; GTA V PS5 Edition</span>
-                    </div>
-                    <span class="gs-series-tag">Legenda</span>
-                  </div>
-                  <div class="gs-series-row">
-                    <span class="gs-series-rank">5</span>
-                    <div class="gs-series-info">
-                      <strong>Brawl Stars</strong>
-                      <span>Supercell · 40k+ кубков, 108 бойцов, соревновательный скилл</span>
-                    </div>
-                    <span class="gs-series-tag gs-series-tag--bs">40k Cups</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="p-card gs-rig-card">
-                <div class="p-card-title">
-                  <span class="p-icon-emoji">⚡</span>
-                  <span>БОЕВОЙ СЕТАП</span>
-                </div>
-                <div class="gs-rig-list">
-                  <div class="gs-rig-item">
-                    <span class="gs-rig-icon">🎮</span>
-                    <div class="gs-rig-info">
-                      <strong>PlayStation 5</strong>
-                      <span>Ultra-HD Blu-ray Edition · 4K HDR 60/120 FPS</span>
-                    </div>
-                  </div>
-                  <div class="gs-rig-item">
-                    <span class="gs-rig-icon">🕹️</span>
-                    <div class="gs-rig-info">
-                      <strong>DualSense Midnight Black</strong>
-                      <span>Адаптивные курки и тактильная отдача haptic feedback</span>
-                    </div>
-                  </div>
-                  <div class="gs-rig-item">
-                    <span class="gs-rig-icon">🖥️</span>
-                    <div class="gs-rig-info">
-                      <strong>High-Refresh Gaming Display</strong>
-                      <span>144Hz Fast Response, насыщенная цветопередача</span>
-                    </div>
-                  </div>
-                  <div class="gs-rig-item">
-                    <span class="gs-rig-icon">🎧</span>
-                    <div class="gs-rig-info">
-                      <strong>3D Spatial Audio</strong>
-                      <span>Точное позиционирование шагов и звуков боя</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- 4. Трофеи сайта · Достижения -->
-        <li class="item" id="itemSiteTrophies">
-          <div class="item__row">
-            <span class="item__icon item__icon--photo">
-              <span class="icon-tile icon-tile--star" style="background: rgba(234, 179, 8, 0.15); border: 1px solid rgba(234, 179, 8, 0.3);">
-                <img src="assets/icons/trophies/gold.svg" alt="Trophies">
-              </span>
-            </span>
-            <span class="item__text">
-              <span class="item__title">Трофеи сайта · Достижения</span>
-              <span class="item__sub">Интерактивная система наград XMB (X/4)</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--wide item__panel--trophies">
-            <div class="p-card site-tr-summary">
-              <div class="site-tr-summary__header">
-                <div>
-                  <h3 class="site-tr-summary__title">Достижения посетителя сайта</h3>
-                  <span class="site-tr-summary__sub">Исследуйте разделы сайта cr1mnsx, чтобы открыть все 4 приза</span>
-                </div>
-                <div class="site-tr-badge" id="siteTrophyCountBadge">1 / 4</div>
-              </div>
-              <div class="site-tr-progress-bar">
-                <div class="site-tr-progress-fill" id="siteTrophyProgressFill" style="width: 25%;"></div>
-              </div>
-            </div>
-
-            <div class="site-tr-grid">
-              <!-- Трофей 1: Бронза -->
-              <div class="site-tr-card is-unlocked" id="trCardWelcome">
-                <div class="site-tr-card__icon-wrap">
-                  <img src="assets/icons/trophies/bronze.svg" alt="Bronze Trophy">
-                </div>
-                <div class="site-tr-card__body">
-                  <div class="site-tr-card__type">БРОНЗОВЫЙ ПРИЗ</div>
-                  <strong class="site-tr-card__name">Добро пожаловать в Дранглик</strong>
-                  <p class="site-tr-card__desc">Посетить био-сайт cr1mnsx и войти в XMB интерфейс.</p>
-                </div>
-                <div class="site-tr-card__status" id="trStatusWelcome">Получен 🏆</div>
-              </div>
-
-              <!-- Трофей 2: Серебро -->
-              <div class="site-tr-card" id="trCardBio">
-                <div class="site-tr-card__icon-wrap">
-                  <img src="assets/icons/trophies/silver.svg" alt="Silver Trophy">
-                </div>
-                <div class="site-tr-card__body">
-                  <div class="site-tr-card__type">СЕРЕБРЯНЫЙ ПРИЗ</div>
-                  <strong class="site-tr-card__name">Хранитель Огня</strong>
-                  <p class="site-tr-card__desc">Открыть и прочитать раздел «Биография cr1mnsx» с таймлайном.</p>
-                </div>
-                <div class="site-tr-card__status" id="trStatusBio">Заблокирован 🔒</div>
-              </div>
-
-              <!-- Трофей 3: Золото -->
-              <div class="site-tr-card" id="trCardGaming">
-                <div class="site-tr-card__icon-wrap">
-                  <img src="assets/icons/trophies/gold.svg" alt="Gold Trophy">
-                </div>
-                <div class="site-tr-card__body">
-                  <div class="site-tr-card__type">ЗОЛОТОЙ ПРИЗ</div>
-                  <strong class="site-tr-card__name">Платиновый Охотник</strong>
-                  <p class="site-tr-card__desc">Изучить витрину платиновых наград в разделе Gaming Showcase.</p>
-                </div>
-                <div class="site-tr-card__status" id="trStatusGaming">Заблокирован 🔒</div>
-              </div>
-
-              <!-- Трофей 4: Платина -->
-              <div class="site-tr-card" id="trCardPlatinum">
-                <div class="site-tr-card__icon-wrap">
-                  <img src="assets/icons/trophies/plat.svg" alt="Platinum Trophy">
-                </div>
-                <div class="site-tr-card__body">
-                  <div class="site-tr-card__type">ПЛАТИНОВЫЙ ПРИЗ</div>
-                  <strong class="site-tr-card__name">Истинный путник</strong>
-                  <p class="site-tr-card__desc">Осмотреть все категории XMB (Профиль, Музыка, PS5, Игры, Twitch, Линки).</p>
-                </div>
-                <div class="site-tr-card__status" id="trStatusPlatinum">Заблокирован 🔒</div>
-              </div>
-            </div>
-
-            <div class="site-tr-actions">
-              <button type="button" class="site-tr-btn" id="btnResetSiteTrophies">
-                <span>Сбросить трофеи (для повторного теста) 🔄</span>
-              </button>
-            </div>
-          </div>
-        </li>
-
-      </ul>
     </section>
 
-    <!-- Музыка (Яндекс Музыка) -->
-    <section class="cat" id="music" data-icon="assets/icons/xmb/music.svg">
-      <h2 class="cat__label">Музыка</h2>
-      <ul class="cat__items">
-        <!-- 1. Яндекс Музыка · Мой плейлист -->
-        <li class="item item--yandex-music is-selected" id="itemYandexMusic">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/yandexmusic.svg" alt="Яндекс Музыка"></span>
-            <span class="item__text">
-              <span class="item__title">Яндекс Музыка · Плейлист Cr1mnsx</span>
-              <span class="item__sub" id="ymListSub">Любимый плейлист · Слушать онлайн в плеере</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--music">
-            <div class="ym-player-card">
-              <div class="ym-player-header">
-                <div class="ym-player-brand">
-                  <img src="assets/icons/aero/yandexmusic.svg" alt="" width="28" height="28">
-                  <div>
-                    <strong class="ym-player-title" id="ymMainTitle">Плейлист Cr1mnsx</strong>
-                    <span class="ym-player-sub" id="ymMainSub">Яндекс Музыка · Официальный плеер</span>
-                  </div>
-                </div>
-                <div class="ym-player-badge">
-                  <span class="ym-pulse"></span>
-                  <span>ONLINE STREAM</span>
-                </div>
-              </div>
+    <!-- Нижняя часть экрана (Виджеты Welcome Hub или Карточки активностей игры) -->
+    <main class="ps5-content-stage" id="ps5ContentStage">
 
-              <!-- Интерактивный плеер Яндекс Музыки с полным списком треков и прокруткой -->
-              <div class="ym-embed-wrap">
-                <iframe 
-                  id="ymIframePlayer" 
-                  class="ym-iframe" 
-                  src="https://music.yandex.ru/iframe/playlist/446019089/3" 
-                  width="100%" 
-                  height="460" 
-                  frameborder="0" 
-                  allow="autoplay; encrypted-media; fullscreen">
-                </iframe>
-              </div>
+      <!-- ================= WELCOME HUB WIDGETS (Точная сетка как на референсе PS5) ================= -->
+      <div class="ps5-welcome-view" id="ps5WelcomeView">
+        <button class="ps5-stage-nav-arrow ps5-stage-nav-arrow--left" id="btnHubPrev" aria-label="Предыдущие виджеты">‹</button>
 
-              <div class="ym-controls-row">
-                <button type="button" class="ym-action-btn" id="ymChangePlaylistBtn" title="Сменить плейлист или вставить другую ссылку">
-                  <span>⚙️ Сменить плейлист</span>
-                </button>
-                <a class="ym-action-btn ym-action-btn--ext" id="ymDirectLink" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener">
-                  <span>Открыть в Яндекс Музыке ↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 2. Музыкальный вайб & Плейлисты -->
-        <li class="item" id="itemMusicVibe">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/xmb/music.svg" alt="Music Vibe"></span>
-            <span class="item__text">
-              <span class="item__title">Музыкальный вайб &amp; Плейлисты</span>
-              <span class="item__sub">Любимые стили, фон для ночных каток и эстетика звука</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--wide item__panel--music-vibe">
-            <div class="p-card mv-header-card">
-              <div class="p-card-title">
-                <span class="p-icon-emoji">🎧</span>
-                <span>ЗВУКОВАЯ ЭСТЕТИКА CR1MNSX</span>
-              </div>
-              <p class="mv-desc">Музыка — ключевой элемент атмосферы для каток в Dark Souls, Brawl Stars и ночных сессий кодинга.</p>
-            </div>
-
-            <div class="mv-grid">
-              <div class="mv-genre-card mv-genre-card--phonk">
-                <div class="mv-genre-header">
-                  <span class="mv-genre-icon">⚡</span>
-                  <span class="mv-genre-tag">Energy &amp; Drive</span>
-                </div>
-                <strong class="mv-genre-title">Drift &amp; Aggressive Phonk</strong>
-                <p class="mv-genre-desc">Глубокие басы, cowbell-мелодии и мощный ритм для максимальной концентрации во время каток.</p>
-              </div>
-
-              <div class="mv-genre-card mv-genre-card--synth">
-                <div class="mv-genre-header">
-                  <span class="mv-genre-icon">🌃</span>
-                  <span class="mv-genre-tag">Cyber-Retro</span>
-                </div>
-                <strong class="mv-genre-title">Dark Synthwave &amp; Cyberpunk</strong>
-                <p class="mv-genre-desc">Неоновый ретрофутуризм, аналоговые синтезаторы и вайб ночного Лос-Сантоса.</p>
-              </div>
-
-              <div class="mv-genre-card mv-genre-card--doomer">
-                <div class="mv-genre-header">
-                  <span class="mv-genre-icon">🌧️</span>
-                  <span class="mv-genre-tag">Melancholy</span>
-                </div>
-                <strong class="mv-genre-title">Russian Post-Punk &amp; Doomer</strong>
-                <p class="mv-genre-desc">Гитарная меланхолия, холодная атмосфера панелек и кинематографичный звук.</p>
-              </div>
-
-              <div class="mv-genre-card mv-genre-card--ost">
-                <div class="mv-genre-header">
-                  <span class="mv-genre-icon">⚔️</span>
-                  <span class="mv-genre-tag">Dark Fantasy</span>
-                </div>
-                <strong class="mv-genre-title">Soulsborne &amp; Game OSTs</strong>
-                <p class="mv-genre-desc">Эпические хоровые и скрипичные темы Маджулы, Лордрана, Людвига и Гаэля.</p>
-              </div>
-            </div>
-
-            <div class="mv-action-row">
-              <a class="psn-btn-profile psn-btn-profile--brawl" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener">
-                <span>Слушать главный плейлист на Яндекс Музыке ↗</span>
-              </a>
-            </div>
-          </div>
-        </li>
-
-
-        <!-- 2. Ссылка на открытие в приложении / веб-версии -->
-        <li class="item">
-          <a class="item__row" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener">
-            <span class="item__icon"><img src="assets/icons/aero/yandexmusic.svg" alt="Яндекс Музыка"></span>
-            <span class="item__text">
-              <span class="item__title">Открыть плейлист в Яндекс Музыке</span>
-              <span class="item__sub">music.yandex.ru · Прослушивание на телефоне или в приложении ↗</span>
-            </span>
-          </a>
-        </li>
-
-        <!-- 3. Моя волна / Рекомендации -->
-        <li class="item">
-          <a class="item__row" href="https://music.yandex.ru" target="_blank" rel="noopener">
-            <span class="item__icon"><img src="assets/icons/aero/yandexmusic.svg" alt="Моя волна"></span>
-            <span class="item__text">
-              <span class="item__title">Моя волна · Яндекс Музыка</span>
-              <span class="item__sub">Умный бесконечный поток музыки по вкусам на music.yandex.ru ↗</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <!-- PlayStation 5 (Последние запущенные игры и трофеи) -->
-    <section class="cat" id="souls" data-icon="assets/icons/xmb/dualshock3.svg">
-      <h2 class="cat__label">PlayStation 5</h2>
-      <ul class="cat__items">
-        <li class="item item--psn" id="itemPsnProfile">
-          <a class="item__row" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="assets/icons/ps-gothic.jpg" alt="PlayStation Network" style="border-radius: 6px;"></span>
-            <span class="item__text">
-              <span class="item__title">PlayStation Network · Профиль Cr1mnsx</span>
-              <span class="item__sub" id="psnHeaderSub">🎮 Последний запуск: DARK SOULS™ II: Scholar of the First Sin (8 октября 2026) · 709 трофеев</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="psn-terminal-widget">
-              <a class="psn-card-link" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть карточку Cr1mnsx на PSN.GG">
-                <img class="psn-card-img" src="assets/photos/terminal.svg?v=monica" alt="Cr1mnsx PSN Terminal Card" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5</span>
-                <span class="psn-meta__title">PlayStation Network · Cr1mnsx</span>
-              </div>
-
-              <!-- 🎮 Виджет: Последняя активность на PS5 -->
-              <a class="ps5-last-played-widget ps5-last-played-widget--card" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на PlayStation Network">
-                <div class="ps5-lp__cover-wrap">
-                  <img class="ps5-lp__cover ps5-last-game-img" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="DARK SOULS™ II: Scholar of the First Sin">
-                  <span class="pgc-cover-badge ps5-last-game-platform">PS5</span>
-                </div>
-                <div class="ps5-lp__content">
-                  <div class="ps5-lp__status-row">
-                    <span class="ps5-lp__pulse-dot"></span>
-                    <span class="ps5-lp__status-text ps5-last-game-status">Последний запуск на PlayStation 5 · 8 октября 2026</span>
-                  </div>
-                  <strong class="ps5-lp__title ps5-last-game-title">DARK SOULS™ II: Scholar of the First Sin</strong>
-                  <div class="ps5-lp__progress-wrap">
-                    <div class="ps5-lp__progress-bar">
-                      <div class="ps5-lp__progress-fill ps5-last-game-bar" style="width: 27%;"></div>
-                    </div>
-                    <span class="ps5-lp__progress-text ps5-last-game-progress"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="" width="14" height="14"> 14/38 трофеев (27%) · C Rank</span>
-                  </div>
-                </div>
-                <span class="ps5-lp__arrow">↗</span>
-              </a>
-
-              <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--plat" data-trophy-grade="Платиновый приз" data-trophy-name="Платиновые трофеи PSN" title="Платиновые трофеи на PSN (Spider-Man Remastered &amp; Miles Morales)"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt="Platinum"> <b class="psn-acc-plat">2</b> платины</div>
-                <div class="stat-pill stat-pill--gold" data-trophy-grade="Золотой приз" data-trophy-name="Золотые трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt="Gold"> <b class="psn-acc-gold">21</b> золотых</div>
-                <div class="stat-pill stat-pill--silver" data-trophy-grade="Серебряный приз" data-trophy-name="Серебряные трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt="Silver"> <b class="psn-acc-silver">138</b> серебра</div>
-                <div class="stat-pill stat-pill--bronze" data-trophy-grade="Бронзовый приз" data-trophy-name="Бронзовые трофеи PSN"><img class="ps-trophy-img" src="assets/icons/trophies/bronze.svg" alt="Bronze"> <b class="psn-acc-bronze">548</b> бронзы</div>
-                <div class="stat-pill stat-pill--lvl"><span class="stat-star">⭐</span> <b class="psn-acc-level-num">199</b> LVL</div>
-              </div>
-
-              <!-- История недавних игр PS5 с точным временем (PSN API) -->
-              <div class="ps5-history-block">
-                <div class="ps5-history-header">
-                  <span>🕹️ НЕДАВНИЕ ЗАПУСКИ И ВРЕМЯ В ИГРЕ (PSN API)</span>
-                </div>
-                <div class="ps5-recent-history-list"></div>
-              </div>
-
-              <a class="psn-btn-profile" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
-                <span>Открыть профиль на PSN.GG</span>
-                <span class="psn-btn-arrow">↗</span>
-              </a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 🎮 1. Последняя запущенная игра на PS5: Dark Souls II -->
-        <li class="item item--photo item--ps5-latest" id="itemPs5Latest">
-          <a class="item__row" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo">
-              <img class="ps5-latest-thumb" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="DARK SOULS™ II: Scholar of the First Sin" style="border-radius: 6px;">
-            </span>
-            <span class="item__text">
-              <span class="item__title ps5-latest-title">DARK SOULS™ II: Scholar of the First Sin</span>
-              <span class="item__sub ps5-latest-sub">🎮 Последний запуск на PS5 · 8 октября 2026 · 27% трофеев</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи">
-                <img class="game-banner-bg ps5-last-game-img" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="" aria-hidden="true">
-                <img class="game-banner-img ps5-latest-banner" src="https://image.api.playstation.com/vulcan/img/rnd/202010/1216/oSOVmvoekCf9ASaAItqfKvpP.png" alt="DARK SOULS™ II: Scholar of the First Sin">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge ps5-latest-platform">PS5</span>
-                <span class="psn-meta__title ps5-latest-title">DARK SOULS™ II: Scholar of the First Sin</span>
-              </div>
-              <div class="bs-action-links" style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <a class="psn-btn-profile" style="flex: 1; min-width: 170px;" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-                  <span>Трофеи на PSNProfiles</span>
-                  <span class="psn-btn-arrow">↗</span>
-                </a>
-                <a class="psn-btn-profile psn-btn-profile--psn" style="flex: 1; min-width: 170px;" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
-                  <span>Профиль на PSN.GG</span>
-                  <span class="psn-btn-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <!-- 2. Minecraft -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png" alt="Minecraft"></span>
-            <span class="item__text">
-              <span class="item__title">Minecraft</span>
-              <span class="item__sub">Бесконечные миры, строительство и выживание на PS5</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener" title="Открыть Minecraft">
-                <img class="game-banner-img" src="https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png" alt="Minecraft" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5</span>
-                <span class="psn-meta__title">Minecraft</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 3. Grand Theft Auto V (PS5) -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png" alt="Grand Theft Auto V"></span>
-            <span class="item__text">
-              <span class="item__title">Grand Theft Auto V (PlayStation®5)</span>
-              <span class="item__sub">Лос-Сантос нового поколения · 17% трофеев · 12/78</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener" title="Открыть трофеи GTA V">
-                <img class="game-banner-img" src="assets/photos/games/gta5.jpg" alt="GTA V" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5 Native</span>
-                <span class="psn-meta__title">Grand Theft Auto V</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/15720-grand-theft-auto-v/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 4. Marvel's Spider-Man 2 -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png" alt="Marvel's Spider-Man 2"></span>
-            <span class="item__text">
-              <span class="item__title">Marvel's Spider-Man 2</span>
-              <span class="item__sub">Питер Паркер и Майлз Моралес против Венома и Крэйвена</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/1c7b75d8ed9271516546560d219ad0b22ee0a263b4537bd8.png" alt="Marvel's Spider-Man 2" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5 Exclusive</span>
-                <span class="psn-meta__title">Marvel's Spider-Man 2</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener"><span>Профиль на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 5. The Witcher 3: Wild Hunt — Remastered -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/20111-the-witcher-3-wild-hunt/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202609/1711/d851895118a16d07706b91e7b69b53ce27531269cad5e968.png" alt="The Witcher 3"></span>
-            <span class="item__text">
-              <span class="item__title">The Witcher 3: Wild Hunt — Remastered</span>
-              <span class="item__sub">Next-Gen PS5 сага о Геральте · 18% трофеев · 17/79</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/20111-the-witcher-3-wild-hunt/Cr1mnsx" target="_blank" rel="noopener" title="Открыть The Witcher 3">
-                <img class="game-banner-img" src="assets/photos/games/witcher3.jpg" alt="The Witcher 3" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5</span>
-                <span class="psn-meta__title">The Witcher 3: Wild Hunt</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/20111-the-witcher-3-wild-hunt/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 6. Assassin's Creed Unity -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/3072-assassins-creed-unity/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/cdn/UP0001/CUSA00663_00/o1pTr4XjsCODz0vZadpH4zyxgMj7I7ga.png" alt="Assassin's Creed Unity"></span>
-            <span class="item__text">
-              <span class="item__title">Assassin's Creed® Unity</span>
-              <span class="item__sub">Париж 1789 · Сюжет пройден · 40% трофеев · 27/58</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/3072-assassins-creed-unity/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/ac-unity.jpg" alt="Assassin's Creed Unity" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS4 / PS5</span>
-                <span class="psn-meta__title">Assassin's Creed Unity</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/3072-assassins-creed-unity/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 7. Far Cry 3 Classic Edition -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/7735-far-cry-3-classic-edition/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202606/2413/d1b2bc237dc9b35e0d592a994ef8c7c3b9697680f8e410e1.png" alt="Far Cry 3"></span>
-            <span class="item__text">
-              <span class="item__title">Far Cry® 3 Classic Edition</span>
-              <span class="item__sub">Рук Айленд · Сюжет пройден · 45% трофеев · 24/44</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/7735-far-cry-3-classic-edition/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/farcry3.jpg" alt="Far Cry 3 Classic Edition" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS4 / PS5</span>
-                <span class="psn-meta__title">Far Cry 3 Classic Edition</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/7735-far-cry-3-classic-edition/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 8. skate.™ -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202604/2122/41d5a3beff5a2b0b9ac56b9b23869dad7821df71a60f4b02.png" alt="skate."></span>
-            <span class="item__text">
-              <span class="item__title">skate.™</span>
-              <span class="item__sub">Новый скейтбординг San Vansterdam на PlayStation 5</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="https://image.api.playstation.com/vulcan/ap/rnd/202604/2122/41d5a3beff5a2b0b9ac56b9b23869dad7821df71a60f4b02.png" alt="skate." width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5</span>
-                <span class="psn-meta__title">skate.™</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener"><span>Профиль на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 9. UNCHARTED: Legacy of Thieves Collection -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202111/2000/gTUWTlvPHzxFJ2JAxtDyI2eS.png" alt="UNCHARTED: Legacy of Thieves"></span>
-            <span class="item__text">
-              <span class="item__title">UNCHARTED: Legacy of Thieves Collection</span>
-              <span class="item__sub">Приключения Нейтана Дрейка и Хлои Фрейзер на PS5</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="https://image.api.playstation.com/vulcan/ap/rnd/202111/2000/gTUWTlvPHzxFJ2JAxtDyI2eS.png" alt="UNCHARTED" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5 Remastered</span>
-                <span class="psn-meta__title">UNCHARTED: Legacy of Thieves</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 10. Until Dawn -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/29755-until-dawn/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202401/2910/d48262b72a5a2daa3ca3aed6c8f42c44f3fdaf2902265a13.png" alt="Until Dawn"></span>
-            <span class="item__text">
-              <span class="item__title">Until Dawn™</span>
-              <span class="item__sub">Интерактивный хоррор на UE5 · 4% трофеев · 3/29</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/29755-until-dawn/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/until-dawn.jpg" alt="Until Dawn" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5 Native</span>
-                <span class="psn-meta__title">Until Dawn</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/29755-until-dawn/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 11. Dark Souls Remastered -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/7655-dark-souls-remastered/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/games/ds1-remastered.png" alt="Dark Souls Remastered"></span>
-            <span class="item__text">
-              <span class="item__title">Dark Souls Remastered (Top-1 Souls)</span>
-              <span class="item__sub">Лордран, костры и путешествие сквозь пепел и тьму · 42%</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="assets/photos/games/ds1-remastered.jpg" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/ds1-remastered.jpg" alt="Dark Souls Remastered" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS4 / PS5</span>
-                <span class="psn-meta__title">Dark Souls Remastered</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/7655-dark-souls-remastered/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 12. Red Dead Redemption 2 -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/8370-red-dead-redemption-2/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/games/rdr2.png" alt="Red Dead Redemption 2"></span>
-            <span class="item__text">
-              <span class="item__title">Red Dead Redemption 2</span>
-              <span class="item__sub">Эпос Rockstar Games о закате эпохи Дикого Запада · 15%</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/8370-red-dead-redemption-2/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/rdr2.jpg" alt="Red Dead Redemption 2" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS4 / PS5</span>
-                <span class="psn-meta__title">Red Dead Redemption 2</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/8370-red-dead-redemption-2/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 13. Dying Light -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/3303-dying-light/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/games/dying-light.png" alt="Dying Light"></span>
-            <span class="item__text">
-              <span class="item__title">Dying Light</span>
-              <span class="item__sub">Адреналиновый паркур и выживание среди орд зомби в Харране</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/3303-dying-light/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/dying-light.jpg" alt="Dying Light" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS4 / PS5</span>
-                <span class="psn-meta__title">Dying Light</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/3303-dying-light/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 14. Helldivers 2 -->
-        <li class="item item--photo">
-          <a class="item__row" href="https://psnprofiles.com/trophies/25779-helldivers-2/Cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon item__icon--photo"><img src="assets/photos/games/helldivers2.png" alt="Helldivers 2"></span>
-            <span class="item__text">
-              <span class="item__title">Helldivers 2</span>
-              <span class="item__sub">Тактический кооперативный шутер нового поколения во имя Супер-Земли</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget">
-              <a class="game-banner-link" href="https://psnprofiles.com/trophies/25779-helldivers-2/Cr1mnsx" target="_blank" rel="noopener">
-                <img class="game-banner-img" src="assets/photos/games/helldivers2.jpg" alt="Helldivers 2" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge">PS5</span>
-                <span class="psn-meta__title">Helldivers 2</span>
-              </div>
-              <a class="psn-btn-profile" href="https://psnprofiles.com/trophies/25779-helldivers-2/Cr1mnsx" target="_blank" rel="noopener"><span>Трофеи на PSNProfiles ↗</span></a>
-            </div>
-          </div>
-        </li>
-
-        <!-- 15. Brawl Stars -->
-        <li class="item item--brawlstars" id="itemBrawlStars">
-          <a class="item__row" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener">
-            <span class="item__icon"><span class="icon-tile icon-tile--brawl"><img src="assets/icons/aero/brawl-stars.png" alt="Brawl Stars"></span></span>
-            <span class="item__text">
-              <span class="item__title">Brawl Stars · Профиль Cr1mnsx</span>
-              <span class="item__sub" id="bs-sub-preview">🏆 40,000+ кубков · 108 бойцов · Ежедневный актив · #2RGUQJQ0R</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--psn">
-            <div class="game-banner-widget game-banner-widget--brawl">
-              <a class="game-banner-link" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener" title="Открыть профиль Cr1mnsx на Brawlify">
-                <img class="game-banner-img" src="assets/photos/brawl-stars-banner.jpg" alt="Brawl Stars Arena" width="800" height="180">
-              </a>
-            </div>
-            <div class="psn-meta">
-              <div class="psn-meta__header">
-                <span class="psn-badge psn-badge--brawl">Brawl Stars</span>
-                <span class="psn-badge">Cr1mnsx</span>
-                <span class="bs-sync-badge" id="bs-sync-status" title="Статус синхронизации">🟢 Live: ~40k</span>
-              </div>
-              <div class="psn-stats-grid">
-                <div class="stat-pill stat-pill--gold" title="Текущие кубки"><img class="ps-trophy-img" src="assets/icons/trophies/gold.svg" alt=""> Кубки: <b id="bs-trophies">39,950</b></div>
-                <div class="stat-pill stat-pill--lvl" title="Рекордное количество кубков"><span class="stat-star">🔥</span> Рекорд: <b id="bs-highest">40,120</b></div>
-                <div class="stat-pill stat-pill--bronze" title="Разблокированные бойцы"><span class="stat-trophy">🔓</span> Бойцы: <b id="bs-brawlers">108 / 108</b></div>
-                <div class="stat-pill stat-pill--plat" title="Победы в режиме 3 на 3"><img class="ps-trophy-img" src="assets/icons/trophies/plat.svg" alt=""> 3v3 победы: <b id="bs-3v3">2,840</b></div>
-                <div class="stat-pill stat-pill--silver" title="Победы в одиночном и парном столкновении (ШД)"><img class="ps-trophy-img" src="assets/icons/trophies/silver.svg" alt=""> Соло / Дуо: <b id="bs-showdown">1,530</b></div>
-                <div class="stat-pill" title="Текущий клуб игрока"><span class="stat-trophy">🛡️</span> Клуб: <b id="bs-club">0.3.7|teams</b></div>
-              </div>
-
-              <!-- Витрина топ-бойцов профиля (Brawler Showcase) -->
-              <div class="bs-showcase-section">
-                <div class="bs-showcase-header">
-                  <span>⭐ ТОП БОЙЦОВ ПРОФИЛЯ (MAX TIER · POWER 11)</span>
-                  <span class="bs-showcase-sub">Top 6</span>
-                </div>
-                <div class="bs-brawlers-grid" id="bsTopBrawlersGrid"></div>
-              </div>
-
-              <!-- История последних боёв (Recent Battlelog) -->
-              <div class="bs-showcase-section">
-                <div class="bs-showcase-header">
-                  <span>⚔️ НЕДАВНИЕ МАТЧИ (BATTLELOG)</span>
-                  <span class="bs-showcase-sub">#2RGUQJQ0R</span>
-                </div>
-                <div class="bs-battles-list" id="bsRecentBattlesList"></div>
-              </div>
-
-              <div class="bs-action-links" style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <button type="button" class="psn-btn-profile" id="bsRefreshBtn" style="flex: 1; min-width: 170px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); cursor: pointer; color:#fff;" title="Обновить текущие кубки">
-                  <span>Обновить кубки 🔄</span>
-                </button>
-                <a class="psn-btn-profile psn-btn-profile--brawl" style="flex: 1; min-width: 170px;" href="https://brawlify.com/player/2RGUQJQ0R" target="_blank" rel="noopener">
-                  <span>Статистика на Brawlify</span>
-                  <span class="psn-btn-arrow">↗</span>
-                </a>
-                <a class="psn-btn-profile psn-btn-profile--brawltime" style="flex: 1; min-width: 170px;" href="https://brawltime.ninja/profile/2RGUQJQ0R" target="_blank" rel="noopener">
-                  <span>Brawl Time Ninja</span>
-                  <span class="psn-btn-arrow">↗</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Игры: Популярные браузерные онлайн-игры (MinGame) -->
-    <section class="cat" id="game" data-icon="assets/icons/xmb/disc.svg">
-      <h2 class="cat__label">Игры Онлайн</h2>
-      <ul class="cat__items">
-        <!-- 1. Grand Theft Auto V -->
-        <li class="item item--game" id="game-grand-theft-auto-5">
-          <a class="item__row" href="#play" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/webport/gta5/index.html" data-game-title="Grand Theft Auto V">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/f8V8CiIXbCTxQELLhImCQ4PuXgw1XbB2OcR4TGYQ.webp" alt="Grand Theft Auto V" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Grand Theft Auto V</span>
-              <span class="item__sub">Rockstar Games · Лос-Сантос · Культовый 3D-мир прямо в браузере</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Grand Theft Auto V</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/webport/gta5/index.html" data-game-title="Grand Theft Auto V" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/webport/gta5/index.html" data-game-title="Grand Theft Auto V" title="Запустить Grand Theft Auto V">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/f8V8CiIXbCTxQELLhImCQ4PuXgw1XbB2OcR4TGYQ.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/f8V8CiIXbCTxQELLhImCQ4PuXgw1XbB2OcR4TGYQ.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/f8V8CiIXbCTxQELLhImCQ4PuXgw1XbB2OcR4TGYQ.webp" alt="Grand Theft Auto V">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/webport/gta5/index.html" data-game-title="Grand Theft Auto V">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 2. GTA: Vice City (Русская Версия) -->
-        <li class="item item--game" id="game-grand-theft-auto-vice-city-ru">
-          <a class="item__row" href="#play" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/gtavc/index.html?lang=ru&cheats=1" data-game-title="GTA: Vice City (Русская Версия)">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/PktHSpZAdZyDQDOYX3c5Xdtqbb12KfmIsKiLPPRB.jpg" alt="GTA: Vice City (Русская Версия)" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">GTA: Vice City (Русская Версия)</span>
-              <span class="item__sub">Томми Версетти · Неоновый Майами 80-х · WebAssembly порт</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">GTA: Vice City (Русская Версия)</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/gtavc/index.html?lang=ru&cheats=1" data-game-title="GTA: Vice City (Русская Версия)" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/gtavc/index.html?lang=ru&cheats=1" data-game-title="GTA: Vice City (Русская Версия)" title="Запустить GTA: Vice City (Русская Версия)">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/PktHSpZAdZyDQDOYX3c5Xdtqbb12KfmIsKiLPPRB.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/PktHSpZAdZyDQDOYX3c5Xdtqbb12KfmIsKiLPPRB.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/PktHSpZAdZyDQDOYX3c5Xdtqbb12KfmIsKiLPPRB.jpg" alt="GTA: Vice City (Русская Версия)">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/gtavc/index.html?lang=ru&cheats=1" data-game-title="GTA: Vice City (Русская Версия)">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 3. Counter-Strike 1.6 Web -->
-        <li class="item item--game" id="game-counter-strike-1-6">
-          <a class="item__row" href="#play" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/cs16-web/index.html" data-game-title="Counter-Strike 1.6 Web">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/8Njr0AG1C3YOSPxgydkJXesP9WvqjxPAlW48hks9.webp" alt="Counter-Strike 1.6 Web" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Counter-Strike 1.6 Web</span>
-              <span class="item__sub">Valve · Оригинальный GoldSrc на WebAssembly · de_dust2</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Counter-Strike 1.6 Web</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/cs16-web/index.html" data-game-title="Counter-Strike 1.6 Web" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/cs16-web/index.html" data-game-title="Counter-Strike 1.6 Web" title="Запустить Counter-Strike 1.6 Web">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/8Njr0AG1C3YOSPxgydkJXesP9WvqjxPAlW48hks9.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/8Njr0AG1C3YOSPxgydkJXesP9WvqjxPAlW48hks9.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/8Njr0AG1C3YOSPxgydkJXesP9WvqjxPAlW48hks9.webp" alt="Counter-Strike 1.6 Web">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/cs16-web/index.html" data-game-title="Counter-Strike 1.6 Web">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 4. Need for Speed: Most Wanted -->
-        <li class="item item--game" id="game-need-for-speed-most-wanted-gba-ru">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/gba/index.html?g=NeedforSpeedMostWanted(UE)(M4)TRus_MagicGame" data-game-title="Need for Speed: Most Wanted">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/aLLMgnrQcI2xeAPAjpXAbHSXoYY9PaRNjT8UUCnS.jpg" alt="Need for Speed: Most Wanted" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Need for Speed: Most Wanted</span>
-              <span class="item__sub">EA Games · Чёрный список Рокпорта · Погони и тюнинг на русском</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Need for Speed: Most Wanted</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/gba/index.html?g=NeedforSpeedMostWanted(UE)(M4)TRus_MagicGame" data-game-title="Need for Speed: Most Wanted" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/gba/index.html?g=NeedforSpeedMostWanted(UE)(M4)TRus_MagicGame" data-game-title="Need for Speed: Most Wanted" title="Запустить Need for Speed: Most Wanted">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/aLLMgnrQcI2xeAPAjpXAbHSXoYY9PaRNjT8UUCnS.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/aLLMgnrQcI2xeAPAjpXAbHSXoYY9PaRNjT8UUCnS.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/aLLMgnrQcI2xeAPAjpXAbHSXoYY9PaRNjT8UUCnS.jpg" alt="Need for Speed: Most Wanted">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/gba/index.html?g=NeedforSpeedMostWanted(UE)(M4)TRus_MagicGame" data-game-title="Need for Speed: Most Wanted">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 5. Half-Life (Xash3D Web) -->
-        <li class="item item--game" id="game-half-life">
-          <a class="item__row" href="#play" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/ololoken/half-life/index.html" data-game-title="Half-Life (Xash3D Web)">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/k4FZTgEuIMLeAztnUTmYr30vaRgNE3txrM71Zt9g.webp" alt="Half-Life (Xash3D Web)" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Half-Life (Xash3D Web)</span>
-              <span class="item__sub">Valve · Гордон Фримен · Катастрофа в Чёрной Мезе</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Half-Life (Xash3D Web)</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/ololoken/half-life/index.html" data-game-title="Half-Life (Xash3D Web)" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/ololoken/half-life/index.html" data-game-title="Half-Life (Xash3D Web)" title="Запустить Half-Life (Xash3D Web)">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/k4FZTgEuIMLeAztnUTmYr30vaRgNE3txrM71Zt9g.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/k4FZTgEuIMLeAztnUTmYr30vaRgNE3txrM71Zt9g.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/k4FZTgEuIMLeAztnUTmYr30vaRgNE3txrM71Zt9g.webp" alt="Half-Life (Xash3D Web)">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/ololoken/half-life/index.html" data-game-title="Half-Life (Xash3D Web)">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 6. Ultimate Mortal Kombat 3 -->
-        <li class="item item--game" id="game-ultimate-mortal-kombat-3">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=umk3" data-game-title="Ultimate Mortal Kombat 3">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/sega_umk3.jpg" alt="Ultimate Mortal Kombat 3" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Ultimate Mortal Kombat 3</span>
-              <span class="item__sub">Midway · Скорпион, Саб-Зиро · Fatality, Babality & Brutality</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Ultimate Mortal Kombat 3</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=umk3" data-game-title="Ultimate Mortal Kombat 3" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=umk3" data-game-title="Ultimate Mortal Kombat 3" title="Запустить Ultimate Mortal Kombat 3">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/sega_umk3.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/sega_umk3.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/sega_umk3.jpg" alt="Ultimate Mortal Kombat 3">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=umk3" data-game-title="Ultimate Mortal Kombat 3">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 7. DOOM (1993 Classic) -->
-        <li class="item item--game" id="game-doom">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/dos/index.html?g=doom" data-game-title="DOOM (1993 Classic)">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/Qc764WubM6YsjxbdUWhuC6GtAXRRb3NAARF0MUSW.jpg" alt="DOOM (1993 Classic)" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">DOOM (1993 Classic)</span>
-              <span class="item__sub">id Software · Палач Рока · Дробовик, BFG9000 и адские орды</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">DOOM (1993 Classic)</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/dos/index.html?g=doom" data-game-title="DOOM (1993 Classic)" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/dos/index.html?g=doom" data-game-title="DOOM (1993 Classic)" title="Запустить DOOM (1993 Classic)">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/Qc764WubM6YsjxbdUWhuC6GtAXRRb3NAARF0MUSW.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/Qc764WubM6YsjxbdUWhuC6GtAXRRb3NAARF0MUSW.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/Qc764WubM6YsjxbdUWhuC6GtAXRRb3NAARF0MUSW.jpg" alt="DOOM (1993 Classic)">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/dos/index.html?g=doom" data-game-title="DOOM (1993 Classic)">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 8. Super Mario 64 -->
-        <li class="item item--game" id="game-super-mario-64">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/n64/index.html?g=Super%20Mario%2064" data-game-title="Super Mario 64">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/CixUShoSSXRvvuarkZx9BKYRgw3HIda6y6KZXt5N.jpg" alt="Super Mario 64" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Super Mario 64</span>
-              <span class="item__sub">Nintendo · Замок принцессы Пич · Революционный 3D-платформер</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Super Mario 64</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/n64/index.html?g=Super%20Mario%2064" data-game-title="Super Mario 64" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/n64/index.html?g=Super%20Mario%2064" data-game-title="Super Mario 64" title="Запустить Super Mario 64">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/CixUShoSSXRvvuarkZx9BKYRgw3HIda6y6KZXt5N.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/CixUShoSSXRvvuarkZx9BKYRgw3HIda6y6KZXt5N.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/CixUShoSSXRvvuarkZx9BKYRgw3HIda6y6KZXt5N.jpg" alt="Super Mario 64">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/n64/index.html?g=Super%20Mario%2064" data-game-title="Super Mario 64">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 9. Kingdom Rush -->
-        <li class="item item--game" id="game-kingdom-rush">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=kingdomrush_1.14b_hack" data-game-title="Kingdom Rush">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/xvWkiCn5VybWv3aw4iQPCALRW4pS690FRhFQrinx.webp" alt="Kingdom Rush" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Kingdom Rush</span>
-              <span class="item__sub">Ironhide Game Studio · Лучшая в мире Tower Defense стратегия</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Kingdom Rush</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=kingdomrush_1.14b_hack" data-game-title="Kingdom Rush" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=kingdomrush_1.14b_hack" data-game-title="Kingdom Rush" title="Запустить Kingdom Rush">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/xvWkiCn5VybWv3aw4iQPCALRW4pS690FRhFQrinx.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/xvWkiCn5VybWv3aw4iQPCALRW4pS690FRhFQrinx.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/xvWkiCn5VybWv3aw4iQPCALRW4pS690FRhFQrinx.webp" alt="Kingdom Rush">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=kingdomrush_1.14b_hack" data-game-title="Kingdom Rush">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 10. Road of the Dead -->
-        <li class="item item--game" id="game-road-of-the-dead">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=дорога_смерти" data-game-title="Road of the Dead (Дорога Смерти)">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/E6t4CLszqvNHIZgaRs5KN1zIRH6n5NfAD0G673Kx.webp" alt="Road of the Dead" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Road of the Dead</span>
-              <span class="item__sub">Evil-Dog · Гонка на выживание сквозь зону зомби-карантина</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Road of the Dead (Дорога Смерти)</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=дорога_смерти" data-game-title="Road of the Dead (Дорога Смерти)" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=дорога_смерти" data-game-title="Road of the Dead (Дорога Смерти)" title="Запустить Road of the Dead (Дорога Смерти)">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/E6t4CLszqvNHIZgaRs5KN1zIRH6n5NfAD0G673Kx.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/E6t4CLszqvNHIZgaRs5KN1zIRH6n5NfAD0G673Kx.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/E6t4CLszqvNHIZgaRs5KN1zIRH6n5NfAD0G673Kx.webp" alt="Road of the Dead (Дорога Смерти)">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=дорога_смерти" data-game-title="Road of the Dead (Дорога Смерти)">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 11. Zuma Deluxe -->
-        <li class="item item--game" id="game-zuma-deluxe">
-          <a class="item__row" href="#play" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/starodymov/zuma-deluxe-original/index.html" data-game-title="Zuma Deluxe">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/jb6Bznyd7OXOc5wWsqTwnERAsPrlpeHS35gRjofi.webp" alt="Zuma Deluxe" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Zuma Deluxe</span>
-              <span class="item__sub">PopCap Games · Каменная лягушка, древние храмы и цепочки шаров</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Zuma Deluxe</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/starodymov/zuma-deluxe-original/index.html" data-game-title="Zuma Deluxe" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/starodymov/zuma-deluxe-original/index.html" data-game-title="Zuma Deluxe" title="Запустить Zuma Deluxe">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/jb6Bznyd7OXOc5wWsqTwnERAsPrlpeHS35gRjofi.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/jb6Bznyd7OXOc5wWsqTwnERAsPrlpeHS35gRjofi.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/jb6Bznyd7OXOc5wWsqTwnERAsPrlpeHS35gRjofi.webp" alt="Zuma Deluxe">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://s3.ru1.storage.beget.cloud/fa44ebbed79a-mingame-cloud/yg/starodymov/zuma-deluxe-original/index.html" data-game-title="Zuma Deluxe">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 12. Sonic the Hedgehog 3 -->
-        <li class="item item--game" id="game-sonic-the-hedgehog-3">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=sonic3" data-game-title="Sonic the Hedgehog 3">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/sega_eng/sonic3.jpg" alt="Sonic the Hedgehog 3" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Sonic the Hedgehog 3</span>
-              <span class="item__sub">SEGA · Соник, Тейлз и Наклз на Парящем Острове</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Sonic the Hedgehog 3</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=sonic3" data-game-title="Sonic the Hedgehog 3" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=sonic3" data-game-title="Sonic the Hedgehog 3" title="Запустить Sonic the Hedgehog 3">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/sega_eng/sonic3.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/sega_eng/sonic3.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/sega_eng/sonic3.jpg" alt="Sonic the Hedgehog 3">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/sega/index.html?g=sonic3" data-game-title="Sonic the Hedgehog 3">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 13. Madness: Project Nexus -->
-        <li class="item item--game" id="game-madness-project-nexus">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=madness-project-nexus" data-game-title="Madness: Project Nexus">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/Zd8UpME3uKNSYmJd7hVtZAwEzDh286CWzdGluLmW.jpg" alt="Madness: Project Nexus" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Madness: Project Nexus</span>
-              <span class="item__sub">Krinkels · Культовый аренный экшен по вселенной Madness Combat</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Madness: Project Nexus</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=madness-project-nexus" data-game-title="Madness: Project Nexus" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=madness-project-nexus" data-game-title="Madness: Project Nexus" title="Запустить Madness: Project Nexus">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/Zd8UpME3uKNSYmJd7hVtZAwEzDh286CWzdGluLmW.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/Zd8UpME3uKNSYmJd7hVtZAwEzDh286CWzdGluLmW.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/Zd8UpME3uKNSYmJd7hVtZAwEzDh286CWzdGluLmW.jpg" alt="Madness: Project Nexus">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=madness-project-nexus" data-game-title="Madness: Project Nexus">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 14. Lines 98 (Цветные Линии) -->
-        <li class="item item--game" id="game-lines-98">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=lines98" data-game-title="Lines 98 (Цветные Линии)">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/siazqHsUey3OULdr0dEKEr7niOnOPjyucCI5zSl6.webp" alt="Lines 98 (Цветные Линии)" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Lines 98 (Цветные Линии)</span>
-              <span class="item__sub">Культовая офисная головоломка 90-х · Линии из 5 шариков</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Lines 98 (Цветные Линии)</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=lines98" data-game-title="Lines 98 (Цветные Линии)" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=lines98" data-game-title="Lines 98 (Цветные Линии)" title="Запустить Lines 98 (Цветные Линии)">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/siazqHsUey3OULdr0dEKEr7niOnOPjyucCI5zSl6.webp" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/siazqHsUey3OULdr0dEKEr7niOnOPjyucCI5zSl6.webp" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/siazqHsUey3OULdr0dEKEr7niOnOPjyucCI5zSl6.webp" alt="Lines 98 (Цветные Линии)">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=lines98" data-game-title="Lines 98 (Цветные Линии)">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!-- 15. Yetisports: Пингвиний полёт -->
-        <li class="item item--game" id="game-yetisports-5">
-          <a class="item__row" href="#play" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=Yetisports-5" data-game-title="Yetisports: Пингвиний полёт">
-            <span class="item__icon item__icon--game">
-              <img src="https://mingame.ru/storage/cover/admin/Og7og9WsMzNmso7KtVHtplvVaowq5sqtqVO89kQ7.jpg" alt="Yetisports: Пингвиний полёт" loading="lazy">
-            </span>
-            <span class="item__text">
-              <span class="item__title">Yetisports: Пингвиний полёт</span>
-              <span class="item__sub">Chris Hilgert · Культовый снежный йети, бита и пингвины</span>
-            </span>
-          </a>
-          <div class="item__panel item__panel--game">
-            <div class="game-window">
-              <div class="game-window__header">
-                <div class="game-window__title-group">
-                  <span class="game-window__badge">WEBPORT</span>
-                  <h3 class="game-window__title">Yetisports: Пингвиний полёт</h3>
-                </div>
-                <button class="game-window__fs-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=Yetisports-5" data-game-title="Yetisports: Пингвиний полёт" title="Во весь экран (F11)">
-                  <span class="game-window__fs-icon">⛶</span>
-                  <span>Во весь экран</span>
-                </button>
-              </div>
-              <div class="game-window__screen" role="button" tabindex="0" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=Yetisports-5" data-game-title="Yetisports: Пингвиний полёт" title="Запустить Yetisports: Пингвиний полёт">
-                <video class="game-banner-video" poster="https://mingame.ru/storage/cover/admin/Og7og9WsMzNmso7KtVHtplvVaowq5sqtqVO89kQ7.jpg" autoplay loop muted playsinline preload="none"></video>
-                <img class="game-window__bg" src="https://mingame.ru/storage/cover/admin/Og7og9WsMzNmso7KtVHtplvVaowq5sqtqVO89kQ7.jpg" alt="" aria-hidden="true">
-                <img class="game-window__cover" src="https://mingame.ru/storage/cover/admin/Og7og9WsMzNmso7KtVHtplvVaowq5sqtqVO89kQ7.jpg" alt="Yetisports: Пингвиний полёт">
-                
-                <div class="game-window__overlay">
-                  <button class="game-window__play-btn psn-btn-launch-game" type="button" data-game-url="https://mingame.ru/storage/game/ruffle/index.html?g=Yetisports-5" data-game-title="Yetisports: Пингвиний полёт">
-                    <span class="game-window__play-icon">▶</span>
-                    <span class="game-window__play-text">Запустить игру</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Twitch (Телевизор / Медиа) -->
-    <section class="cat" id="twitch" data-icon="assets/icons/xmb/tv.svg">
-      <h2 class="cat__label">Twitch</h2>
-      <ul class="cat__items">
-        <li class="item">
-          <a class="item__row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener">
-            <span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/cr1mnsx.png" alt="cr1mnsx"></span></span>
-            <span class="item__text">
-              <span class="item__title">cr1mnsx на Twitch</span>
-              <span class="item__sub">twitch.tv/cr1mnsx · Мой профиль на твиче</span>
-            </span>
-          </a>
-        </li>
-        <li class="item item--mafanya" id="itemMafanyaTwitch">
-          <div class="item__row" id="mafanyaTwitchRow">
-            <span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/mafanya.png" alt="mafanyaking"></span></span>
-            <span class="item__text">
-              <span class="item__title">mafanyaking (Влад Мафаня) <span class="twitch-live-pill" id="mafanyaMenuBadge" style="display:none;">LIVE</span></span>
-              <span class="item__sub">twitch.tv/mafanyaking · Любимый стример</span>
-            </span>
-          </div>
-
-          <!-- Встроенная правая панель XMB со стримом Мафани -->
-          <div class="item__panel item__panel--twitch">
-            <div class="twitch-xmb-card aero-tilt">
-              <!-- Шапка виджета -->
-              <div class="twitch-xmb-header">
-                <div class="twitch-xmb-user">
-                  <div class="twitch-xmb-avatar-box">
-                    <img class="twitch-xmb-avatar" id="twitchXmbAvatar" src="assets/photos/twitch/mafanya.png" alt="Влад Мафаня">
-                    <span class="twitch-xmb-avatar-ring"></span>
-                  </div>
-                  <div class="twitch-xmb-meta">
-                    <div class="twitch-xmb-name-row">
-                      <strong class="twitch-xmb-name">Влад Мафаня</strong>
-                      <span class="twitch-verified" title="Подтвержденный стример">✓</span>
-                    </div>
-                    <div class="twitch-xmb-sub" id="twitchXmbSub">mafanyaking · 561k фолловеров</div>
-                  </div>
-                </div>
-                <div class="twitch-status-pill is-offline" id="twitchXmbStatusPill">
-                  <span class="twitch-status-dot"></span>
-                  <span class="twitch-status-label" id="twitchXmbStatusLabel">ОФФЛАЙН</span>
-                </div>
-              </div>
-
-              <!-- Вкладки: Топ Клипы / Прямой Эфир / Анонсы -->
-              <div class="twitch-tabs" role="tablist">
-                <button type="button" class="twitch-tab is-active" id="twitchTabClips" role="tab" aria-selected="true">
-                  <span class="twitch-tab-icon">🎬</span>
-                  <span>Лучшие клипы</span>
-                  <span class="twitch-tab-badge">5</span>
-                </button>
-                <button type="button" class="twitch-tab" id="twitchTabLive" role="tab" aria-selected="false">
-                  <span class="twitch-tab-icon">📺</span>
-                  <span id="twitchTabLiveLabel">Канал Twitch</span>
-                </button>
-                <a href="https://t.me/toxiclegion" target="_blank" rel="noopener" class="twitch-tab twitch-tab--tg" title="Телеграм Toxic Legion">
-                  <img src="assets/icons/social/telegram.png" alt="" width="13" height="13">
-                  <span>Анонсы</span>
-                  <span class="twitch-tab-ext">↗</span>
-                </a>
-              </div>
-
-              <!-- Плеер 16:9 (Клипы / Лайв) -->
-              <div class="twitch-xmb-player-box" id="twitchPlayerBox">
-                <!-- Плеер клипов (активен по умолчанию при оффлайне) -->
-                <iframe 
-                  id="twitchClipIframe"
-                  class="twitch-xmb-iframe"
-                  title="Клип mafanyaking"
-                  src=""
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-
-                <!-- Плеер прямого эфира -->
-                <iframe 
-                  id="twitchXmbIframe"
-                  class="twitch-xmb-iframe"
-                  title="Стрим mafanyaking"
-                  src=""
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowfullscreen
-                  style="display: none;">
-                </iframe>
-              </div>
-
-              <!-- Интерактивный селектор клипов -->
-              <div class="twitch-clips-section" id="twitchClipsSection">
-                <div class="twitch-clips-bar">
-                  <span class="twitch-clips-heading">🎬 ВЫБОР КЛИПА</span>
-                  <span class="twitch-clips-now" id="twitchClipsNowPlaying">▶ «на очки смотрите»</span>
-                </div>
-                <div class="twitch-clips-carousel" id="twitchClipsCarousel">
-                  <!-- Заполняется динамически скриптом js/main.js -->
-                </div>
-              </div>
-
-              <!-- Информация о стриме / последнем эфире -->
-              <div class="twitch-xmb-info">
-                <div class="twitch-xmb-stream-title" id="twitchXmbStreamTitle">Стрим Влада Мафани на Twitch</div>
-                <div class="twitch-xmb-stream-tags">
-                  <span class="twitch-meta-item" id="twitchXmbCategory">🎮 Общение</span>
-                  <span class="twitch-meta-item" id="twitchXmbViewers">👥 Оффлайн</span>
-                  <span class="twitch-meta-item" id="twitchXmbLastDate" style="display:none;">⏱ 22 октября</span>
-                  <span class="twitch-meta-item" id="twitchXmbUptime" style="display:none;">⏱ 0:00</span>
-                </div>
-              </div>
-
-              <!-- Кнопки перехода и быстрые ссылки -->
-              <div class="twitch-xmb-actions">
-                <a class="twitch-xmb-cta" id="twitchXmbCta" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+        <div class="ps5-widgets-grid">
+          
+          <!-- Колонка 1: Online Friends + Store Offer -->
+          <div class="ps5-widget-col ps5-col-friends">
+            <!-- Виджет друзей онлайн -->
+            <div class="ps5-card ps5-card--friends">
+              <div class="ps5-card-header">
+                <div class="ps5-card-title-wrap">
+                  <svg class="ps5-card-header-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                   </svg>
-                  <span id="twitchCtaText">Открыть канал Влада на Twitch ↗</span>
-                </a>
-                <div class="twitch-xmb-chips">
-                  <a class="twitch-chip" href="https://t.me/toxiclegion" target="_blank" rel="noopener" title="Официальный ТГК">
-                    <img src="assets/icons/social/telegram.png" alt="">
-                    <span>Toxic Legion</span>
-                  </a>
-                  <a class="twitch-chip" href="https://mafanya.ru/" target="_blank" rel="noopener" title="Архив Пранков">
-                    <img src="assets/icons/aero/movie.png" alt="">
-                    <span>Архив Пранков</span>
-                  </a>
-                  <a class="twitch-chip" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener" title="Диор Армани">
-                    <img src="assets/icons/social/telegram.png" alt="">
-                    <span>Диор Армани</span>
-                  </a>
-                  <a class="twitch-chip" href="https://t.me/bombastertg" target="_blank" rel="noopener" title="Новости Бомбастер">
-                    <img src="assets/icons/aero/clock.png" alt="">
-                    <span>Бомбастер</span>
-                  </a>
+                  <span class="ps5-card-title">Online Friends</span>
+                </div>
+                <div class="ps5-badge-online">
+                  <span class="ps5-green-dot"></span>
+                  <span id="friendsCount">4</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </li>
-        <li class="item">
-          <a class="item__row" href="https://t.me/toxiclegion" target="_blank" rel="noopener">
-            <span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Toxic Legion"></span></span>
-            <span class="item__text">
-              <span class="item__title">ТГК Мафани (Toxic Legion)</span>
-              <span class="item__sub">t.me/toxiclegion · Официальный телеграм-канал Мафани</span>
-            </span>
-          </a>
-        </li>
-        <li class="item">
-          <a class="item__row" href="https://mafanya.ru/" target="_blank" rel="noopener">
-            <span class="item__icon"><img src="assets/icons/aero/movie.png" alt="Пранки"></span>
-            <span class="item__text">
-              <span class="item__title">Сайт Мафани (Архив Пранков)</span>
-              <span class="item__sub">mafanya.ru · Все легендарные пранки и проекты</span>
-            </span>
-          </a>
-        </li>
-        <li class="item">
-          <a class="item__row" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener">
-            <span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Влад Диор Армани"></span></span>
-            <span class="item__text">
-              <span class="item__title">Влад Клёвые Тачки (Диор Армани)</span>
-              <span class="item__sub">t.me/VLADAPRMANI · Телеграм Влада, легендарного персонажа лора</span>
-            </span>
-          </a>
-        </li>
-        <li class="item">
-          <a class="item__row" href="https://t.me/bombastertg" target="_blank" rel="noopener">
-            <span class="item__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></span>
-            <span class="item__text">
-              <span class="item__title">Новости по Мафане (Бомбастер)</span>
-              <span class="item__sub">t.me/bombastertg · Нарезки, анонсы и свежие новости</span>
-            </span>
-          </a>
-        </li>
-      </ul>
-    </section>
 
-    <!-- Линки -->
-    <section class="cat" id="links" data-icon="assets/icons/xmb/network.svg">
-      <h2 class="cat__label">Линки</h2>
-      <ul class="cat__items">
-                <!-- 1. Поделиться & QR-код -->
-        <li class="item item--share is-selected" id="itemShareBio">
-          <div class="item__row">
-            <span class="item__icon"><span class="icon-tile icon-tile--stats"><img src="assets/icons/xmb/network.svg" alt="Share"></span></span>
-            <span class="item__text">
-              <span class="item__title">Поделиться &amp; QR-код</span>
-              <span class="item__sub">Открыть сайт на смартфоне или скопировать ссылку</span>
-            </span>
+              <!-- Аватарки друзей в ряд -->
+              <div class="ps5-friends-avatars-row">
+                <div class="ps5-friend-avatar" title="Zane Richardsons">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Friend 1">
+                </div>
+                <div class="ps5-friend-avatar" title="Space_Carrot10">
+                  <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80" alt="Friend 2">
+                </div>
+                <div class="ps5-friend-avatar" title="DRjuiceXI">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=120&q=80" alt="Friend 3">
+                </div>
+                <div class="ps5-friend-avatar" title="Elisa Woods">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Friend 4">
+                </div>
+              </div>
+
+              <div class="ps5-friends-names" id="friendsNames">
+                Zane Richardsons, Space_Carrot10, DRjuiceXI, Elisa Woods
+              </div>
+            </div>
+
+            <!-- Баннер PlayStation Store под друзьями -->
+            <a class="ps5-card ps5-card--store-banner" href="https://store.playstation.com" target="_blank" rel="noopener">
+              <div class="ps5-store-banner-bg" style="background-image: url('assets/photos/games/witcher3.jpg');"></div>
+              <div class="ps5-store-banner-content">
+                <div class="ps5-store-tag">
+                  <img src="assets/ps5ish/PlaystationStore.png" width="14" height="14" alt="">
+                  <span>PlayStation Store</span>
+                </div>
+                <strong class="ps5-store-game-name">Horizon Forbidden West</strong>
+                <div class="ps5-store-pills">
+                  <span class="ps5-platform-pill">PS5</span>
+                  <span class="ps5-platform-pill">PS4</span>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="item__panel item__panel--wide item__panel--share">
-            <div class="p-card share-card">
-              <div class="share-grid">
-                <div class="share-qr-box">
-                  <div class="share-qr-frame">
-                    <img src="assets/photos/qr-cr1mnsx.svg" alt="QR-код сайта cr1mnsx" width="160" height="160">
+
+          <!-- Колонка 2: Accessibility + Trophies -->
+          <div class="ps5-widget-col ps5-col-center">
+            <!-- Accessibility -->
+            <div class="ps5-card ps5-card--accessibility">
+              <div class="ps5-card-header">
+                <div class="ps5-card-title-wrap">
+                  <svg class="ps5-card-header-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M12 8v4m0 4h.01"></path>
+                  </svg>
+                  <span class="ps5-card-title">Accessibility</span>
+                </div>
+                <div class="ps5-access-logo">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#38bdf8" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <circle cx="12" cy="8" r="2" fill="#38bdf8"/>
+                    <path d="M7 11h10M12 11v7M9 18l3-3 3 3"/>
+                  </svg>
+                </div>
+              </div>
+              <p class="ps5-card-desc">Make your PS5 more usable for you.</p>
+            </div>
+
+            <!-- Trophies Widget (Точная шкала PS5: Plat, Gold, Silver, Bronze + Level) -->
+            <a class="ps5-card ps5-card--trophies" href="https://psn.gg/profile/Cr1mnsx" target="_blank" rel="noopener">
+              <div class="ps5-card-header">
+                <div class="ps5-card-title-wrap">
+                  <svg class="ps5-card-header-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
+                  </svg>
+                  <span class="ps5-card-title">Trophies</span>
+                </div>
+                <span class="ps5-card-meta">Total: <strong id="trTotalVal">709</strong></span>
+              </div>
+
+              <!-- Кубки в ряд -->
+              <div class="ps5-trophies-row">
+                <div class="ps5-tr-col">
+                  <img class="ps5-tr-cup" src="assets/icons/trophies/plat.svg" alt="Platinum">
+                  <span class="ps5-tr-count" id="trPlatVal">2</span>
+                </div>
+                <div class="ps5-tr-col">
+                  <img class="ps5-tr-cup" src="assets/icons/trophies/gold.svg" alt="Gold">
+                  <span class="ps5-tr-count" id="trGoldVal">21</span>
+                </div>
+                <div class="ps5-tr-col">
+                  <img class="ps5-tr-cup" src="assets/icons/trophies/silver.svg" alt="Silver">
+                  <span class="ps5-tr-count" id="trSilverVal">138</span>
+                </div>
+                <div class="ps5-tr-col">
+                  <img class="ps5-tr-cup" src="assets/icons/trophies/bronze.svg" alt="Bronze">
+                  <span class="ps5-tr-count" id="trBronzeVal">548</span>
+                </div>
+              </div>
+
+              <!-- Уровень и полоска прогресса -->
+              <div class="ps5-level-section">
+                <div class="ps5-level-badge">
+                  <span class="ps5-level-star">⭐</span>
+                  <span class="ps5-level-label">Level <strong id="trLevelVal">199</strong></span>
+                  <span class="ps5-level-pct" id="trLevelPct">33%</span>
+                </div>
+                <div class="ps5-progress-bar">
+                  <div class="ps5-progress-fill" id="trProgressFill" style="width: 33%;"></div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Колонка 3: Accessories (DualSense) + Wishlist (Gran Turismo 7) -->
+          <div class="ps5-widget-col ps5-col-right">
+            <!-- Accessories (Кольца заряда DualSense 1, DualSense 2, Headset) -->
+            <div class="ps5-card ps5-card--accessories">
+              <div class="ps5-accessories-row">
+                
+                <!-- Контроллер 1 (100% зелёное кольцо) -->
+                <div class="ps5-acc-item">
+                  <div class="ps5-gauge" data-pct="100">
+                    <svg viewBox="0 0 44 44">
+                      <circle class="ps5-gauge-track" cx="22" cy="22" r="19"/>
+                      <circle class="ps5-gauge-val val-green" cx="22" cy="22" r="19" stroke-dasharray="119.38" stroke-dashoffset="0"/>
+                    </svg>
+                    <div class="ps5-acc-icon">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 15H22V9h-5.5l-3 3 3 3z"/>
+                      </svg>
+                    </div>
                   </div>
-                  <span class="share-qr-hint">Наведите камеру телефона для перехода</span>
+                  <span class="ps5-battery-mini">🪫 100%</span>
                 </div>
-                <div class="share-info-box">
-                  <span class="psn-badge">LINK-IN-BIO</span>
-                  <h3 class="share-title">Поделиться сайтом Cr1mnsx</h3>
-                  <p class="share-desc">Персональная биография и интерактивный хаб в дизайне PlayStation 3 XMB с трофеями, музыкой и веб-играми.</p>
-                  <div class="share-url-pill" id="shareUrlDisplay">https://crimnsx-alt.github.io/cr1mnsx</div>
-                  <div class="share-btn-row">
-                    <button type="button" class="psn-btn-profile" id="btnCopyShareUrl">
-                      <span id="btnCopyShareText">Скопировать ссылку 📋</span>
-                    </button>
-                    <a class="psn-btn-profile psn-btn-profile--psn" href="https://github.com/crimnsx-alt/cr1mnsx" target="_blank" rel="noopener">
-                      <span>GitHub репозиторий ↗</span>
-                    </a>
+
+                <!-- Контроллер 2 (65% оранжевое кольцо) -->
+                <div class="ps5-acc-item">
+                  <div class="ps5-gauge" data-pct="65">
+                    <svg viewBox="0 0 44 44">
+                      <circle class="ps5-gauge-track" cx="22" cy="22" r="19"/>
+                      <circle class="ps5-gauge-val val-orange" cx="22" cy="22" r="19" stroke-dasharray="119.38" stroke-dashoffset="41.78"/>
+                    </svg>
+                    <div class="ps5-acc-icon">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 15H22V9h-5.5l-3 3 3 3z"/>
+                      </svg>
+                    </div>
                   </div>
+                  <span class="ps5-battery-mini">🪫 65%</span>
+                </div>
+
+                <!-- Наушники Pulse 3D (85% бирюзовое кольцо) -->
+                <div class="ps5-acc-item">
+                  <div class="ps5-gauge" data-pct="85">
+                    <svg viewBox="0 0 44 44">
+                      <circle class="ps5-gauge-track" cx="22" cy="22" r="19"/>
+                      <circle class="ps5-gauge-val val-cyan" cx="22" cy="22" r="19" stroke-dasharray="119.38" stroke-dashoffset="17.9"/>
+                    </svg>
+                    <div class="ps5-acc-icon">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                        <path d="M12 3a9 9 0 0 0-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1a7 7 0 0 1 14 0v1h-4v8h4c1.1 0 2-.9 2-2v-7a9 9 0 0 0-9-9z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <span class="ps5-battery-mini">🎧 85%</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Wishlist (Gran Turismo 7) -->
+            <div class="ps5-card ps5-card--wishlist">
+              <div class="ps5-wishlist-bg" style="background-image: url('assets/photos/games/rdr2.jpg');"></div>
+              <div class="ps5-wishlist-content">
+                <div class="ps5-wishlist-tag">
+                  <span>❤️ Wishlist</span>
+                </div>
+                <strong class="ps5-wishlist-title">Gran Turismo® 7</strong>
+                <div class="ps5-store-pills">
+                  <span class="ps5-platform-pill">PS5</span>
+                  <span class="ps5-platform-pill">PS4</span>
                 </div>
               </div>
             </div>
           </div>
-        </li>
-<li class="item"><a class="item__row" href="https://music.yandex.ru/playlists/lk.67e283d6-a061-4e6d-b74f-27e04c3f412f" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/yandexmusic.svg" alt="Яндекс Музыка"></span></span><span class="item__text"><span class="item__title">Яндекс Музыка</span><span class="item__sub">music.yandex.ru · Мой плейлист &amp; любимые треки</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://vk.ru/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/vk.png" alt="VK"></span></span><span class="item__text"><span class="item__title">ВКонтакте</span><span class="item__sub">vk.ru/cr1mnsx</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://steamcommunity.com/profiles/76561199335958843" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--steam"><img src="assets/icons/social/steam.svg" alt="Steam"></span></span><span class="item__text"><span class="item__title">Steam Профиль</span><span class="item__sub">cr1mnsx</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://www.twitch.tv/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/icons/social/twitch.png" alt="Twitch"></span></span><span class="item__text"><span class="item__title">Twitch Профиль</span><span class="item__sub">twitch.tv/cr1mnsx</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://www.twitch.tv/mafanyaking" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile icon-tile--twitch"><img src="assets/photos/twitch/mafanya.png" alt="Mafanya"></span></span><span class="item__text"><span class="item__title">Канал Мафани на Twitch</span><span class="item__sub">twitch.tv/mafanyaking</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://t.me/toxiclegion" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Toxic Legion"></span></span><span class="item__text"><span class="item__title">ТГК Мафани (Toxic Legion)</span><span class="item__sub">t.me/toxiclegion</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://mafanya.ru/" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt="Сайт Мафани"></span><span class="item__text"><span class="item__title">Сайт Мафани (Архив Пранков)</span><span class="item__sub">mafanya.ru</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://t.me/VLADAPRMANI" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Влад Диор Армани"></span></span><span class="item__text"><span class="item__title">ТГ Влада Клёвые Тачки</span><span class="item__sub">t.me/VLADAPRMANI (@VLADAPRMANI)</span></span></a></li>
-        <li class="item"><a class="item__row" href="https://t.me/bombastertg" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/clock.png" alt="Бомбастер"></span><span class="item__text"><span class="item__title">Новости по Мафане (Бомбастер)</span><span class="item__sub">t.me/bombastertg</span></span></a></li>
-        <li class="item"><div class="item__row"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/xmb/dualshock3.svg" alt="PSN"></span></span><span class="item__text"><span class="item__title">PlayStation Network</span><span class="item__sub">PSN: cr1mnsx · PlayStation 5</span></span></div></li>
-        <li class="item"><a class="item__row" href="https://t.me/cr1mnsx" target="_blank" rel="noopener"><span class="item__icon"><span class="icon-tile"><img src="assets/icons/social/telegram.png" alt="Telegram"></span></span><span class="item__text"><span class="item__title">Telegram</span><span class="item__sub">t.me/cr1mnsx</span></span></a></li>
-      </ul>
-    </section>
 
-    <!-- Об этом сайте -->
-    <!-- Об этом сайте и реальная аналитика -->
-    <section class="cat" id="info" data-icon="assets/icons/xmb/info.svg">
-      <h2 class="cat__label">Об этом сайте</h2>
-      <ul class="cat__items">
-        <!-- Главный пункт: Мониторинг посетителей и статистика -->
-        <li class="item item--stats is-selected" id="itemSiteStats">
-          <div class="item__row">
-            <span class="item__icon"><span class="icon-tile icon-tile--stats"><img src="assets/icons/aero/visits-steps.png" alt="Stats"></span></span>
-            <span class="item__text">
-              <span class="item__title">Статистика сайта и посетители</span>
-              <span class="item__sub">Живой счётчик входов</span>
-            </span>
-          </div>
-          <div class="item__panel item__panel--stats">
-            <div class="stats-panel-header">
-              <div class="stats-panel-title">
-                <span class="stats-live-dot"></span>
-                <strong>Мониторинг посетителей сайта</strong>
+          <!-- Колонка 4: Крайний слайд с подсказкой ленты -->
+          <div class="ps5-widget-col ps5-col-edge">
+            <div class="ps5-card ps5-card--friend-activity">
+              <div class="ps5-card-header">
+                <span class="ps5-card-title">Friend Activity</span>
               </div>
-              <span class="stats-panel-badge">REALTIME</span>
-            </div>
-
-            <!-- 4 Главные KPI карточки -->
-            <div class="stats-kpi-grid">
-              <div class="kpi-card kpi-card--unique">
-                <span class="kpi-icon">👥</span>
-                <span class="kpi-label">Уникальных гостей</span>
-                <strong class="kpi-val" id="statUnique">295</strong>
-              </div>
-              <div class="kpi-card kpi-card--total">
-                <span class="kpi-icon">📈</span>
-                <span class="kpi-label">Всего входов на сайт</span>
-                <strong class="kpi-val" id="statTotal">346</strong>
-              </div>
-              <div class="kpi-card kpi-card--today">
-                <span class="kpi-icon">📅</span>
-                <span class="kpi-label">Вошли сегодня</span>
-                <strong class="kpi-val" id="statToday">14</strong>
-              </div>
-              <div class="kpi-card kpi-card--online">
-                <span class="kpi-icon">🟢</span>
-                <span class="kpi-label">Сейчас в сети</span>
-                <strong class="kpi-val" id="statOnline">1 в сети</strong>
+              <div class="ps5-edge-preview">
+                <img src="assets/photos/games/helldivers2.png" width="60" height="60" alt="">
+                <strong>Nanami</strong>
+                <span>First time playing</span>
               </div>
             </div>
           </div>
-        </li>
 
-        <li class="item">
-          <div class="item__row">
-            <span class="item__icon"><img src="assets/icons/aero/info.png" alt=""></span>
-            <span class="item__text"><span class="item__title">Сайт cr1mnsx · Frutiger Aero x PS5/PS3 XMB</span><span class="item__sub">Портфолио в дизайне PlayStation 3 XrossMediaBar</span></span>
+        </div>
+
+        <button class="ps5-stage-nav-arrow ps5-stage-nav-arrow--right" id="btnHubNext" aria-label="Следующие виджеты">›</button>
+      </div>
+
+      <!-- ================= GAME HUB DETAIL VIEW (Появляется при выборе конкретной игры) ================= -->
+      <div class="ps5-game-detail-view" id="ps5GameDetailView" hidden>
+        <div class="ps5-game-hero-info">
+          <div class="ps5-game-hero-badges">
+            <span class="ps5-hero-badge ps5-badge-ps5">PS5</span>
+            <span class="ps5-hero-badge" id="gameDetailStatus">Installed</span>
           </div>
-        </li>
-        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/movie.png" alt=""></span><span class="item__text"><span class="item__title">Видео-аватар</span><span class="item__sub">Max Verstappen (Red Bull Racing)</span></span></div></li>
-        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Живой аквариум на фоне</span><span class="item__sub">Skeuomorphic live video background</span></span></div></li>
-        <li class="item"><div class="item__row"><span class="item__icon"><img src="assets/icons/xmb/dualshock3.svg" alt=""></span><span class="item__text"><span class="item__title">Звуки меню PS3</span><span class="item__sub">Синтезированы через Web Audio API</span></span></div></li>
-        <li class="item"><a class="item__row" href="https://fonts.google.com/specimen/M+PLUS+1p" target="_blank" rel="noopener"><span class="item__icon"><img src="assets/icons/aero/file.png" alt=""></span><span class="item__text"><span class="item__title">Шрифт M PLUS 1p</span><span class="item__sub">M+ Fonts Project · SIL OFL</span></span></a></li>
-      </ul>
-    </section>
-  </main>
+          <h1 class="ps5-game-hero-title" id="gameDetailTitle">Dark Souls Remastered</h1>
+          <p class="ps5-game-hero-sub" id="gameDetailSub">Лордран, костры и путешествие сквозь пепел и тьму · 42%</p>
 
-  <!-- Нижняя панель быстрого доступа PlayStation 5 Control Center -->
-  <footer class="ps3-bottom-bar" role="toolbar" aria-label="Control Center PlayStation 5">
-    <div class="ps3-bottom-bar__left">
-      <button type="button" class="ps3-guide-btn" data-ps3-act="enter" title="Открыть выбранный пункт (Enter)">
-        <span class="ps3-glyph ps3-glyph--cross">✕</span><span>Выбрать</span>
-      </button>
-      <button type="button" class="ps3-guide-btn" data-ps3-act="psn" title="Перейти к PlayStation 5 Live">
-        <span class="ps3-glyph ps3-glyph--square">□</span><span>PS5 Live</span>
-      </button>
-      <button type="button" class="ps3-guide-btn" data-ps3-act="brawl" title="Перейти к Brawl Stars (#2RGUQJQ0R)">
-        <span class="ps3-glyph ps3-glyph--circle">○</span><span>Brawl Stars</span>
-      </button>
-      <button type="button" class="ps3-guide-btn" data-ps3-act="color" title="Сменить цвет подсветки PS5">
-        <span class="ps3-glyph ps3-glyph--triangle">△</span><span id="ps3ColorNameLabel">Подсветка: PS5 Синяя</span>
-      </button>
-    </div>
-    <div class="ps3-bottom-bar__right">
-      <span class="ps3-nav-hint">←/→ Вкладки · ↑/↓ Карточки · Скролл внутри панелей</span>
-    </div>
-  </footer>
+          <div class="ps5-hero-actions">
+            <button class="ps5-play-btn" id="btnPlayGame">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Play Game</span>
+            </button>
+            <button class="ps5-hero-sub-btn" id="btnGameTrophies">
+              <span>🏆 Trophies</span>
+            </button>
+            <button class="ps5-hero-sub-btn" id="btnGameMore">
+              <span>•••</span>
+            </button>
+          </div>
+        </div>
 
-  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Просмотр фото" hidden>
-    <img class="viewer__img" id="viewerImg" alt="">
-    <video class="viewer__video" id="viewerVideo" controls playsinline preload="metadata" hidden></video>
-    <div class="viewer__bar">
-      <button class="viewer__btn" type="button" data-prev aria-label="Предыдущее фото">‹</button>
-      <span id="viewerCount"></span>
-      <button class="viewer__btn" type="button" data-next aria-label="Следующее фото">›</button>
-    </div>
-    <button class="viewer__btn viewer__close" type="button" data-close aria-label="Закрыть">✕</button>
+        <!-- Activity Cards под выбранной игрой в духе PS5 -->
+        <div class="ps5-activity-cards-row">
+          <div class="ps5-act-card">
+            <span class="ps5-act-tag">Activity</span>
+            <strong class="ps5-act-title">Defeat Ornstein &amp; Smough</strong>
+            <span class="ps5-act-progress">In Progress · 75%</span>
+          </div>
+          <div class="ps5-act-card">
+            <span class="ps5-act-tag">Trophy</span>
+            <strong class="ps5-act-title">Reach Anor Londo</strong>
+            <span class="ps5-act-progress">Completed ✓</span>
+          </div>
+          <div class="ps5-act-card">
+            <span class="ps5-act-tag">Recent Capture</span>
+            <strong class="ps5-act-title">Bonfire Lit</strong>
+            <span class="ps5-act-progress">1080p Video Clip</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Нижняя подсказка кнопок DualSense Controller Help Bar -->
+    <footer class="ps5-footer-bar">
+      <div class="ps5-controller-hints">
+        <div class="ps5-hint-item">
+          <span class="ps5-btn-glyph">✕</span>
+          <span>Select</span>
+        </div>
+        <div class="ps5-hint-item">
+          <span class="ps5-btn-glyph">○</span>
+          <span>Back</span>
+        </div>
+        <div class="ps5-hint-item">
+          <span class="ps5-btn-glyph">△</span>
+          <span>Sound / Theme</span>
+        </div>
+        <div class="ps5-hint-item">
+          <span class="ps5-btn-glyph">□</span>
+          <span>Options</span>
+        </div>
+      </div>
+      <div class="ps5-footer-sys-info">
+        <span>PlayStation®5 System Software · Cr1mnsx Edition</span>
+      </div>
+    </footer>
+
   </div>
 
-    <!-- ============================================================
-       PS3 GAME THEATER / ОКНО ЗАПУСКА ИГРЫ
-       ============================================================ -->
-  <div class="play" id="play" hidden role="dialog" aria-modal="true" aria-labelledby="playGameTitle">
-    <div class="play__backdrop" id="playBackdrop"></div>
-    <div class="play__window" id="playWindow">
-      <!-- Верхняя панель управления окном -->
-      <div class="play__header">
-        <div class="play__brand">
-          <span class="play__badge">PS3 WEB THEATER</span>
-          <h2 class="play__title" id="playGameTitle">Запуск игры...</h2>
-        </div>
-        <div class="play__controls">
-          <button class="play__btn play__btn--fullscreen" id="playFullscreenBtn" type="button" title="Во весь экран (F11)">
-            <span class="play__btn-icon" id="playFsIcon">⛶</span>
-            <span class="play__btn-label" id="playFsLabel">Во весь экран</span>
-          </button>
-          <button class="play__btn play__btn--close" id="playClose" type="button" title="Закрыть окно (Esc)">
-            <span class="play__btn-icon">✕</span>
-            <span class="play__btn-label">Закрыть</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Игровая сцена / Iframe контейнер -->
-      <div class="play__stage" id="playStage">
-        <div class="play__loader" id="playLoader">
-          <div class="ps3-game-spinner"></div>
-          <span class="play__loader-text">Подготовка игрового порта...</span>
-          <span class="play__loader-sub">Загрузка WebGL / 3D движка</span>
-          <button class="play__fallback-btn" id="playFallbackBtn" type="button" style="display:none;" title="Открыть игру в отдельном чистом окне">
-            ⚡ Открыть в чистом окне
-          </button>
-        </div>
-        <iframe
-          class="play__frame"
-          id="playFrame"
-          title="Игровое окно"
-          allow="autoplay; fullscreen; gamepad; keyboard"
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <!-- Нижняя панель подсказок -->
-      <div class="play__footer">
-        <div class="play__hints">
-          <span class="play__hint-item">🎮 Управление: Клавиатура и Мышь / Геймпад</span>
-          <span class="play__hint-sep">•</span>
-          <span class="play__hint-item">Клавиша <kbd>Esc</kbd> — закрыть игру</span>
-          <span class="play__hint-sep">•</span>
-          <span class="play__hint-item">Кнопка <b>⛶</b> — режим на весь экран</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="js/ps3wave.js?v=20261106-ps5ui"></script>
-  <script src="js/analytics.js?v=20260927-v2"></script>
-  <script src="js/main.js?v=20261106-ps5ui"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
