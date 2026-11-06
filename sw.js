@@ -1,11 +1,11 @@
-const CACHE_NAME = 'cr1mnsx-ps3xmb-v20261106-v5';
+const CACHE_NAME = 'cr1mnsx-ps5ui-v20261106-v6';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style.css?v=20261106-ps3xmb',
+  './css/style.css?v=20261106-ps5ui',
   './js/boot.js',
-  './js/ps3wave.js?v=20261106-ps3xmb',
-  './js/main.js?v=20261106-ps3xmb'
+  './js/ps3wave.js?v=20261106-ps5ui',
+  './js/main.js?v=20261106-ps5ui'
 ];
 
 self.addEventListener('install', (event) => {

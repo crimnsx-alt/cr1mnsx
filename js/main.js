@@ -97,27 +97,24 @@
   const measure = () => {
     const vw = innerWidth;
     const vh = innerHeight;
-    const narrow = vw < 640;
-    const catIcon = px('--cat-icon');
-    const col = px('--col');
-    const anchorX = narrow ? Math.max(16, vw * 0.08) : vw * 0.2;
-    const catY = vh * (narrow ? 0.2 : 0.25);
+    const narrow = vw < 768;
+    const catIcon = px('--cat-icon') || 42;
+    const col = px('--col') || 340;
     geo = {
       narrow,
-      anchorX,
-      catY,
+      anchorX: 28,
+      catY: 36,
       catIcon,
-      // на телефоне кнопки не втискиваем все в экран: крайние уезжают вправо, как на ПК
-      catStep: narrow ? Math.max(72, (vw - 32) / cats.length) : clamp(vw * 0.1, 112, 160),
-      selY: catY + catIcon / 2 + 52,
-      aboveBottom: catY - catIcon / 2 - 18,
-      step: narrow ? 58 : Math.max(64, vh * 0.085),
+      catStep: 130,
+      selY: 84,
+      aboveBottom: 60,
+      step: 68,
     };
-    root.style.setProperty('--ix', `${Math.max(8, anchorX + catIcon / 2 - col / 2)}px`);
+    root.style.setProperty('--ix', `${narrow ? 14 : 28}px`);
     root.style.setProperty('--sel-y', `${geo.selY}px`);
   };
 
-  /* ---------- PS3 XMB Dynamic PIC1.PNG Game Backdrop ---------- */
+  /* ---------- PS5 Dynamic Game Hub Backdrop (Full-Screen Artwork) ---------- */
   const pic1El = $('#ps3Pic1Bg');
   let lastPic1Url = '';
 
@@ -130,7 +127,7 @@
     const selItem = items[selected[current]];
 
     let artUrl = '';
-    if (selItem && (catId === 'souls' || catId === 'game')) {
+    if (selItem && (catId === 'souls' || catId === 'game' || selItem.id === 'itemBioDashboard')) {
       const bannerImg = selItem.querySelector('.game-banner-img, .ps5-last-game-img, .ps5-latest-banner');
       const iconImg = selItem.querySelector('.item__icon img');
       const candidate = (bannerImg && bannerImg.getAttribute('src')) || (iconImg && iconImg.getAttribute('src')) || '';
@@ -160,13 +157,7 @@
   const render = () => {
     catButtons.forEach((btn, k) => {
       const on = k === current;
-      // на телефоне ряд сдвигается, как на ПК, но выбранный раздел стоит во втором слоте,
-      // чтобы предыдущая кнопка оставалась на экране и на неё можно было нажать
-      const slot = Math.min(current, 1) + (k - current);
-      const x = geo.narrow
-        ? 16 + slot * geo.catStep + (geo.catStep - geo.catIcon) / 2
-        : geo.anchorX + (k - current) * geo.catStep;
-      btn.style.transform = `translate(${x}px, ${geo.catY - geo.catIcon / 2}px)`;
+      btn.style.transform = '';
       btn.classList.toggle('is-current', on);
       btn.setAttribute('aria-selected', String(on));
       btn.tabIndex = on ? 0 : -1;
@@ -178,23 +169,22 @@
       const items = itemsOf(k);
       const s = clamp(selected[k], 0, Math.max(0, items.length - 1));
       selected[k] = s;
-      items.forEach((item, j) => item.classList.toggle('is-selected', j === s));
-
-      // скрытые разделы тоже раскладываем, чтобы при переключении пункты не прилетали сверху
-      const selHeight = items[s] ? items[s].offsetHeight : 0;
       items.forEach((item, j) => {
-        let y;
-        if (j === s) y = geo.selY;
-        else if (j > s) y = geo.selY + selHeight + 20 + (j - s - 1) * geo.step;
-        else y = geo.aboveBottom - (s - j) * geo.step;
-        item.style.transform = `translate3d(0, ${y}px, 0)`;
-        const far = y < -geo.step * 2 || y > innerHeight + geo.step;
-        item.classList.toggle('is-far', far);
-        if (on && (!far || window.innerWidth <= 768)) loadThumb(item);
+        const isSel = j === s;
+        item.classList.toggle('is-selected', isSel);
+        item.classList.remove('is-far');
+        item.style.transform = '';
+        if (on) loadThumb(item);
       });
+
+      if (on && items[s]) {
+        const rowEl = items[s].querySelector('.item__row') || items[s];
+        try {
+          rowEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } catch {}
+      }
     });
 
-    // листаем пункты — на телефоне прячем термометр, чтобы не мешался
     root.classList.toggle('items-scrolled', selected[current] > 0);
 
     // Управление воспроизведением стрима в правой панели XMB
@@ -548,6 +538,11 @@
     if (isTwitchDrawerOpen()) return;
     if (window.innerWidth <= 768) return; // Разрешаем нативный скролл на мобильных устройствах
     if (!viewer.hidden || (play && !play.hidden)) return;
+    // Если курсор внутри правой панели PS5 Stage и панель скроллится — разрешаем нативный плавный скролл панели
+    const panelEl = e.target instanceof Element ? e.target.closest('.item__panel') : null;
+    if (panelEl && panelEl.scrollHeight > panelEl.clientHeight + 4 && !e.shiftKey && Math.abs(e.deltaY) >= Math.abs(e.deltaX)) {
+      return;
+    }
     e.preventDefault();
     const now = performance.now();
     if (now - wheelLast > 220) wheelAcc = 0;
