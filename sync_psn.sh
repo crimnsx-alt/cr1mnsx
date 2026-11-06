@@ -15,6 +15,7 @@ if git diff --staged --quiet; then
 else
   git commit -m "feat(psn): обновить статус запущенных игр на PS5"
   echo "🚀 Отправка обновления на GitHub..."
+  git pull --rebase origin main || true
   git push origin main
   echo ""
   echo "🎉 Готово! Сайт https://crimnsx-alt.github.io/cr1mnsx/ успешно обновлен!"

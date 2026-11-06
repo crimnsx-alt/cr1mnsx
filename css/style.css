@@ -914,6 +914,225 @@ a { color: inherit; }
   font-weight: 700;
   color: #cbd5e1;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Apple Design Improvements: Brawl Stars Landing Card & Spring Physics
+   ========================================================================== */
+
+.bsc-card {
+  position: relative;
+  display: block;
+  background: linear-gradient(135deg, rgba(32, 20, 10, 0.88) 0%, rgba(18, 11, 6, 0.94) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.22);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(253, 230, 138, 0.18);
+  margin-bottom: 8px;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.bsc-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(251, 191, 36, 0.55);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.bsc-card:active,
+.pgc-card:active,
+.p-link-row:active,
+.p-card:active {
+  transform: scale(0.984) !important;
+  transition: transform 0.1s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.bsc-backdrop {
+  position: absolute;
+  inset: -15px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bsc-backdrop-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(24px) saturate(220%) brightness(0.25);
+  transform: scale(1.2);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.bsc-card:hover .bsc-backdrop-img {
+  filter: blur(20px) saturate(240%) brightness(0.32);
+  transform: scale(1.25);
+}
+
+.bsc-backdrop-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(245, 158, 11, 0.15), transparent 70%),
+              linear-gradient(180deg, rgba(20, 14, 8, 0.6) 0%, rgba(12, 8, 4, 0.88) 100%);
+}
+
+.bsc-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.bsc-cover-box {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.7), 0 0 14px rgba(245, 158, 11, 0.3);
+  background: radial-gradient(circle, #f59e0b 0%, #78350f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bsc-cover {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bsc-card:hover .bsc-cover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+.bsc-cover-badge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  background: linear-gradient(135deg, #d97706 0%, #78350f 100%);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border: 1px solid rgba(253, 230, 138, 0.5);
+  line-height: 1.1;
+}
+
+.bsc-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bsc-top-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.bsc-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #fde68a;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bs-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  display: inline-block;
+  animation: pulseLiveDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseLiveDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.bsc-club-badge {
+  font-size: 9px;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.bsc-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.bsc-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.bsc-trophy-count {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #fbbf24;
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+}
+
+.bsc-bottom-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 1px;
+}
+
+.bsc-pill {
+  font-size: 9.5px;
+  color: rgba(241, 245, 249, 0.85);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bsc-pill b {
+  color: #fff;
+  font-weight: 700;
 }
 
 /* 2. Средний ряд: Сетка из 2 карточек (О ИГРОКЕ + СТАТИСТИКА) */
@@ -926,18 +1145,23 @@ a { color: inherit; }
 
 .p-card {
   background: rgba(13, 20, 35, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 13px;
-  padding: 10px 11px;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 11px 12px;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
   position: relative;
   overflow: hidden;
 }
 
 .p-card:hover {
-  border-color: rgba(0, 168, 255, 0.4);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 140, 255, 0.25);
+  transform: translateY(-2px);
+  border-color: rgba(0, 168, 255, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 140, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .p-card-title {

@@ -920,18 +920,35 @@
 
     const updateDOM = (data, isLive = false) => {
       if (!data) return;
-      if (elTrophies && data.trophies) elTrophies.textContent = Number(data.trophies).toLocaleString('ru-RU');
+      const formattedTrophies = Number(data.trophies).toLocaleString('ru-RU');
+      const formattedHighest = Number(data.highest || data.highestTrophies).toLocaleString('ru-RU');
+      const formatted3v3 = Number(data.victories3v3).toLocaleString('ru-RU');
+
+      if (elTrophies && data.trophies) elTrophies.textContent = formattedTrophies;
       if (elHighest && (data.highest || data.highestTrophies)) {
-        elHighest.textContent = Number(data.highest || data.highestTrophies).toLocaleString('ru-RU');
+        elHighest.textContent = formattedHighest;
       }
-      if (el3v3 && data.victories3v3) el3v3.textContent = Number(data.victories3v3).toLocaleString('ru-RU');
+      if (el3v3 && data.victories3v3) el3v3.textContent = formatted3v3;
       if (elShowdown && data.showdown) {
         elShowdown.textContent = typeof data.showdown === 'number' ? Number(data.showdown).toLocaleString('ru-RU') : data.showdown;
       }
       if (elBrawlers && data.brawlers) elBrawlers.textContent = data.brawlers;
       if (elClub && data.club) elClub.textContent = data.club;
+
+      // Обновление дашборда на главной
+      const dashTrophies = $('#dash-bs-trophies');
+      if (dashTrophies && data.trophies) dashTrophies.textContent = formattedTrophies;
+      const dashHighest = $('#dash-bs-highest');
+      if (dashHighest && (data.highest || data.highestTrophies)) dashHighest.textContent = formattedHighest;
+      const dashBrawlers = $('#dash-bs-brawlers');
+      if (dashBrawlers && data.brawlers) dashBrawlers.textContent = data.brawlers;
+      const dash3v3 = $('#dash-bs-3v3');
+      if (dash3v3 && data.victories3v3) dash3v3.textContent = formatted3v3;
+      const dashClub = $('#dash-bs-club');
+      if (dashClub && data.club) dashClub.textContent = `🛡️ ${data.club}`;
+
       if (elSubPreview && data.trophies) {
-        elSubPreview.textContent = `🏆 ${Number(data.trophies).toLocaleString('ru-RU')} кубков · 108 бойцов · Ежедневный актив · #2RGUQJQ0R`;
+        elSubPreview.textContent = `🏆 ${formattedTrophies} кубков · 108 бойцов · Ежедневный актив · #2RGUQJQ0R`;
       }
       if (elSyncStatus) {
         elSyncStatus.textContent = isLive ? '🟢 Live: ~40k' : '🟢 Синхронизировано';
