@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-06T12:47:40.107Z",
+  "updated_at": "2026-11-06T14:28:40.625Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
@@ -128,14 +128,14 @@
       "play_count": 1
     },
     {
-      "title": "سبايدرمان من مارفل",
+      "title": "Marvel's Spider-Man",
       "platform": "PS4",
-      "image": "https://image.api.playstation.com/vulcan/img/rnd/202011/0714/PtibIky4FYHQOZOZ96Kq4Q8E.png",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
       "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
-      "progress_percent": 0,
-      "trophies_earned": 0,
-      "trophies_total": 0,
-      "rank": "E",
+      "progress_percent": 16,
+      "trophies_earned": 17,
+      "trophies_total": 74,
+      "rank": "D",
       "last_played": "25 октября 2026",
       "play_duration": "75 ч. 37 мин.",
       "play_count": 129
