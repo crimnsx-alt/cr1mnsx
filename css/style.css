@@ -1,7 +1,32 @@
 /* ==========================================================================
    cr1mnsx — PlayStation 5 (PS5) Welcome Hub & Activity Cards Design System
    Complete PS5 UI Architecture (v6.0)
+   Based on PS5ish System UI Architecture
    ========================================================================== */
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: url('../assets/fonts/TitilliumWeb-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: url('../assets/fonts/TitilliumWeb-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  src: url('../assets/fonts/TitilliumWeb-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* PS5 UI Geometry */
@@ -11,28 +36,34 @@
   --ix: 28px;
   --sel-y: 84px;
 
-  /* Typography — Inter (PS5 SST / Apple UI) + M PLUS 1p */
-  --font-sans: 'Inter', 'M PLUS 1p', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-  --font-xmb: 'Inter', 'M PLUS 1p', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography — TitilliumWeb (PS5ish) + Inter (PS5 SST / Apple UI) */
+  --font-sans: 'TitilliumWeb', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-xmb: 'TitilliumWeb', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'SF Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
 
   /* Emil Kowalski & Apple Fluid Spring Physics */
   --spring-out: cubic-bezier(0.16, 1, 0.3, 1);
   --spring-snappy: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* PS5 Matte Obsidian & HDR Blue/Gold Palette */
-  --text-primary: #f8fafc;
+  /* PS5ish Authentic Palette (from Constants.xaml) */
+  --ps5-bg-start: #090c13;
+  --ps5-bg-end: #181a1e;
+  --ps5-control-bg: #222328;
+  --ps5-selection: #8d919d;
+  --ps5-overlay: #bb000000;
+
+  --text-primary: #f5f5f5;
   --text-secondary: rgba(226, 232, 240, 0.84);
   --text-muted: rgba(148, 163, 184, 0.78);
 
-  --ps3-surface: linear-gradient(165deg, rgba(16, 22, 38, 0.78) 0%, rgba(8, 12, 22, 0.88) 100%);
-  --ps3-surface-elevated: linear-gradient(165deg, rgba(24, 34, 58, 0.86) 0%, rgba(11, 16, 30, 0.94) 100%);
+  --ps3-surface: linear-gradient(165deg, rgba(22, 23, 27, 0.82) 0%, rgba(9, 12, 19, 0.90) 100%);
+  --ps3-surface-elevated: linear-gradient(165deg, rgba(34, 35, 40, 0.88) 0%, rgba(18, 20, 26, 0.95) 100%);
   --ps3-border: rgba(255, 255, 255, 0.12);
-  --ps3-border-bright: rgba(255, 255, 255, 0.85);
-  --ps3-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.20), inset 0 -1px 0 rgba(0, 0, 0, 0.45);
-  --ps3-shadow: 0 22px 54px rgba(0, 0, 0, 0.65), 0 4px 16px rgba(0, 0, 0, 0.42);
+  --ps3-border-bright: rgba(255, 255, 255, 0.88);
+  --ps3-bevel: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  --ps3-shadow: 0 22px 54px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(0, 0, 0, 0.45);
 
-  --accent-psn: #0070d1;
+  --accent-psn: #0f42d7;
   --accent-cyan: #38bdf8;
   --accent-brawl: #f59e0b;
   --accent-twitch: #a855f7;

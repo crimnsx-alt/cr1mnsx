@@ -220,10 +220,16 @@
     updatePs3Pic1();
   };
 
-  /* ---------- Аудио-эффекты PS3 XrossMediaBar (Web Audio API) ---------- */
+  /* ---------- Аудио-эффекты PlayStation 5 (Оригинальные звуки PS5 из PS5ish) ---------- */
   let soundEnabled = localStorage.getItem('ps3_sound') !== '0';
   let audioCtx = null;
   const soundToggleBtn = $('#soundToggle');
+
+  const sfxBuffers = {};
+  const sfxFiles = {
+    nav: 'assets/audio/navigation.wav',
+    act: 'assets/audio/activation.wav',
+  };
 
   function initAudio() {
     if (!audioCtx) {
@@ -233,10 +239,51 @@
     if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
   }
 
+  // Предзагрузка оригинальных PS5 звуков
+  const preloadPs5Audio = () => {
+    initAudio();
+    if (!audioCtx) return;
+    Object.entries(sfxFiles).forEach(([key, url]) => {
+      fetch(url)
+        .then(res => res.arrayBuffer())
+        .then(buf => audioCtx.decodeAudioData(buf))
+        .then(decoded => { sfxBuffers[key] = decoded; })
+        .catch(() => {});
+    });
+  };
+  window.addEventListener('pointerdown', preloadPs5Audio, { once: true });
+  window.addEventListener('keydown', preloadPs5Audio, { once: true });
+
   function playSfx(type) {
     if (!soundEnabled) return;
     initAudio();
     if (!audioCtx) return;
+
+    // Воспроизводим оригинальный сэмпл PS5ish navigation / activation если загружен
+    if ((type === 'cat' || type === 'item') && sfxBuffers.nav) {
+      try {
+        const src = audioCtx.createBufferSource();
+        const gain = audioCtx.createGain();
+        src.buffer = sfxBuffers.nav;
+        gain.gain.value = 0.28;
+        src.connect(gain);
+        gain.connect(audioCtx.destination);
+        src.start(0);
+        return;
+      } catch {}
+    } else if (type === 'ok' && sfxBuffers.act) {
+      try {
+        const src = audioCtx.createBufferSource();
+        const gain = audioCtx.createGain();
+        src.buffer = sfxBuffers.act;
+        gain.gain.value = 0.32;
+        src.connect(gain);
+        gain.connect(audioCtx.destination);
+        src.start(0);
+        return;
+      } catch {}
+    }
+
     try {
       const t = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
@@ -302,7 +349,7 @@
     if (!soundToggleBtn) return;
     soundToggleBtn.textContent = soundEnabled ? '🔊' : '🔇';
     soundToggleBtn.classList.toggle('is-muted', !soundEnabled);
-    soundToggleBtn.title = soundEnabled ? 'Звук PS3: Включен (нажмите для выкл)' : 'Звук PS3: Выключен (нажмите для вкл)';
+    soundToggleBtn.title = soundEnabled ? 'Звук PS5: Включен (нажмите для выкл)' : 'Звук PS5: Выключен (нажмите для вкл)';
   };
   updateSoundBtn();
 
