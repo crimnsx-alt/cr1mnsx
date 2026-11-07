@@ -1,41 +1,54 @@
 {
-  "updated_at": "2026-11-07T07:39:01.670Z",
+  "updated_at": "2026-11-07T10:20:35.176Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
   "is_playing_now": false,
-  "last_available_date": "2026-11-06T17:06:01.977Z",
+  "last_available_date": "2026-11-07T09:20:25.617Z",
   "account_summary": {
     "trophyLevel": 199,
-    "progress": 0,
+    "progress": 16,
     "tier": 2,
     "earnedTrophies": {
-      "bronze": 548,
+      "bronze": 549,
       "silver": 138,
       "gold": 21,
       "platinum": 2
     },
-    "totalTrophies": 709
+    "totalTrophies": 710
   },
   "game": {
-    "title": "Grand Theft Auto V",
+    "title": "F1® 25",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "play_count": 656,
-    "progress_percent": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "rank": "D",
-    "bronze": 9,
-    "silver": 2,
-    "gold": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+    "play_count": 21,
+    "progress_percent": 5,
+    "trophies_earned": 4,
+    "trophies_total": 47,
+    "rank": "E",
+    "bronze": 4,
+    "silver": 0,
+    "gold": 0,
     "platinum": 0,
-    "last_played_text": "6 ноября 2026",
-    "play_duration": "500 ч. 55 мин."
+    "last_played_text": "7 ноября 2026",
+    "play_duration": "5 ч. 55 мин."
   },
   "recent_history": [
+    {
+      "title": "F1® 25",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+      "progress_percent": 5,
+      "trophies_earned": 4,
+      "trophies_total": 47,
+      "rank": "E",
+      "last_played": "7 ноября 2026",
+      "play_duration": "5 ч. 55 мин.",
+      "play_count": 21
+    },
     {
       "title": "Grand Theft Auto V",
       "platform": "PS5",
@@ -126,19 +139,6 @@
       "last_played": "27 октября 2026",
       "play_duration": "31 мин.",
       "play_count": 1
-    },
-    {
-      "title": "Marvel's Spider-Man",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
-      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
-      "progress_percent": 16,
-      "trophies_earned": 17,
-      "trophies_total": 74,
-      "rank": "D",
-      "last_played": "25 октября 2026",
-      "play_duration": "75 ч. 37 мин.",
-      "play_count": 129
     }
   ]
 }
