@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-07T10:20:35.176Z",
+  "updated_at": "2026-11-07T15:31:39.244Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
   "is_playing_now": false,
-  "last_available_date": "2026-11-07T09:20:25.617Z",
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 199,
     "progress": 16,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
-    "play_count": 21,
+    "play_count": 22,
     "progress_percent": 5,
     "trophies_earned": 4,
     "trophies_total": 47,
@@ -33,7 +33,7 @@
     "gold": 0,
     "platinum": 0,
     "last_played_text": "7 ноября 2026",
-    "play_duration": "5 ч. 55 мин."
+    "play_duration": "6 ч. 27 мин."
   },
   "recent_history": [
     {
@@ -46,8 +46,8 @@
       "trophies_total": 47,
       "rank": "E",
       "last_played": "7 ноября 2026",
-      "play_duration": "5 ч. 55 мин.",
-      "play_count": 21
+      "play_duration": "6 ч. 27 мин.",
+      "play_count": 22
     },
     {
       "title": "Grand Theft Auto V",
