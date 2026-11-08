@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-08T16:00:43.709Z",
+  "updated_at": "2026-11-08T17:40:07.121Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "play_count": 70,
+    "play_count": 73,
     "progress_percent": 0,
     "trophies_earned": 0,
     "trophies_total": 0,
@@ -32,8 +32,8 @@
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "7 ноября 2026",
-    "play_duration": "15 ч. 50 мин."
+    "last_played_text": "8 ноября 2026",
+    "play_duration": "15 ч. 54 мин."
   },
   "recent_history": [
     {
@@ -45,9 +45,22 @@
       "trophies_earned": 0,
       "trophies_total": 0,
       "rank": "E",
-      "last_played": "7 ноября 2026",
-      "play_duration": "15 ч. 50 мин.",
-      "play_count": 70
+      "last_played": "8 ноября 2026",
+      "play_duration": "15 ч. 54 мин.",
+      "play_count": 73
+    },
+    {
+      "title": "Marvel's Spider-Man",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
+      "progress_percent": 16,
+      "trophies_earned": 17,
+      "trophies_total": 74,
+      "rank": "D",
+      "last_played": "8 ноября 2026",
+      "play_duration": "75 ч. 38 мин.",
+      "play_count": 131
     },
     {
       "title": "Grand Theft Auto V",
@@ -126,19 +139,6 @@
       "last_played": "28 октября 2026",
       "play_duration": "8 ч. 10 мин.",
       "play_count": 6
-    },
-    {
-      "title": "RESIDENT EVIL 7 biohazard",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202206/0207/V6IViuKogBMRtajqjnYrcj0e.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0509/XhJB07xH50P8jRQO7L0kOqgQ.png",
-      "progress_percent": 0,
-      "trophies_earned": 0,
-      "trophies_total": 0,
-      "rank": "E",
-      "last_played": "27 октября 2026",
-      "play_duration": "31 мин.",
-      "play_count": 1
     }
   ]
 }
