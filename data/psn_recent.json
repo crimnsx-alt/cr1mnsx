@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-10T10:59:04.354Z",
+  "updated_at": "2026-11-10T15:21:13.428Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
   "is_playing_now": false,
-  "last_available_date": "2026-11-07T14:20:03.254Z",
+  "last_available_date": "2026-11-10T15:01:31.544Z",
   "account_summary": {
     "trophyLevel": 199,
     "progress": 16,
@@ -18,24 +18,37 @@
     "totalTrophies": 710
   },
   "game": {
-    "title": "Minecraft",
+    "title": "F1® 25",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "play_count": 73,
-    "progress_percent": 0,
-    "trophies_earned": 0,
-    "trophies_total": 0,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+    "play_count": 23,
+    "progress_percent": 5,
+    "trophies_earned": 4,
+    "trophies_total": 47,
     "rank": "E",
-    "bronze": 0,
+    "bronze": 4,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "8 ноября 2026",
-    "play_duration": "15 ч. 54 мин."
+    "last_played_text": "10 ноября 2026",
+    "play_duration": "6 ч. 27 мин."
   },
   "recent_history": [
+    {
+      "title": "F1® 25",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+      "progress_percent": 5,
+      "trophies_earned": 4,
+      "trophies_total": 47,
+      "rank": "E",
+      "last_played": "10 ноября 2026",
+      "play_duration": "6 ч. 27 мин.",
+      "play_count": 23
+    },
     {
       "title": "Minecraft",
       "platform": "PS5",
@@ -74,19 +87,6 @@
       "last_played": "7 ноября 2026",
       "play_duration": "33 ч. 2 мин.",
       "play_count": 66
-    },
-    {
-      "title": "F1® 25",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
-      "progress_percent": 5,
-      "trophies_earned": 4,
-      "trophies_total": 47,
-      "rank": "E",
-      "last_played": "7 ноября 2026",
-      "play_duration": "6 ч. 27 мин.",
-      "play_count": 22
     },
     {
       "title": "DARK SOULS™ III",
