@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-12T09:56:47.064Z",
+  "updated_at": "2026-11-12T15:22:01.843Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "play_count": 77,
+    "play_count": 78,
     "progress_percent": 0,
     "trophies_earned": 0,
     "trophies_total": 0,
@@ -32,7 +32,7 @@
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "11 ноября 2026",
+    "last_played_text": "12 ноября 2026",
     "play_duration": "16 ч. 11 мин."
   },
   "recent_history": [
@@ -45,9 +45,9 @@
       "trophies_earned": 0,
       "trophies_total": 0,
       "rank": "E",
-      "last_played": "11 ноября 2026",
+      "last_played": "12 ноября 2026",
       "play_duration": "16 ч. 11 мин.",
-      "play_count": 77
+      "play_count": 78
     },
     {
       "title": "Marvel's Spider-Man",
