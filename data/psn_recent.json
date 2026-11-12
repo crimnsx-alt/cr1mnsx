@@ -1,41 +1,67 @@
 {
-  "updated_at": "2026-11-12T16:32:11.268Z",
+  "updated_at": "2026-11-12T18:04:10.197Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
   "is_playing_now": false,
-  "last_available_date": "2026-11-11T11:29:47.053Z",
+  "last_available_date": "2026-11-12T17:49:20.410Z",
   "account_summary": {
     "trophyLevel": 199,
-    "progress": 16,
+    "progress": 33,
     "tier": 2,
     "earnedTrophies": {
-      "bronze": 549,
+      "bronze": 550,
       "silver": 138,
       "gold": 21,
       "platinum": 2
     },
-    "totalTrophies": 710
+    "totalTrophies": 711
   },
   "game": {
-    "title": "Marvel's Spider-Man",
-    "platform": "PS4",
+    "title": "F1® 25",
+    "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
-    "play_count": 135,
-    "progress_percent": 16,
-    "trophies_earned": 17,
-    "trophies_total": 74,
-    "rank": "D",
-    "bronze": 16,
-    "silver": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+    "play_count": 24,
+    "progress_percent": 7,
+    "trophies_earned": 5,
+    "trophies_total": 47,
+    "rank": "E",
+    "bronze": 5,
+    "silver": 0,
     "gold": 0,
     "platinum": 0,
     "last_played_text": "12 ноября 2026",
-    "play_duration": "75 ч. 39 мин."
+    "play_duration": "7 ч. 20 мин."
   },
   "recent_history": [
+    {
+      "title": "F1® 25",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
+      "progress_percent": 7,
+      "trophies_earned": 5,
+      "trophies_total": 47,
+      "rank": "E",
+      "last_played": "12 ноября 2026",
+      "play_duration": "7 ч. 20 мин.",
+      "play_count": 24
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
+      "rank": "D",
+      "last_played": "12 ноября 2026",
+      "play_duration": "33 ч. 2 мин.",
+      "play_count": 67
+    },
     {
       "title": "Marvel's Spider-Man",
       "platform": "PS4",
@@ -61,32 +87,6 @@
       "last_played": "12 ноября 2026",
       "play_duration": "17 ч. 41 мин.",
       "play_count": 78
-    },
-    {
-      "title": "F1® 25",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
-      "progress_percent": 5,
-      "trophies_earned": 4,
-      "trophies_total": 47,
-      "rank": "E",
-      "last_played": "10 ноября 2026",
-      "play_duration": "6 ч. 27 мин.",
-      "play_count": 23
-    },
-    {
-      "title": "Grand Theft Auto V",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-      "progress_percent": 17,
-      "trophies_earned": 12,
-      "trophies_total": 78,
-      "rank": "D",
-      "last_played": "7 ноября 2026",
-      "play_duration": "33 ч. 2 мин.",
-      "play_count": 66
     },
     {
       "title": "DARK SOULS™ III",
