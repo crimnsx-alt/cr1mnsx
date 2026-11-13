@@ -1,5 +1,31 @@
 [
   {
+    "id": "grand-theft-auto-v",
+    "title": "Grand Theft Auto V",
+    "subtitle": "Сыграно на PS5: 34 ч. 23 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 71,
+    "progress_pct": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 2,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "13 ноября 2026",
+    "last_played_iso": "2026-11-13T18:53:46.840000Z",
+    "play_duration": "34 ч. 23 мин.",
+    "status": "Активно на PS5",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 34 ч. 23 мин. (71 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "minecraft",
     "title": "Minecraft",
     "subtitle": "Сыграно на PS5: 18 ч. 17 мин.",
@@ -23,32 +49,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 18 ч. 17 мин. (82 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v",
-    "title": "Grand Theft Auto V",
-    "subtitle": "Сыграно на PS5: 34 ч. 23 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 70,
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "12 ноября 2026",
-    "last_played_iso": "2026-11-12T18:26:55.420000Z",
-    "play_duration": "34 ч. 23 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 34 ч. 23 мин. (70 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
