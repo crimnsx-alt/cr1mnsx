@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-13T19:07:08.865Z",
+  "updated_at": "2026-11-13T20:23:08.149Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": false,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "play_count": 71,
+    "play_count": 72,
     "progress_percent": 17,
     "trophies_earned": 12,
     "trophies_total": 78,
@@ -33,7 +33,7 @@
     "gold": 1,
     "platinum": 0,
     "last_played_text": "13 ноября 2026",
-    "play_duration": "34 ч. 23 мин."
+    "play_duration": "35 ч. 11 мин."
   },
   "recent_history": [
     {
@@ -46,8 +46,8 @@
       "trophies_total": 78,
       "rank": "D",
       "last_played": "13 ноября 2026",
-      "play_duration": "34 ч. 23 мин.",
-      "play_count": 71
+      "play_duration": "35 ч. 11 мин.",
+      "play_count": 72
     },
     {
       "title": "Minecraft",
@@ -58,9 +58,9 @@
       "trophies_earned": 0,
       "trophies_total": 0,
       "rank": "E",
-      "last_played": "12 ноября 2026",
-      "play_duration": "18 ч. 17 мин.",
-      "play_count": 82
+      "last_played": "13 ноября 2026",
+      "play_duration": "18 ч. 55 мин.",
+      "play_count": 83
     },
     {
       "title": "F1® 25",
