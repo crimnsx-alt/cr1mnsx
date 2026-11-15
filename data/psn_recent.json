@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T03:06:21.938Z",
+  "updated_at": "2026-11-15T08:09:16.239Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
-  "last_available_date": "2026-11-12T17:49:20.410Z",
+  "is_online": true,
+  "is_playing_now": true,
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 199,
     "progress": 33,
@@ -18,24 +18,37 @@
     "totalTrophies": 711
   },
   "game": {
-    "title": "Minecraft",
-    "platform": "PS5",
+    "title": "DARK SOULS™ III",
+    "platform": "PS4",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "play_count": 84,
-    "progress_percent": 0,
-    "trophies_earned": 0,
-    "trophies_total": 0,
-    "rank": "E",
-    "bronze": 0,
+    "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+    "play_count": 14,
+    "progress_percent": 12,
+    "trophies_earned": 9,
+    "trophies_total": 43,
+    "rank": "D",
+    "bronze": 9,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "14 ноября 2026",
-    "play_duration": "19 ч. 12 мин."
+    "last_played_text": "🟢 В игре прямо сейчас!",
+    "play_duration": "13 ч. 17 мин."
   },
   "recent_history": [
+    {
+      "title": "DARK SOULS™ III",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+      "progress_percent": 12,
+      "trophies_earned": 9,
+      "trophies_total": 43,
+      "rank": "D",
+      "last_played": "15 ноября 2026",
+      "play_duration": "13 ч. 17 мин.",
+      "play_count": 14
+    },
     {
       "title": "Minecraft",
       "platform": "PS5",
@@ -87,19 +100,6 @@
       "last_played": "12 ноября 2026",
       "play_duration": "75 ч. 39 мин.",
       "play_count": 135
-    },
-    {
-      "title": "DARK SOULS™ III",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
-      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-      "progress_percent": 12,
-      "trophies_earned": 9,
-      "trophies_total": 43,
-      "rank": "D",
-      "last_played": "5 ноября 2026",
-      "play_duration": "13 ч. 17 мин.",
-      "play_count": 13
     },
     {
       "title": "Tomb Raider IV-VI Remastered",
