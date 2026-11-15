@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T09:09:24.867Z",
+  "updated_at": "2026-11-15T11:15:13.029Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -18,24 +18,37 @@
     "totalTrophies": 711
   },
   "game": {
-    "title": "Grand Theft Auto V",
+    "title": "Battlefield™ 6",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "play_count": 657,
-    "progress_percent": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
+    "play_count": 89,
+    "progress_percent": 12,
+    "trophies_earned": 9,
+    "trophies_total": 54,
     "rank": "D",
-    "bronze": 9,
-    "silver": 2,
-    "gold": 1,
+    "bronze": 8,
+    "silver": 1,
+    "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "500 ч. 55 мин."
+    "play_duration": "41 ч. 27 мин."
   },
   "recent_history": [
+    {
+      "title": "Battlefield™ 6",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
+      "progress_percent": 12,
+      "trophies_earned": 9,
+      "trophies_total": 54,
+      "rank": "D",
+      "last_played": "15 ноября 2026",
+      "play_duration": "41 ч. 27 мин.",
+      "play_count": 89
+    },
     {
       "title": "Grand Theft Auto V",
       "platform": "PS5",
@@ -46,7 +59,7 @@
       "trophies_total": 78,
       "rank": "D",
       "last_played": "15 ноября 2026",
-      "play_duration": "500 ч. 55 мин.",
+      "play_duration": "501 ч. 45 мин.",
       "play_count": 657
     },
     {
@@ -126,19 +139,6 @@
       "last_played": "1 ноября 2026",
       "play_duration": "10 ч. 17 мин.",
       "play_count": 5
-    },
-    {
-      "title": "Kingdom Come: Deliverance II",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202408/1208/05a84ce968125d79fa36484c5a756a1c8d9b05622aae21c1.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202408/1209/1ccd8c6eb043c9c80a49c871ca64891055651141b55324c2.jpg",
-      "progress_percent": 4,
-      "trophies_earned": 5,
-      "trophies_total": 84,
-      "rank": "E",
-      "last_played": "28 октября 2026",
-      "play_duration": "8 ч. 10 мин.",
-      "play_count": 6
     }
   ]
 }
