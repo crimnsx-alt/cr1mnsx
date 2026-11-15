@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T08:09:16.239Z",
+  "updated_at": "2026-11-15T09:09:24.867Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -18,24 +18,37 @@
     "totalTrophies": 711
   },
   "game": {
-    "title": "DARK SOULS™ III",
-    "platform": "PS4",
+    "title": "Grand Theft Auto V",
+    "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-    "play_count": 14,
-    "progress_percent": 12,
-    "trophies_earned": 9,
-    "trophies_total": 43,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+    "play_count": 657,
+    "progress_percent": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
     "rank": "D",
     "bronze": 9,
-    "silver": 0,
-    "gold": 0,
+    "silver": 2,
+    "gold": 1,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "13 ч. 17 мин."
+    "play_duration": "500 ч. 55 мин."
   },
   "recent_history": [
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
+      "rank": "D",
+      "last_played": "15 ноября 2026",
+      "play_duration": "500 ч. 55 мин.",
+      "play_count": 657
+    },
     {
       "title": "DARK SOULS™ III",
       "platform": "PS4",
@@ -46,7 +59,7 @@
       "trophies_total": 43,
       "rank": "D",
       "last_played": "15 ноября 2026",
-      "play_duration": "13 ч. 17 мин.",
+      "play_duration": "14 ч. 21 мин.",
       "play_count": 14
     },
     {
@@ -61,19 +74,6 @@
       "last_played": "14 ноября 2026",
       "play_duration": "19 ч. 12 мин.",
       "play_count": 84
-    },
-    {
-      "title": "Grand Theft Auto V",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-      "progress_percent": 17,
-      "trophies_earned": 12,
-      "trophies_total": 78,
-      "rank": "D",
-      "last_played": "14 ноября 2026",
-      "play_duration": "35 ч. 56 мин.",
-      "play_count": 73
     },
     {
       "title": "F1® 25",
