@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-15T16:44:24.752Z",
+  "updated_at": "2026-11-15T18:07:55.689Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -7,35 +7,48 @@
   "last_available_date": null,
   "account_summary": {
     "trophyLevel": 199,
-    "progress": 33,
+    "progress": 83,
     "tier": 2,
     "earnedTrophies": {
-      "bronze": 550,
+      "bronze": 553,
       "silver": 138,
       "gold": 21,
       "platinum": 2
     },
-    "totalTrophies": 711
+    "totalTrophies": 714
   },
   "game": {
-    "title": "Grand Theft Auto V",
+    "title": "Horizon Zero Dawn™",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "play_count": 658,
-    "progress_percent": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "rank": "D",
-    "bronze": 9,
-    "silver": 2,
-    "gold": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
+    "play_count": 2,
+    "progress_percent": 3,
+    "trophies_earned": 3,
+    "trophies_total": 79,
+    "rank": "E",
+    "bronze": 3,
+    "silver": 0,
+    "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "501 ч. 45 мин."
+    "play_duration": "19 мин."
   },
   "recent_history": [
+    {
+      "title": "Horizon Zero Dawn™",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
+      "progress_percent": 3,
+      "trophies_earned": 3,
+      "trophies_total": 79,
+      "rank": "E",
+      "last_played": "15 ноября 2026",
+      "play_duration": "19 мин.",
+      "play_count": 2
+    },
     {
       "title": "Grand Theft Auto V",
       "platform": "PS5",
@@ -46,7 +59,7 @@
       "trophies_total": 78,
       "rank": "D",
       "last_played": "15 ноября 2026",
-      "play_duration": "501 ч. 45 мин.",
+      "play_duration": "502 ч. 29 мин.",
       "play_count": 658
     },
     {
@@ -126,19 +139,6 @@
       "last_played": "12 ноября 2026",
       "play_duration": "75 ч. 39 мин.",
       "play_count": 135
-    },
-    {
-      "title": "Tomb Raider IV-VI Remastered",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202409/1221/c785b0366d8f84a18dd17a0d046fdee92ccd6195d79c81a1.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202409/1221/85006e3582d8b415bf4b7b2aa884c8ddf2f1a7d5d7d2083e.jpg",
-      "progress_percent": 0,
-      "trophies_earned": 0,
-      "trophies_total": 169,
-      "rank": "E",
-      "last_played": "4 ноября 2026",
-      "play_duration": "57 мин.",
-      "play_count": 1
     }
   ]
 }

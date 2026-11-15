@@ -1,8 +1,34 @@
 [
   {
+    "id": "horizon-zero-dawn",
+    "title": "Horizon Zero Dawn™",
+    "subtitle": "Сыграно на PS5: 19 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 2,
+    "progress_pct": 3,
+    "trophies_earned": 3,
+    "trophies_total": 79,
+    "trophy_breakdown": {
+      "bronze": 3,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "E",
+    "last_played": "15 ноября 2026",
+    "last_played_iso": "2026-11-15T16:53:33.450000Z",
+    "play_duration": "19 мин.",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 19 мин. (2 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "grand-theft-auto-v",
     "title": "Grand Theft Auto V",
-    "subtitle": "Сыграно на PS5: 501 ч. 45 мин.",
+    "subtitle": "Сыграно на PS5: 502 ч. 29 мин.",
     "platform": "PS5",
     "played_on": "PS5",
     "play_count": 658,
@@ -17,12 +43,12 @@
     },
     "rank": "D",
     "last_played": "15 ноября 2026",
-    "last_played_iso": "2026-11-15T16:09:02.740000Z",
-    "play_duration": "501 ч. 45 мин.",
-    "status": "🟢 Играет прямо сейчас",
+    "last_played_iso": "2026-11-15T16:53:29.410000Z",
+    "play_duration": "502 ч. 29 мин.",
+    "status": "Активно на PS5",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 501 ч. 45 мин. (658 запусков).",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 502 ч. 29 мин. (658 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -413,32 +439,6 @@
     "banner": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08519_00/12/i_3da1cf7c41dc7652f9b639e1680d96436773658668c7dc3930c441291095713b/i/pic0.png",
     "thumb": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA08519_00/12/i_3da1cf7c41dc7652f9b639e1680d96436773658668c7dc3930c441291095713b/i/icon0.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 96 ч. 22 мин. (90 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "assassin-s-creed-unity",
-    "title": "Assassin's Creed® Unity",
-    "subtitle": "Сыграно на PS5: 22 ч. 18 мин.",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "play_count": 37,
-    "progress_pct": 43,
-    "trophies_earned": 28,
-    "trophies_total": 58,
-    "trophy_breakdown": {
-      "bronze": 21,
-      "silver": 7,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "C",
-    "last_played": "10 октября 2026",
-    "last_played_iso": "2026-10-10T07:31:07.920000Z",
-    "play_duration": "22 ч. 18 мин.",
-    "status": "Сюжет пройден",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0220/lX4FGJHDVSy8szMS7fRrevmY.jpg",
-    "thumb": "https://image.api.playstation.com/cdn/UP0001/CUSA00663_00/o1pTr4XjsCODz0vZadpH4zyxgMj7I7ga.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 22 ч. 18 мин. (37 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   }
 ]
