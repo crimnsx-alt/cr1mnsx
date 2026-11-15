@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-15T11:15:13.029Z",
+  "updated_at": "2026-11-15T13:01:08.206Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
-  "last_available_date": null,
+  "is_online": false,
+  "is_playing_now": false,
+  "last_available_date": "2026-11-15T12:35:52.798Z",
   "account_summary": {
     "trophyLevel": 199,
     "progress": 33,
@@ -32,8 +32,8 @@
     "silver": 1,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "41 ч. 27 мин."
+    "last_played_text": "15 ноября 2026",
+    "play_duration": "43 ч. 59 мин."
   },
   "recent_history": [
     {
@@ -46,7 +46,7 @@
       "trophies_total": 54,
       "rank": "D",
       "last_played": "15 ноября 2026",
-      "play_duration": "41 ч. 27 мин.",
+      "play_duration": "43 ч. 59 мин.",
       "play_count": 89
     },
     {
@@ -59,8 +59,21 @@
       "trophies_total": 78,
       "rank": "D",
       "last_played": "15 ноября 2026",
-      "play_duration": "501 ч. 45 мин.",
-      "play_count": 657
+      "play_duration": "35 ч. 56 мин.",
+      "play_count": 74
+    },
+    {
+      "title": "Minecraft",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 0,
+      "rank": "E",
+      "last_played": "15 ноября 2026",
+      "play_duration": "19 ч. 42 мин.",
+      "play_count": 86
     },
     {
       "title": "DARK SOULS™ III",
@@ -74,19 +87,6 @@
       "last_played": "15 ноября 2026",
       "play_duration": "14 ч. 21 мин.",
       "play_count": 14
-    },
-    {
-      "title": "Minecraft",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-      "progress_percent": 0,
-      "trophies_earned": 0,
-      "trophies_total": 0,
-      "rank": "E",
-      "last_played": "14 ноября 2026",
-      "play_duration": "19 ч. 12 мин.",
-      "play_count": 84
     },
     {
       "title": "F1® 25",
