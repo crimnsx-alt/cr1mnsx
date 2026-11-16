@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-16T17:08:04.203Z",
+  "updated_at": "2026-11-16T18:38:37.147Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
-  "last_available_date": "2026-11-16T15:33:54.112Z",
+  "is_online": true,
+  "is_playing_now": true,
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
     "progress": 23,
@@ -18,36 +18,36 @@
     "totalTrophies": 717
   },
   "game": {
-    "title": "Battlefield™ 6",
-    "platform": "PS5",
+    "title": "DARK SOULS™ III",
+    "platform": "PS4",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-    "play_count": 92,
-    "progress_percent": 21,
-    "trophies_earned": 11,
-    "trophies_total": 54,
+    "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+    "play_count": 16,
+    "progress_percent": 12,
+    "trophies_earned": 9,
+    "trophies_total": 43,
     "rank": "D",
     "bronze": 9,
-    "silver": 1,
-    "gold": 1,
+    "silver": 0,
+    "gold": 0,
     "platinum": 0,
-    "last_played_text": "16 ноября 2026",
-    "play_duration": "45 ч. 37 мин."
+    "last_played_text": "🟢 В игре прямо сейчас!",
+    "play_duration": "14 ч. 41 мин."
   },
   "recent_history": [
     {
-      "title": "Battlefield™ 6",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-      "progress_percent": 21,
-      "trophies_earned": 11,
-      "trophies_total": 54,
+      "title": "DARK SOULS™ III",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+      "progress_percent": 12,
+      "trophies_earned": 9,
+      "trophies_total": 43,
       "rank": "D",
       "last_played": "16 ноября 2026",
-      "play_duration": "45 ч. 37 мин.",
-      "play_count": 92
+      "play_duration": "14 ч. 41 мин.",
+      "play_count": 16
     },
     {
       "title": "Horizon Zero Dawn™",
@@ -59,8 +59,21 @@
       "trophies_total": 79,
       "rank": "E",
       "last_played": "16 ноября 2026",
-      "play_duration": "4 ч. 1 мин.",
-      "play_count": 3
+      "play_duration": "4 ч. 23 мин.",
+      "play_count": 4
+    },
+    {
+      "title": "Battlefield™ 6",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
+      "progress_percent": 21,
+      "trophies_earned": 11,
+      "trophies_total": 54,
+      "rank": "D",
+      "last_played": "16 ноября 2026",
+      "play_duration": "45 ч. 37 мин.",
+      "play_count": 93
     },
     {
       "title": "Grand Theft Auto V",
@@ -74,19 +87,6 @@
       "last_played": "16 ноября 2026",
       "play_duration": "503 ч. 4 мин.",
       "play_count": 660
-    },
-    {
-      "title": "DARK SOULS™ III",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
-      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-      "progress_percent": 12,
-      "trophies_earned": 9,
-      "trophies_total": 43,
-      "rank": "D",
-      "last_played": "15 ноября 2026",
-      "play_duration": "14 ч. 41 мин.",
-      "play_count": 15
     },
     {
       "title": "UFC® 5",
