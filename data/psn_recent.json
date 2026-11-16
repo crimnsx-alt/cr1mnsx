@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-16T07:53:37.335Z",
+  "updated_at": "2026-11-16T09:30:19.231Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
-  "last_available_date": "2026-11-15T20:37:58.830Z",
+  "is_online": true,
+  "is_playing_now": true,
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 199,
     "progress": 83,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-    "play_count": 90,
+    "play_count": 91,
     "progress_percent": 12,
     "trophies_earned": 9,
     "trophies_total": 54,
@@ -32,7 +32,7 @@
     "silver": 1,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "15 ноября 2026",
+    "last_played_text": "🟢 В игре прямо сейчас!",
     "play_duration": "45 ч. 1 мин."
   },
   "recent_history": [
@@ -45,9 +45,9 @@
       "trophies_earned": 9,
       "trophies_total": 54,
       "rank": "D",
-      "last_played": "15 ноября 2026",
+      "last_played": "16 ноября 2026",
       "play_duration": "45 ч. 1 мин.",
-      "play_count": 90
+      "play_count": 91
     },
     {
       "title": "Horizon Zero Dawn™",
