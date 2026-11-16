@@ -1,66 +1,53 @@
 {
-  "updated_at": "2026-11-16T09:30:19.231Z",
+  "updated_at": "2026-11-16T14:32:25.458Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
   "is_playing_now": true,
   "last_available_date": null,
   "account_summary": {
-    "trophyLevel": 199,
-    "progress": 83,
-    "tier": 2,
+    "trophyLevel": 200,
+    "progress": 0,
+    "tier": 3,
     "earnedTrophies": {
-      "bronze": 553,
+      "bronze": 554,
       "silver": 138,
       "gold": 21,
       "platinum": 2
     },
-    "totalTrophies": 714
+    "totalTrophies": 715
   },
   "game": {
-    "title": "Battlefield™ 6",
+    "title": "Horizon Zero Dawn™",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-    "play_count": 91,
-    "progress_percent": 12,
-    "trophies_earned": 9,
-    "trophies_total": 54,
-    "rank": "D",
-    "bronze": 8,
-    "silver": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
+    "play_count": 3,
+    "progress_percent": 4,
+    "trophies_earned": 4,
+    "trophies_total": 79,
+    "rank": "E",
+    "bronze": 4,
+    "silver": 0,
     "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "45 ч. 1 мин."
+    "play_duration": "2 ч. 56 мин."
   },
   "recent_history": [
-    {
-      "title": "Battlefield™ 6",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-      "progress_percent": 12,
-      "trophies_earned": 9,
-      "trophies_total": 54,
-      "rank": "D",
-      "last_played": "16 ноября 2026",
-      "play_duration": "45 ч. 1 мин.",
-      "play_count": 91
-    },
     {
       "title": "Horizon Zero Dawn™",
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
       "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
-      "progress_percent": 3,
-      "trophies_earned": 3,
+      "progress_percent": 4,
+      "trophies_earned": 4,
       "trophies_total": 79,
       "rank": "E",
-      "last_played": "15 ноября 2026",
+      "last_played": "16 ноября 2026",
       "play_duration": "2 ч. 56 мин.",
-      "play_count": 2
+      "play_count": 3
     },
     {
       "title": "Grand Theft Auto V",
@@ -71,9 +58,22 @@
       "trophies_earned": 12,
       "trophies_total": 78,
       "rank": "D",
-      "last_played": "15 ноября 2026",
-      "play_duration": "502 ч. 29 мин.",
-      "play_count": 658
+      "last_played": "16 ноября 2026",
+      "play_duration": "503 ч. 4 мин.",
+      "play_count": 660
+    },
+    {
+      "title": "Battlefield™ 6",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
+      "progress_percent": 12,
+      "trophies_earned": 9,
+      "trophies_total": 54,
+      "rank": "D",
+      "last_played": "16 ноября 2026",
+      "play_duration": "45 ч. 32 мин.",
+      "play_count": 91
     },
     {
       "title": "DARK SOULS™ III",
