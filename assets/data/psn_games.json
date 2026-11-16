@@ -1,8 +1,34 @@
 [
   {
+    "id": "battlefield-6",
+    "title": "Battlefield™ 6",
+    "subtitle": "Сыграно на PS5: 45 ч. 37 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 92,
+    "progress_pct": 21,
+    "trophies_earned": 11,
+    "trophies_total": 54,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 1,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "16 ноября 2026",
+    "last_played_iso": "2026-11-16T15:33:51.830000Z",
+    "play_duration": "45 ч. 37 мин.",
+    "status": "Активно на PS5",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 45 ч. 37 мин. (92 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "horizon-zero-dawn",
     "title": "Horizon Zero Dawn™",
-    "subtitle": "Сыграно на PS5: 2 ч. 56 мин.",
+    "subtitle": "Сыграно на PS5: 4 ч. 1 мин.",
     "platform": "PS5",
     "played_on": "PS5",
     "play_count": 3,
@@ -17,12 +43,12 @@
     },
     "rank": "E",
     "last_played": "16 ноября 2026",
-    "last_played_iso": "2026-11-16T14:23:04.860000Z",
-    "play_duration": "2 ч. 56 мин.",
-    "status": "🟢 Играет прямо сейчас",
+    "last_played_iso": "2026-11-16T15:28:20.410000Z",
+    "play_duration": "4 ч. 1 мин.",
+    "status": "Активно на PS5",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/1jE1dG7sSfbJnhoRfAeVc2rs.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202010/0221/vC7trMorHJgbImp8PCQvpI0p.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 2 ч. 56 мин. (3 запусков).",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 4 ч. 1 мин. (3 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -49,32 +75,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 503 ч. 4 мин. (660 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "battlefield-6",
-    "title": "Battlefield™ 6",
-    "subtitle": "Сыграно на PS5: 45 ч. 32 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 91,
-    "progress_pct": 12,
-    "trophies_earned": 9,
-    "trophies_total": 54,
-    "trophy_breakdown": {
-      "bronze": 8,
-      "silver": 1,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "16 ноября 2026",
-    "last_played_iso": "2026-11-16T09:36:23.490000Z",
-    "play_duration": "45 ч. 32 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202610/0917/08b39e70d14fb40da68771c58193cf4e99caf854f7ef4dcf.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202507/2217/7fb7a918a4b9dd1c98de342ec3adfe1421d06627f60397b9.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 45 ч. 32 мин. (91 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
