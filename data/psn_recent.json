@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-11-17T14:13:29.511Z",
+  "updated_at": "2026-11-17T16:16:31.049Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
-  "last_available_date": "2026-11-16T19:26:30.130Z",
+  "is_online": true,
+  "is_playing_now": true,
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 23,
+    "progress": 26,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 555,
+      "bronze": 556,
       "silver": 138,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 717
+    "totalTrophies": 718
   },
   "game": {
     "title": "DARK SOULS™ III",
@@ -23,17 +23,17 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
     "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-    "play_count": 16,
-    "progress_percent": 12,
-    "trophies_earned": 9,
+    "play_count": 18,
+    "progress_percent": 14,
+    "trophies_earned": 10,
     "trophies_total": 43,
     "rank": "D",
-    "bronze": 9,
+    "bronze": 10,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "16 ноября 2026",
-    "play_duration": "14 ч. 50 мин."
+    "last_played_text": "🟢 В игре прямо сейчас!",
+    "play_duration": "14 ч. 52 мин."
   },
   "recent_history": [
     {
@@ -41,13 +41,13 @@
       "platform": "PS4",
       "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
       "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-      "progress_percent": 12,
-      "trophies_earned": 9,
+      "progress_percent": 14,
+      "trophies_earned": 10,
       "trophies_total": 43,
       "rank": "D",
-      "last_played": "16 ноября 2026",
-      "play_duration": "14 ч. 50 мин.",
-      "play_count": 16
+      "last_played": "17 ноября 2026",
+      "play_duration": "14 ч. 52 мин.",
+      "play_count": 18
     },
     {
       "title": "Horizon Zero Dawn™",
@@ -58,9 +58,9 @@
       "trophies_earned": 4,
       "trophies_total": 79,
       "rank": "E",
-      "last_played": "16 ноября 2026",
-      "play_duration": "4 ч. 23 мин.",
-      "play_count": 4
+      "last_played": "17 ноября 2026",
+      "play_duration": "4 ч. 42 мин.",
+      "play_count": 5
     },
     {
       "title": "Battlefield™ 6",
