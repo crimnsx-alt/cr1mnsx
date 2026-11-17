@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-17T16:16:31.049Z",
+  "updated_at": "2026-11-17T18:11:53.464Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -7,15 +7,15 @@
   "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 26,
+    "progress": 30,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 556,
+      "bronze": 557,
       "silver": 138,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 718
+    "totalTrophies": 719
   },
   "game": {
     "title": "DARK SOULS™ III",
@@ -24,11 +24,11 @@
     "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
     "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
     "play_count": 18,
-    "progress_percent": 14,
-    "trophies_earned": 10,
+    "progress_percent": 15,
+    "trophies_earned": 11,
     "trophies_total": 43,
     "rank": "D",
-    "bronze": 10,
+    "bronze": 11,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
@@ -41,8 +41,8 @@
       "platform": "PS4",
       "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
       "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-      "progress_percent": 14,
-      "trophies_earned": 10,
+      "progress_percent": 15,
+      "trophies_earned": 11,
       "trophies_total": 43,
       "rank": "D",
       "last_played": "17 ноября 2026",
