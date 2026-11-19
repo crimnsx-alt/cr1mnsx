@@ -1,53 +1,79 @@
 {
-  "updated_at": "2026-11-18T15:24:15.758Z",
+  "updated_at": "2026-11-19T19:47:33.031Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
+  "is_online": true,
+  "is_playing_now": true,
   "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 46,
+    "progress": 50,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 560,
+      "bronze": 561,
       "silver": 139,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 723
+    "totalTrophies": 724
   },
   "game": {
-    "title": "DARK SOULS™ III",
-    "platform": "PS4",
+    "title": "Grand Theft Auto VI",
+    "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-    "play_count": 20,
-    "progress_percent": 20,
-    "trophies_earned": 13,
-    "trophies_total": 43,
-    "rank": "D",
-    "bronze": 12,
-    "silver": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+    "play_count": 4,
+    "progress_percent": 1,
+    "trophies_earned": 1,
+    "trophies_total": 55,
+    "rank": "E",
+    "bronze": 1,
+    "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "18 ноября 2026",
-    "play_duration": "18 ч. 32 мин."
+    "last_played_text": "🟢 В игре прямо сейчас!",
+    "play_duration": "4 ч. 27 мин."
   },
   "recent_history": [
     {
-      "title": "DARK SOULS™ III",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
-      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
-      "progress_percent": 20,
-      "trophies_earned": 13,
-      "trophies_total": 43,
+      "title": "Grand Theft Auto VI",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+      "progress_percent": 1,
+      "trophies_earned": 1,
+      "trophies_total": 55,
+      "rank": "E",
+      "last_played": "19 ноября 2026",
+      "play_duration": "4 ч. 27 мин.",
+      "play_count": 4
+    },
+    {
+      "title": "Minecraft",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+      "progress_percent": 0,
+      "trophies_earned": 0,
+      "trophies_total": 0,
+      "rank": "E",
+      "last_played": "19 ноября 2026",
+      "play_duration": "19 ч. 47 мин.",
+      "play_count": 88
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
       "rank": "D",
-      "last_played": "18 ноября 2026",
-      "play_duration": "18 ч. 32 мин.",
-      "play_count": 20
+      "last_played": "19 ноября 2026",
+      "play_duration": "503 ч. 13 мин.",
+      "play_count": 662
     },
     {
       "title": "Horizon Zero Dawn™",
@@ -58,9 +84,22 @@
       "trophies_earned": 6,
       "trophies_total": 79,
       "rank": "E",
-      "last_played": "17 ноября 2026",
-      "play_duration": "4 ч. 42 мин.",
-      "play_count": 5
+      "last_played": "18 ноября 2026",
+      "play_duration": "4 ч. 50 мин.",
+      "play_count": 6
+    },
+    {
+      "title": "DARK SOULS™ III",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/gs2-sec/appkgo/prod/CUSA03365_00/2/i_1bf8d3317ff642710196c85c859320f0a9345e3c65a9132d588239fab877d81a/i/icon0.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/0822/zA0pyOR4JXOtGGIY7Jp2FJZP.png",
+      "progress_percent": 20,
+      "trophies_earned": 13,
+      "trophies_total": 43,
+      "rank": "D",
+      "last_played": "18 ноября 2026",
+      "play_duration": "19 ч. 34 мин.",
+      "play_count": 21
     },
     {
       "title": "Battlefield™ 6",
@@ -76,19 +115,6 @@
       "play_count": 93
     },
     {
-      "title": "Grand Theft Auto V",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-      "progress_percent": 17,
-      "trophies_earned": 12,
-      "trophies_total": 78,
-      "rank": "D",
-      "last_played": "16 ноября 2026",
-      "play_duration": "503 ч. 4 мин.",
-      "play_count": 660
-    },
-    {
       "title": "UFC® 5",
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202309/0421/418704276d35ce02e8cb532c6ca3826cf866ad2ec66c0b17.png",
@@ -102,19 +128,6 @@
       "play_count": 4
     },
     {
-      "title": "Minecraft",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-      "progress_percent": 0,
-      "trophies_earned": 0,
-      "trophies_total": 0,
-      "rank": "E",
-      "last_played": "15 ноября 2026",
-      "play_duration": "19 ч. 44 мин.",
-      "play_count": 87
-    },
-    {
       "title": "F1® 25",
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
@@ -126,19 +139,6 @@
       "last_played": "12 ноября 2026",
       "play_duration": "7 ч. 20 мин.",
       "play_count": 24
-    },
-    {
-      "title": "Marvel's Spider-Man",
-      "platform": "PS4",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
-      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
-      "progress_percent": 16,
-      "trophies_earned": 17,
-      "trophies_total": 74,
-      "rank": "D",
-      "last_played": "12 ноября 2026",
-      "play_duration": "75 ч. 39 мин.",
-      "play_count": 135
     }
   ]
 }
