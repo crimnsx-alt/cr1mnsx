@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-20T21:15:14.767Z",
+  "updated_at": "2026-11-20T22:39:51.186Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
-  "last_available_date": null,
+  "is_online": false,
+  "is_playing_now": false,
+  "last_available_date": "2026-11-20T21:41:37.635Z",
   "account_summary": {
     "trophyLevel": 200,
     "progress": 60,
@@ -32,8 +32,8 @@
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "12 ч. 45 мин."
+    "last_played_text": "21 ноября 2026",
+    "play_duration": "19 ч. 21 мин."
   },
   "recent_history": [
     {
@@ -45,8 +45,8 @@
       "trophies_earned": 4,
       "trophies_total": 55,
       "rank": "E",
-      "last_played": "20 ноября 2026",
-      "play_duration": "12 ч. 45 мин.",
+      "last_played": "21 ноября 2026",
+      "play_duration": "19 ч. 21 мин.",
       "play_count": 8
     },
     {
