@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-20T18:14:45.473Z",
+  "updated_at": "2026-11-20T19:14:56.295Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -7,15 +7,15 @@
   "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 53,
+    "progress": 56,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 562,
+      "bronze": 563,
       "silver": 139,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 725
+    "totalTrophies": 726
   },
   "game": {
     "title": "Grand Theft Auto VI",
@@ -24,11 +24,11 @@
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
     "play_count": 8,
-    "progress_percent": 2,
-    "trophies_earned": 2,
+    "progress_percent": 4,
+    "trophies_earned": 3,
     "trophies_total": 55,
     "rank": "E",
-    "bronze": 2,
+    "bronze": 3,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
@@ -41,8 +41,8 @@
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-      "progress_percent": 2,
-      "trophies_earned": 2,
+      "progress_percent": 4,
+      "trophies_earned": 3,
       "trophies_total": 55,
       "rank": "E",
       "last_played": "20 ноября 2026",
