@@ -1,5 +1,31 @@
 [
   {
+    "id": "grand-theft-auto-vi",
+    "title": "Grand Theft Auto VI",
+    "subtitle": "Сыграно на PS5: 31 ч. 42 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 13,
+    "progress_pct": 11,
+    "trophies_earned": 8,
+    "trophies_total": 55,
+    "trophy_breakdown": {
+      "bronze": 8,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "22 ноября 2026",
+    "last_played_iso": "2026-11-21T21:55:11.410000Z",
+    "play_duration": "31 ч. 42 мин.",
+    "status": "Активно на PS5",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 31 ч. 42 мин. (13 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "minecraft",
     "title": "Minecraft",
     "subtitle": "Сыграно на PS5: 20 ч. 27 мин.",
@@ -45,36 +71,10 @@
     "last_played": "21 ноября 2026",
     "last_played_iso": "2026-11-21T17:13:53.880000Z",
     "play_duration": "40 ч. 48 мин.",
-    "status": "🟢 Играет прямо сейчас",
+    "status": "Активно на PS5",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 40 ч. 48 мин. (78 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-vi",
-    "title": "Grand Theft Auto VI",
-    "subtitle": "Сыграно на PS5: 23 ч. 11 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 13,
-    "progress_pct": 11,
-    "trophies_earned": 8,
-    "trophies_total": 55,
-    "trophy_breakdown": {
-      "bronze": 8,
-      "silver": 0,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "21 ноября 2026",
-    "last_played_iso": "2026-11-21T13:24:01.790000Z",
-    "play_duration": "23 ч. 11 мин.",
-    "status": "🟢 Играет прямо сейчас",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 23 ч. 11 мин. (13 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {

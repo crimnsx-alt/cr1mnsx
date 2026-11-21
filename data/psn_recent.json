@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-21T18:31:42.156Z",
+  "updated_at": "2026-11-21T22:37:28.694Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
-  "last_available_date": null,
+  "is_online": false,
+  "is_playing_now": false,
+  "last_available_date": "2026-11-21T21:55:13.584Z",
   "account_summary": {
     "trophyLevel": 200,
     "progress": 73,
@@ -18,24 +18,37 @@
     "totalTrophies": 731
   },
   "game": {
-    "title": "Minecraft",
+    "title": "Grand Theft Auto VI",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "play_count": 93,
-    "progress_percent": 0,
-    "trophies_earned": 0,
-    "trophies_total": 0,
-    "rank": "E",
-    "bronze": 0,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+    "play_count": 13,
+    "progress_percent": 11,
+    "trophies_earned": 8,
+    "trophies_total": 55,
+    "rank": "D",
+    "bronze": 8,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "20 ч. 27 мин."
+    "last_played_text": "22 ноября 2026",
+    "play_duration": "31 ч. 42 мин."
   },
   "recent_history": [
+    {
+      "title": "Grand Theft Auto VI",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+      "progress_percent": 11,
+      "trophies_earned": 8,
+      "trophies_total": 55,
+      "rank": "D",
+      "last_played": "22 ноября 2026",
+      "play_duration": "31 ч. 42 мин.",
+      "play_count": 13
+    },
     {
       "title": "Minecraft",
       "platform": "PS5",
@@ -61,19 +74,6 @@
       "last_played": "21 ноября 2026",
       "play_duration": "40 ч. 48 мин.",
       "play_count": 78
-    },
-    {
-      "title": "Grand Theft Auto VI",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-      "progress_percent": 11,
-      "trophies_earned": 8,
-      "trophies_total": 55,
-      "rank": "D",
-      "last_played": "21 ноября 2026",
-      "play_duration": "23 ч. 11 мин.",
-      "play_count": 13
     },
     {
       "title": "Horizon Zero Dawn™",
