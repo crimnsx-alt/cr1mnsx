@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-21T16:20:28.241Z",
+  "updated_at": "2026-11-21T17:20:35.210Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -18,37 +18,24 @@
     "totalTrophies": 729
   },
   "game": {
-    "title": "Grand Theft Auto V",
+    "title": "Minecraft",
     "platform": "PS5",
     "played_on": "PS5",
-    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "play_count": 78,
-    "progress_percent": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "rank": "D",
-    "bronze": 9,
-    "silver": 2,
-    "gold": 1,
+    "image": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+    "play_count": 93,
+    "progress_percent": 0,
+    "trophies_earned": 0,
+    "trophies_total": 0,
+    "rank": "E",
+    "bronze": 0,
+    "silver": 0,
+    "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "39 ч."
+    "play_duration": "20 ч. 27 мин."
   },
   "recent_history": [
-    {
-      "title": "Grand Theft Auto V",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-      "progress_percent": 17,
-      "trophies_earned": 12,
-      "trophies_total": 78,
-      "rank": "D",
-      "last_played": "21 ноября 2026",
-      "play_duration": "39 ч.",
-      "play_count": 78
-    },
     {
       "title": "Minecraft",
       "platform": "PS5",
@@ -59,8 +46,21 @@
       "trophies_total": 0,
       "rank": "E",
       "last_played": "21 ноября 2026",
-      "play_duration": "20 ч. 23 мин.",
-      "play_count": 92
+      "play_duration": "20 ч. 27 мин.",
+      "play_count": 93
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
+      "rank": "D",
+      "last_played": "21 ноября 2026",
+      "play_duration": "40 ч. 48 мин.",
+      "play_count": 78
     },
     {
       "title": "Grand Theft Auto VI",
