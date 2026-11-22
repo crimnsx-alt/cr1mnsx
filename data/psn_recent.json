@@ -1,21 +1,21 @@
 {
-  "updated_at": "2026-11-22T16:12:55.601Z",
+  "updated_at": "2026-11-22T19:18:06.431Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": true,
-  "is_playing_now": true,
-  "last_available_date": null,
+  "is_online": false,
+  "is_playing_now": false,
+  "last_available_date": "2026-11-22T19:14:34.375Z",
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 83,
+    "progress": 86,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 571,
+      "bronze": 572,
       "silver": 139,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 734
+    "totalTrophies": 735
   },
   "game": {
     "title": "Grand Theft Auto VI",
@@ -24,16 +24,16 @@
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
     "play_count": 15,
-    "progress_percent": 15,
-    "trophies_earned": 11,
+    "progress_percent": 17,
+    "trophies_earned": 12,
     "trophies_total": 55,
     "rank": "D",
-    "bronze": 11,
+    "bronze": 12,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "34 ч. 23 мин."
+    "last_played_text": "22 ноября 2026",
+    "play_duration": "42 ч. 4 мин."
   },
   "recent_history": [
     {
@@ -41,12 +41,12 @@
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-      "progress_percent": 15,
-      "trophies_earned": 11,
+      "progress_percent": 17,
+      "trophies_earned": 12,
       "trophies_total": 55,
       "rank": "D",
       "last_played": "22 ноября 2026",
-      "play_duration": "34 ч. 23 мин.",
+      "play_duration": "42 ч. 4 мин.",
       "play_count": 15
     },
     {
