@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-22T08:20:45.791Z",
+  "updated_at": "2026-11-22T12:33:05.001Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -7,15 +7,15 @@
   "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
-    "progress": 76,
+    "progress": 83,
     "tier": 3,
     "earnedTrophies": {
-      "bronze": 569,
+      "bronze": 571,
       "silver": 139,
       "gold": 22,
       "platinum": 2
     },
-    "totalTrophies": 732
+    "totalTrophies": 734
   },
   "game": {
     "title": "Grand Theft Auto VI",
@@ -23,17 +23,17 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-    "play_count": 14,
-    "progress_percent": 12,
-    "trophies_earned": 9,
+    "play_count": 15,
+    "progress_percent": 15,
+    "trophies_earned": 11,
     "trophies_total": 55,
     "rank": "D",
-    "bronze": 9,
+    "bronze": 11,
     "silver": 0,
     "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "31 ч. 42 мин."
+    "play_duration": "34 ч. 23 мин."
   },
   "recent_history": [
     {
@@ -41,13 +41,13 @@
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
       "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-      "progress_percent": 12,
-      "trophies_earned": 9,
+      "progress_percent": 15,
+      "trophies_earned": 11,
       "trophies_total": 55,
       "rank": "D",
       "last_played": "22 ноября 2026",
-      "play_duration": "31 ч. 42 мин.",
-      "play_count": 14
+      "play_duration": "34 ч. 23 мин.",
+      "play_count": 15
     },
     {
       "title": "Minecraft",
@@ -58,9 +58,9 @@
       "trophies_earned": 0,
       "trophies_total": 0,
       "rank": "E",
-      "last_played": "21 ноября 2026",
-      "play_duration": "20 ч. 27 мин.",
-      "play_count": 93
+      "last_played": "22 ноября 2026",
+      "play_duration": "20 ч. 30 мин.",
+      "play_count": 94
     },
     {
       "title": "Grand Theft Auto V",
