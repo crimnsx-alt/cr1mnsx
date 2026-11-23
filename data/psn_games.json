@@ -1,11 +1,37 @@
 [
   {
+    "id": "grand-theft-auto-v",
+    "title": "Grand Theft Auto V",
+    "subtitle": "Сыграно на PS5: 40 ч. 51 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 79,
+    "progress_pct": 17,
+    "trophies_earned": 12,
+    "trophies_total": 78,
+    "trophy_breakdown": {
+      "bronze": 9,
+      "silver": 2,
+      "gold": 1,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "23 ноября 2026",
+    "last_played_iso": "2026-11-23T09:11:25.810000Z",
+    "play_duration": "40 ч. 51 мин.",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 40 ч. 51 мин. (79 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "grand-theft-auto-vi",
     "title": "Grand Theft Auto VI",
     "subtitle": "Сыграно на PS5: 42 ч. 4 мин.",
     "platform": "PS5",
     "played_on": "PS5",
-    "play_count": 15,
+    "play_count": 16,
     "progress_pct": 17,
     "trophies_earned": 12,
     "trophies_total": 55,
@@ -16,13 +42,13 @@
       "platinum": 0
     },
     "rank": "D",
-    "last_played": "22 ноября 2026",
-    "last_played_iso": "2026-11-22T19:14:32.470000Z",
+    "last_played": "23 ноября 2026",
+    "last_played_iso": "2026-11-23T09:00:54.310000Z",
     "play_duration": "42 ч. 4 мин.",
-    "status": "Активно на PS5",
+    "status": "🟢 Играет прямо сейчас",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 42 ч. 4 мин. (15 запусков).",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 42 ч. 4 мин. (16 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -49,32 +75,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 20 ч. 30 мин. (94 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "grand-theft-auto-v",
-    "title": "Grand Theft Auto V",
-    "subtitle": "Сыграно на PS5: 40 ч. 48 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 78,
-    "progress_pct": 17,
-    "trophies_earned": 12,
-    "trophies_total": 78,
-    "trophy_breakdown": {
-      "bronze": 9,
-      "silver": 2,
-      "gold": 1,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "21 ноября 2026",
-    "last_played_iso": "2026-11-21T17:13:53.880000Z",
-    "play_duration": "40 ч. 48 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 40 ч. 48 мин. (78 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
