@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-26T20:45:44.916Z",
+  "updated_at": "2026-11-26T21:02:12.852Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -50,6 +50,32 @@
       "play_count": 27
     },
     {
+      "title": "Marvel's Spider-Man",
+      "platform": "PS4",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202011/0402/C784xeOFo2wViCf4m5bxgoeH.png",
+      "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2122/19xis9VT5XfnXsLSMkxUjvVd.png",
+      "progress_percent": 16,
+      "trophies_earned": 17,
+      "trophies_total": 74,
+      "rank": "D",
+      "last_played": "25 ноября 2026",
+      "play_duration": "75 ч. 39 мин.",
+      "play_count": 136
+    },
+    {
+      "title": "Grand Theft Auto V",
+      "platform": "PS5",
+      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
+      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
+      "progress_percent": 17,
+      "trophies_earned": 12,
+      "trophies_total": 78,
+      "rank": "D",
+      "last_played": "25 ноября 2026",
+      "play_duration": "42 ч. 13 мин.",
+      "play_count": 83
+    },
+    {
       "title": "UFC® 5",
       "platform": "PS5",
       "image": "https://image.api.playstation.com/vulcan/ap/rnd/202309/0421/418704276d35ce02e8cb532c6ca3826cf866ad2ec66c0b17.png",
@@ -61,19 +87,6 @@
       "last_played": "24 ноября 2026",
       "play_duration": "35 ч. 56 мин.",
       "play_count": 4
-    },
-    {
-      "title": "Grand Theft Auto V",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
-      "progress_percent": 17,
-      "trophies_earned": 12,
-      "trophies_total": 78,
-      "rank": "D",
-      "last_played": "24 ноября 2026",
-      "play_duration": "42 ч. 13 мин.",
-      "play_count": 82
     },
     {
       "title": "Minecraft",
@@ -126,19 +139,6 @@
       "last_played": "16 ноября 2026",
       "play_duration": "45 ч. 37 мин.",
       "play_count": 93
-    },
-    {
-      "title": "F1® 25",
-      "platform": "PS5",
-      "image": "https://image.api.playstation.com/vulcan/ap/rnd/202602/2009/15a5c2ccc34262d0b9c780f7b81c7d95816a0516dc05daaf.png",
-      "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202605/1916/5e8d175253086b15ae7da3323826fecf666b343afb785e26.png",
-      "progress_percent": 7,
-      "trophies_earned": 5,
-      "trophies_total": 47,
-      "rank": "E",
-      "last_played": "12 ноября 2026",
-      "play_duration": "7 ч. 20 мин.",
-      "play_count": 24
     }
   ]
 }
