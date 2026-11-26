@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-11-25T19:51:20.538Z",
+  "updated_at": "2026-11-26T09:12:36.826Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
-  "is_online": false,
-  "is_playing_now": false,
-  "last_available_date": "2026-11-25T15:43:24.908Z",
+  "is_online": true,
+  "is_playing_now": true,
+  "last_available_date": null,
   "account_summary": {
     "trophyLevel": 200,
     "progress": 93,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-    "play_count": 22,
+    "play_count": 25,
     "progress_percent": 20,
     "trophies_earned": 14,
     "trophies_total": 55,
@@ -32,8 +32,8 @@
     "silver": 0,
     "gold": 0,
     "platinum": 0,
-    "last_played_text": "25 ноября 2026",
-    "play_duration": "51 ч. 56 мин."
+    "last_played_text": "🟢 В игре прямо сейчас!",
+    "play_duration": "52 ч. 43 мин."
   },
   "recent_history": [
     {
@@ -45,9 +45,9 @@
       "trophies_earned": 14,
       "trophies_total": 55,
       "rank": "D",
-      "last_played": "25 ноября 2026",
-      "play_duration": "51 ч. 56 мин.",
-      "play_count": 22
+      "last_played": "26 ноября 2026",
+      "play_duration": "52 ч. 43 мин.",
+      "play_count": 25
     },
     {
       "title": "UFC® 5",
