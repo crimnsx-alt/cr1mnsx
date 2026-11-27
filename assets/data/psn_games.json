@@ -1,8 +1,60 @@
 [
   {
+    "id": "minecraft",
+    "title": "Minecraft",
+    "subtitle": "Сыграно на PS5: 21 ч.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 99,
+    "progress_pct": 0,
+    "trophies_earned": 0,
+    "trophies_total": 0,
+    "trophy_breakdown": {
+      "bronze": 0,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "E",
+    "last_played": "27 ноября 2026",
+    "last_played_iso": "2026-11-27T13:50:33.550000Z",
+    "play_duration": "21 ч.",
+    "status": "Активно на PS5",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 21 ч. (99 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
+    "id": "uncharted-legacy-of-thieves-collection",
+    "title": "UNCHARTED: Legacy of Thieves Collection",
+    "subtitle": "Сыграно на PS5: 9 ч. 6 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 17,
+    "progress_pct": 16,
+    "trophies_earned": 22,
+    "trophies_total": 101,
+    "trophy_breakdown": {
+      "bronze": 21,
+      "silver": 1,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "27 ноября 2026",
+    "last_played_iso": "2026-11-27T13:43:18.470000Z",
+    "play_duration": "9 ч. 6 мин.",
+    "status": "Активно на PS5",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202111/2000/KM57mTQi3qxRxLie2W8laBgP.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202111/2000/gTUWTlvPHzxFJ2JAxtDyI2eS.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 9 ч. 6 мин. (17 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "grand-theft-auto-vi",
     "title": "Grand Theft Auto VI",
-    "subtitle": "Сыграно на PS5: 62 ч. 59 мин.",
+    "subtitle": "Сыграно на PS5: 68 ч. 10 мин.",
     "platform": "PS5",
     "played_on": "PS5",
     "play_count": 28,
@@ -17,12 +69,12 @@
     },
     "rank": "D",
     "last_played": "27 ноября 2026",
-    "last_played_iso": "2026-11-27T05:44:50.250000Z",
-    "play_duration": "62 ч. 59 мин.",
-    "status": "🟢 Играет прямо сейчас",
+    "last_played_iso": "2026-11-27T11:04:41.130000Z",
+    "play_duration": "68 ч. 10 мин.",
+    "status": "Активно на PS5",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 62 ч. 59 мин. (28 запусков).",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 68 ч. 10 мин. (28 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -71,7 +123,7 @@
     "last_played": "25 ноября 2026",
     "last_played_iso": "2026-11-25T12:13:16.830000Z",
     "play_duration": "42 ч. 15 мин.",
-    "status": "🟢 Играет прямо сейчас",
+    "status": "Активно на PS5",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 42 ч. 15 мин. (83 запусков).",
@@ -101,32 +153,6 @@
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202309/0421/8e258029459b8e7bb2e2f18cff54e8fcebdcc5a84833a767.png",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202309/0421/418704276d35ce02e8cb532c6ca3826cf866ad2ec66c0b17.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 35 ч. 56 мин. (4 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "minecraft",
-    "title": "Minecraft",
-    "subtitle": "Сыграно на PS5: 20 ч. 54 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 98,
-    "progress_pct": 0,
-    "trophies_earned": 0,
-    "trophies_total": 0,
-    "trophy_breakdown": {
-      "bronze": 0,
-      "silver": 0,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "E",
-    "last_played": "24 ноября 2026",
-    "last_played_iso": "2026-11-24T20:13:29.130000Z",
-    "play_duration": "20 ч. 54 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202407/1020/91fe046f742042e3b31e57f7731dbe2226e1fd1e02a36223.jpg",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202407/0401/670c294ded3baf4fa11068db2ec6758c63f7daeb266a35a1.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 20 ч. 54 мин. (98 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
@@ -413,32 +439,6 @@
     "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/1223/TPknlBAbAXGaQWcyi6YCKjCS.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202205/1100/XW13uDJAOI4GoMIqmfaJc7ru.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 5 ч. 47 мин. (14 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
-    "id": "the-last-of-us-remastered",
-    "title": "The Last of Us™ Remastered",
-    "subtitle": "Сыграно на PS5: 19 ч. 48 мин.",
-    "platform": "PS4",
-    "played_on": "PS5",
-    "play_count": 26,
-    "progress_pct": 0,
-    "trophies_earned": 0,
-    "trophies_total": 50,
-    "trophy_breakdown": {
-      "bronze": 0,
-      "silver": 0,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "E",
-    "last_played": "20 октября 2026",
-    "last_played_iso": "2026-10-19T23:27:17.310000Z",
-    "play_duration": "19 ч. 48 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/img/rnd/202010/2716/wYq1UsVEyQp6dT6cS1omgKiJ.png",
-    "thumb": "https://image.api.playstation.com/vulcan/img/rnd/202011/1020/FKgazVvG7BcWouCr39mIiXkW.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 19 ч. 48 мин. (26 запусков).",
     "link": "https://psnprofiles.com/Cr1mnsx"
   }
 ]
