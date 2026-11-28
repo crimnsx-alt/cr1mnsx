@@ -1,5 +1,31 @@
 [
   {
+    "id": "grand-theft-auto-vi",
+    "title": "Grand Theft Auto VI",
+    "subtitle": "Сыграно на PS5: 68 ч. 10 мин.",
+    "platform": "PS5",
+    "played_on": "PS5",
+    "play_count": 29,
+    "progress_pct": 24,
+    "trophies_earned": 17,
+    "trophies_total": 55,
+    "trophy_breakdown": {
+      "bronze": 17,
+      "silver": 0,
+      "gold": 0,
+      "platinum": 0
+    },
+    "rank": "D",
+    "last_played": "28 ноября 2026",
+    "last_played_iso": "2026-11-28T08:31:48.190000Z",
+    "play_duration": "68 ч. 10 мин.",
+    "status": "🟢 Играет прямо сейчас",
+    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
+    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
+    "note": "Запущено на консоли PlayStation 5 · Наиграно: 68 ч. 10 мин. (29 запусков).",
+    "link": "https://psnprofiles.com/Cr1mnsx"
+  },
+  {
     "id": "minecraft",
     "title": "Minecraft",
     "subtitle": "Сыграно на PS5: 21 ч.",
@@ -52,32 +78,6 @@
     "link": "https://psnprofiles.com/Cr1mnsx"
   },
   {
-    "id": "grand-theft-auto-vi",
-    "title": "Grand Theft Auto VI",
-    "subtitle": "Сыграно на PS5: 68 ч. 10 мин.",
-    "platform": "PS5",
-    "played_on": "PS5",
-    "play_count": 28,
-    "progress_pct": 24,
-    "trophies_earned": 17,
-    "trophies_total": 55,
-    "trophy_breakdown": {
-      "bronze": 17,
-      "silver": 0,
-      "gold": 0,
-      "platinum": 0
-    },
-    "rank": "D",
-    "last_played": "27 ноября 2026",
-    "last_played_iso": "2026-11-27T11:04:41.130000Z",
-    "play_duration": "68 ч. 10 мин.",
-    "status": "Активно на PS5",
-    "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-    "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
-    "note": "Запущено на консоли PlayStation 5 · Наиграно: 68 ч. 10 мин. (28 запусков).",
-    "link": "https://psnprofiles.com/Cr1mnsx"
-  },
-  {
     "id": "marvel-s-spider-man",
     "title": "Marvel's Spider-Man",
     "subtitle": "Сыграно на PS5: 75 ч. 39 мин.",
@@ -123,7 +123,7 @@
     "last_played": "25 ноября 2026",
     "last_played_iso": "2026-11-25T12:13:16.830000Z",
     "play_duration": "42 ч. 15 мин.",
-    "status": "Активно на PS5",
+    "status": "🟢 Играет прямо сейчас",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202203/0302/bZ1JTRXzoyl3hkcsloKcCgdB.jpg",
     "thumb": "https://image.api.playstation.com/vulcan/ap/rnd/202202/2816/K6mmm89oNII1iI1aqaClO0wh.png",
     "note": "Запущено на консоли PlayStation 5 · Наиграно: 42 ч. 15 мин. (83 запусков).",
