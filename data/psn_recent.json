@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-28T08:56:14.473Z",
+  "updated_at": "2026-11-28T10:15:41.206Z",
   "username": "Cr1mnsx",
   "psn_url": "https://psn.gg/profile/Cr1mnsx",
   "is_online": true,
@@ -23,7 +23,7 @@
     "played_on": "PS5",
     "image": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/9f51f0ccdb65bd29c36a0907a738c2902a712f03e2fd6470.png",
     "banner": "https://image.api.playstation.com/vulcan/ap/rnd/202606/1818/1c8e3e304f0bad2d99ffed828ad460ebe5949608cb82a5dd.png",
-    "play_count": 29,
+    "play_count": 30,
     "progress_percent": 24,
     "trophies_earned": 17,
     "trophies_total": 55,
@@ -33,7 +33,7 @@
     "gold": 0,
     "platinum": 0,
     "last_played_text": "🟢 В игре прямо сейчас!",
-    "play_duration": "68 ч. 10 мин."
+    "play_duration": "69 ч. 21 мин."
   },
   "recent_history": [
     {
@@ -46,8 +46,8 @@
       "trophies_total": 55,
       "rank": "D",
       "last_played": "28 ноября 2026",
-      "play_duration": "68 ч. 10 мин.",
-      "play_count": 29
+      "play_duration": "69 ч. 21 мин.",
+      "play_count": 30
     },
     {
       "title": "Minecraft",
